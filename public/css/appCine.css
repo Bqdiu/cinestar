@@ -1,0 +1,49 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0f172a;
+ 
+    font-family: "Josefin Sans",sans-serif;
+}
+
+.btn--pri{
+    width:fit-content;
+    height:40px;
+    background-color: yellow;
+    font-weight: bold;
+    position: relative;
+   
+
+}
+.input-search{
+    border-radius: 100rem;
+    font-size: 14px;
+    font-weight: 400;
+    height: 40px;
+    line-height: 1;
+    padding: 0 3rem 0 1.6rem;
+    width: 250px;
+    color:grey
+}
+.btn-search-submit{
+    position:relative;
+    right:50px;
+}
+.link-text {
+    color:white;
+    font-size: 16px;
+    
+    margin: auto;
+}
+.link-text:hover{
+    color: yellow;
+
+}
+.signin-signup-text{
+   margin:auto;
+}
+h1{
+    font-family: 'Anton',sans-serif;
+}
