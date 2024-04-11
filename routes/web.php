@@ -15,6 +15,7 @@ use App\Http\Controllers\HomeController;
 
 
 Route::get('/',[HomeController::class,'Index']);
+Route::get('/login',[HomeController::class,'Login']);
 
 
 

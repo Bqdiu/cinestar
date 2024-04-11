@@ -9,4 +9,8 @@ class HomeController extends Controller
     public function Index(){
         return view('index');
     }
+
+    public function Login(){
+        return view('user/login');
+    }
 }
