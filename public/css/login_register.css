@@ -1,0 +1,27 @@
+
+.nav-pills .nav-link.active {
+    background-color: #52a851;
+}
+
+.green {
+    color: #52a851;
+}
+
+.form-check-input[type=checkbox]:checked {
+    background: #52a851;
+}
+
+.mgt {
+    margin-top: 16px;
+}
+
+.error {
+    color: red;
+    font-size: 15px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.mgb-20 {
+    margin-bottom: 20px;
+}
