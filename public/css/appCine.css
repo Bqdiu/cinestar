@@ -4,8 +4,12 @@
 
 body {
     background-color: #0f172a;
- 
-    font-family: "Josefin Sans",sans-serif;
+    font-family: "Noto Serif", serif;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+      font-weight: 500;
+      font-optical-sizing: auto;
 }
 
 .btn--pri{
@@ -14,6 +18,7 @@ body {
     background-color: yellow;
     font-weight: bold;
     position: relative;
+    
    
 
 }
@@ -46,4 +51,61 @@ body {
 }
 h1{
     font-family: 'Anton',sans-serif;
+}
+
+.heading{
+    color: #f8fafc;
+    font-family: var(--font-title);
+    font-size: 4rem;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top:4rem;
+    margin-bottom:4rem
+}
+
+.name-product{
+    font-weight: bold;
+    font-family: Verdana;
+}
+.kanit-regular {
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .kanit-bold {
+    font-family: "Kanit", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+
+
+  .card{
+    background-color:transparent;
+    }
+
+.bottom-card{
+    justify-content: space-around;
+}
+.btn-xemthem{
+    justify-content: center;
+    text-decoration: none;
+    background-color: transparent;
+    color:yellow;
+    border:1px solid yellow;
+    padding:20px;
+    width:300px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 10px;
+
+
+}
+.bg-linear{
+   /* background: url(https://metiz.vn/static/assets/websites/images/bg-session-movie.png); */
+  /* background: url(https://media.istockphoto.com/id/1362422378/photo/abstract-blurred-purple-background-light-spot-on-dark-background.jpg?s=170667a&w=0&k=20&c=3f4tWpDpLk9UfppLBZjiTTLG-1V0Q-gCknhZHF9moJM=);*/
+   background: url(https://bogatyr.club/uploads/posts/2023-03/thumbs/1679586820_bogatyr-club-p-temno-fioletovii-fon-gradient-pinterest-44.jpg);
+    background-size: cover;
 }
