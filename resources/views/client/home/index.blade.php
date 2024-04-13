@@ -47,8 +47,8 @@
         @foreach($chunk as $k => $item)
         @if($item->IDStatus == $statusItem->IDStatus )
         <div class="col-md-3">
-          <a href="/detailproduct/{{$item->MovieID}}">
-              <div class="card" style="width: 18rem;height:580px">
+          <a style="text-decoration:none" href="/detailproduct/{{$item->MovieID}}">
+              <div class="card" style="width: 18rem;height:600px">
                     <img src="{{$item->Thumbnail}}" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h6 class="card-title text-white text-center" >{{$item->Title}}</h6>
