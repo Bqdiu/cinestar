@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +19,7 @@ Route::get('/',[HomeController::class,'Index']);
 Route::get('/login',[HomeController::class,'Login']);
 Route::get('/register',[HomeController::class,'Register']);
 Route::get('/detailproduct/{id}',[HomeController::class,'DetailProduct'])->name('detailproduct');
-
+Route::get('/dashboard',[AdminController::class,'Index']);
 
 
 
