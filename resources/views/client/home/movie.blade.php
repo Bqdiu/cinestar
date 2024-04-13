@@ -1,30 +1,6 @@
-@extends('layout')
+@extends ('layout')
 
 @section('main-content')
-<div class="container">
-   <div id="carouselBanner" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="/img/godzilla.png" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="/img/thanh-xuan-18x2.png" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="/img/civil-war.png" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" style="left:-150px" type="button" data-bs-target="#carouselBanner" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" style="right:-150px" type="button" data-bs-target="#carouselBanner" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-   </div>
-
 @foreach($Status as $statusItem)
 
 @if($statusItem->IDStatus != 3)
@@ -83,9 +59,7 @@
       </div>
     </div>
     <?php $i=$i+1;?>
-    
 @endforeach
-  
 <div class="carousel-indicators" style="margin-bottom:0px">
     @for($p=0;$p<$i;$p=$p+1)
       @if($p==0)
@@ -96,6 +70,7 @@
     @endfor
    
   </div>
+  
   </div>
   <button class="carousel-control-prev" style="left:-150px" type="button" data-bs-target="#carousel{{$statusItem->IDStatus}}" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -106,11 +81,10 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
- 
 </div>
 
 <div class="d-flex justify-content-center"style="margin-bottom:90px">
-  <?php 
+<?php 
   if($statusItem->IDStatus==1){
     $status = '/movie/showing';
   }else {
@@ -123,5 +97,4 @@
 
 @endif
 @endforeach
-
 @endsection

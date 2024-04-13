@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-md-4" style="display: flex; align-items:center;gap:1px;justify-content:center" >
                     
-                    <a href="#datve" class="btn btn--pri" >
+                    <a href="/movie" class="btn btn--pri" >
                         <div class="d-flex w-100">
                             <img style="margin-right:10px;" src="/img/ic-ticket.svg" alt="">
                             <span class="mt-1" style="font-size: 14px; font-family: 'Anton',sans-serif;">ĐẶT VÉ NGAY</span>
@@ -36,12 +36,12 @@
                 <div class="col-md-6" style="display: grid; align-items:center">
                     
                         <div class="container d-flex" style="align-items: center;justify-content:space-around">
-                            <form action=""style="display:flex">
-                                <input type="text" placeholder="Tìm phim, rạp, vé, tin tức,..." class="input-search">
+                            <form action=""style="display:flex" method="get">
+                                <input type="text" placeholder="Tìm phim,rạp,..." class="input-search">
                                 <button class="btn btn-search-submit" type="submit"><i class="fas fa-search"></i></button>
                             </form>
                             <div class="signin-signup-text">
-                                <p style="color:white;margin:auto"><i class="far fa-user-circle"></i> <a class="link-text"style="text-decoration:none;" href="#login">Đăng Nhập</a> / <a class="link-text"style="text-decoration:none;" href="#register">Đăng ký</a></p>
+                                <p style="color:white;margin:auto"><i class="far fa-user-circle"></i> <a class="link-text"style="text-decoration:none;" href="/login">Đăng Nhập</a> / <a class="link-text"style="text-decoration:none;" href="/register">Đăng ký</a></p>
                             </div>
                             <div class="language">
                                 <p style="color: white;margin:auto"><img src="https://cinestar.com.vn/assets/images/footer-vietnam.svg" alt=""> VN</p>

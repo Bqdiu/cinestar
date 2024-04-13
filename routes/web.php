@@ -18,7 +18,10 @@ use App\Http\Controllers\AdminController;
 Route::get('/',[HomeController::class,'Index']);
 Route::get('/login',[HomeController::class,'Login']);
 Route::get('/register',[HomeController::class,'Register']);
-Route::get('/detailproduct/{id}',[HomeController::class,'DetailProduct'])->name('detailproduct');
+Route::get('/detailmovie/{id}',[HomeController::class,'DetailMovie'])->name('detailmovie');
+Route::get('/movie',[HomeController::class,'Movie']);
+Route::get('/movie/showing',[HomeController::class,'Showing']);
+Route::get('/movie/upcoming',[HomeController::class,'Upcoming']);
 Route::get('/dashboard',[AdminController::class,'Index']);
 
 
