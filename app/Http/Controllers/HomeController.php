@@ -9,7 +9,9 @@ class HomeController extends Controller
     public function Index(){
         return view('client/home/index');
     }
-
+    public function DetailProduct(){
+        return view('client/home/detailproduct');
+    }
     public function Login(){
         return view('client/user/login');
     }

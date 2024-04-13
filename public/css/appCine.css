@@ -8,7 +8,6 @@ body {
     font-style: normal;
     font-variation-settings:
       "wdth" 100;
-      font-weight: 500;
       font-optical-sizing: auto;
 }
 
@@ -39,12 +38,23 @@ body {
 .link-text {
     color:white;
     font-size: 16px;
-    
+    text-decoration: none;
     margin: auto;
 }
 .link-text:hover{
     color: yellow;
 
+}
+.link-text-btn{
+    font-size: 16px;
+    text-decoration: none;
+    margin: auto;
+}
+.link-text-btn:hover{
+    color:brown;
+}
+.btn-trailer .link-text:hover{
+    color:red;
 }
 .signin-signup-text{
    margin:auto;
@@ -108,4 +118,92 @@ h1{
   /* background: url(https://media.istockphoto.com/id/1362422378/photo/abstract-blurred-purple-background-light-spot-on-dark-background.jpg?s=170667a&w=0&k=20&c=3f4tWpDpLk9UfppLBZjiTTLG-1V0Q-gCknhZHF9moJM=);*/
    background: url(https://bogatyr.club/uploads/posts/2023-03/thumbs/1679586820_bogatyr-club-p-temno-fioletovii-fon-gradient-pinterest-44.jpg);
     background-size: cover;
+}
+
+.info-detail
+{
+    padding-inline-start: 0px;
+    list-style-type: none;
+    font-size: 18px;
+
+}
+.info-detail li 
+{
+    margin-bottom:10px
+}
+.span-icon{
+    width:24px;
+    height:24px;
+    margin-right:10px
+}
+.trailer-link
+{
+    font-size:20px;
+    margin-top:30px;
+}
+.type-movie-box{
+    display: flex;
+    flex-direction: row;
+    position:absolute;
+    width:fit-content;
+    height:fit-content;
+    top: 0;
+    left: 50px;
+
+}
+.type-movie{
+    background-color: #f93;
+    color: #000;
+    padding: 0.8rem;
+    height:70px;
+    width: 70px;
+    text-transform: uppercase;
+    display: flex;
+   
+}
+.type-movie .txt{
+    display: flex;
+    margin: auto;
+    align-items: center;
+    border: 2px solid #000;
+    border-radius: 0.4rem;
+    display: flex;
+    font-size: 12px;
+    height: 1.8rem;
+    justify-content: center;
+    width: 1.8rem;
+    font-weight: 1000;
+}
+
+.age{
+    background-color: #f03;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-title);
+    height: 70px;
+    width: 70px;
+    padding: 0.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    justify-content: center;
+}
+.age .num{
+    font-size: 22px;
+    letter-spacing: .18rem;
+    line-height: 100%;
+    text-indent: 0.18rem;
+    color:white;
+    font-weight: bold;
+}
+.age .txt{
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    font-size: 5px;
+    justify-content: center;
+    letter-spacing: .4rem;
+    line-height: 100%;
+    padding: 0.2rem;
+    text-indent: 0.4rem;
 }

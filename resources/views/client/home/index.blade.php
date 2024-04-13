@@ -34,10 +34,11 @@
     <div class="carousel-item active">
       <div class="row">
         <div class="col-md-3">
-        <div class="card" style="width: 18rem;">
+          <a href="/detailproduct">
+          <div class="card" style="width: 18rem;">
           <img src="https://cinestar.com.vn/_next/image/?url=https%3A%2F%2Fapi-website.cinestar.com.vn%2Fmedia%2Fwysiwyg%2FPosters%2F04-2024%2Fmonkey-man.jpg&w=1920&q=75" class="card-img-top" alt="...">
           <div class="card-body">
-            <h6 class="card-title text-white text-center" >MONKEY MAN BÁO THÙ (T18)</h6>
+            <h6 class="card-title text-center" ><a href="/detailproduct" style="text-decoration:none;color:white">MONKEY MAN BÁO THÙ (T18)</a></h6>
           <div class="d-inlinegrid w-100 bottom-card" style="margin-top:40px">
             <div class="row">
               <div class="col-md-6" style="margin:auto">
@@ -52,6 +53,8 @@
           </div>
           </div>
         </div>
+          </a>
+       
         </div>
         <div class="col-md-3">
         <div class="card" style="width: 18rem;">
