@@ -9,17 +9,17 @@
                 <div class="age"><span class="num">T13</span><span class="txt">KID</span></div>
             </div>
       
-        <img style="width:85%" src="https://cinestar.com.vn/_next/image/?url=https%3A%2F%2Fapi-website.cinestar.com.vn%2Fmedia%2Fwysiwyg%2FPosters%2F04-2024%2Fthanh-xuan-18x2-poster-2.jpg&w=1920&q=75" alt="">
+        <img style="width:85%;border-radius:5px" src="https://cinestar.com.vn/_next/image/?url=https%3A%2F%2Fapi-website.cinestar.com.vn%2Fmedia%2Fwysiwyg%2FPosters%2F04-2024%2Fthanh-xuan-18x2-poster-2.jpg&w=1920&q=75" alt="">
         </div>
         <div class="col-md-7">
         <h2 class="text-white" style="font-weight:1000;margin-bottom:20px" >THANH XUÂN 18X2: LỮ TRÌNH HƯỚNG VỀ EM (T13)</h2>
        <ul class="info-detail">
         <li>
-            <span><img class="span-icon" src="img/icon-tag.svg" alt=""></span>
+            <span><img class="span-icon" src="/img/icon-tag.svg" alt=""></span>
             <span class="text-white">Tình cảm</span>
         </li>
         <li>
-            <span><img class="span-icon" src="img/icon-clock.svg" alt=""></span>
+            <span><img class="span-icon" src="/img/icon-clock.svg" alt=""></span>
             <span class="text-white">135'</span>
         </li>
 
@@ -28,7 +28,7 @@
             <span class="text-white">Khác</span>
         </li>
         <li>
-            <span class="span-icon"><img style="width:24px;height:24px" src="img/subtitle.svg" alt=""></span>
+            <span class="span-icon"><img style="width:24px;height:24px" src="/img/subtitle.svg" alt=""></span>
             <span class="text-white">Phụ Đề</span>
         </li>
         <li>

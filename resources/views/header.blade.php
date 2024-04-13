@@ -21,7 +21,7 @@
         <div class="container">
             <div class="row" style="height: 80px;border-bottom:1px solid grey">
                 <div class="col-md-2" style="display:flex;align-items:center">
-                    <img src="img/header-logo.png" style="width: 130px; height:46px" alt="">
+                    <a href="/"> <img src="/img/header-logo.png" style="width: 130px; height:46px" alt=""></a>   
                 </div>
                 <div class="col-md-4" style="display: flex; align-items:center;gap:1px;justify-content:center" >
                     
