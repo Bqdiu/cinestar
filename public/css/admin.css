@@ -10,10 +10,7 @@ body {
       font-optical-sizing: auto;
 }
 
-.content{
-    min-height: 150vh;
-}
 
-#left-content{
-    height: 300px;
+#profile_img{
+    width: 50px;
 }
