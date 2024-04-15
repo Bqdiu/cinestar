@@ -22,6 +22,7 @@ Route::get('/detailmovie/{id}',[HomeController::class,'DetailMovie'])->name('det
 Route::get('/movie',[HomeController::class,'Movie']);
 Route::get('/movie/showing',[HomeController::class,'Showing']);
 Route::get('/movie/upcoming',[HomeController::class,'Upcoming']);
+Route::post('/search',[HomeController::class,'Search'])->name('search');
 Route::get('/dashboard',[AdminController::class,'Index']);
 
 

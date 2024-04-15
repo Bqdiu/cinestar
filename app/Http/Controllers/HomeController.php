@@ -34,8 +34,10 @@ class HomeController extends Controller
                         ->first();
         return view('client/home/detailmovie',['PhimItem' => $PhimItem]);
     }
-    public function Search($key){
-        return view('client/home/search');
+    public function Search(Request $request){
+        $keySearch = "%$request->key%";
+        $Phim = DB::select('select movie.*,age_regulation.* from movie,age_regulation where movie.RegulationID = age_regulation.RegulationID and movie.Title like ?',[$keySearch]);
+        return view('client/home/search',['key'=>$request->key,'Phim' => $Phim]);
     }
 
     //Login-Register

@@ -36,8 +36,10 @@
                 <div class="col-md-6" style="display: grid; align-items:center">
                     
                         <div class="container d-flex" style="align-items: center;justify-content:space-around">
-                            <form action=""style="display:flex" method="get">
-                                <input type="text" placeholder="Tìm phim,rạp,..." class="input-search">
+                       
+                            <form action="{{route('search')}}"style="display:flex" method="post">
+                                @csrf
+                                <input type="text" name="key" placeholder="Tìm phim,rạp,..." class="input-search" value="{{$key ?? ''}}">
                                 <button class="btn btn-search-submit" type="submit"><i class="fas fa-search"></i></button>
                             </form>
                             <div class="signin-signup-text">
