@@ -1,6 +1,7 @@
 @extends ('layout');
 
 @section('main-content')
+<input type="hidden" name="idRap" id="idRap" value="{{$RapTheoID->CinemaID}}">
 <div class="container mt-2">
     <div class="row" style="max-height:230px">
         <div class="col-md-4">
@@ -33,7 +34,7 @@
         </div>
     </div>
 </div>
-<div id="container content-Movie-selector">
+<div class="container" id="content-Movie-selector">
 
 </div>
 

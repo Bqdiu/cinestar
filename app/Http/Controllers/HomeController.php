@@ -58,13 +58,19 @@ class HomeController extends Controller
                         ->join('showinfor','movie.MovieID','=','showinfor.MovieID')
                         ->join('cinema_hall','showinfor.CinemaHallID','=','cinema_hall.CinemaHallID')
                         ->join('cinema','cinema_hall.CinemaID','=','cinema.CinemaID')
-                        ->select('movie.*','age_regulation.Content')->distinct()
+                        ->select('movie.*','age_regulation.*')->distinct()
                         ->where('cinema.CinemaID',$idRap)
-                        ->where('movie.IDStatus',$idStatus);
-        return view('client/home/bookticketsPartial',compact('PhimTheoRap'));
+                        ->where('movie.IDStatus',$idStatus)
+                        ->get();
+        $Title = DB::table('status_movie')
+                    ->select('*')
+                    ->where('IDStatus',$idStatus)
+                    ->first();
+        return view('client/home/bookticketsPartial',['Title'=>$Title,'idRap' => $idRap,'idStatus'=>$idStatus,'PhimTheoRap'=> $PhimTheoRap]);
     }
     //Login-Register
     public function Login(){
         return view('client/user/login');
     }
+    
 }
