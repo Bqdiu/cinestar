@@ -19,6 +19,7 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/',[HomeController::class,'Index']);
 Route::get('/login',[LoginController::class,'Login']);
+Route::post('/loginSubmit',[LoginController::class,'LoginPost']);
 Route::get('/register',[UserInforController::class,'Register']);
 Route::post('/registerSubmit',[UserInforController::class,'PostRegister']);
 Route::get('/detailmovie/{id}',[HomeController::class,'DetailMovie'])->name('detailmovie');

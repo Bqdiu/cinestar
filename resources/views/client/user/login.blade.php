@@ -4,6 +4,7 @@
 
 <div class="container mt-5 mb-lg-5" style="height: fit-content" ;>
 
+  
     <!-- Outer Row -->
     <div class="row justify-content-center">
         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -21,7 +22,8 @@
                 <!-- Pills navs -->
                 <!-- Pills content -->
                
-                <form method="post" action="/User/Login">
+                <form action="/loginSubmit" method="post">
+                    @csrf
                     <div class="text-center mb-3">
                         <p>Sign in with:</p>
                         <button type="button" class="btn btn-link btn-floating mx-1">
