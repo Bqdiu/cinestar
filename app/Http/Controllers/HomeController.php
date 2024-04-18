@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
+ 
     //Home
     public function Index(){
         $Phim = DB::select('select movie.*,age_regulation.* from movie,age_regulation where movie.RegulationID = age_regulation.RegulationID');
@@ -40,6 +41,28 @@ class HomeController extends Controller
         return view('client/home/search',['key'=>$request->key,'Phim' => $Phim]);
     }
 
+    //Cinema
+
+    public function BookTickets($id){
+        
+        $RapTheoID = DB::table('cinema')
+                ->select('*')
+                ->where('cinemaID',$id)
+                ->first();
+        return view('client/home/booktickets',compact('RapTheoID'));
+    }
+   
+    public function bookTicketsPartial($idRap,$idStatus){
+        $PhimTheoRap = DB::table('movie')
+                        ->join('age_regulation','movie.RegulationID','=','age_regulation.RegulationID')
+                        ->join('showinfor','movie.MovieID','=','showinfor.MovieID')
+                        ->join('cinema_hall','showinfor.CinemaHallID','=','cinema_hall.CinemaHallID')
+                        ->join('cinema','cinema_hall.CinemaID','=','cinema.CinemaID')
+                        ->select('movie.*','age_regulation.Content')->distinct()
+                        ->where('cinema.CinemaID',$idRap)
+                        ->where('movie.IDStatus',$idStatus);
+        return view('client/home/bookticketsPartial',compact('PhimTheoRap'));
+    }
     //Login-Register
     public function Login(){
         return view('client/user/login');

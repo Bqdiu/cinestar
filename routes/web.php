@@ -24,6 +24,6 @@ Route::get('/movie/showing',[HomeController::class,'Showing']);
 Route::get('/movie/upcoming',[HomeController::class,'Upcoming']);
 Route::post('/search',[HomeController::class,'Search'])->name('search');
 Route::get('/dashboard',[AdminController::class,'Index']);
-
+Route::get('/book-tickets/{id}',[HomeController::class,'BookTickets']);
 
 
