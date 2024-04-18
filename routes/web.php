@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserInforController;
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +18,7 @@ use App\Http\Controllers\UserInforController;
 
 
 Route::get('/',[HomeController::class,'Index']);
-Route::get('/login',[HomeController::class,'Login']);
+Route::get('/login',[LoginController::class,'Login']);
 Route::get('/register',[UserInforController::class,'Register']);
 Route::post('/registerSubmit',[UserInforController::class,'PostRegister']);
 Route::get('/detailmovie/{id}',[HomeController::class,'DetailMovie'])->name('detailmovie');
