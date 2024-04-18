@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserInforController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +18,7 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/',[HomeController::class,'Index']);
 Route::get('/login',[HomeController::class,'Login']);
-Route::get('/register',[HomeController::class,'Register']);
+Route::get('/register',[UserInforController::class,'Register']);
 Route::get('/detailmovie/{id}',[HomeController::class,'DetailMovie'])->name('detailmovie');
 Route::get('/movie',[HomeController::class,'Movie']);
 Route::get('/movie/showing',[HomeController::class,'Showing']);

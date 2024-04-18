@@ -19,7 +19,8 @@
 
             
 
-                <form method="post" action="~/User/Register">
+                <form action="/register" method="post">
+                    @csrf
                     <div class="text-center mb-3">
                         <p>Sign up with:</p>
                         <button type="button" class="btn btn-link btn-floating mx-1">
@@ -42,47 +43,81 @@
                     <p class="text-center">or:</p>
                     <!-- Name input -->
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingName" placeholder="Your name">
+                        <input 
+                        type="text" class="form-control" 
+                        id="floatingName" 
+                        name="Name"
+                        placeholder="Your name">
                         <label for="floatingName">Họ và tên</label>
                     </div>
                     <!-- Day of birth -->
                     <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="floatingDOF" placeholder="Date of birth">
+                        <input 
+                        type="date" class="form-control" 
+                        id="floatingDOF" 
+                        name="BirthDay"
+                        placeholder="Date of birth">
                         <label for="floatingDOF">Ngày sinh</label>
                     </div>
                 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingNumber" placeholder="08081508">
+                        <input 
+                        type="text" class="form-control" 
+                        id="floatingNumber" 
+                        name="Phone"
+                        placeholder="08081508">
                         <label for="floatingNumber">Số điện thoại</label>
                     </div>
 
                     <!-- Username input -->
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingUsername" placeholder="dieucobap2003">
+                        <input 
+                        type="text" class="form-control" 
+                        id="floatingUsername" 
+                        name="Username"
+                        placeholder="dieucobap2003">
                         <label for="floatingUsername">Tên đăng nhập</label>
                     </div>
 
                     <!-- CCCD/CMND input -->
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingID" placeholder="Your ID">
+                        <input 
+                        type="text" class="form-control" 
+                        id="floatingID" 
+                        name="CCCD"
+                        placeholder="Your ID">
                         <label for="floatingID">CCDD/CMND</label>
                     </div>
 
                     <!-- Email input -->
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+                        <input 
+                        type="email" class="form-control" 
+                        id="floatingEmail" 
+                        name="Email"
+                        placeholder="name@example.com">
                         <label for="floatingInput">Email</label>
                     </div>
                     <!-- Password input -->
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPW" placeholder="Password">
+                        <input 
+                        type="password" 
+                        class="form-control" 
+                        id="floatingPW" 
+                        name="Password"
+                        placeholder="Password">
                         <label for="floatingPW">Mật khẩu</label>
                     </div>
 
 
                     <!-- Repeat Password input -->
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingRPW" placeholder="Vetify">
+                        <input 
+                        type="password" 
+                        class="form-control" 
+                        id="floatingRPW" 
+                        name="rp_password"
+                        placeholder="Vetify">
                         <label for="floatingRPW">Xác thực mật khẩu</label>
                     </div>
 
@@ -100,7 +135,10 @@
 
 
                     <!-- Submit button -->
-                    <button type="submit" class="btn btn-success btn-block mb-3">Sign up</button>
+                    <button 
+                    type="submit" 
+                    class="btn btn-success btn-block mb-3"
+                    >Sign up</button>
                 </form>
             </div>
 

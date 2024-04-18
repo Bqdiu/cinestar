@@ -67,7 +67,4 @@ class HomeController extends Controller
     public function Login(){
         return view('client/user/login');
     }
-    public function Register(){
-        return view('client/user/register');
-    }
 }
