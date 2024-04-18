@@ -19,6 +19,7 @@ use App\Http\Controllers\UserInforController;
 Route::get('/',[HomeController::class,'Index']);
 Route::get('/login',[HomeController::class,'Login']);
 Route::get('/register',[UserInforController::class,'Register']);
+Route::post('/registerSubmit',[UserInforController::class,'PostRegister']);
 Route::get('/detailmovie/{id}',[HomeController::class,'DetailMovie'])->name('detailmovie');
 Route::get('/movie',[HomeController::class,'Movie']);
 Route::get('/movie/showing',[HomeController::class,'Showing']);

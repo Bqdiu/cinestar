@@ -10,6 +10,6 @@ class UserInfor extends Model
     use HasFactory;
     protected $table = 'userinfor';
     protected $primaryKey = 'UserID ';
-    public $timestamps = true;
+    public $timestamps = false;
     protected $fillable = ['UserID', 'Name', 'BirthDay', 'Username', 'CCCD', 'Password', 'Email', 'Phone']; 
 }

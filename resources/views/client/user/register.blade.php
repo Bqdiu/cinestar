@@ -18,8 +18,9 @@
                 <!-- Pills content -->
 
             
-
-                <form action="/register" method="post">
+             
+               
+                <form action="/registerSubmit" method="post">
                     @csrf
                     <div class="text-center mb-3">
                         <p>Sign up with:</p>
@@ -39,7 +40,13 @@
                             <i class="fab fa-github green"></i>
                         </button>
                     </div>
-
+                    @if($errors->any())
+                    <div>
+                        @foreach($errors->all() as $err)
+                                <p class="text-danger">{{$err}}</p>
+                        @endforeach        
+                    </div>
+                    @endif
                     <p class="text-center">or:</p>
                     <!-- Name input -->
                     <div class="form-floating mb-3">
@@ -140,8 +147,7 @@
                     class="btn btn-success btn-block mb-3"
                     >Sign up</button>
                 </form>
-            </div>
-
+                
             <!-- Pills content -->
 
         </div>

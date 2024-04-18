@@ -68,9 +68,5 @@ class HomeController extends Controller
                     ->first();
         return view('client/home/bookticketsPartial',['Title'=>$Title,'idRap' => $idRap,'idStatus'=>$idStatus,'PhimTheoRap'=> $PhimTheoRap]);
     }
-    //Login-Register
-    public function Login(){
-        return view('client/user/login');
-    }
-    
+   
 }
