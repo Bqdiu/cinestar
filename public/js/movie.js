@@ -40,4 +40,8 @@ $(document).ready(function() {
             }
         })
     }
+    $(".movie-collapse").click(function(){
+        $(".content-movieShow").css("display", "none");
+
+    })
 });
