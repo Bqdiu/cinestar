@@ -21,7 +21,6 @@ class UserInforController extends Controller
            'Username' => 'required|unique:Userinfor',
            'Password' => 'required',
            'rp_password' => 'required|same:Password',
-           'CCCD' => 'unique:Userinfor',
            'Email' => 'unique:Userinfor',
            'Phone' => 'unique:Userinfor'
 

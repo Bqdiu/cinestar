@@ -47,13 +47,21 @@
 
                     <!-- Email input -->
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput">Email address</label>
+                        <input type="text" 
+                        class="form-control" 
+                        id="floatingInput" 
+                        name="username"
+                        placeholder="Username">
+                        <label for="floatingInput">User name</label>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-floating mgb-20">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <input type="password" 
+                        class="form-control" 
+                        id="floatingPassword"
+                        name="password" 
+                        placeholder="Password">
                         <label for="floatingPassword">Password</label>
                     </div>
 
@@ -85,7 +93,13 @@
                         <p>Not a member? <a href="#!">Register</a></p>
                     </div>
                 </form>
-               
+                @if($errors->any())
+                    <div>
+                        @foreach($errors->all() as $err)
+                                <p class="text-danger">{{$err}}</p>
+                        @endforeach        
+                    </div>
+                    @endif
                 <!-- Pills content -->
 
             </div>
