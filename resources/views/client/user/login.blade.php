@@ -22,7 +22,7 @@
                 <!-- Pills navs -->
                 <!-- Pills content -->
                
-                <form action="/loginSubmit" method="post">
+                <form action="/loginSubmit" method="post" id="loginForm">
                     @csrf
                     <div class="text-center mb-3">
                         <p>Sign in with:</p>
@@ -49,20 +49,22 @@
                     <div class="form-floating mb-3">
                         <input type="text" 
                         class="form-control" 
-                        id="floatingInput" 
+                        id="username" 
                         name="username"
                         placeholder="Username">
                         <label for="floatingInput">User name</label>
+                        <span class="text-danger" id="errorUsernameLogin"></span>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-floating mgb-20">
                         <input type="password" 
                         class="form-control" 
-                        id="floatingPassword"
+                        id="password"
                         name="password" 
                         placeholder="Password">
                         <label for="floatingPassword">Password</label>
+                        <span class="text-danger" id="errorPasswordLogin"></span>
                     </div>
 
                    
@@ -86,20 +88,22 @@
                    
 
                     <!-- Submit button -->
-                    <button type="submit" class="btn btn-success btn-block mb-4">Sign in</button>
+                    <button type="submit" class="btn btn-success btn-block mb-4" >Sign in</button>
 
                     <!-- Register buttons -->
                     <div class="text-center">
                         <p>Not a member? <a href="#!">Register</a></p>
                     </div>
                 </form>
-                @if($errors->any())
-                    <div>
-                        @foreach($errors->all() as $err)
-                                <p class="text-danger">{{$err}}</p>
-                        @endforeach        
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
-                    @endif
+                @endif
                 <!-- Pills content -->
 
             </div>

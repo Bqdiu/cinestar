@@ -5,23 +5,22 @@
           
           <div class="input-group input-group-outline">
             <label class="form-label">Search</label>
-            <input type="text" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)">
+            <input type="text" class="form-control" >
           </div>
           
       </div>
       <ul class="navbar-nav justify-content-end">
         <div class="topbar-divider d-none d-sm-block"></div>
-        <li class="nav-item d-flex align-items-center no-arrow">
-          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img id="profile_img" class="img-profile mr-2 rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI8ng4psBMjSWKi7txMchONWFHrEWcOO8f1w&amp;usqp=CAU">
-            <span class="mr-2 d-none d-lg-inline text-gray-600 smfHall">admin</span>
-          </a>
-          <!-- Dropdown - User Information -->
-          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-            <div class="dropdown-divider"></div>
-            <a style="text-decoration: none; margin-left:30px; color:black" href="/User/Login">LOG OUT</a>
-          </div>
-        </li>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="far fa-user-circle"></i>
+                <span>{{session()->get('username')}}</span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            </ul>
+        </div>
       </ul>
     </div>
   </div>

@@ -40,13 +40,6 @@
                             <i class="fab fa-github green"></i>
                         </button>
                     </div>
-                    @if($errors->any())
-                    <div>
-                        @foreach($errors->all() as $err)
-                                <p class="text-danger">{{$err}}</p>
-                        @endforeach        
-                    </div>
-                    @endif
                     <p class="text-center">or:</p>
                     <!-- Name input -->
                     <div class="form-floating mb-3">
@@ -56,6 +49,9 @@
                         name="Name"
                         placeholder="Your name">
                         <label for="floatingName">Họ và tên</label>
+                        @error('Name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <!-- Day of birth -->
                     <div class="form-floating mb-3">
@@ -65,6 +61,9 @@
                         name="BirthDay"
                         placeholder="Date of birth">
                         <label for="floatingDOF">Ngày sinh</label>
+                        @error('BirthDay')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 
                     <div class="form-floating mb-3">
@@ -74,6 +73,9 @@
                         name="Phone"
                         placeholder="08081508">
                         <label for="floatingNumber">Số điện thoại</label>
+                        @error('Phone')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Username input -->
@@ -84,6 +86,9 @@
                         name="Username"
                         placeholder="dieucobap2003">
                         <label for="floatingUsername">Tên đăng nhập</label>
+                        @error('Username')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- CCCD/CMND input -->
@@ -94,6 +99,9 @@
                         name="CCCD"
                         placeholder="Your ID">
                         <label for="floatingID">CCDD/CMND</label>
+                        @error('CCCD')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Email input -->
@@ -104,6 +112,9 @@
                         name="Email"
                         placeholder="name@example.com">
                         <label for="floatingInput">Email</label>
+                        @error('Email')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <!-- Password input -->
                     <div class="form-floating mb-3">
@@ -114,6 +125,9 @@
                         name="Password"
                         placeholder="Password">
                         <label for="floatingPW">Mật khẩu</label>
+                        @error('Password')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
 
@@ -126,6 +140,9 @@
                         name="rp_password"
                         placeholder="Vetify">
                         <label for="floatingRPW">Xác thực mật khẩu</label>
+                        @error('rp_password')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
 
@@ -147,7 +164,15 @@
                     class="btn btn-success btn-block mb-3"
                     >Sign up</button>
                 </form>
-                
+                <!-- @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif -->
             <!-- Pills content -->
 
         </div>

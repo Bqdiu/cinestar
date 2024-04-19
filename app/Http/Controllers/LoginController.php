@@ -17,7 +17,10 @@ class LoginController extends Controller
         $request->validate([
             'username' => 'required',
             'password' => 'required',
-        ]);
+        ],[
+            'username.required' => 'Vui lòng nhập tên đăng nhập',
+            'password.required' => 'Vui lòng nhập mật khẩu',]
+    );
         $username = $request->username;
         $password = $request->password;
         $user = Userinfor::where('Username',$username)->where('Password',$password)->first();
@@ -26,7 +29,7 @@ class LoginController extends Controller
             session::put('username',$username);
             return redirect('/');
         }
-        return redirect('/login');
+        return redirect('/login')->withErrors(['username' => 'Tên đăng nhập hoặc mật khẩu không chính xác']);
     }
     
     public function Logout(Request $request){
