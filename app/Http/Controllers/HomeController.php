@@ -62,11 +62,22 @@ class HomeController extends Controller
                         ->where('cinema.CinemaID',$idRap)
                         ->where('movie.IDStatus',$idStatus)
                         ->get();
+        $CountPhim = DB::table('movie')
+                        ->join('age_regulation', 'movie.RegulationID', '=', 'age_regulation.RegulationID')
+                        ->join('showinfor', 'movie.MovieID', '=', 'showinfor.MovieID')
+                        ->join('cinema_hall', 'showinfor.CinemaHallID', '=', 'cinema_hall.CinemaHallID')
+                        ->join('cinema', 'cinema_hall.CinemaID', '=', 'cinema.CinemaID')
+                        ->select(DB::raw('count(*) as count'))
+                        ->where('cinema.CinemaID', $idRap)
+                        ->where('movie.IDStatus', $idStatus)
+                        ->first(); 
+                    
+        $count = $CountPhim->count; 
         $Title = DB::table('status_movie')
                     ->select('*')
                     ->where('IDStatus',$idStatus)
                     ->first();
-        return view('client/home/bookticketsPartial',['Title'=>$Title,'idRap' => $idRap,'idStatus'=>$idStatus,'PhimTheoRap'=> $PhimTheoRap]);
+        return view('client/home/bookticketsPartial',['CountPhim'=>$count,'Title'=>$Title,'idRap' => $idRap,'idStatus'=>$idStatus,'PhimTheoRap'=> $PhimTheoRap]);
     }
    
 }

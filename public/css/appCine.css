@@ -264,3 +264,30 @@ h1{
    align-items: center;
 
 }
+.active{
+
+}
+.movieShow{
+    border:1px solid rgba(248, 250, 252, .5);
+    height:auto;
+    width: 100%;
+    border-radius: 0.6rem;
+    padding:10px;
+    font-size:14px;
+}
+
+.movie-show-item{
+    border:1px solid rgba(248, 250, 252, .5);
+    height:auto;
+    color: white;
+    padding:10px;
+    border-radius: 0.3rem;
+}
+.movie-show-item.active{
+    color:yellow;
+    border-color: yellow;
+}
+.content-movieShow.active
+{
+    overflow: hidden;
+}
