@@ -264,6 +264,24 @@ h1{
    align-items: center;
 
 }
+@keyframes scrollUp {
+    from {
+        height:auto;
+    }
+    to {
+        height:5%;
+    }
+}
+
+/* Animation cuộn xuống */
+@keyframes scrollDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
 .active{
 
 }
@@ -277,17 +295,34 @@ h1{
 }
 
 .movie-show-item{
+    display: flex;
+    margin-left:10px;
+    justify-content: center;
+    align-items: center;
+    position:relative;
     border:1px solid rgba(248, 250, 252, .5);
-    height:auto;
-    color: white;
-    padding:10px;
     border-radius: 0.3rem;
+    color:white;
+    text-decoration: none;
+    padding:10px;
+    width:auto;
+    margin-bottom:5px;
+}
+.movie-show-item:hover{
+    color:white;
 }
 .movie-show-item.active{
     color:yellow;
     border-color: yellow;
 }
-.content-movieShow.active
-{
-    overflow: hidden;
+.content-movieShow{
+    display: block;
+   
+}
+.movie-collapse{
+    cursor: pointer;
+   
+}
+.movieShow .movie-collapse{
+    height:5%;
 }

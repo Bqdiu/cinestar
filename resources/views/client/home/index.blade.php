@@ -27,7 +27,7 @@
 
 @foreach($Status as $statusItem)
 
-@if($statusItem->IDStatus != 3)
+@if($statusItem->IDStatus != 3 && $statusItem->IDStatus != 4)
 <?php
     $i=0;
     $chunks = array_chunk(array_filter($Phim, function ($phim) use ($statusItem) {

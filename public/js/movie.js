@@ -2,6 +2,7 @@
 
 $(document).ready(function() {
     LoadData(1);
+ 
     $(".slide-PhimDangChieu").click(function() {
         LoadData(1);
         $(".slide-PhimDangChieu").addClass("click");
@@ -39,9 +40,26 @@ $(document).ready(function() {
                 $("#content-Movie-selector").html(res);
             }
         })
-    }
-    $(".movie-collapse").click(function(){
-        $(".content-movieShow").css("display", "none");
-
-    })
+    };
+    // $(document).on('click','#'+idCollapse,function(){
+    //     var id = $(this).data('movie-id');
+    //     if($("#"+id).hasClass("d-none")){
+    //         $("#"+id).removeClass("d-none");
+    //         $('.movieShow').removeClass("active");
+    //     }
+    //     else{
+    //         $("#"+id).addClass("d-none");
+    //         $('.movieShow').addClass("active");
+    //     }
+       
+    // });
+    $(document).on('click', '.movie-collapse', function(){
+        var collapseId = $(this).data('collapse-id'); // Lấy giá trị của thuộc tính "data-collapse-id" của phần tử "movie-collapse" được click
+        var contentId = $(this).data('movie-id'); // Lấy giá trị của thuộc tính "data-movie-id" của phần tử "movie-collapse" được click
+        $("." + collapseId).toggleClass('active');
+        // Thêm hoặc loại bỏ class "active" cho phần tử "movie-collapse" được click
+        $("#" + contentId).toggleClass('d-none'); // Hiển thị hoặc ẩn phần tử "content-movieShow" tương ứng
+    });
+    
 });
+

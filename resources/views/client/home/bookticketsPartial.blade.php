@@ -30,27 +30,18 @@
                 <span class="text-white">{{$v->Content}}</span>
               </p>
               <div class="movieShow">
-                <div class="movie-collapse d-flex w-100 justify-content-between">
-                  <p class="text-white">Ngày: 19/04/2024</p>
+                <div id="movie-collapse-{{$v->MovieID}}" data-collapse-id="movie-collapse-{{$v->MovieID}}" class="movie-collapse d-flex w-100 justify-content-between" data-movie-id="content-movieShow-{{$v->MovieID}}">
+                  <p class="text-white" id="clickItem">Ngày: 19/04/2024</p>
                   <p class="text-white d-grid align-items-center"><i class="fas fa-angle-up"></i></p>
                 </div>
-                <div class="content-movieShow ">
-                <p class="text-white">STANDARD</p>
-                <div class="row">
-                  <div class="col-md-3 p-0 ms-2 mt-1 mb-1 me-1" style="width:auto">
-                    <span class="movie-show-item active">09:25</span>
-                  </div>
-                  <div class="col-md-3 p-0 m-1" style="width:auto">
-                    <span class="movie-show-item">09:25</span>
-                  </div>
-                  <div class="col-md-3 p-0 m-1" style="width:auto">
-                    <span class="movie-show-item">09:25</span>
-                  </div>
-                  <div class="col-md-3 p-0 m-1" style="width:auto">
-                    <span class="movie-show-item">09:25</span>
-                  </div>
-                  
-                </div>
+                <div id="content-movieShow-{{$v->MovieID}}" class="content-movieShow mt-2">
+                    <p class="text-white">STANDARD</p>
+                    <div class="row">
+                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
+                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
+                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
+                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>        
+                    </div>
                 </div>
                 
               </div>
