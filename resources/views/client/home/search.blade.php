@@ -10,7 +10,7 @@
               <div class="card" style="width: 18rem;height:600px;position:relative;">
                     <div class="type-movie-box" style="left:0px">
                         <div class="type-movie" style="height:50px;width:50px"><span class="txt">2D</span></div>
-                        <div class="age" style="height:50px;width:50px"><span class="num" style="font-size:12px">{{$item->AgeRegulationName}}</span><span class="txt">{{$item->Object}}</span></div>
+                        <div class="age" style="height:50px;width:50px"><span class="num" style="font-size:12px">{{$item->regulation->AgeRegulationName}}</span><span class="txt" style="letter-spacing: .2rem;">{{$item->regulation->Object}}</span></div>
                     </div>
                     <img src="/imgMovie/{{$item->Thumbnail}}" style="border-radius:5px" class="card-img-top" alt="...">
                     <div class="card-body">

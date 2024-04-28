@@ -7,8 +7,8 @@
     @if(isset($CountPhim) && $CountPhim > 0)
       @foreach($PhimTheoRap as $k=>$v)
         <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-6"><a href="/detailmovie/{{$v->MovieID}}"><img style="width:100%;height:90%" src="/imgMovie/{{$v->Thumbnail}}" alt=""></a></div>
+          <div class="row mb-3">
+            <div class="col-md-6"><a href="/detailmovie/{{$v->MovieID}}"><img style="width:100%;" src="/imgMovie/{{$v->Thumbnail}}" alt=""></a></div>
             <div class="col-md-6">
               <p class="text-white" style="font-weight:1000;margin-bottom:20px">{{$v->Title}} ({{$v->AgeRegulationName}})</p>
               <div style="font-size:14px;">
@@ -30,17 +30,35 @@
                 <span class="text-white">{{$v->Content}}</span>
               </p>
               <div class="movieShow">
-                <div id="movie-collapse-{{$v->MovieID}}" data-collapse-id="movie-collapse-{{$v->MovieID}}" class="movie-collapse d-flex w-100 justify-content-between" data-movie-id="content-movieShow-{{$v->MovieID}}">
+                <div id="movie-collapse-1-{{$v->MovieID}}" data-collapse-id="movie-collapse-1-{{$v->MovieID}}" class="movie-collapse d-flex w-100 justify-content-between" data-movie-id="content-movieShow-1-{{$v->MovieID}}">
                   <p class="text-white" id="clickItem">Ngày: 19/04/2024</p>
                   <p class="text-white d-grid align-items-center"><i class="fas fa-angle-up"></i></p>
                 </div>
-                <div id="content-movieShow-{{$v->MovieID}}" class="content-movieShow mt-2">
+                <div id="content-movieShow-1-{{$v->MovieID}}" class="content-movieShow mt-2">
                     <p class="text-white">STANDARD</p>
                     <div class="row">
                     <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
                     <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
                     <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
-                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>        
+                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a> 
+                                 
+                    </div>
+                </div>
+                
+              </div>
+              <div class="movieShow">
+                <div id="movie-collapse-2-{{$v->MovieID}}" data-collapse-id="movie-collapse-2-{{$v->MovieID}}" class="movie-collapse d-flex w-100 justify-content-between" data-movie-id="content-movieShow-2-{{$v->MovieID}}">
+                  <p class="text-white" id="clickItem">Ngày: 20/04/2024</p>
+                  <p class="text-white d-grid align-items-center"><i class="fas fa-angle-up"></i></p>
+                </div>
+                <div id="content-movieShow-2-{{$v->MovieID}}" class="content-movieShow mt-2">
+                    <p class="text-white">STANDARD</p>
+                    <div class="row">
+                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
+                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
+                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
+                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a> 
+                                 
                     </div>
                 </div>
                 

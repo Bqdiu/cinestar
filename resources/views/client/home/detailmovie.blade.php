@@ -8,7 +8,7 @@
         <div class="col-md-5 d-flex justify-content-center" style="position:relative">
             <div class="type-movie-box">
                 <div class="type-movie"><span class="txt">2D</span></div>
-                <div class="age"><span class="num">{{$PhimItem->AgeRegulationName}}</span><span class="txt">{{$PhimItem->Object}}</span></div>
+                <div class="age"><span class="num">{{$PhimItem->regulation->AgeRegulationName}}</span><span class="txt">{{$PhimItem->regulation->Object}}</span></div>
             </div>
       
         <img style="width:85%;border-radius:5px" src="/imgMovie/{{$PhimItem->Thumbnail}}" alt="">
@@ -35,7 +35,7 @@
         </li>
         <li>
             <span class="span-icon"><i  class="fas fa-user-check" style="color:yellow;padding-left:4px"></i></span>
-            <span class="text-black" style="background:yellow">{{$PhimItem->Content}}</span>
+            <span class="text-black" style="background:yellow">{{$PhimItem->regulation->Content}}</span>
         </li>
        </ul>
        <h4 class="text-white" style="font-weight:1000;margin-top:20px">Mô Tả</h4>

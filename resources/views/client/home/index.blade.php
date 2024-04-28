@@ -27,12 +27,12 @@
 
 @foreach($Status as $statusItem)
 
-@if($statusItem->IDStatus != 3 && $statusItem->IDStatus != 4)
+ @if($statusItem->IDStatus!=3 && $statusItem->IDStatus!=4)
 <?php
     $i=0;
-    $chunks = array_chunk(array_filter($Phim, function ($phim) use ($statusItem) {
+    $chunks = $Phim->filter(function($phim) use ($statusItem){
       return $phim->IDStatus == $statusItem->IDStatus;
-  }), 4);
+    })->chunk(4);
     ?>
 <div class="heading">
   <h1>{{$statusItem->StatusName}}</h1>
@@ -53,7 +53,7 @@
               <div class="card" style="width: 18rem;height:600px;position:relative;">
                     <div class="type-movie-box" style="left:0px">
                         <div class="type-movie" style="height:50px;width:50px"><span class="txt">2D</span></div>
-                        <div class="age" style="height:50px;width:50px"><span class="num" style="font-size:12px">{{$item->AgeRegulationName}}</span><span class="txt">{{$item->Object}}</span></div>
+                        <div class="age" style="height:50px;width:50px"><span class="num" style="font-size:12px;width:100%">{{$item->regulation->AgeRegulationName}}</span><span class="txt" style="letter-spacing: .2rem;">{{$item->regulation->Object}}</span></div>
                     </div>
                     <img src="/imgMovie/{{$item->Thumbnail}}" style="border-radius:5px" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -120,8 +120,8 @@
   <a href="{{$status}}" class="btn-xemthem">XEM THÊM</a>
 </div>
 
-
 @endif
+
 @endforeach
 
 @endsection

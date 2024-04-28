@@ -14,6 +14,15 @@ class Movie extends Model
     protected $fillable = ['Title','Thumbnail','Description','Duration','Language','ReleaseDate','Country','Genre','trailer_url','Director','Actor','RegulationID','IDStatus'];
 
     public function regulation(){
-        return $this->belongsTo(regulation::class,"RegulationID","RegulationID");
+        return $this->belongsTo(Regulation::class,"RegulationID","RegulationID");
+    }
+    public static function getAllMovieWithAgeRegulation(){
+        return self::with('regulation')->get();
+    }
+    public static function getMovie($id){
+        return self::with('regulation')->find($id);
+    }
+    public static function searchMovie($name){
+        return self::with('regulation')->where('Title','like',$name)->get();
     }
 }
