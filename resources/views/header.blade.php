@@ -43,9 +43,20 @@
                                 <input type="text" name="key" placeholder="Tìm phim,rạp,..." class="input-search" value="{{$key ?? ''}}">
                                 <button class="btn btn-search-submit" type="submit"><i class="fas fa-search"></i></button>
                             </form>
-                            <div class="signin-signup-text">
-                                <p style="color:white;margin:auto"><i class="far fa-user-circle"></i> <a class="link-text"style="text-decoration:none;" href="/login">Đăng Nhập</a> / <a class="link-text"style="text-decoration:none;" href="/register">Đăng ký</a></p>
+                            @if(Auth::check())
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="far fa-user-circle"></i>
+                                    <span>{{Auth::user()->Name}}</span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                </ul>
                             </div>
+                            @else
+                                <p style="color:white;margin:auto"><i class="far fa-user-circle"></i> <a class="link-text"style="text-decoration:none;" href="/login">Đăng Nhập</a> / <a class="link-text"style="text-decoration:none;" href="/register">Đăng ký</a></p>
+                            @endif
                             <div class="language">
                                 <p style="color: white;margin:auto"><img src="https://cinestar.com.vn/assets/images/footer-vietnam.svg" alt=""> VN</p>
                             </div>

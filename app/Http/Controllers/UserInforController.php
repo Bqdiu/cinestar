@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 Use App\Models\UserInfor;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Exception;
+use Hash;
 
 
 class UserInforController extends Controller
@@ -45,21 +47,48 @@ class UserInforController extends Controller
             
         ]
         );
-        $user = UserInfor::create([
-            'Name' => $request->Name,
-            'BirthDay' => $request->BirthDay,
-            'Username' => $request->Username,
-            'Password' => $request->Password,
-            'CCCD' => $request->CCCD,
-            'Email' => $request->Email,
-            'Phone' => $request->Phone
-        ]);
+       
         try {
+            $user = new UserInfor();
+            $user->Name = $request->input('Name');
+            $user->BirthDay = $request->input('BirthDay');
+            $user->Username = $request->input('Username');
+            $user->Password =  bcrypt($request->input('Password'));
+            $user->Email = $request->input('Email');
+            $user->Phone = $request->input('Phone');
+            $user->CCCD = $request->input('CCCD');
             $user->save();
             return redirect('login');
         } catch (Exception $e) {
             return redirect('register');
         }
+        dd($request->all());
+    }
+    public function Login(){
+        return view('client/user/login');
+    }
+
+    public function LoginPost(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ],[
+            'username.required' => 'Vui lòng nhập tên đăng nhập',
+            'password.required' => 'Vui lòng nhập mật khẩu',]
+        );
+        $credentials = $request->only('username', 'password');
+        if (Auth::attempt($credentials)) {
+            // $user = Auth::getLastAttempted();
+            // Auth::login($user);
+            return redirect('/')->with('success', 'Đăng nhập thành công');
+        } else {
+            return redirect()->back()->withErrors(['username' => 'Tên đăng nhập hoặc mật khẩu không chính xác']);
+        }
     }
     
+    public function Logout(Request $request){
+        Auth::logout();
+        return redirect('/');
+    }
 }
