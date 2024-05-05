@@ -81,7 +81,7 @@ class UserInforController extends Controller
         if (Auth::attempt($credentials)) {
             // $user = Auth::getLastAttempted();
             // Auth::login($user);
-            return redirect('/')->with('success', 'Đăng nhập thành công');
+            return redirect('/');
         } else {
             return redirect()->back()->withErrors(['username' => 'Tên đăng nhập hoặc mật khẩu không chính xác']);
         }

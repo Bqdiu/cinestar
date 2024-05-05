@@ -28,8 +28,12 @@ Route::get('/movie',[HomeController::class,'Movie']);
 Route::get('/movie/showing',[HomeController::class,'Showing']);
 Route::get('/movie/upcoming',[HomeController::class,'Upcoming']);
 Route::post('/search',[HomeController::class,'Search'])->name('search');
-Route::get('/dashboard',[AdminController::class,'Index']);
 Route::get('/book-tickets/{id}',[HomeController::class,'BookTickets']);
 Route::get('/booktickets-partial/{idRap}/{idStatus}',[HomeController::class,'bookTicketsPartial']);
 
-
+Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminController::class, 'login']); 
+Route::get('/admin/logout', [AdminController::class, 'Logout']);    
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'Index']);
+});
