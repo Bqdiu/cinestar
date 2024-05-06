@@ -3,11 +3,28 @@
 <head>
     <title>Admin Login</title>
     <!-- Add CSS libraries such as Bootstrap here -->
+    <!-- Bootstrap CSS -->
+    <link href="{{asset('/css/bootstrap.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('/css/adminLogin.css')}}" rel="stylesheet"/>
 </head>
 <body>
-    <div class="container">
-        <h2>Admin Login</h2>
-        @if ($errors->any())
+    <div class="form-container">
+        <form method="POST" action="{{ route('admin.login') }}">
+            @csrf
+            <div class="form-group">
+                <img src="/img/admin-login.png" alt="" style="width: 150; height:150px">
+            </div>
+            <h2>Admin Login</h2>
+            <div class="form-group">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Tên đăng nhập" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="submit" value="login now" class="form-btn">
+            </div>
+            @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -15,18 +32,7 @@
                     @endforeach
                 </ul>
             </div>
-        @endif
-        <form method="POST" action="{{ route('admin.login') }}">
-            @csrf
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            @endif
         </form>
     </div>
 </body>
