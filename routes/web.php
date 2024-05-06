@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserInforController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Management\StatusMovieController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,9 +32,10 @@ Route::post('/search',[HomeController::class,'Search'])->name('search');
 Route::get('/book-tickets/{id}',[HomeController::class,'BookTickets']);
 Route::get('/booktickets-partial/{idRap}/{idStatus}',[HomeController::class,'bookTicketsPartial']);
 
-Route::get('/admin/login', [AdminController::class, 'showLoginForm'])->name('admin.login');
-Route::post('/admin/login', [AdminController::class, 'login']); 
+Route::get('/admin', [AdminController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin', [AdminController::class, 'login']); 
 Route::get('/admin/logout', [AdminController::class, 'Logout']);    
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'Index']);
+    Route::get('/admin/moviestatus/index',[StatusMovieController::class,'StatusMovieIndex']);
 });

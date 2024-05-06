@@ -2,28 +2,38 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-  <!-- Nucleo Icons -->
-  <link href="{{asset('/css/nucleo-icons.css')}}" rel="stylesheet"/>
-  <link href="{{asset('/css/nucleo-svg.css')}}" rel="stylesheet"/>
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-  <!-- CSS Files -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-dashboard@3.0.9/assets/css/material-dashboard.min.css">
-  <link rel="stylesheet" href="{{asset('/css/admin.css')}}">
-  <title>
-    Admin
-  </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
+    <script src="https://kit.fontawesome.com/a597e9f72c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('/summernote/summernote-bs4.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/css/admin.css') }}">
 </head>
 
-<body class="g-sidenav-show  bg-gray-200">
-    @include ('layouts.sidebar')
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg "> 
-        @include('layouts.navbar')
+<body>
+    <div class="sidebar">
+        <a href="#">
+            <img src="{{ asset('/img/header-logo.png') }}" alt="logo"  class="logo">
+        </a>  
+        <a href="/admin/dashboard" >Dashboard</a>
+        <a href="/admin/moviestatus/index" >Movie status</a>
+    </div>
+
+    <div class="content">
+        <div class="row">
+          <div class="col-md-12 d-flex">
+              <div class="dropdown ms-auto dropdown_btn">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="far fa-user-circle"></i>
+                      <span>{{Auth::user()->Name}}</span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                      <li><a class="dropdown-item" href="/admin/logout">Logout</a></li>
+                  </ul>
+              </div>
+          </div>
+        </div>
+        <div class="row">

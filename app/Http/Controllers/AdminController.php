@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function showLoginForm()
     {
-        return view('admin.login');
+        return view('/admin/login');
     }
 
     public function login(Request $request)
@@ -18,9 +18,7 @@ class AdminController extends Controller
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
-            if (Auth::user()->role == 1) {
                 return redirect()->intended('/admin/dashboard');
-            }
         }
 
         return redirect()->back()
@@ -38,7 +36,7 @@ class AdminController extends Controller
     public function Logout()
     {
         Auth::Logout();
-        return redirect('/admin/login');
+        return redirect('/admin');        
     }
 
 }
