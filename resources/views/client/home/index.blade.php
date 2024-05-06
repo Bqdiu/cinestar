@@ -50,7 +50,7 @@
         <div class="col-md-3">
           <a style="text-decoration:none" href="/detailmovie/{{$item->MovieID}}">
       
-              <div class="card" style="width: 18rem;height:600px;position:relative;">
+              <div class="card" style="width: 18rem;height:700px;position:relative;">
                     <div class="type-movie-box" style="left:0px">
                         <div class="type-movie" style="height:50px;width:50px"><span class="txt">2D</span></div>
                         <div class="age" style="height:50px;width:50px"><span class="num" style="font-size:12px;width:100%">{{$item->regulation->AgeRegulationName}}</span><span class="txt" style="letter-spacing: .2rem;">{{$item->regulation->Object}}</span></div>
