@@ -13,5 +13,18 @@ class StatusMovieController extends Controller
         return view('admin.moviestatus.index',compact('movie_status'));
     }
 
-
+    public function deleteMovieStatus(Request $request)
+    {
+        try{
+            $movie_status = StatusMovie::find($request->deleteStatusID);
+            if(!$movie_status)
+                throw new \Exception('Không tìm thấy trạng thái phim '.$request->deleteStatusID);
+            $movie_status->delete();
+            return redirect()->back()->with('mess','Xóa thành công');
+        }catch(\Exception $e)
+        {
+            $message = "Xóa không thành công: " . $e->getMessage();
+            return redirect()->back()->with('mess',$message);
+        }
+    }
 }

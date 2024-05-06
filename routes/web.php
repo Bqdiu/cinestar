@@ -38,4 +38,5 @@ Route::get('/admin/logout', [AdminController::class, 'Logout']);
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'Index']);
     Route::get('/admin/moviestatus/index',[StatusMovieController::class,'StatusMovieIndex']);
+    Route::post('/admin/moviestatus/delete-movie-status',[StatusMovieController::class,'deleteMovieStatus'])->name('deleteMovieStatus');
 });

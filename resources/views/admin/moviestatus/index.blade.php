@@ -25,8 +25,8 @@
                             <th scope="row" class="text-center align-middle">{{$row->IDStatus}}</th>
                             <td scope="row" class="text-center">{{$row->StatusName}}</td>
                             <td scope="row" class="align-middle">
-                                <a class="col btn btn-secondary edit-status-btn" data-bs-toggle="modal" data-bs-target="#editStatusMovie" data-brand-id="{{$row->IDStatus}}">Edit</a>
-                                <a class="col btn btn-danger delete-status-btn" data-bs-toggle="modal" data-bs-target="#deleteStatusMovie" data-brand-id="{{$row->IDStatus}}">Delete</a>
+                                <a class="col btn btn-secondary edit-status-btn" data-bs-toggle="modal" data-bs-target="#editStatusMovie" data-status-id="{{$row->IDStatus}} ">Edit</a>
+                                <a class="col btn btn-danger delete-status-btn" data-bs-toggle="modal" data-bs-target="#deleteStatusMovie" data-status-id="{{$row->IDStatus}}">Delete</a>
                             </td>
                         </tr>
                     @endforeach
@@ -34,6 +34,11 @@
             </table>
         </div>
     </div>
+    @if(session('mess'))
+        <script>
+            alert("{{ session('mess') }}");
+        </script>
+    @endif
     {{-- Edit modal --}}
     <div class="modal fade" id="editStatusMovie" tabindex="-1" aria-labelledby="editStatusMovieLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -63,7 +68,7 @@
     <div class="modal fade" id="deleteStatusMovie" tabindex="-1" aria-labelledby="deleteStatusMovieLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="#" method="post">
+                <form action="{{route('deleteMovieStatus')}}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title">Xóa trạng thái phim</h5>
