@@ -16,5 +16,9 @@ class StatusMovie extends Model
     public static function getAllStatusMovie(){
         return self::all();
     }
-    
+    public static function getStatusByID($idStatus){
+        return self::select('*')
+        ->where('IDStatus',$idStatus)
+        ->first();
+    }
 }

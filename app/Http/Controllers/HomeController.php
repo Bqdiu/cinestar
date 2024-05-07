@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\StatusMovie;
 use App\Models\Movie;
+use App\Models\Cinema;
+use App\Models\Showinfor;
 class HomeController extends Controller
 {
  
@@ -44,39 +46,14 @@ class HomeController extends Controller
 
     public function BookTickets($id){
         
-        $RapTheoID = DB::table('cinema')
-                ->select('*')
-                ->where('cinemaID',$id)
-                ->first();
+        $RapTheoID = Cinema::getCinemaByID($id);
         return view('client/home/booktickets',compact('RapTheoID'));
     }
    
     public function bookTicketsPartial($idRap,$idStatus){
-        $PhimTheoRap = DB::table('movie')
-                        ->join('age_regulation','movie.RegulationID','=','age_regulation.RegulationID')
-                        ->join('showinfor','movie.MovieID','=','showinfor.MovieID')
-                        ->join('cinema_hall','showinfor.CinemaHallID','=','cinema_hall.CinemaHallID')
-                        ->join('cinema','cinema_hall.CinemaID','=','cinema.CinemaID')
-                        ->select('movie.*','age_regulation.*')->distinct()
-                        ->where('cinema.CinemaID',$idRap)
-                        ->where('movie.IDStatus',$idStatus)
-                        ->get();
-        $CountPhim = DB::table('movie')
-                        ->join('age_regulation', 'movie.RegulationID', '=', 'age_regulation.RegulationID')
-                        ->join('showinfor', 'movie.MovieID', '=', 'showinfor.MovieID')
-                        ->join('cinema_hall', 'showinfor.CinemaHallID', '=', 'cinema_hall.CinemaHallID')
-                        ->join('cinema', 'cinema_hall.CinemaID', '=', 'cinema.CinemaID')
-                        ->select(DB::raw('count(*) as count'))
-                        ->where('cinema.CinemaID', $idRap)
-                        ->where('movie.IDStatus', $idStatus)
-                        ->first(); 
-                    
-        $count = $CountPhim->count; 
-        $Title = DB::table('status_movie')
-                    ->select('*')
-                    ->where('IDStatus',$idStatus)
-                    ->first();
-
+        $PhimTheoRap = Movie::getMovieByCinema($idRap,$idStatus);            
+        $count = Movie::countMovieByCinema($idRap,$idStatus); 
+        $Title = StatusMovie::getStatusByID($idStatus);
         
         return view('client/home/bookticketsPartial',['CountPhim'=>$count,'Title'=>$Title,'idRap' => $idRap,'idStatus'=>$idStatus,'PhimTheoRap'=> $PhimTheoRap]);
     }

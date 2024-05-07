@@ -29,40 +29,30 @@
                 <span class="span-icon m-0"><i  class="fas fa-user-check" style="color:yellow;padding-left:4px"></i></span>
                 <span class="text-white">{{$v->Content}}</span>
               </p>
-              <div class="movieShow">
-                <div id="movie-collapse-1-{{$v->MovieID}}" data-collapse-id="movie-collapse-1-{{$v->MovieID}}" class="movie-collapse d-flex w-100 justify-content-between" data-movie-id="content-movieShow-1-{{$v->MovieID}}">
-                  <p class="text-white" id="clickItem">Ngày: 19/04/2024</p>
-                  <p class="text-white d-grid align-items-center"><i class="fas fa-angle-up"></i></p>
-                </div>
-                <div id="content-movieShow-1-{{$v->MovieID}}" class="content-movieShow mt-2">
-                    <p class="text-white">STANDARD</p>
-                    <div class="row">
-                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
-                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
-                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
-                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a> 
-                                 
+              <?php $date = 1?>
+                @foreach(\App\Models\Showinfor::getDateOFShow($idRap,$v->MovieID) as $keyShow=>$valueShow)
+
+                  <div class="movieShow">
+                    <div id="movie-collapse-{{$date}}-{{$v->MovieID}}" data-collapse-id="movie-collapse-{{$date}}-{{$v->MovieID}}" class="movie-collapse d-flex w-100 justify-content-between" data-movie-id="content-movieShow-{{$date}}-{{$v->MovieID}}">
+                      <p class="text-white" id="clickItem">Ngày: {{ \Carbon\Carbon::createFromFormat('Y-m-d', $valueShow->ShowDate)->format('d/m/Y') }}</p>
+                      <p class="text-white d-grid align-items-center"><i class="fas fa-angle-up"></i></p>
                     </div>
-                </div>
-                
-              </div>
-              <div class="movieShow">
-                <div id="movie-collapse-2-{{$v->MovieID}}" data-collapse-id="movie-collapse-2-{{$v->MovieID}}" class="movie-collapse d-flex w-100 justify-content-between" data-movie-id="content-movieShow-2-{{$v->MovieID}}">
-                  <p class="text-white" id="clickItem">Ngày: 20/04/2024</p>
-                  <p class="text-white d-grid align-items-center"><i class="fas fa-angle-up"></i></p>
-                </div>
-                <div id="content-movieShow-2-{{$v->MovieID}}" class="content-movieShow mt-2">
-                    <p class="text-white">STANDARD</p>
-                    <div class="row">
-                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
-                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
-                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a>
-                    <a href="" class="col-md-3 movie-show-item"><span>09:25</span></a> 
-                                 
+                    <div id="content-movieShow-{{$date}}-{{$v->MovieID}}" class="content-movieShow mt-2">
+                        <p class="text-white">STANDARD</p>
+                        <div class="row">
+                          @foreach(\App\Models\Showinfor::getStartTimeOFShow($idRap,$valueShow->ShowDate,$v->MovieID) as $keyTime=>$valueTime)
+                          
+                          <a href="" class="col-md-3 movie-show-item"><span>{{ \Carbon\Carbon::createFromFormat('H:i:s', $valueTime->StartTime)->format('H:i') }}</span></a>
+
+                          @endforeach
+                                    
+                        </div>
                     </div>
-                </div>
-                
-              </div>
+                    
+                  </div>
+                  <?php $date = $date + 1?>
+              @endforeach
+           
             </div>
           </div>
         </div>
