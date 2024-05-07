@@ -6,10 +6,9 @@
                 <h3 class="text-center">Movie Status</h3>
             </div>
         </div>
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchMovieStatus">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <div class="row">
+            <input id="searchMovieStatus" class="form-control mr-sm-2" type="search" placeholder="Search" name="searchMovieStatus">
+        </div>
         <div class="row">
             <table class="table">
                 <thead>
@@ -23,7 +22,7 @@
                     @foreach($movie_status as $row)
                         <tr>
                             <th scope="row" class="text-center align-middle">{{$row->IDStatus}}</th>
-                            <td scope="row" class="text-center">{{$row->StatusName}}</td>
+                            <td scope="row" class="text-center align-middle">{{$row->StatusName}}</td>
                             <td scope="row" class="align-middle">
                                 <a class="col btn btn-secondary edit-status-btn" data-bs-toggle="modal" data-bs-target="#editStatusMovie" data-status-id="{{$row->IDStatus}} ">Edit</a>
                                 <a class="col btn btn-danger delete-status-btn" data-bs-toggle="modal" data-bs-target="#deleteStatusMovie" data-status-id="{{$row->IDStatus}}">Delete</a>
@@ -34,25 +33,23 @@
             </table>
         </div>
     </div>
-    @if(session('mess'))
-        <script>
-            alert("{{ session('mess') }}");
-        </script>
-    @endif
     {{-- Edit modal --}}
     <div class="modal fade" id="editStatusMovie" tabindex="-1" aria-labelledby="editStatusMovieLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form action="{{route('editMovieStatus')}}" method="post" enctype="multipart/form-data">
     
                     <div class="modal-header border-bottom-0">
                         <h5 class="modal-title" id="editStatusLabel">Sửa trạng thái phim</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        
                         @csrf
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="status_name" name="status" placeholder="Nhập trạng thái phim">
+                            <input type="hidden" id="editStatusID" name="editStatusID">
+                            <label for="status_name" class="form-label">Trạng thái phim</label>
+                            <input type="text" class="form-control" id="status_name" name="status_name" placeholder="Tên trạng thái phim">
                             <div class="text-danger" id="error_status_name"></div>
                         </div>
                     </div>
@@ -86,4 +83,19 @@
             </div>
         </div>
     </div>
+    @if(session('mess'))
+        <script>
+            alert("{{ session('mess') }}");
+        </script>          
+    @endif
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    
 @endsection

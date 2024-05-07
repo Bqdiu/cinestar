@@ -39,4 +39,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'Index']);
     Route::get('/admin/moviestatus/index',[StatusMovieController::class,'StatusMovieIndex']);
     Route::post('/admin/moviestatus/delete-movie-status',[StatusMovieController::class,'deleteMovieStatus'])->name('deleteMovieStatus');
+    Route::get('/admin/moviestatus/getMovieStatus/{IDStatus}',[StatusMovieController::class,'getMovieStatus'])->name('getMovieStatus');
+    Route::post('/admin/moviestatus/editMovieStatus',[StatusMovieController::class,'editMovieStatus'])->name('editMovieStatus');
+    Route::get('/admin/moviestatus/searchMovieStatus/{term}',[StatusMovieController::class,'searchMovieStatus'])->name('searchMovieStatus');
+
 });

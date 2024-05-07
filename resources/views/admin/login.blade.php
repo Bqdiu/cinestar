@@ -12,9 +12,9 @@
         <form method="POST" action="{{ route('admin.login') }}">
             @csrf
             <div class="form-group">
-                <img src="/img/admin-login.png" alt="" style="width: 150; height:150px">
+                <img src="{{asset('/img/admin_logo.png')}}" alt="" style="width: 300px; height:200px; margin-bottom: -20px;">
             </div>
-            <h2>Admin Login</h2>
+            <h2>Admin Panel</h2>
             <div class="form-group">
                 <input type="text" class="form-control" id="username" name="username" placeholder="Tên đăng nhập" required>
             </div>

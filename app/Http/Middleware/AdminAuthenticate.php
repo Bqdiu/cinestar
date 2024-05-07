@@ -18,7 +18,10 @@ class AdminAuthenticate
         if (Auth::check() && Auth::user()->role == 1) {
             return $next($request);
         }
-        return redirect('/admin');
+        return redirect('/admin')->withInput($request->only('username'))
+        ->withErrors([
+            'login_error' => 'Bạn không có quyền truy cập vào trang này',
+        ]);
     }
 }
 ?>
