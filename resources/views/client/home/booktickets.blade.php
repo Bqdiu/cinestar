@@ -8,15 +8,15 @@
             <img src="/imgCinema/{{$RapTheoID->Thumbnail}}" alt="" style="width:103%;height:100%">
         </div>
         <div class="col-md-8" style="background:linear-gradient(106deg, rgba(102, 51, 153, .8), rgba(51, 102, 204, .8) 102.69%);flex:1;display:grid;align-items:center">
-            <div class="d-flex flex-column ms-5" >
+            <div class="d-flex flex-column ms-5">
                 <p class="titleCinema">{{$RapTheoID->Name}}</p>
-                <p class="txtAddress"><i class="fas fa-map-marker-alt" style="color:yellow;margin-right:5px"></i>  {{$RapTheoID->Address}}</p>
+                <p class="txtAddress"><i class="fas fa-map-marker-alt" style="color:yellow;margin-right:5px"></i> {{$RapTheoID->Address}}</p>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 d-flex text-white justify-content-lg-around align-items-center slide-SuatChieu" >
-          
+        <div class="col-md-12 d-flex text-white justify-content-lg-around align-items-center slide-SuatChieu">
+
             <div class="slide-PhimDangChieu click">
                 <span>Phim Đang Chiếu</span>
             </div>
@@ -29,8 +29,8 @@
             <div class="slide-BangGiaVe">
                 <span>Bảng giá Vé</span>
             </div>
-           
-            
+
+
         </div>
     </div>
 </div>

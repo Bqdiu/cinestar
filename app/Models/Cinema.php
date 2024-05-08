@@ -11,11 +11,17 @@ class Cinema extends Model
     protected $table = 'cinema';
     protected $primaryKey = 'CinemaID';
     public $timestamps = false;
-    protected $fillable = ['Name','Thumbnail','Address','TotalCinemaHalls'];
+    protected $fillable = ['Name', 'Thumbnail', 'Address', 'TotalCinemaHalls', 'CityID'];
 
-    public static function getCinemaByID($id){
+    public function city()
+    {
+        return self::belongsTo(City::class, 'CityID', 'CityID');
+    }
+
+    public static function getCinemaByID($id)
+    {
         return self::select('*')
-        ->where('cinemaID',$id)
-        ->first();
+            ->where('cinemaID', $id)
+            ->first();
     }
 }

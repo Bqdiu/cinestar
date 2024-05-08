@@ -39,11 +39,25 @@ $(document).ready(function () {
         });
     }
 
-    $(document).on("click", ".movie-collapse", function () {
-        var collapseId = $(this).data("collapse-id"); // Lấy giá trị của thuộc tính "data-collapse-id" của phần tử "movie-collapse" được click
-        var contentId = $(this).data("movie-id"); // Lấy giá trị của thuộc tính "data-movie-id" của phần tử "movie-collapse" được click
-        $("." + collapseId).toggleClass("active");
-        // Thêm hoặc loại bỏ class "active" cho phần tử "movie-collapse" được click
-        $("#" + contentId).toggleClass("d-none"); // Hiển thị hoặc ẩn phần tử "content-movieShow" tương ứng
+    $(document).on("click", ".movieShow", function () {
+        var movieShowID = $(this).data("movie-show");
+        $("#" + movieShowID).toggleClass("active");
+    });
+
+    $(".swiper-slide-item").click(function () {
+        var swiperID = $(this).data("swiper-slide");
+        $(".swiper-slide-item").not(this).removeClass("active");
+        $("#" + swiperID).addClass("active");
+    });
+    $(document).on("click", ".city-option-menu", function () {
+        var cityName = $(this).data("city-name");
+        $(".an-select-selection-item").empty();
+        $(".an-select-selection-item").html(cityName);
+    });
+    $(document).on("click", ".cinestar-item", function () {
+        var cinestarItemID = $(this).data("cinestar-collapse-item");
+        var cinestarBodyItemID = $(this).data("cinestar-body-item");
+        console.log(cinestarBodyItemID);
+        $("#" + cinestarItemID).toggleClass("active");
     });
 });

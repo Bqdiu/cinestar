@@ -11,10 +11,10 @@ class CinemaHall extends Model
     protected $table = 'cinema_hall';
     protected $primaryKey = 'CinemaHallID';
     public $timestamps = false;
-    protected $fillable = ['Name','TotalSeats','CinemaID'];
+    protected $fillable = ['Name', 'TotalSeats', 'CinemaID'];
 
-    public function cinema(){
-        return $this->belongsTo(Cinema::Class,'CinemaID','CinemaID');
+    public function cinema()
+    {
+        return $this->belongsTo(Cinema::class, 'CinemaID', 'CinemaID');
     }
-
 }

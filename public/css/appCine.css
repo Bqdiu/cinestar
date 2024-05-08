@@ -1,4 +1,4 @@
-*{
+* {
     box-sizing: border-box;
 }
 
@@ -6,22 +6,59 @@ body {
     background-color: #0f172a;
     font-family: "Noto Serif", serif;
     font-style: normal;
-    font-variation-settings:
-      "wdth" 100;
-      font-optical-sizing: auto;
+    font-variation-settings: "wdth" 100;
+    font-optical-sizing: auto;
 }
 
-.btn--pri{
-    width:fit-content;
-    height:40px;
-    background-color: yellow;
-    font-weight: bold;
+.btn--pri {
+    color: #0f172a;
     position: relative;
-    
-   
-
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
+    font-weight: bold;
 }
-.input-search{
+.btn--pri:after,
+.btn--pri:before {
+    content: "";
+    height: 100%;
+    position: absolute;
+    transition: all 0.4s ease-in-out;
+    width: 0.1rem;
+}
+.btn--pri:before {
+    background: #f3ea28;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: -2;
+}
+
+.btn--pri:after {
+    background: linear-gradient(106deg, #639, #36c 102.69%);
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    width: 0;
+    z-index: -1;
+}
+.btn--pri:hover {
+    color: #fff;
+}
+
+.btn--pri:hover img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0) saturate(7487%)
+        hue-rotate(198deg) brightness(105%) contrast(101%);
+}
+
+.btn--pri:hover:before {
+    width: 0;
+}
+
+.btn--pri:hover:after {
+    width: 100%;
+}
+
+.input-search {
     border-radius: 100rem;
     font-size: 14px;
     font-weight: 400;
@@ -29,42 +66,40 @@ body {
     line-height: 1;
     padding: 0 3rem 0 1.6rem;
     width: 250px;
-    color:grey
+    color: grey;
 }
-.btn-search-submit{
-    position:relative;
-    right:50px;
+.btn-search-submit {
+    position: relative;
+    right: 50px;
 }
 .link-text {
-    color:white;
+    color: white;
     font-size: 16px;
     text-decoration: none;
     margin: auto;
 }
-.link-text:hover{
+.link-text:hover {
     color: yellow;
-
 }
 
-
-.signin-signup-text{
-   margin:auto;
+.signin-signup-text {
+    margin: auto;
 }
-h1{
-    font-family: 'Anton',sans-serif;
+h1 {
+    font-family: "Anton", sans-serif;
 }
 
-.heading{
+.heading {
     color: #f8fafc;
     font-family: var(--font-title);
     font-size: 4rem;
     text-transform: uppercase;
     text-align: center;
-    margin-top:4rem;
-    margin-bottom:4rem
+    margin-top: 4rem;
+    margin-bottom: 4rem;
 }
 
-.name-product{
+.name-product {
     font-weight: bold;
     font-family: Verdana;
 }
@@ -72,88 +107,124 @@ h1{
     font-family: "Kanit", sans-serif;
     font-weight: 400;
     font-style: normal;
-  }
-  
-  .kanit-bold {
+}
+
+.kanit-bold {
     font-family: "Kanit", sans-serif;
     font-weight: 700;
     font-style: normal;
-  }
+}
 
+.card {
+    background-color: transparent;
+}
 
-
-  .card{
-    background-color:transparent;
-    }
-
-.bottom-card{
+.bottom-card {
     justify-content: space-around;
 }
-.btn-xemthem{
-    justify-content: center;
+.btn-xemthem {
+    border: 0.1rem solid #f3ea28;
+    color: #f3ea28;
+    position: relative;
+    transition: all 0.4s ease-in-out;
+    z-index: 1;
+    width: 300px;
+    padding: 20px;
     text-decoration: none;
-    background-color: transparent;
-    color:yellow;
-    border:1px solid yellow;
-    padding:20px;
-    width:300px;
-    text-align: center;
     font-weight: bold;
     font-size: 18px;
+    text-align: center;
     border-radius: 10px;
-    margin-top: 20px;
-
 }
-.bg-linear{
-  
-  /* background: url(https://media.istockphoto.com/id/1362422378/photo/abstract-blurred-purple-background-light-spot-on-dark-background.jpg?s=170667a&w=0&k=20&c=3f4tWpDpLk9UfppLBZjiTTLG-1V0Q-gCknhZHF9moJM=);*/
-   background: url(https://bogatyr.club/uploads/posts/2023-03/thumbs/1679586820_bogatyr-club-p-temno-fioletovii-fon-gradient-pinterest-44.jpg);
-   /*background: url(https://metiz.vn/static/assets/websites/images/bg-session-movie.png); */
+.btn-xemthem:after,
+.btn-xemthem:before {
+    content: "";
+    height: 100%;
+    position: absolute;
+    transition: all 0.4s ease-in-out;
+    width: 0.1rem;
+    border-radius: 10px;
+}
+
+.btn-xemthem:before {
+    background: transparent;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: -2;
+    border-radius: 10px;
+}
+
+.btn-xemthem:after {
+    background: linear-gradient(90deg, #ff6d00, #ffc107);
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    width: 0;
+    z-index: -1;
+    border-radius: 10px;
+}
+
+.btn-xemthem:hover {
+    color: #fff;
+}
+
+.btn-xemthem:hover img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0) saturate(7487%)
+        hue-rotate(198deg) brightness(105%) contrast(101%);
+    transition: all 0.2s;
+}
+
+.btn-xemthem:hover:before {
+    width: 0;
+}
+
+.btn-xemthem:hover:after {
+    width: 100%;
+}
+.bg-linear {
+    /* background: url(https://media.istockphoto.com/id/1362422378/photo/abstract-blurred-purple-background-light-spot-on-dark-background.jpg?s=170667a&w=0&k=20&c=3f4tWpDpLk9UfppLBZjiTTLG-1V0Q-gCknhZHF9moJM=);*/
+    background: url(https://bogatyr.club/uploads/posts/2023-03/thumbs/1679586820_bogatyr-club-p-temno-fioletovii-fon-gradient-pinterest-44.jpg);
+    /*background: url(https://metiz.vn/static/assets/websites/images/bg-session-movie.png); */
     background-size: cover;
 }
 
-.info-detail
-{
+.info-detail {
     padding-inline-start: 0px;
     list-style-type: none;
     font-size: 18px;
-
 }
-.info-detail li 
-{
-    margin-bottom:10px
+.info-detail li {
+    margin-bottom: 10px;
 }
-.span-icon{
-    width:24px;
-    height:24px;
-    margin-right:10px
+.span-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
 }
-.trailer-link
-{
-    font-size:20px;
-    margin-top:30px;
+.trailer-link {
+    font-size: 20px;
+    margin-top: 30px;
 }
-.type-movie-box{
+.type-movie-box {
     display: flex;
     flex-direction: row;
-    position:absolute;
-    width:fit-content;
-    height:fit-content;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
     top: 0;
     left: 50px;
-
 }
-.type-movie{
+.type-movie {
     background-color: #f93;
     color: #000;
     padding: 0.8rem;
-    height:70px;
+    height: 70px;
     width: 70px;
     text-transform: uppercase;
     display: flex;
-   
 }
-.type-movie .txt{
+.type-movie .txt {
     display: flex;
     margin: auto;
     align-items: center;
@@ -167,7 +238,7 @@ h1{
     font-weight: 1000;
 }
 
-.age{
+.age {
     background-color: #f03;
     display: flex;
     flex-direction: column;
@@ -179,151 +250,307 @@ h1{
     text-transform: uppercase;
     justify-content: center;
 }
-.age .num{
+.age .num {
     font-size: 22px;
-    letter-spacing: .18rem;
+    letter-spacing: 0.18rem;
     line-height: 100%;
     text-indent: 0.18rem;
-    color:white;
+    color: white;
     font-weight: bold;
 }
-.age .txt{
+.age .txt {
     align-items: center;
     background-color: #000;
     color: #fff;
     display: flex;
     font-size: 5px;
     justify-content: center;
-    letter-spacing: .4rem;
+    letter-spacing: 0.4rem;
     line-height: 100%;
     padding: 0.2rem;
     text-indent: 0.4rem;
 }
 
-.cinema-list
-{
-    position:absolute;
+.cinema-list {
+    position: absolute;
     z-index: 1;
     display: none;
-    width:100%;
-    height:100px;
-   background-color: transparent;
+    width: 100%;
+    height: 100px;
+    background-color: transparent;
     background-size: cover;
-    color:white;
+    color: white;
     background-color: #230240;
-    border:1px solid rgba(248,250,252,.1);
+    border: 1px solid rgba(248, 250, 252, 0.1);
     box-shadow: 4px 2px 15px #000000;
     border-radius: 5px;
-    top:50px;
-    left:10px;
-    
-    
+    top: 50px;
+    left: 10px;
 }
-.cinema-list li 
-{
+.cinema-list li {
     list-style-type: none;
-   
+
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.chon-Rap .icon-chonRap:hover +  .cinema-list, .chon-Rap:hover .cinema-list{
+.chon-Rap .icon-chonRap:hover + .cinema-list,
+.chon-Rap:hover .cinema-list {
     display: flex;
-    
 }
 
-
-.titleCinema{
+.titleCinema {
     font-size: 45px;
-    color:white;
+    color: white;
     font-weight: 900;
 }
-.txtAddress{
-    color:white
+.txtAddress {
+    color: white;
 }
-.slide-SuatChieu{
-    height:60px;
+.slide-SuatChieu {
+    height: 60px;
     width: 99.3%;
-    font-size:18px;
-    font-weight:900;
+    font-size: 18px;
+    font-weight: 900;
     background: url(https://bogatyr.club/uploads/posts/2023-03/thumbs/1679586820_bogatyr-club-p-temno-fioletovii-fon-gradient-pinterest-44.jpg);
-    margin-left:12px;
+    margin-left: 12px;
     background-size: cover;
     padding: 0px;
 }
-.click
-{
+.click {
     border-bottom: 0.4rem solid #f3ea28;
     color: #f3ea28;
 }
 .slide-SuatChieu div {
-    height:100%;
-   width:25%;
-   text-align: center;
-   display: grid;
-   align-items: center;
-
+    height: 100%;
+    width: 25%;
+    text-align: center;
+    display: grid;
+    align-items: center;
 }
 @keyframes scrollUp {
-    from {
-        height:auto;
+    0% {
+        transform: translateY(0);
     }
-    to {
-        height:5%;
+    100% {
+        transform: translateY(-100%);
     }
 }
 
-/* Animation cuộn xuống */
 @keyframes scrollDown {
-    from {
+    0% {
         transform: translateY(-100%);
     }
-    to {
+    100% {
         transform: translateY(0);
     }
 }
-.active{
 
+.movieShow.active {
+    height: fit-content;
 }
-.movieShow{
-    border:1px solid rgba(248, 250, 252, .5);
-    height:auto;
+.movieShow {
+    border: 1px solid rgba(248, 250, 252, 0.5);
     width: 100%;
+    height: 40px;
     border-radius: 0.6rem;
-    padding:10px;
-    font-size:14px;
-    margin-bottom:5px;
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.movieShow .content-movieShow {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s ease;
+}
+.movieShow.active .content-movieShow {
+    max-height: none;
+    overflow: visible;
 }
 
-.movie-show-item{
+.movieShow.active .movie-collapse .icon {
+    transform: rotate(180deg);
+}
+.movieShow .movie-collapse .icon {
+    position: relative;
+    transition: all 0.3s ease;
+}
+.movie-show-item {
     display: flex;
-    margin-left:10px;
+    margin-left: 10px;
     justify-content: center;
     align-items: center;
-    position:relative;
-    border:1px solid rgba(248, 250, 252, .5);
+    position: relative;
+    border: 1px solid rgba(248, 250, 252, 0.5);
     border-radius: 0.3rem;
-    color:white;
+    color: white;
     text-decoration: none;
-    padding:10px;
-    width:auto;
-    margin-bottom:5px;
+    padding: 10px;
+    width: auto;
+    margin-bottom: 5px;
 }
-.movie-show-item:hover{
-    color:white;
+.movie-show-item:hover {
+    color: white;
 }
-.movie-show-item.active{
-    color:yellow;
+.movie-show-item.active {
+    color: yellow;
     border-color: yellow;
 }
-.content-movieShow{
-    display: block;
-   
-}
-.movie-collapse{
+
+.movie-collapse {
     cursor: pointer;
-   
 }
-.movieShow .movie-collapse{
-    height:5%;
+
+.show-date-swiper {
+    color: white;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.swiper-wrapper {
+    box-sizing: content-box;
+    display: flex;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.swiper-slide-item {
+    border: 0.1rem solid #f3ea28;
+    padding: 10px;
+    gap: 0.4rem;
+    cursor: pointer;
+    border-radius: 0.4rem;
+    margin: 0 15px;
+    height: 93px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.swiper-slide-item.active {
+    background-color: #f3ea28;
+    transition: all 0.2s;
+}
+.swiper-slide-item.active .date {
+    color: #639;
+    transition: all 0.2s;
+}
+.swiper-slide-item.active .day {
+    color: #639;
+    transition: all 0.2s;
+}
+.swiper-slider {
+    width: 135px;
+}
+.date {
+    color: #f3ea28;
+    font: "Anton", sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.02rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin: 0px;
+}
+.day {
+    color: #f3ea28;
+    margin: 0px;
+}
+.shtime-body {
+    display: flex;
+}
+.btn-group-vertical > .btn,
+.btn-group > .btn {
+    background: transparent;
+    border-color: #f3ea28;
+    color: #f3ea28;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 800;
+    width: 140px;
+    text-align: start;
+}
+.btn-group-vertical > .btn,
+.btn-group > .btn::after {
+    content: none;
+}
+.dropdown-menu.show {
+    transition: all 0.2s;
+}
+.shtime-ft {
+    margin-left: auto;
+    margin-right: auto;
+    width: 66.6666666667%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.shtime-ft .cinestar-item {
+    transition: all 1s ease;
+}
+.shtime-ft .cinestar-item.active .icon {
+    transform: rotate(180deg);
+}
+.shtime-ft .cinestar-item .icon {
+    transition: all 0.3s ease;
+}
+.shtime-ft .cinestar-item .cinestar-heading {
+    padding: 24px;
+}
+.shtime-ft .cinestar-heading {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+}
+.shtime-ft .cinestar-item.active .tittle {
+    color: #f3ea28;
+}
+.shtime-ft .cinestar-item .tittle {
+    color: #f8fafc;
+    font-size: 24px;
+    font-weight: 600;
+}
+.shtime-ft .cinestar-item.active {
+    background: #639;
+}
+.shtime-ft .cinestar-item.active .cinestar-body {
+    display: block;
+}
+.cinestar-item.collapseItem {
+    background: #64748b;
+    border-radius: 10px;
+}
+.shtime-ft .cinestar-item .cinestar-body {
+    display: none;
+}
+.shtime-ft .cinestar-item .cinestar-body {
+    padding: 0 24px 24px;
+}
+.shtime-ft .cinestar-item .addr {
+    color: #fff;
+}
+.list-info {
+    list-style-type: none;
+    padding: 0px;
+}
+.shtime-ft .cinestar-item .item-info {
+    margin-top: 24px;
+}
+.shtime-ft .cinestar-item .list-time {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+    list-style: none;
+    padding: 0px;
+}
+.shtime-ft .cinestar-item .item-time {
+    border: 0.5px solid #f8fafc;
+    border-radius: 4px;
+    cursor: pointer;
+    line-height: 100%;
+    padding: 8px 12px;
+    transition: all 0.3s;
 }
