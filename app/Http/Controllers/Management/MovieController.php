@@ -87,4 +87,26 @@ class MovieController extends Controller
         }
     }
 
+    public function searchMovie($term)
+    {
+        $movie = Movie::where('MovieID','like','%'.$term.'%')
+                ->orWhere('Title','like','%'.$term.'%')
+                ->orWhere('Thumbnail','like','%'.$term.'%')
+                ->orWhere('Description','like','%'.$term.'%')
+                ->orWhere('Duration','like','%'.$term.'%')
+                ->orWhere('Language','like','%'.$term.'%')
+                ->orWhere('ReleaseDate','like','%'.$term.'%')
+                ->orWhere('Country','like','%'.$term.'%')
+                ->orWhere('Genre','like','%'.$term.'%')
+                ->orWhere('trailer_url','like','%'.$term.'%')
+                ->orWhere('Director','like','%'.$term.'%')
+                ->orWhere('Actor','like','%'.$term.'%')
+                ->get();
+        if($movie->isEmpty())
+        {
+            $movie = Movie::all();
+            return response()->json($movie);
+        }
+        return response()->json($movie);
+    }
 }

@@ -22,7 +22,7 @@ $(document).ready(function(){
     $('#searchMovieStatus').on('input', function () {
         var searchTerm = $(this).val().trim();
         $.ajax({
-        url: '/admin/moviestatus/searchMovieStatus/' + searchTerm,
+            url: '/admin/moviestatus/searchMovieStatus/' + searchTerm,
             type: 'GET',
             success: function (data) {
                 $('#data-body').empty();
@@ -90,13 +90,46 @@ $(document).ready(function(){
         $('#deleteMovieID').val(movie_id);    
    });
 
-
-
-
+   $('#searchMovie').on('input',function(){
+        var term = $(this).val().trim();
+        $.ajax({
+            url: '/admin/movie/searchMovie/' + term,
+            type: 'GET',
+            success: function(data) {
+                $('#data-body').empty();
+                $.each(data, function (index, movie) {
+                    var row = 
+                    '<tr>' +
+                        '<th scope="row" class="text-left">'+movie.MovieID+'</th>' +
+                        '<td scope="row" class="text-left">'+movie.Title+'</td>' +
+                        '<td scope="row" class="text-left">' +
+                            '<img src="/imgMovie/'+movie.Thumbnail+'" width="50" height="50">'+
+                        '</td>'+
+                        '<td scope="row" class="text-left">'+movie.Description+'</td>'+
+                        '<td scope="row" class="text-left">'+movie.Duration+'</td>'+
+                        '<td scope="row" class="text-left">'+movie.Language+'</td>'+
+                        '<td scope="row" class="text-left">'+movie.ReleaseDate+'</td>'+
+                        '<td scope="row" class="text-left">'+movie.Country+'</td>'+
+                        '<td scope="row" class="text-left">'+movie.Genre+'</td>'+
+                        '<td scope="row" class="text-left">'+movie.trailer_url+'</td>'+
+                        '<td scope="row" class="text-left">'+movie.Director+'</td>'+
+                        '<td scope="row" class="text-left">'+movie.Actor+'</td>'+
+                        '<td scope="row">'+
+                            '<a class="col btn btn-secondary edit-movie-btn" data-bs-toggle="modal" data-bs-target="#editMovie" data-movie-id="'+movie.MovieID+'">Edit</a>'+
+                        '</td>'+
+                        '<td scope="row">'+
+                            '<a class="col btn btn-danger delete-movie-btn" data-bs-toggle="modal" data-bs-target="#deleteMovie" data-movie-id="'+movie.MovieID+'">Delete</a>'+
+                        '</td>'+
+                    '</tr>';
+                    $('#data-body').append(row);
+                });
+            }         
+        });   
+   });
 
    // hide alert
     setTimeout(function() 
     {
         $('.alert_hide').fadeOut('fast');
-    }, 5000);
+    }, 3000);
 });
