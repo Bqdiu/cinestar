@@ -4,6 +4,21 @@
         <div class="row">
             <div class="col-12">
                 <h3 class="text-center">Movie Status</h3>
+                @if(session('mess'))
+                    <div class="alert alert-success alert_hide">
+                        {{session('mess')}}
+                    </div>
+                    
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger alert_hide">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="row">
@@ -82,20 +97,8 @@
                 </form>
             </div>
         </div>
+        
     </div>
-    @if(session('mess'))
-        <script>
-            alert("{{ session('mess') }}");
-        </script>          
-    @endif
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
+    
     
 @endsection

@@ -16,9 +16,9 @@ $(document).ready(function(){
             success: function(data){
                 $('#status_name').val(data.StatusName);
             }
+            
         });      
     });
-    
     $('#searchMovieStatus').on('input', function () {
         var searchTerm = $(this).val().trim();
         $.ajax({
@@ -51,7 +51,7 @@ $(document).ready(function(){
             type: 'GET',
             success: function(response){
                 $('#title').val(response[0].Title);
-                $('#loadThumnail').attr('src', '/imgMovie/' + response[0].Thumbnail);    
+                $('#loadThumbnail').attr('src', '/imgMovie/' + response[0].Thumbnail);    
                 $('#descripton').val(response[0].Description);
                 $('#duration').val(response[0].Duration);
                 $('#language').val(response[0].Language);
@@ -75,7 +75,7 @@ $(document).ready(function(){
                 if(response[2]){
                     console.log(response[2]);
                     $.each(response[2], function(index, movie_status){
-                    $('#movie_status_name').append('<option value="'+movie_status.MovieID+'" ' + (response[0].IDStatus == movie_status.IDStatus ? 'selected' : '') +'>'+ movie_status.StatusName + '</option>');
+                        $('#movie_status_name').append('<option value="'+movie_status.IDStatus+'"' + (response[0].IDStatus == movie_status.IDStatus ? 'selected' : '') + '>' + movie_status.StatusName + '</option>');
                     });
                 }else {
                     console.log("response[2] is undefined or null");
@@ -85,4 +85,9 @@ $(document).ready(function(){
         });
    }); 
 
+   // hide alert
+    setTimeout(function() 
+    {
+        $('.alert_hide').fadeOut('fast');
+    }, 5000);
 });

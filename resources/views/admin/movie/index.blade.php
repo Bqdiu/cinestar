@@ -4,6 +4,20 @@
         <div class="row">
             <div class="col-12">
                 <h3 class="text-center">Movie Status</h3>
+                 @if(session('mess'))
+                    <div class="alert alert-success alert_hide">
+                        {{session('mess')}}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger alert_hide">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="row">
@@ -63,7 +77,7 @@
     <div class="modal fade" id="editMovie" tabindex="-1" aria-labelledby="editMovieLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form action="{{route('editMovie')}}" method="post" enctype="multipart/form-data">
     
                     <div class="modal-header border-bottom-0">
                         <h5 class="modal-title">Edit movie</h5>
@@ -78,9 +92,9 @@
                             <div class="text-danger" id="error_title"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="thumnail" class="form-label">Thumnail</label>
-                            <img id="loadThumnail" width="80" height="80">
-                            <input type="file" class="form-control" id="thumnail" name="thumnail" placeholder="Thumnail">
+                            <label for="thumbnail" class="form-label">Thumbnail</label>
+                            <img id="loadThumbnail" width="80" height="80">
+                            <input type="file" class="form-control" id="thumbnail" name="thumbnail" placeholder="Thumbnail">
                         </div>
                         <div class="mb-3">
                             <label for="descripton" class="form-label">Description</label>
@@ -112,7 +126,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="director" class="form-label">Director</label>
-                            <input type="url" class="form-control" id="director" name="director" placeholder="Director">
+                            <input type="text" class="form-control" id="director" name="director" placeholder="Director">
                         </div>
                         <label for="actor" class="form-label">Actor</label>
                             <textarea class="form-control" id="actor" name="actor" rows="3" placeholder="Actor"></textarea>
@@ -137,4 +151,5 @@
             </div>
         </div>
     </div>
+    
 @endsection
