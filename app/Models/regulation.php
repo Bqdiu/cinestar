@@ -12,4 +12,10 @@ class Regulation extends Model
     protected $primaryKey = 'RegulationID';
     public $timestamps = false;
     protected $fillable = ['AgeRegulationName','Content','Object'];
+
+    public function movie()
+    {
+        return $this->hasMany(Movie::class,'RegulationID','RegulationID');
+    }
+    
 }

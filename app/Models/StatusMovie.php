@@ -13,6 +13,10 @@ class StatusMovie extends Model
     public $timestamps = false;
     protected $fillable = ['StatusName'];
 
+    public function movie(){
+        return $this->hasMany(Movie::class,'IDStatus','IDStatus');
+    }   
+
     public static function getAllStatusMovie(){
         return self::all();
     }

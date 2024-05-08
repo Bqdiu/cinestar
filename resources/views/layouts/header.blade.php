@@ -18,6 +18,7 @@
             <img src="{{ asset('/img/header-logo.png') }}" alt="logo"  class="logo">
         </a>  
         <a href="/admin/dashboard" >Dashboard</a>
+        <a href="/admin/movie/index" >Movie</a>
         <a href="/admin/moviestatus/index" >Movie status</a>
     </div>
 

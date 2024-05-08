@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserInforController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Management\MovieController;
 use App\Http\Controllers\Management\StatusMovieController;
 /*
 |--------------------------------------------------------------------------
@@ -37,10 +38,14 @@ Route::post('/admin', [AdminController::class, 'login']);
 Route::get('/admin/logout', [AdminController::class, 'Logout']);    
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'Index']);
+    // movie status
     Route::get('/admin/moviestatus/index',[StatusMovieController::class,'StatusMovieIndex']);
     Route::post('/admin/moviestatus/delete-movie-status',[StatusMovieController::class,'deleteMovieStatus'])->name('deleteMovieStatus');
     Route::get('/admin/moviestatus/getMovieStatus/{IDStatus}',[StatusMovieController::class,'getMovieStatus'])->name('getMovieStatus');
     Route::post('/admin/moviestatus/editMovieStatus',[StatusMovieController::class,'editMovieStatus'])->name('editMovieStatus');
     Route::get('/admin/moviestatus/searchMovieStatus/{term}',[StatusMovieController::class,'searchMovieStatus'])->name('searchMovieStatus');
 
+    // movie
+    Route::get('/admin/movie/index',[Moviecontroller::class,'MovieIndex']);
+    Route::get('/admin/movie/getMovie/{MovieID}',[Moviecontroller::class,'getMovie'])->name('getMovie');
 });

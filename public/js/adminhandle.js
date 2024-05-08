@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    //Movie status
     // get id for movie status delete
     $(document).on('click','.delete-status-btn', function(){
         var IDStatus = $(this).data('status-id');
@@ -41,6 +42,47 @@ $(document).ready(function(){
         });
     });
 
-    
+   // Movie
+   $(document).on('click','.edit-movie-btn', function(){
+        var MovieID = $(this).data('movie-id');
+        $('#editMovieID').val(MovieID);
+        $.ajax({
+            url: '/admin/movie/getMovie/' + MovieID,
+            type: 'GET',
+            success: function(response){
+                $('#title').val(response[0].Title);
+                $('#loadThumnail').attr('src', '/imgMovie/' + response[0].Thumbnail);    
+                $('#descripton').val(response[0].Description);
+                $('#duration').val(response[0].Duration);
+                $('#language').val(response[0].Language);
+                $('#release_date').val(response[0].ReleaseDate);
+                $('#country').val(response[0].Country);
+                $('#genre').val(response[0].Genre);
+                $('#trailer_url').val(response[0].trailer_url);
+                $('#director').val(response[0].Director);
+                $('#actor').val(response[0].Actor);
+                $('#regulation_name').empty();
+                $('#movie_status_name').empty();
+                if (response[1]) {
+                    console.log(response[1]);
+                    $.each(response[1], function(index, regulation){
+                        console.log(regulation);
+                        $('#regulation_name').append('<option value="'+regulation.RegulationID+'"' + (response[0].RegulationID == regulation.RegulationID ? 'selected' : '') + '>' + regulation.AgeRegulationName + '</option>');
+                    });
+                } else {
+                    console.log("response[1] is undefined or null");
+                }
+                if(response[2]){
+                    console.log(response[2]);
+                    $.each(response[2], function(index, movie_status){
+                    $('#movie_status_name').append('<option value="'+movie_status.MovieID+'" ' + (response[0].IDStatus == movie_status.IDStatus ? 'selected' : '') +'>'+ movie_status.StatusName + '</option>');
+                    });
+                }else {
+                    console.log("response[2] is undefined or null");
+                }
+               
+            }
+        });
+   }); 
 
 });

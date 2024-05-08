@@ -28,7 +28,7 @@ class StatusMovieController extends Controller
         }
     }
 
-    //get data for ajax request
+    //get data for edit
     public function getMovieStatus($IDStatus)
     {
         $movie_status = StatusMovie::find($IDStatus);

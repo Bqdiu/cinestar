@@ -63,7 +63,7 @@
     </div>
     {{-- Delete modal --}}
     <div class="modal fade" id="deleteStatusMovie" tabindex="-1" aria-labelledby="deleteStatusMovieLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form action="{{route('deleteMovieStatus')}}" method="post">
                     @csrf
