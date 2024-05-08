@@ -151,5 +151,27 @@
             </div>
         </div>
     </div>
-    
+    {{-- Delete modal --}}
+    <div class="modal fade" id="deleteMovie" tabindex="-1" aria-labelledby="deleteMovieLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form action="{{route('deleteMovie')}}" method="post">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title">Xóa phim</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="deleteMovieID" name="deleteMovieID">
+                        <p>Bạn có chắc chắn muốn xóa phim này không?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-danger">Xóa</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
 @endsection

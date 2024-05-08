@@ -28,7 +28,6 @@ class MovieController extends Controller
 
     public function editMovie(Request $request)
     {
-        // dd($request);
         $request->validate([
             'title' => 'required',
             'descripton' => 'required',
@@ -65,7 +64,6 @@ class MovieController extends Controller
             $movie->IDStatus = $request->movie_status_id;
             $movie->RegulationID = $request->regulation_id;
             $movie->Thumbnail = $img;
-            // dd($movie);
             $movie->save();
             return redirect()->back()->with('mess','Sửa thành công ');
         }catch(\Illuminate\Database\QueryException $e)
@@ -73,4 +71,20 @@ class MovieController extends Controller
             return redirect()->back()->withErrors('Sửa không thành công: '.$e->getMessage());
         }
     }
+
+    public function deleteMovie(Request $request)
+    {
+        try{
+            $movie = Movie::find($request->deleteMovieID);
+            if(!$movie)
+                return redirect()->back()->withErorrs('Không tìm thấy phim muốn xóa');
+            $movie->delete();
+            return redirect()->back()->with('mess','Xóa thành công');    
+        }catch(\Exception $e)
+        {
+            $mess = "Xóa không thành công ".$e->getMessage();
+            return redirect()->back()->withErrors($mess);
+        }
+    }
+
 }

@@ -13,6 +13,9 @@ class Movie extends Model
     public $timestamps = false;
     protected $fillable = ['Title','Thumbnail','Description','Duration','Language','ReleaseDate','Country','Genre','trailer_url','Director','Actor','RegulationID','IDStatus'];
 
+    public function regulation(){
+        return $this->belongsTo(Regulation::class,"RegulationID","RegulationID");
+    }
     public static function getAllMovieWithAgeRegulation(){
         return self::with('regulation')->get();
     }

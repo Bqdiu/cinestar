@@ -22,7 +22,7 @@ $(document).ready(function(){
     $('#searchMovieStatus').on('input', function () {
         var searchTerm = $(this).val().trim();
         $.ajax({
-            url: '/admin/moviestatus/searchMovieStatus/' + searchTerm,
+        url: '/admin/moviestatus/searchMovieStatus/' + searchTerm,
             type: 'GET',
             success: function (data) {
                 $('#data-body').empty();
@@ -84,6 +84,15 @@ $(document).ready(function(){
             }
         });
    }); 
+   $(document).on('click','.delete-movie-btn',function(){
+        var movie_id = $(this).data('movie-id');
+        console.log(movie_id);
+        $('#deleteMovieID').val(movie_id);    
+   });
+
+
+
+
 
    // hide alert
     setTimeout(function() 
