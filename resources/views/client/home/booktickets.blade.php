@@ -1,4 +1,4 @@
-@extends ('layout');
+@extends ('layout')
 
 @section('main-content')
 <input type="hidden" name="idRap" id="idRap" value="{{$RapTheoID->CinemaID}}">

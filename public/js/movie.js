@@ -54,10 +54,28 @@ $(document).ready(function () {
         $(".an-select-selection-item").empty();
         $(".an-select-selection-item").html(cityName);
     });
-    $(document).on("click", ".cinestar-item", function () {
+    $(document).on("click", ".cinestar-heading", function () {
         var cinestarItemID = $(this).data("cinestar-collapse-item");
-        var cinestarBodyItemID = $(this).data("cinestar-body-item");
-        console.log(cinestarBodyItemID);
+        // var cinestarBodyItemID = $(this).data("cinestar-body-item");
+        // console.log(cinestarBodyItemID);
         $("#" + cinestarItemID).toggleClass("active");
+    });
+    // $(document).on("click", ".cinestar-item", function () {
+    //     var cinestarItemID = $(this).data("cinestar-collapse-item");
+    //     var cinestarBodyItemID = $(this).data("cinestar-body-item");
+    //     console.log(cinestarBodyItemID);
+    //     $("#" + cinestarItemID).toggleClass("active");
+    // });
+    $(".count-minus").click(function () {
+        var countElement = $(this).siblings(".count-number");
+        var count = parseInt(countElement.text());
+        if (count > 0) {
+            countElement.text(count - 1);
+        }
+    });
+    $(".count-plus").click(function () {
+        var countElement = $(this).siblings(".count-number");
+        var count = parseInt(countElement.text());
+        countElement.text(count + 1);
     });
 });
