@@ -51,5 +51,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/movie/editMovie',[Moviecontroller::class,'editMovie'])->name('editMovie');
     Route::post('/admin/movie/delete-movie',[MovieController::class,'deleteMovie'])->name('deleteMovie');
     Route::get('/admin/movie/searchMovie/{term}',[MovieController::class,'searchMovie'])->name('searchMovie');
-
+    Route::post('/admin/movie/add-movie',[MovieController::class,'addMovie'])->name('addMovie');
+    Route::get('/admin/movie/getDataOption',[Moviecontroller::class,'getDataOption']);
 });

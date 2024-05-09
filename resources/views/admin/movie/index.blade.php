@@ -181,7 +181,7 @@
     <div class="modal fade" id="addMovie" tabindex="-1" aria-labelledby="addMovieLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form action="{{route('addMovie')}}" method="post" enctype="multipart/form-data">
     
                     <div class="modal-header border-bottom-0">
                         <h5 class="modal-title">Add movie</h5>
@@ -192,63 +192,63 @@
                         <input type="hidden" id="addMovieID" name="addMovieID">
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                            <input type="text" class="form-control" id="add_title" name="add_title" placeholder="Title">
                             <div class="text-danger" id="error_title"></div>
                         </div>
                         <div class="mb-3">
                             <label for="thumbnail" class="form-label">Thumbnail</label>
-                            <input type="file" class="form-control" id="thumbnail" name="thumbnail" placeholder="Thumbnail">
+                            <input type="file" class="form-control" id="add_thumbnail" name="add_thumbnail" placeholder="Thumbnail">
                         </div>
                         <div class="mb-3">
                             <label for="descripton" class="form-label">Description</label>
-                            <textarea class="form-control" id="descripton" name="descripton" rows="3" placeholder="Description"></textarea>
+                            <textarea class="form-control" id="add_descripton" name="add_descripton" rows="3" placeholder="Description"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="duration" class="form-label">Duration</label>
-                            <input type="number" class="form-control" id="duration" name="duration" placeholder="Thời lượng">
+                            <input type="number" class="form-control" id="add_duration" name="add_duration" placeholder="Thời lượng">
                         </div>
                         <div class="mb-3">
                             <label for="language" class="form-label">Language</label>
-                            <input type="text" class="form-control" id="language" name="language" placeholder="Language">
+                            <input type="text" class="form-control" id="add_language" name="add_language" placeholder="Language">
                         </div>
                         <div class="mb-3">
                             <label for="release_date" class="form-label">Release Date</label>
-                            <input type="date" class="form-control" id="release_date" name="release_date" placeholder="Release Date">
+                            <input type="date" class="form-control" id="add_release_date" name="add_release_date" placeholder="Release Date">
                         </div>
                         <div class="mb-3">
                             <label for="country" class="form-label">Country</label>
-                            <input type="text" class="form-control" id="country" name="country" placeholder="Country">
+                            <input type="text" class="form-control" id="add_country" name="add_country" placeholder="Country">
                         </div>
                         <div class="mb-3">
                             <label for="genre" class="form-label">Genre</label>
-                            <input type="text" class="form-control" id="genre" name="genre" placeholder="Thể loại">
+                            <input type="text" class="form-control" id="add_genre" name="add_genre" placeholder="Thể loại">
                         </div>
                         <div class="mb-3">
                             <label for="trailer_url" class="form-label">Trailer URL</label>
-                            <input type="url" class="form-control" id="trailer_url" name="trailer_url" placeholder="trailer_url">
+                            <input type="url" class="form-control" id="add_trailer_url" name="add_trailer_url" placeholder="trailer_url">
                         </div>
                         <div class="mb-3">
                             <label for="director" class="form-label">Director</label>
-                            <input type="text" class="form-control" id="director" name="director" placeholder="Director">
+                            <input type="text" class="form-control" id="add_director" name="add_director" placeholder="Director">
                         </div>
                         <label for="actor" class="form-label">Actor</label>
-                            <textarea class="form-control" id="actor" name="actor" rows="3" placeholder="Actor"></textarea>
+                            <textarea class="form-control" id="add_actor" name="add_actor" rows="3" placeholder="Actor"></textarea>
                         <div class="mb-3">
-                            <label for="regulation_name" class="form-label">Regulation</label>
-                            <select class="form-control" name="regulation_id" id="regulation_name">
-                                
+                            <label for="add_regulation_name" class="form-label">Regulation</label>
+                            <select class="form-control" name="add_regulation_id" id="add_regulation_name">
+                                {{-- get option from ajax --}}
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="movie_status_name" class="form-label">Movie Status</label>
-                            <select class="form-control" name="movie_status_id" id="movie_status_name">
-
+                            <label for="add_movie_status_name" class="form-label">Movie Status</label>
+                            <select class="form-control" name="add_movie_status_id" id="add_movie_status_name">
+                                {{-- get option from ajax --}}
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
-                        <input type="submit" class="btn btn-primary" value="Edit"></input>
+                        <input type="submit" class="btn btn-primary" value="Submit"></input>
                     </div>
                 </form>
             </div>

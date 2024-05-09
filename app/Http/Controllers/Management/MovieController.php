@@ -109,4 +109,57 @@ class MovieController extends Controller
         }
         return response()->json($movie);
     }
+
+    public function getDataOption()
+    {
+        $movie_status = StatusMovie::all();
+        $regulation_age = Regulation::all();        
+        return response()->json([$movie_status,$regulation_age]);
+    }
+
+    public function addMovie(Request $request)
+    {
+        $request->validate([
+            'add_title' => 'required',
+            'add_descripton' => 'required',
+            'add_duration' => 'required',
+            'add_director' => 'required',
+            'add_actor' => 'required',
+            'add_thumbnail' => 'mimes:jpeg,jpg,png|required|max:10000',
+        ],[
+            'add_title.required' => 'Hãy nhập tên phim',
+            'add_descripton.required' => 'Hãy nhập mô tả phim',
+            'add_duration.required' => 'Hãy nhập thời lượng phim',
+            'add_director.required' => 'Hãy nhập đạo diễn phim',
+            'add_actor.required' => 'Hãy nhập diễn viên phim',
+            'add_add_thumbnail.mimes' => 'Hãy chọn file ảnh đúng định dạng jpeg,jpg,png',
+            'add_thumbnail.required' => 'Hãy chọn file ảnh',
+            'add_thumbnail.max' => 'File ảnh quá lớn',
+        ]);
+        $originalFileName = $request->file('add_thumbnail')->getClientOriginalName();
+        $user_id = Auth::id();
+        $img = 'image'.$user_id.'-'.time().'-'.$originalFileName;
+        $request->file('add_thumbnail')->move(public_path('/imgMovie'),$img);
+        try{
+            $movie = new Movie();
+            $movie->Title = $request->add_title;
+            $movie->Description = $request->add_descripton;
+            $movie->Duration = $request->add_duration;
+            $movie->Language = $request->add_language;
+            $movie->ReleaseDate = $request->add_release_date;
+            $movie->Country = $request->add_country;
+            $movie->Genre = $request->add_genre;
+            $movie->trailer_url = $request->add_trailer_url;
+            $movie->Director = $request->add_director;
+            $movie->Actor = $request->add_actor;
+            $movie->IDStatus = $request->add_movie_status_id;
+            $movie->RegulationID = $request->add_regulation_id;
+            $movie->Thumbnail = $img;
+            $movie->save();
+            return redirect()->back()->with('mess','Thêm thành công');
+        }catch(\Illuminate\Database\QueryException $e)
+        {
+            return redirect()->back()->withErrors('Thêm không thành công: '.$e->getMessage());
+        }
+    }
 }

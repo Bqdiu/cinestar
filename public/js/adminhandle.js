@@ -126,6 +126,27 @@ $(document).ready(function(){
             }         
         });   
    });
+   // get data for option select
+   $('.btn-add-movie').on('click', function(){
+    $.ajax({
+        url: '/admin/movie/getDataOption',
+        type: 'GET',
+        success: function(response){
+            $('add_regulation_name').empty();
+            $('add_movie_status_name').empty();
+            if(response[0] && response[1]){
+                $.each(response[0], function(index, movie_status){
+                    var row = '<option value="'+movie_status.IDStatus+'">' + movie_status.StatusName + '</option>';
+                    $('#add_movie_status_name').append(row);
+                }); 
+                $.each(response[1], function(index, regulation){
+                    var row = '<option value="'+regulation.RegulationID+'">' + regulation.AgeRegulationName + '</option>';
+                    $('#add_regulation_name').append(row);
+                });              
+            }
+        }
+    });   
+   });
 
    // hide alert
     setTimeout(function() 
