@@ -351,6 +351,35 @@ h1 {
     display: grid;
     align-items: center;
 }
+.none-time {
+    align-items: center;
+    border: 0.1rem solid hsla(0, 0%, 100%, 0.4);
+    border-radius: 0.4rem;
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding: 1.6rem;
+}
+.none-time img {
+    filter: brightness(0) invert(1);
+    flex-shrink: 0;
+    width: 2rem;
+}
+.none-time .tt {
+    color: white;
+}
+.box {
+    align-items: center;
+    color: #f3ea28;
+    display: flex;
+    font-family: var(--font-title);
+    font-size: 3.6rem;
+    gap: 1rem;
+    justify-content: center;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 @keyframes scrollUp {
     0% {
         transform: translateY(0);

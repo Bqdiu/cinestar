@@ -32,8 +32,8 @@
           <?php $date = 1 ?>
           @foreach(\App\Models\Showinfor::getDateOFShow($idRap,$v->MovieID) as $keyShow=>$valueShow)
 
-          <div class="movieShow active" data-movie-show="movieShow-{{$date}}-{{$v->MovieID}}" id="movieShow-{{$date}}-{{$v->MovieID}}">
-            <div class="movie-collapse d-flex w-100 justify-content-between">
+          <div class="movieShow active" id="movieShow-{{$date}}-{{$v->MovieID}}">
+            <div class="movie-collapse d-flex w-100 justify-content-between" data-movie-show="movieShow-{{$date}}-{{$v->MovieID}}">
               <p class="text-white" id="clickItem">Ngày: {{ \Carbon\Carbon::createFromFormat('Y-m-d', $valueShow->ShowDate)->format('d/m/Y') }}</p>
               <p class="text-white d-grid align-items-center"><i class="fas fa-angle-up icon"></i></p>
             </div>

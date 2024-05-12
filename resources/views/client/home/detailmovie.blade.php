@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('main-content')
-<div class="container mt-3">
+<div class="container mt-3" data-movie-id="{{$MovieID}}" id="movie">
     <div class="row">
         <div class="col-md-5 d-flex justify-content-center" style="position:relative">
             <div class="type-movie-box">
@@ -60,16 +60,30 @@
         </div>
     </div>
 </div>
+@if($PhimItem->IDStatus == 1)
 <div class="container">
     <h2 class="text-white text-center" style="font-weight:1000;margin-bottom:20px;margin-top:100px;margin-bottom:50px">LỊCH CHIẾU</h2>
     <div class="show-date-swiper">
         <div class="swiper-wrapper">
+            <?php
+            $thu = [
+                'Monday' => 'Thứ Hai',
+                'Tuesday' => 'Thứ Ba',
+                'Wednesday' => 'Thứ Tư',
+                'Thursday' => 'Thứ Năm',
+                'Friday' => 'Thứ Sáu',
+                'Saturday' => 'Thứ Bảy',
+                'Sunday' => 'Chủ Nhật',
+            ]; ?>
+            @foreach($ShowInfor as $sKey => $sValue)
             <div class="swiper-slider">
-                <div id="swiper-slide-item-1" data-swiper-slide="swiper-slide-item-1" class="swiper-slide-item active">
-                    <p class="date">08/05</p>
-                    <p class="day">Thứ Sáu</p>
+                <div id="swiper-slide-item-{{$sKey}}" data-swiper-slide="swiper-slide-item-{{$sKey}}" class="swiper-slide-item {{ $sKey == 0 ? 'active' : '' }}">
+                    <p class="date" data-date="{{$sValue->ShowDate}}">{{ date('d/m', strtotime($sValue->ShowDate)) }}</p>
+                    <p class="day">{{ $thu[date('l', strtotime($sValue->ShowDate))] }}</p>
                 </div>
             </div>
+            @endforeach
+
         </div>
 
     </div>
@@ -82,43 +96,15 @@
             </button>
             <ul class="dropdown-menu city-options">
                 @foreach($City as $k=>$v)
-                <li class="dropdown-item city-option-menu" data-city-name="{{$v->CityName}}"><span class="city-option-item">{{$v->CityName}}</span></li>
+                <li class="dropdown-item city-option-menu {{ $k == 0 ? 'active' : '' }}" data-city-id="{{$k=$k+1}}" data-city-name="{{$v->CityName}}"><span class="city-option-item">{{$v->CityName}}</span></li>
+
                 @endforeach
             </ul>
         </div>
 
     </div>
     <div class="shtime-ft">
-        <div class="cinestar-item collapseItem active" id="cinestar-item-1">
-            <div class="cinestar-heading collapseHeading" data-cinestar-collapse-item="cinestar-item-1">
-                <span class="tittle">Cinestar Quốc Thanh</span>
-                <i class="fas fa-angle-down text-white icon"></i>
-            </div>
-            <div class="cinestar-body collapseBody">
-                <p class="addr">271 Nguyễn Trãi, Phường Nguyễn Cư Trinh, Quận 1, Thành Phố Hồ Chí Minh</p>
-                <ul class="list-info">
-                    <li class="item-info">
-                        <div class="tt text-white">Standard</div>
-                        <ul class="list-time">
-                            <li class="item-time text-white">08:20</li>
-                            <li class="item-time text-white">08:20</li>
-                            <li class="item-time text-white">08:20</li>
-                            <li class="item-time text-white">08:20</li>
-                            <li class="item-time text-white">08:20</li>
-                            <li class="item-time text-white">08:20</li>
-                            <li class="item-time text-white">08:20</li>
-                            <li class="item-time text-white">08:20</li>
-                            <li class="item-time text-white">08:20</li>
-                            <li class="item-time text-white">08:20</li>
-                            <li class="item-time text-white">08:20</li>
-                            <li class="item-time text-white">08:20</li>
-                            <li class="item-time text-white">08:20</li>
-                            <li class="item-time text-white">08:20</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
     </div>
     <div class="container">
         <div class="tickett-wr">
@@ -1062,6 +1048,12 @@
         </div>
     </section>
 </div>
-
+@else
+<div class="container" style="margin-top:100px;margin-bottom:100px;font-size:36px">
+    <div class="box"><i class="fas fa-film"></i>
+        <p class="mb-0"> Hiện chưa có lịch chiếu</p>
+    </div>
+</div>
+@endif
 
 @endsection

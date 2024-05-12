@@ -1,6 +1,9 @@
 $(document).ready(function () {
+    var movieID = $("#movie").data("movie-id");
+    var dCityID = $(".dropdown-menu .city-option-menu.active").data("city-id");
+    var dShowDate = $(".swiper-slide-item.active .date").data("date");
     LoadData(1);
-
+    LoadCinemaList(dCityID, dShowDate, movieID);
     $(".slide-PhimDangChieu").click(function () {
         LoadData(1);
         $(".slide-PhimDangChieu").addClass("click");
@@ -38,21 +41,41 @@ $(document).ready(function () {
             },
         });
     }
-
-    $(document).on("click", ".movieShow", function () {
+    function LoadCinemaList(cityID, date, movieID) {
+        $.ajax({
+            url: "/cinemalist-partial/" + cityID + "/" + date + "/" + movieID,
+            type: "GET",
+            success: function (res) {
+                $(".shtime-ft").html(res);
+            },
+        });
+    }
+    $(document).on("click", ".movie-collapse", function () {
         var movieShowID = $(this).data("movie-show");
         $("#" + movieShowID).toggleClass("active");
     });
 
     $(".swiper-slide-item").click(function () {
         var swiperID = $(this).data("swiper-slide");
+        var defaultCityID = $(".dropdown-menu .city-option-menu.active").data(
+            "city-id"
+        );
         $(".swiper-slide-item").not(this).removeClass("active");
         $("#" + swiperID).addClass("active");
+        var defaultShowDate = $(".swiper-slide-item.active .date").data("date");
+        console.log(defaultShowDate);
+        LoadCinemaList(defaultCityID, defaultShowDate, movieID);
     });
     $(document).on("click", ".city-option-menu", function () {
         var cityName = $(this).data("city-name");
+        var cityID = $(this).data("city-id");
+        var defaultShowDate = $(".swiper-slide-item.active .date").data("date");
+        console.log(cityID);
+        $(this).addClass("active");
+        $(".city-option-menu").not(this).removeClass("active");
         $(".an-select-selection-item").empty();
         $(".an-select-selection-item").html(cityName);
+        LoadCinemaList(cityID, defaultShowDate, movieID);
     });
     $(document).on("click", ".cinestar-heading", function () {
         var cinestarItemID = $(this).data("cinestar-collapse-item");

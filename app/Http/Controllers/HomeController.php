@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\StatusMovie;
 use App\Models\Movie;
 use App\Models\Cinema;
+use App\Models\CinemaHall;
 use App\Models\Showinfor;
 use App\Models\City;
 
@@ -38,12 +39,31 @@ class HomeController extends Controller
         $Phim = Movie::getAllMovieWithAgeRegulation()->where("IDStatus", 2);
         return view('client/home/upcoming', compact('Phim'));
     }
+
+    //Detail Movie
     public function DetailMovie($id)
     {
         $PhimItem = Movie::getMovie($id);
         $City = City::all();
-        return view('client/home/detailmovie', ['PhimItem' => $PhimItem, 'City' => $City]);
+        $ShowInfor = Showinfor::select("ShowDate")->where('MovieID', $id)->distinct()->get();
+        return view('client/home/detailmovie', ['PhimItem' => $PhimItem, 'City' => $City, 'ShowInfor' => $ShowInfor, "MovieID" => $id]);
     }
+
+    public function CinemaListPartial($CityID, $date, $movieID)
+    {
+        $Cinema = Cinema::where("CityID", $CityID)->get();
+        $ShowTimes = [];
+        foreach ($Cinema as $key => $cinema) {
+
+            $ShowTimes[$cinema->CinemaID] = Showinfor::getStartTimeOFShow($cinema->CinemaID, $date, $movieID);
+
+            // Thực hiện xử lý với $ShowInfor nếu cần
+        }
+
+
+        return view('client/home/detail-movie/cinemalistPartial', ["Cinema" => $Cinema, "ShowTime" => $ShowTimes]);
+    }
+    //Search
     public function Search(Request $request)
     {
         $keySearch = "%$request->key%";
