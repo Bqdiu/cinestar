@@ -34,13 +34,13 @@ Route::get('/movie/upcoming', [HomeController::class, 'Upcoming']);
 Route::post('/search', [HomeController::class, 'Search'])->name('search');
 Route::get('/book-tickets/{id}', [HomeController::class, 'BookTickets']);
 Route::get('/booktickets-partial/{idRap}/{idStatus}', [HomeController::class, 'bookTicketsPartial']);
-<<<<<<< Updated upstream
+
 Route::get('/promotion', [HomeController::class, 'PromotionPage'])->name('promotion');
 Route::get('/aboutus', [HomeController::class, 'AboutUsPage'])->name('aboutus');
 
-=======
+
 Route::get('/seat-partial/{id}', [HomeController::class, 'seatPartial']);
->>>>>>> Stashed changes
+
 Route::get('/admin', [AdminController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin', [AdminController::class, 'login']);
 Route::get('/admin/logout', [AdminController::class, 'Logout']);
@@ -67,5 +67,4 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/cinema/getDataOption', [CinemaController::class, 'getDataOption']);
     Route::post('/admin/cinema/add-cinema', [CinemaController::class, 'addCinema'])->name('addCinema');
     Route::post('/admin/cinema/delete-cinema', [CinemaController::class, 'deleteCinema'])->name('deleteCinema');
-
 });
