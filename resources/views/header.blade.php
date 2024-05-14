@@ -15,7 +15,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link href="{{asset('/css/appCine.css')}}" rel="stylesheet" />
-
     <title>Home</title>
 </head>
 
@@ -81,7 +80,7 @@
                         </ul>
                     </div>
                     <div style="display:flex;justify-content:space-between;width:35%">
-                        <a class="link-text" href="">Khuyến mãi</a>
+                        <a class="link-text" href="{{ route('promotion') }}">Khuyến mãi</a>
                         <a class="link-text" href="">Thuê sự kiện</a>
                         <a class="link-text" href="">Dịch vụ khác</a>
                         <a class="link-text" href="">Giới thiệu</a>

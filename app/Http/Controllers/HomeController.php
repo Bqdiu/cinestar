@@ -88,4 +88,7 @@ class HomeController extends Controller
 
         return view('client/home/bookticketsPartial', ['CountPhim' => $count, 'Title' => $Title, 'idRap' => $idRap, 'idStatus' => $idStatus, 'PhimTheoRap' => $PhimTheoRap]);
     }
+    public function PromotionPage() {
+        return view('client/event/promotion');
+    }
 }
