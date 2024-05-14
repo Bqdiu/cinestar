@@ -8,8 +8,10 @@ use App\Models\StatusMovie;
 use App\Models\Movie;
 use App\Models\Cinema;
 use App\Models\CinemaHall;
+use App\Models\CinemaSeat;
 use App\Models\Showinfor;
 use App\Models\City;
+use App\Models\TicketPrice;
 
 class HomeController extends Controller
 {
@@ -46,7 +48,8 @@ class HomeController extends Controller
         $PhimItem = Movie::getMovie($id);
         $City = City::all();
         $ShowInfor = Showinfor::select("ShowDate")->where('MovieID', $id)->distinct()->get();
-        return view('client/home/detailmovie', ['PhimItem' => $PhimItem, 'City' => $City, 'ShowInfor' => $ShowInfor, "MovieID" => $id]);
+        $TicketPrice = TicketPrice::all();
+        return view('client/home/detailmovie', ['PhimItem' => $PhimItem, 'City' => $City, 'ShowInfor' => $ShowInfor, "MovieID" => $id, "TicketPrice" => $TicketPrice]);
     }
 
     public function CinemaListPartial($CityID, $date, $movieID)
@@ -62,6 +65,13 @@ class HomeController extends Controller
 
 
         return view('client/home/detail-movie/cinemalistPartial', ["Cinema" => $Cinema, "ShowTime" => $ShowTimes]);
+    }
+    public function SeatPartial($ShowID)
+    {
+        $Showinfor = Showinfor::find($ShowID);
+        $CinemaSeat = CinemaSeat::where("CinemaHallID", $Showinfor->CinemaHallID)->orderByDesc("ColumnPosition")->get();
+        $RowPos = CinemaSeat::select("RowPosition")->where("CinemaHallID", $Showinfor->CinemaHallID)->distinct()->get();
+        return view('client/home/detail-movie/seatPartial', ["ShowInfor" => $Showinfor, "Seat" => $CinemaSeat, "RowPos" => $RowPos]);
     }
     //Search
     public function Search(Request $request)

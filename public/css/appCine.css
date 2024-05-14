@@ -605,8 +605,12 @@ h1 {
     line-height: 100%;
     padding: 8px 12px;
     transition: all 0.3s;
+    color: white;
 }
-
+.shtime-ft .cinestar-item .item-time.active {
+    color: yellow;
+    border-color: yellow;
+}
 .ticket-heading {
     display: flex;
     flex-direction: column;
@@ -1211,4 +1215,328 @@ h1 {
 .seat-disable {
     filter: brightness(0) saturate(100%) invert(31%) sepia(6%) saturate(2041%)
         hue-rotate(176deg) brightness(97%) contrast(87%);
+}
+
+.sec-seat {
+    display: none;
+    margin-bottom: 100px;
+}
+.sec-seat.d-block {
+    transition: all 1s ease;
+}
+.ticket-cointainer {
+    display: none;
+}
+.bill-custom {
+    --gap: 1.6rem;
+}
+.dt-bill {
+    display: none;
+}
+.bill-fixed {
+    animation: fadeInUp 0.3s ease-in-out;
+    background: url(https://bogatyr.club/uploads/posts/2023-03/thumbs/1679586820_bogatyr-club-p-temno-fioletovii-fon-gradient-pinterest-44.jpg);
+    border-top: 0.1rem solid rgba(248, 250, 252, 0.5);
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    position: sticky;
+    transition: 0.3s ease-in-out;
+    width: 100%;
+    z-index: calc(55 - 5);
+    color: white;
+}
+
+.sticky {
+    position: sticky;
+}
+.bill-fixed .container {
+    padding: 0;
+}
+
+.bill-custom .bill-wr {
+    align-items: center;
+    gap: var(--gap);
+}
+.bill-fixed .bill-wr {
+    background-color: transparent;
+    padding: 0;
+    width: 100%;
+}
+.bill-wr {
+    background: #639;
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3.2rem;
+    width: 75%;
+}
+.bill-custom .bill-left {
+    flex: 1;
+    overflow: hidden;
+}
+.bill-fixed .bill-left {
+    justify-content: center;
+}
+.bill-left,
+.bill-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.bill-right .price .num {
+    font-size: 24px;
+    font-weight: 600;
+}
+.dt-bill .bill-wr .name-combo {
+    font-size: 24px;
+    letter-spacing: 0.024rem;
+    font-weight: 700;
+}
+.bill-wr .name-combo {
+    font-family: "Anton", sans-serif;
+    text-transform: uppercase;
+}
+.dt-bill .list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding-left: 0px;
+    font-weight: 600;
+}
+.dt-bill .item {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+.bill-custom-right {
+    display: flex;
+    gap: 1rem;
+    width: 38rem;
+}
+.bill-coundown {
+    background-color: #f3ea28;
+    border: 0.1rem solid rgba(248, 250, 252, 0.5);
+    border-radius: 0.4rem;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+}
+.bill-coundown .txt {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0px;
+}
+.bill-time {
+    align-items: center;
+    display: flex;
+    font-family: "Anton", sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+}
+.dt-bill .item {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-weight: 600;
+}
+
+.bill-custom .bill-right {
+    border-left: none;
+    flex: 1;
+    padding-left: 0;
+}
+.bill-fixed .bill-right {
+    justify-content: center;
+}
+.bill-right {
+    border-left: 0.1rem solid rgba(241, 245, 249, 0.5);
+    padding-left: 3.2rem;
+    width: 33.3333333333%;
+}
+.bill-fixed .bill-right .price {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: space-between;
+}
+.bill-right .price {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+.opacity-40 {
+    opacity: 0.4;
+}
+.pointer-events-none {
+    pointer-events: none;
+}
+.popup {
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    visibility: hidden;
+    z-index: 999;
+}
+.popup.open {
+    pointer-events: visible;
+    visibility: visible;
+}
+.popup.open .popup-overlay {
+    height: 100%;
+    opacity: 1;
+    transform: translate(0);
+    visibility: visible;
+}
+.btn.btn-xemthem {
+    border: 0.1rem solid #f3ea28;
+    color: #f3ea28;
+    position: relative;
+    transition: all 0.4s ease-in-out;
+    z-index: 1;
+    padding: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 10px;
+    width: 150px;
+}
+.popup.open .popup-main {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    transition: 0.3s ease-in-out;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    -ms-transition: 0.3s ease-in-out;
+    -o-transition: 0.3s ease-in-out;
+    transition-delay: 0.1s;
+    -webkit-transition-delay: 0.1s;
+    -moz-transition-delay: 0.1s;
+    -ms-transition-delay: 0.1s;
+    -o-transition-delay: 0.1s;
+    visibility: visible;
+}
+.popup-main,
+.popup-overlay {
+    opacity: 0;
+    position: absolute;
+    transition: 0.3s ease-in-out;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    -ms-transition: 0.3s ease-in-out;
+    -o-transition: 0.3s ease-in-out;
+    visibility: hidden;
+}
+.popup-overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+.popup-noti.--w7 .popup-main {
+    width: 68rem;
+}
+.popup-noti .popup-main {
+    width: 400px;
+}
+.popup-main {
+    left: 50%;
+    max-width: 95%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 70rem;
+    z-index: 2;
+}
+.popup-main-wrapper {
+    border-radius: 6px;
+    overflow: hidden;
+}
+.popup-noti .popup-over {
+    min-height: 10vh;
+}
+.popup-over {
+    max-height: 80vh;
+    min-height: 40vh;
+    overflow-y: auto;
+}
+.popup-noti .popup-wrapper {
+    background: linear-gradient(106deg, #639, #36c 102.69%);
+    min-height: 10vh;
+    padding: 24px;
+    text-align: center;
+}
+.popup-noti-des {
+    font-size: 15px;
+}
+.popup-wrapper {
+    background-color: #fff;
+    min-height: 40vh;
+    padding: 4.8rem 2rem 2rem;
+    position: relative;
+    width: 100%;
+}
+.popup-noti-wr {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+.popup-noti-extra {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.popup-noti-extra div {
+    flex: 1;
+}
+.popup-noti-title {
+    font-family: "Anton", sans-serif;
+    font-size: 2.4rem;
+    text-transform: uppercase;
+}
+.btn--outline:before {
+    background: transparent;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: -2;
+}
+.btn--outline:after {
+    background: linear-gradient(90deg, #ff6d00, #ffc107);
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    width: 0;
+    z-index: -1;
+}
+.btn--outline:after,
+.btn--outline:before {
+    content: "";
+    height: 100%;
+    position: absolute;
+    transition: all 0.4s ease-in-out;
+    width: 0.1rem;
+}
+.popup-noti .btn {
+    margin: 0 auto;
+    max-width: 40rem;
+}
+.btn--outline {
+    border: 0.1rem solid #f3ea28;
+    color: #f3ea28;
+    position: relative;
+    transition: all 0.4s ease-in-out;
+    z-index: 1;
 }

@@ -13,7 +13,7 @@
                 <div class="tt text-white">Standard</div>
                 <ul class="list-time">
                     @foreach($ShowTime[$cValue->CinemaID] as $timeValue)
-                    <li class="item-time text-white">{{ \Carbon\Carbon::createFromFormat('H:i:s', $timeValue->StartTime)->format('H:i') }}</li>
+                    <li class="item-time" data-show-time-item="{{$timeValue->ShowID}}">{{ \Carbon\Carbon::createFromFormat('H:i:s', $timeValue->StartTime)->format('H:i') }}</li>
                     @endforeach
                 </ul>
                 @else

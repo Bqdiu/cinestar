@@ -34,9 +34,13 @@ Route::get('/movie/upcoming', [HomeController::class, 'Upcoming']);
 Route::post('/search', [HomeController::class, 'Search'])->name('search');
 Route::get('/book-tickets/{id}', [HomeController::class, 'BookTickets']);
 Route::get('/booktickets-partial/{idRap}/{idStatus}', [HomeController::class, 'bookTicketsPartial']);
+<<<<<<< Updated upstream
 Route::get('/promotion', [HomeController::class, 'PromotionPage'])->name('promotion');
 Route::get('/aboutus', [HomeController::class, 'AboutUsPage'])->name('aboutus');
 
+=======
+Route::get('/seat-partial/{id}', [HomeController::class, 'seatPartial']);
+>>>>>>> Stashed changes
 Route::get('/admin', [AdminController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin', [AdminController::class, 'login']);
 Route::get('/admin/logout', [AdminController::class, 'Logout']);
