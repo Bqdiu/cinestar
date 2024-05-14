@@ -1,24 +1,24 @@
 @extends('layouts.admin')
 @section('main-content')
-<div class="container-fluid mt-3 border-top">
+    <div class="container-fluid mt-3 border-top">
         <div class="row">
             <div class="col-12">
-                <h3 class="text-center">Movie Status</h3>
-                 @if(session('mess'))
-                    <div class="alert alert-success alert_hide">
-                        {{session('mess')}}
-                    </div>
-                @endif
-                @if ($errors->any())
-                    <div class="alert alert-danger alert_hide">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            </div>
+                    <h3 class="text-center">Movie Status</h3>
+                    @if(session('mess'))
+                        <div class="alert alert-success alert_hide">
+                            {{session('mess')}}
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert_hide">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
         </div>
         <div class="row">
             <div class="col-12 p-0 m-0">
@@ -32,18 +32,18 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col" class="text-left">ID</th>
-                        <th scope="col" class="text-left">Title</th>
-                        <th scope="col" class="text-left">Thumbnail</th>
-                        <th scope="col" class="text-left">Description</th>
-                        <th scope="col" class="text-left">Duration</th>
-                        <th scope="col" class="text-left">Language</th>
-                        <th scope="col" class="text-left">ReleaseDate</th>
-                        <th scope="col" class="text-left">Country</th>
-                        <th scope="col" class="text-left">Genre</th>
-                        <th scope="col" class="text-left">Trailer</th>
-                        <th scope="col" class="text-left">Director</th>
-                        <th scope="col" class="text-left">Actor</th>
+                        <th scope="col" class="text-center align-middle">ID</th>
+                        <th scope="col" class="text-center">Title</th>
+                        <th scope="col" class="text-center">Thumbnail</th>
+                        <th scope="col" class="text-center">Description</th>
+                        <th scope="col" class="text-center">Duration</th>
+                        <th scope="col" class="text-center">Language</th>
+                        <th scope="col" class="text-center">ReleaseDate</th>
+                        <th scope="col" class="text-center">Country</th>
+                        <th scope="col" class="text-center">Genre</th>
+                        <th scope="col" class="text-center">Trailer</th>
+                        <th scope="col" class="text-center">Director</th>
+                        <th scope="col" class="text-center">Actor</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
@@ -51,20 +51,20 @@
                 <tbody id="data-body">
                     @foreach($movie as $row)
                     <tr>
-                        <th scope="row" class="text-left">{{$row->MovieID}}</th>
-                        <td scope="row" class="text-left">{{$row->Title}}</td>
-                        <td scope="row" class="text-left">
+                        <th scope="row" class="text-center align-middle">{{$row->MovieID}}</th>
+                        <td scope="row" class="text-center align-middle">{{$row->Title}}</td>
+                        <td scope="row" class="text-center align-middle">
                             <img src="{{ asset('/imgMovie/' . $row->Thumbnail) }}" width="50" height="50">
                         </td>
-                        <td scope="row" class="text-left">{{$row->Description}}</td>
-                        <td scope="row" class="text-left">{{$row->Duration}}</td>
-                        <td scope="row" class="text-left">{{$row->Language}}</td>
-                        <td scope="row" class="text-left">{{$row->ReleaseDate}}</td>
-                        <td scope="row" class="text-left">{{$row->Country}}</td>
-                        <td scope="row" class="text-left">{{$row->Genre}}</td>
-                        <td scope="row" class="text-left">{{$row->trailer_url}}</td>
-                        <td scope="row" class="text-left">{{$row->Director}}</td>
-                        <td scope="row" class="text-left">{{$row->Actor}}</td>
+                        <td scope="row" class="text-center align-middle">{{$row->Description}}</td>
+                        <td scope="row" class="text-center align-middle">{{$row->Duration}}</td>
+                        <td scope="row" class="text-center align-middle">{{$row->Language}}</td>
+                        <td scope="row" class="text-center align-middle">{{$row->ReleaseDate}}</td>
+                        <td scope="row" class="text-center align-middle">{{$row->Country}}</td>
+                        <td scope="row" class="text-center align-middle">{{$row->Genre}}</td>
+                        <td scope="row" class="text-center align-middle">{{$row->trailer_url}}</td>
+                        <td scope="row" class="text-center align-middle">{{$row->Director}}</td>
+                        <td scope="row" class="text-center align-middle">{{$row->Actor}}</td>
                         <td scope="row">
                             <a class="col btn btn-secondary edit-movie-btn" data-bs-toggle="modal" data-bs-target="#editMovie" data-movie-id="{{$row->MovieID}} ">Edit</a>
                         </td>
@@ -76,6 +76,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
 
     {{-- Edit modal --}}
     <div class="modal fade" id="editMovie" tabindex="-1" aria-labelledby="editMovieLabel" aria-hidden="true">

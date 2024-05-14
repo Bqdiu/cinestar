@@ -19,6 +19,7 @@
         </a>  
         <a href="/admin/dashboard" >Dashboard</a>
         <a href="/admin/movie/index" >Movie</a>
+        <a href="/admin/cinema/index" >Cinema</a>
         <a href="/admin/moviestatus/index" >Movie status</a>
     </div>
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\UserInforController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Management\MovieController;
 use App\Http\Controllers\Management\StatusMovieController;
+use App\Http\Controllers\Management\CinemaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,4 +55,11 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/movie/searchMovie/{term}', [MovieController::class, 'searchMovie'])->name('searchMovie');
     Route::post('/admin/movie/add-movie', [MovieController::class, 'addMovie'])->name('addMovie');
     Route::get('/admin/movie/getDataOption', [Moviecontroller::class, 'getDataOption']);
+
+    // cinema
+    Route::get('/admin/cinema/index', [CinemaController::class, 'CinemaIndex']);
+    Route::get('/admin/cinema/getDataOption', [CinemaController::class, 'getDataOption']);
+    Route::post('/admin/cinema/add-cinema', [CinemaController::class, 'addCinema'])->name('addCinema');
+    Route::post('/admin/cinema/delete-cinema', [CinemaController::class, 'deleteCinema'])->name('deleteCinema');
+
 });

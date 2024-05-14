@@ -132,7 +132,7 @@ class MovieController extends Controller
             'add_duration.required' => 'Hãy nhập thời lượng phim',
             'add_director.required' => 'Hãy nhập đạo diễn phim',
             'add_actor.required' => 'Hãy nhập diễn viên phim',
-            'add_add_thumbnail.mimes' => 'Hãy chọn file ảnh đúng định dạng jpeg,jpg,png',
+            'add_thumbnail.mimes' => 'Hãy chọn file ảnh đúng định dạng jpeg,jpg,png',
             'add_thumbnail.required' => 'Hãy chọn file ảnh',
             'add_thumbnail.max' => 'File ảnh quá lớn',
         ]);

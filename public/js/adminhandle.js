@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    //Movie status
+    //Movie status function
     // get id for movie status delete
     $(document).on('click','.delete-status-btn', function(){
         var IDStatus = $(this).data('status-id');
@@ -42,7 +42,7 @@ $(document).ready(function(){
         });
     });
 
-   // Movie
+   // Movie function
    $(document).on('click','.edit-movie-btn', function(){
         var MovieID = $(this).data('movie-id');
         $('#editMovieID').val(MovieID);
@@ -148,6 +148,30 @@ $(document).ready(function(){
     });   
    });
 
+   // Cinema function
+    $('.btn-add-cinema').on('click',function(){
+        $.ajax({
+            url : '/admin/cinema/getDataOption',
+            type : 'GET',
+            success: function(response)
+            {
+                $('#add_city_name').empty();
+                console.log(response);
+                if(response)
+                {
+                    $.each(response, function(index, city){
+                        var row = '<option value="'+city.CityID+'">' + city.CityName + '</option>';
+                        $('#add_city_name').append(row);
+                    });
+                }
+            }
+        });
+    });
+    $(document).on('click','.delete-cinema-btn',function(){
+        var cinema_id = $(this).data('cinema-id');
+        console.log(cinema_id);
+        $('#deleteCinemaID').val(cinema_id);    
+   }); 
    // hide alert
     setTimeout(function() 
     {
