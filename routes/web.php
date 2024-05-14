@@ -35,6 +35,7 @@ Route::post('/search', [HomeController::class, 'Search'])->name('search');
 Route::get('/book-tickets/{id}', [HomeController::class, 'BookTickets']);
 Route::get('/booktickets-partial/{idRap}/{idStatus}', [HomeController::class, 'bookTicketsPartial']);
 Route::get('/promotion', [HomeController::class, 'PromotionPage'])->name('promotion');
+Route::get('/aboutus', [HomeController::class, 'AboutUsPage'])->name('aboutus');
 
 Route::get('/admin', [AdminController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin', [AdminController::class, 'login']);

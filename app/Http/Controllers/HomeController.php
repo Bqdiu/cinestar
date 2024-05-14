@@ -91,4 +91,8 @@ class HomeController extends Controller
     public function PromotionPage() {
         return view('client/event/promotion');
     }
+
+    public function AboutUsPage() {
+        return view('client/event/aboutus');
+    }
 }

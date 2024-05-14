@@ -83,7 +83,7 @@
                         <a class="link-text" href="{{ route('promotion') }}">Khuyến mãi</a>
                         <a class="link-text" href="">Thuê sự kiện</a>
                         <a class="link-text" href="">Dịch vụ khác</a>
-                        <a class="link-text" href="">Giới thiệu</a>
+                        <a class="link-text" href="{{ route('aboutus') }}">Giới thiệu</a>
                     </div>
 
                 </div>

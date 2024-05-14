@@ -166,6 +166,7 @@ p {
 }
 .ht {
     padding: 2rem 0;
+    padding-top: 0;
 }
 img {
     border: 0;
@@ -191,4 +192,96 @@ img {
     top: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
+}
+
+.ht .container {
+    height: 100%;
+    margin: 0 auto;
+    max-width: var(--w-container);
+    padding: 0 var(--pd-container);
+    width: 100%;
+}
+
+.ht-qc {
+    margin-bottom: 4rem;
+    padding: 4rem 2rem;
+    position: relative;
+}
+
+.ht-qc-br, .ht-qc-br:before {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.ht-qc-br {
+    z-index: -1;
+}
+
+.ht-qc-br:before {
+    background: rgba(0, 13, 57, .5);
+    content: "";
+}
+
+.ht-qc-br img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+    
+}
+
+.ht-qc-content {
+    color: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0 auto;
+    max-width: 50rem;
+    text-align: center;
+}
+
+.au-row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y)* -1);
+    margin-right: calc(var(--bs-gutter-x)* -.5);
+    margin-left: calc(var(--bs-gutter-x)* -.5);
+}
+
+.au-col {
+    margin-bottom: 2.4rem;
+    padding: 0 calc(2.4rem / 2);
+    width: 100%;
+}
+
+.au-col-4 {
+    width: 33.3333333333%;
+}
+
+.ht-as-wr {
+    background: rgba(51, 102, 204, .8);
+    border-radius: .8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    height: 100%;
+    padding: 2.4rem;
+    text-align: center;
+    width: 85%;
+}
+
+.ht-as-wr .num {
+    color: #f3ea28;
+    font-size: 2.4rem;
+    font-weight: bold;
+    line-height: 100%;
+    margin: 0 auto;
+}
+
+.ht-as-wr h3 {
+    color: #f8fafc;
 }
