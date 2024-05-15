@@ -1,4 +1,5 @@
 @foreach($Cinema as $cKey=>$cValue)
+
 <div class="cinestar-item collapseItem active mt-3" id="cinestar-item-{{$cKey}}">
     <div class="cinestar-heading collapseHeading" data-cinestar-collapse-item="cinestar-item-{{$cKey}}">
         <span class="tittle">{{$cValue->Name}}</span>
@@ -13,7 +14,8 @@
                 <div class="tt text-white">Standard</div>
                 <ul class="list-time">
                     @foreach($ShowTime[$cValue->CinemaID] as $timeValue)
-                    <li class="item-time" data-show-time-item="{{$timeValue->ShowID}}">{{ \Carbon\Carbon::createFromFormat('H:i:s', $timeValue->StartTime)->format('H:i') }}</li>
+
+                    <li class="item-time" data-show-time-item="{{$timeValue->ShowID}}" data-value-name="{{$cValue->Name}}">{{ \Carbon\Carbon::createFromFormat('H:i:s', $timeValue->StartTime)->format('H:i') }}</li>
                     @endforeach
                 </ul>
                 @else

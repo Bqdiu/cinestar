@@ -118,7 +118,8 @@
                     <div class="combo-list row">
                         @foreach($TicketPrice as $tpKey=>$tpValue)
                         <div class="combo-item col col-md-4">
-                            <div class="popup popup-noti  " id="popup-{{$tpValue->TicketID}}">
+                            @if($tpValue->TicketID == 2)
+                            <div class="popup popup-noti  " id="popup-2">
                                 <div class=" popup-overlay"></div>
                                 <div class="popup-main">
                                     <div class="popup-main-wrapper">
@@ -141,6 +142,7 @@
                                     <div class="popup-close popupClose"><i class="fas fa-times icon"></i></div>
                                 </div>
                             </div>
+                            @endif
                             <div class="food-box " id="food-box-{{$tpValue->TicketID}}">
                                 <div class="content">
                                     <div class="content-top">
@@ -185,10 +187,10 @@
                 <div class="popup-over">
                     <div class="popup-wrapper">
                         <div class="popup-noti-wr">
-                            <p class="popup-noti-title">LƯU Ý !</p>
-                            <p class="popup-noti-des">You did not purchase this type of seat!</p>
+                            <p class="popup-noti-title mb-0">LƯU Ý !</p>
+                            <p class="popup-noti-des text-white m-0"></p>
                             <div class="popup-noti-ctr">
-                                <div class="btn btn--outline custom-cursor-on-hover"><span class="txt">OK</span></div>
+                                <div class="btn btn-xemthem custom-cursor-on-hover OK"><span class="txt">OK</span></div>
                             </div>
                         </div>
                     </div>

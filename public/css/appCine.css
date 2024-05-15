@@ -1447,7 +1447,7 @@ h1 {
     z-index: 1;
 }
 .popup-noti.--w7 .popup-main {
-    width: 68rem;
+    width: 30rem;
 }
 .popup-noti .popup-main {
     width: 400px;
@@ -1480,6 +1480,7 @@ h1 {
 }
 .popup-noti-des {
     font-size: 15px;
+    font-weight: 500;
 }
 .popup-wrapper {
     background-color: #fff;
@@ -1503,8 +1504,10 @@ h1 {
 }
 .popup-noti-title {
     font-family: "Anton", sans-serif;
-    font-size: 2.4rem;
+    font-size: 24px;
+    font-weight: 700;
     text-transform: uppercase;
+    color: white;
 }
 .btn--outline:before {
     background: transparent;
