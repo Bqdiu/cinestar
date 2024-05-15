@@ -67,9 +67,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/cinema/getDataOption', [CinemaController::class, 'getDataOption']);
     Route::post('/admin/cinema/add-cinema', [CinemaController::class, 'addCinema'])->name('addCinema');
     Route::post('/admin/cinema/delete-cinema', [CinemaController::class, 'deleteCinema'])->name('deleteCinema');
-<<<<<<< Updated upstream
-=======
-    Route::post('/admin/cinema/editCinema', [CinemaController::class, 'editCinema'])->name('editCinema');
 
->>>>>>> Stashed changes
+    Route::post('/admin/cinema/editCinema', [CinemaController::class, 'editCinema'])->name('editCinema');
 });
