@@ -171,7 +171,22 @@ $(document).ready(function(){
         var cinema_id = $(this).data('cinema-id');
         console.log(cinema_id);
         $('#deleteCinemaID').val(cinema_id);    
+
    }); 
+
+   $('.edit-cinema-btn').on('click',function(){
+        var cinema_id = $(this).data('cinema-id');
+        $.ajax({
+            url: '',
+            type: 'GET',
+            success: function(response){
+                
+            }
+        });
+    });
+
+
+
    // hide alert
     setTimeout(function() 
     {

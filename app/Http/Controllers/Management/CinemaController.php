@@ -70,4 +70,12 @@ class CinemaController extends Controller
             return redirect()->back()->withErrors($mess);
         }
     }
+
+    public function getCinema($CinemaID)
+    {
+        $cinemas = Cinema::select('*')->leftJoin('city','city.CityID','=','cinema.CityID')
+                                    ->where('cinema.CinemaID','=',$CinemaID)->first();
+        $citys = City::all();
+        return response()->json([$cinemas, $citys]);
+    }
 }

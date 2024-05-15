@@ -79,7 +79,7 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <input type="hidden" id="adCinemaID" name="addCinemaID">
+                        <input type="hidden" id="addCinemaID" name="addCinemaID">
                         <div class="mb-3">
                             <label for="add_name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="add_name" name="add_name" placeholder="Name">
@@ -129,6 +129,51 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                         <button type="submit" class="btn btn-danger">Xóa</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- Edit modal --}}
+    <div class="modal fade" id="editCinema" tabindex="-1" aria-labelledby="editCinemaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form action="{{route('editCinema')}}" method="post" enctype="multipart/form-data">
+    
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title">Edit movie</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <input type="hidden" id="CinemaID" name="CinemaID">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                            <div class="text-danger" id="error_title"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="thumbnail" class="form-label">Thumbnail</label>
+                            <input type="file" class="form-control" id="thumbnail" name="thumbnail">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="toltalcinemahalls" class="form-label">Toltal Cinema Halls</label>
+                            <input type="number" class="form-control" id="toltalcinemahalls" name="toltalcinemahalls" placeholder="Toltal Cinema Halls">
+                        </div>
+                        <div class="mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <select class="form-control" name="city_id" id="city_name">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+                        <input type="submit" class="btn btn-primary" value="Edit"></input>
                     </div>
                 </form>
             </div>
