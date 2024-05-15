@@ -100,20 +100,20 @@ $(document).ready(function(){
                 $.each(data, function (index, movie) {
                     var row = 
                     '<tr>' +
-                        '<th scope="row" class="text-left">'+movie.MovieID+'</th>' +
-                        '<td scope="row" class="text-left">'+movie.Title+'</td>' +
-                        '<td scope="row" class="text-left">' +
+                        '<th scope="row" class="text-left align-middle">'+movie.MovieID+'</th>' +
+                        '<td scope="row" class="text-left align-middle">'+movie.Title+'</td>' +
+                        '<td scope="row" class="text-left align-middle">' +
                             '<img src="/imgMovie/'+movie.Thumbnail+'" width="50" height="50">'+
                         '</td>'+
-                        '<td scope="row" class="text-left">'+movie.Description+'</td>'+
-                        '<td scope="row" class="text-left">'+movie.Duration+'</td>'+
-                        '<td scope="row" class="text-left">'+movie.Language+'</td>'+
-                        '<td scope="row" class="text-left">'+movie.ReleaseDate+'</td>'+
-                        '<td scope="row" class="text-left">'+movie.Country+'</td>'+
-                        '<td scope="row" class="text-left">'+movie.Genre+'</td>'+
-                        '<td scope="row" class="text-left">'+movie.trailer_url+'</td>'+
-                        '<td scope="row" class="text-left">'+movie.Director+'</td>'+
-                        '<td scope="row" class="text-left">'+movie.Actor+'</td>'+
+                        '<td scope="row" class="text-left align-middle">'+movie.Description+'</td>'+
+                        '<td scope="row" class="text-left align-middle">'+movie.Duration+'</td>'+
+                        '<td scope="row" class="text-left align-middle">'+movie.Language+'</td>'+
+                        '<td scope="row" class="text-left align-middle">'+movie.ReleaseDate+'</td>'+
+                        '<td scope="row" class="text-left align-middle">'+movie.Country+'</td>'+
+                        '<td scope="row" class="text-left align-middle">'+movie.Genre+'</td>'+
+                        '<td scope="row" class="text-left align-middle">'+movie.trailer_url+'</td>'+
+                        '<td scope="row" class="text-left align-middle">'+movie.Director+'</td>'+
+                        '<td scope="row" class="text-left align-middle">'+movie.Actor+'</td>'+
                         '<td scope="row">'+
                             '<a class="col btn btn-secondary edit-movie-btn" data-bs-toggle="modal" data-bs-target="#editMovie" data-movie-id="'+movie.MovieID+'">Edit</a>'+
                         '</td>'+
@@ -175,12 +175,22 @@ $(document).ready(function(){
    }); 
 
    $('.edit-cinema-btn').on('click',function(){
-        var cinema_id = $(this).data('cinema-id');
+        var CinemaID = $(this).data('cinema-id');
+        $('#CinemaID').val(CinemaID);
+        console.log(CinemaID);
         $.ajax({
-            url: '',
+            url: '/admin/cinema/getCinema/' + CinemaID,
             type: 'GET',
             success: function(response){
-                
+                console.log(response);
+                $('#CinemaName').val(response[0].Name);   
+                $('#loadThumbnail').attr('src', '/imgCinema/' + response[0].Thumbnail);   
+                $('#address').val(response[0].Address);   
+                $('#toltalcinemahalls').val(response[0].TotalCinemaHalls);   
+                $('#city_name').empty();
+                $.each(response[1], function(index, city){
+                    $('#city_name').append('<option value="'+city.CityID+'"' + (response[0].CityID == city.CityID ? 'selected' : '') + '>' + city.CityName + '</option>');
+                });    
             }
         });
     });

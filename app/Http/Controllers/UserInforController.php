@@ -91,4 +91,11 @@ class UserInforController extends Controller
         Auth::logout();
         return redirect('/');
     }
+
+    public function UserInforIndex()
+    {
+        $users = UserInfor::select('*')->leftJoin('role','userinfor.role','=','role.role_id')->get();
+        dd($users);
+        return view('admin.userinfor.index',compact('users'));        
+    }
 }
