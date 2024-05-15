@@ -18,8 +18,11 @@
             <img src="{{ asset('/img/header-logo.png') }}" alt="logo"  class="logo">
         </a>  
         <a href="/admin/dashboard" >Dashboard</a>
-        <a href="/admin/movie/index" >Movie</a>
+        <a href="/admin/userinfor/index" >Account</a>
+        <a href="#" >Ticket price</a>
+        <a href="#" >Show info</a>
         <a href="/admin/cinema/index" >Cinema</a>
+        <a href="/admin/movie/index" >Movie</a>
         <a href="/admin/moviestatus/index" >Movie status</a>
     </div>
 

@@ -27,9 +27,6 @@
             </div>
         </div>
         <div class="row">
-            <input id="searchCinema" class="form-control mr-sm-2" type="search" placeholder="Search" name="searchCinema">
-        </div>
-        <div class="row">
             <table class="table">
                 <thead>
                     <tr>
@@ -119,12 +116,12 @@
                 <form action="{{route('deleteCinema')}}" method="post">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title">Xóa phim</h5>
+                        <h5 class="modal-title">Xóa rạp</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" id="deleteCinemaID" name="deleteCinemaID">
-                        <p>Bạn có chắc chắn muốn xóa phim này không?</p>
+                        <p>Bạn có chắc chắn muốn xóa rạp này không?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -141,7 +138,7 @@
                 <form action="{{route('editCinema')}}" method="post" enctype="multipart/form-data">
     
                     <div class="modal-header border-bottom-0">
-                        <h5 class="modal-title">Edit movie</h5>
+                        <h5 class="modal-title">Edit Cinema</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -149,11 +146,12 @@
                         <input type="hidden" id="CinemaID" name="CinemaID">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                            <input type="text" class="form-control" id="CinemaName" name="CinemaName" placeholder="Name">
                             <div class="text-danger" id="error_title"></div>
                         </div>
                         <div class="mb-3">
                             <label for="thumbnail" class="form-label">Thumbnail</label>
+                            <img id="loadThumbnail" width="80" height="80">
                             <input type="file" class="form-control" id="thumbnail" name="thumbnail">
                         </div>
                         <div class="mb-3">

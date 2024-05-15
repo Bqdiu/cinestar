@@ -78,4 +78,37 @@ class CinemaController extends Controller
         $citys = City::all();
         return response()->json([$cinemas, $citys]);
     }
+    public function editCinema(Request $request)
+    {
+        $request->validate([
+            'CinemaName' => 'required',
+            'address' => 'required',
+            'toltalcinemahalls' => 'required',
+            'thumbnail' => 'mimes:jpeg,jpg,png|required|max:10000',
+        ],[
+            'CinemaName.required' => 'Chưa nhập tên rạp',
+            'address.required' => 'Chưa nhập địa chỉ',
+            'toltalcinemahalls.required' => 'Chưa nhập đạo diễn phim',
+            'thumbnail.mimes' => 'Hãy chọn file ảnh đúng định dạng jpeg,jpg,png',
+            'thumbnail.required' => 'Hãy chọn file ảnh',
+            'thumbnail.max' => 'File ảnh quá lớn',
+        ]);
+        $originalFileName = $request->file('thumbnail')->getClientOriginalName();
+        $user_id = Auth::id();
+        $img = 'image'.$user_id.'-'.time().'-'.$originalFileName;
+        $request->file('thumbnail')->move(public_path('/imgCinema'),$img);
+        try{
+            $cinema = Cinema::find($request->CinemaID);
+            $cinema->Name = $request->CinemaName;
+            $cinema->Thumbnail = $img;
+            $cinema->Address = $request->address;
+            $cinema->TotalCinemaHalls = $request->toltalcinemahalls;
+            $cinema->CityID = $request->city_id;
+            $cinema->save();
+            return redirect()->back()->with('mess','Sửa thành công ');
+        }catch(\Illuminate\Database\QueryException $e)
+        {
+            return redirect()->back()->withErrors('Sửa không thành công: '.$e->getMessage());
+        }
+    }
 }

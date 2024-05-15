@@ -17,13 +17,13 @@ class UserInfor extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
-        'UserID',
         'Name',
         'Username',
         'Password',
         'BirthDay',
         'CCCD',
         'Email',
+        'role',
         'Phone'
     ];
 

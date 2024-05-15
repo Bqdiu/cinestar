@@ -3,7 +3,7 @@
     <div class="container-fluid mt-3 border-top">
         <div class="row">
             <div class="col-12">
-                    <h3 class="text-center">Movie Status</h3>
+                    <h3 class="text-center">Movie</h3>
                     @if(session('mess'))
                         <div class="alert alert-success alert_hide">
                             {{session('mess')}}
