@@ -25,11 +25,10 @@
                     <div class="text-center mb-3">
                         <p style="color: white;">Sign in with:</p>
                         <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-facebook-f" style="color: #f3ea28;"></i>
+                            <a href="{{route('google-auth')}}"><i class="fab fa-google" style="color: #f3ea28;"></i></a>
                         </button>
-
                         <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-google" style="color: #f3ea28;"></i>
+                            <i class="fab fa-facebook-f" style="color: #f3ea28;"></i>
                         </button>
 
                         <button type="button" class="btn btn-link btn-floating mx-1">

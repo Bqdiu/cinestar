@@ -83,3 +83,7 @@ Route::group(['middleware' => 'staff'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'Index']);
     
 });
+
+Route::get('auth/google', [UserInforController::class, 'redirect'])->name('google-auth');
+Route::get('auth/google/call-back', [UserInforController::class, 'callBackGoogle']);
+

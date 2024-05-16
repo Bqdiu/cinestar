@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Hash;
-
+use Laravel\Socialite\Facades\Socialite;
 
 class UserInforController extends Controller
 {
@@ -97,5 +97,37 @@ class UserInforController extends Controller
         $users = UserInfor::select('*')->leftJoin('role','userinfor.role_id','=','role.role_id')->get();
         // dd($users);
         return view('admin.userinfor.index',compact('users'));        
+    }
+
+    public function redirect()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function callBackGoogle()
+    {
+        try{
+            $google_user = Socialite::driver('google')->user();
+            $user = UserInfor::where('google_id', $google_user->getId())->first();
+            // dd($google_user);
+            if(!$user)
+            {
+                $new_user = UserInfor::create([
+                    'Name' => $google_user->getName(),
+                    'Email' => $google_user->getEmail(),
+                    'google_id' => $google_user->getId()
+                ]);
+                Auth::login($new_user);
+                return redirect()->intended('/');
+            }
+            else
+            {
+                Auth::login($user);
+                return redirect()->intended('/');
+            }
+        }catch(\Throwable $th)
+        {
+            dd('Something went wrong'.$th->getMessage());
+        }
     }
 }

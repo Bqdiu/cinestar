@@ -14,7 +14,9 @@ class UserInfor extends Authenticatable
 
     protected $table = 'userinfor';
     protected $primaryKey = 'UserID';
-    public $timestamps = false;
+    public $timestamps = true;
+    const CREATED_AT = 'create_at';
+    const UPDATED_AT = 'update_at';
 
     protected $fillable = [
         'Name',
@@ -23,11 +25,11 @@ class UserInfor extends Authenticatable
         'BirthDay',
         'CCCD',
         'Email',
+        'role_id',
+        'google_id',
         'Phone'
     ];
     
-    protected $guarded = ['role_id'];
-
     protected $hidden = [
         'Password',
         'remember_token',
