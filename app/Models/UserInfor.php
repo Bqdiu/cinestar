@@ -23,9 +23,10 @@ class UserInfor extends Authenticatable
         'BirthDay',
         'CCCD',
         'Email',
-        'role',
         'Phone'
     ];
+    
+    protected $guarded = ['role_id'];
 
     protected $hidden = [
         'Password',
@@ -35,5 +36,20 @@ class UserInfor extends Authenticatable
     public function getAuthPassword()
     {
         return $this->Password;
+    }
+
+    public function isAdmin()
+    {
+        return $this->role_id === 1;
+    }
+
+    public function isManager()
+    {
+        return $this->role_id === 2;
+    }
+
+    public function isStaff()
+    {
+        return $this->role_id === 3;
     }
 }

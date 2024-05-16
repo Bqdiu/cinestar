@@ -73,3 +73,13 @@ Route::group(['middleware' => 'admin'], function () {
     // userinfo
     Route::get('/admin/userinfor/index', [UserInforController::class, 'UserInforIndex']);
 });
+
+Route::group(['middleware' => 'manager'], function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'Index']);
+    
+});
+
+Route::group(['middleware' => 'staff'], function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'Index']);
+    
+});

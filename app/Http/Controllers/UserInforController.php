@@ -94,8 +94,8 @@ class UserInforController extends Controller
 
     public function UserInforIndex()
     {
-        $users = UserInfor::select('*')->leftJoin('role','userinfor.role','=','role.role_id')->get();
-        dd($users);
+        $users = UserInfor::select('*')->leftJoin('role','userinfor.role_id','=','role.role_id')->get();
+        // dd($users);
         return view('admin.userinfor.index',compact('users'));        
     }
 }

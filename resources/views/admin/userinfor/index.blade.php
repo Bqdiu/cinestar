@@ -50,7 +50,7 @@
                             <td scope="row" class="text-center align-middle">{{$row->CCCD}}</td>
                             <td scope="row" class="text-center align-middle">{{$row->Email}}</td>
                             <td scope="row" class="text-center align-middle">{{$row->CCCD}}</td>
-                            <td scope="row" class="text-center align-middle">{{$row->role}}</td>
+                            <td scope="row" class="text-center align-middle">{{$row->role_name}}</td>
                             <td scope="row" class="align-middle">
                                 <a class="col btn btn-secondary edit-userinfor-btn" data-bs-toggle="modal" data-bs-target="#editCinema" data-userinfor-id="{{$row->UserID}} ">Edit</a>
                             </td>

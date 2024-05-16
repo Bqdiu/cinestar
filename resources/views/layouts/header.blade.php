@@ -17,13 +17,20 @@
         <a href="#">
             <img src="{{ asset('/img/header-logo.png') }}" alt="logo"  class="logo">
         </a>  
-        <a href="/admin/dashboard" >Dashboard</a>
-        <a href="/admin/userinfor/index" >Account</a>
-        <a href="#" >Ticket price</a>
-        <a href="#" >Show info</a>
-        <a href="/admin/cinema/index" >Cinema</a>
-        <a href="/admin/movie/index" >Movie</a>
-        <a href="/admin/moviestatus/index" >Movie status</a>
+        @if(Auth::user()->role_id === 1)
+            <a href="/admin/dashboard" >Dashboard</a>
+            <a href="/admin/userinfor/index" >Account</a>
+            <a href="#" >Ticket price</a>
+            <a href="#" >Show info</a>
+            <a href="/admin/cinema/index" >Cinema</a>
+            <a href="/admin/movie/index" >Movie</a>
+            <a href="/admin/moviestatus/index" >Movie status</a>
+        @elseif(Auth::user()->role_id === 2)
+            <a href="/admin/dashboard" >Dashboard</a>
+        @else
+            <a href="/admin/dashboard" >Dashboard</a>
+        @endif
+        
     </div>
 
     <div class="content">

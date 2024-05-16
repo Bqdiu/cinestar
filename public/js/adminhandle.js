@@ -197,6 +197,9 @@ $(document).ready(function(){
 
 
 
+    // access premission
+    
+
    // hide alert
     setTimeout(function() 
     {

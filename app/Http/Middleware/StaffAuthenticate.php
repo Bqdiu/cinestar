@@ -1,21 +1,21 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
-
-class AdminAuthenticate
+class StaffAuthenticate
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->isAdmin()) {
+        if (Auth::check() && (Auth::user()->isStaff() || Auth::user()->isManager() || Auth::user()->isAdmin())) {
             return $next($request);
         }
         return redirect('/admin')->withInput($request->only('username'))
@@ -24,4 +24,3 @@ class AdminAuthenticate
         ]);
     }
 }
-?>
