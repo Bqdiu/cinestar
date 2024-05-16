@@ -1,5 +1,7 @@
 @extends ('layout')
-
+<?php
+$pageTitle = $RapTheoID->Name;
+?>
 @section('main-content')
 <input type="hidden" name="idRap" id="idRap" value="{{$RapTheoID->CinemaID}}">
 <div class="container mt-2">

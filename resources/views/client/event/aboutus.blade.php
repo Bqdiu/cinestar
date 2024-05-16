@@ -1,5 +1,8 @@
 @extends('layout')
 <link href="{{asset('/css/promotion.css')}}" rel="stylesheet" />
+<?php
+$pageTitle = "About";
+?>
 @section('main-content')
 <div class="ht" style="padding-top: 0">
     <div class="container">

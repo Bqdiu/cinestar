@@ -30,6 +30,7 @@
             <span class="text-white">{{$v->Content}}</span>
           </p>
           <?php $date = 1 ?>
+
           @foreach(\App\Models\Showinfor::getDateOFShow($idRap,$v->MovieID) as $keyShow=>$valueShow)
 
           <div class="movieShow active" id="movieShow-{{$date}}-{{$v->MovieID}}">
@@ -40,18 +41,25 @@
             <div class="content-movieShow mt-2">
               <p class="text-white">STANDARD</p>
               <div class="row">
+
                 @foreach(\App\Models\Showinfor::getStartTimeOFShow($idRap,$valueShow->ShowDate,$v->MovieID) as $keyTime=>$valueTime)
 
                 <a href="" class="col-md-3 movie-show-item"><span>{{ \Carbon\Carbon::createFromFormat('H:i:s', $valueTime->StartTime)->format('H:i') }}</span></a>
 
                 @endforeach
 
+
+
               </div>
             </div>
 
           </div>
+
           <?php $date = $date + 1 ?>
           @endforeach
+          @if($idStatus == 2)
+          <div class="movies-rp-noti"><img src="/img/movie-updating.png" alt=""><span class="text-white">Chưa có suất chiếu</span></div>
+          @endif
 
         </div>
       </div>

@@ -1,4 +1,7 @@
 @extends ('layout')
+<?php
+$pageTitle = "Đăng Ký";
+?>
 @section('main-content')
 <div class="container mt-5 mb-lg-5" style="height: fit-content" ;>
     <div class="row justify-content-center">

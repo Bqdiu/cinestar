@@ -92,17 +92,28 @@ class HomeController extends Controller
 
     public function bookTicketsPartial($idRap, $idStatus)
     {
-        $PhimTheoRap = Movie::getMovieByCinema($idRap, $idStatus);
-        $count = Movie::countMovieByCinema($idRap, $idStatus);
+        $PhimTheoRap = null;
+        $count = null;
+        if ($idStatus == 2) {
+            $PhimTheoRap = Movie::getMovieByStatusID($idStatus);
+            $count = $PhimTheoRap->count();
+        } else {
+            $PhimTheoRap = Movie::getMovieByCinema($idRap, $idStatus);
+            $count = Movie::countMovieByCinema($idRap, $idStatus);
+        }
+
+
         $Title = StatusMovie::getStatusByID($idStatus);
 
         return view('client/home/bookticketsPartial', ['CountPhim' => $count, 'Title' => $Title, 'idRap' => $idRap, 'idStatus' => $idStatus, 'PhimTheoRap' => $PhimTheoRap]);
     }
-    public function PromotionPage() {
+    public function PromotionPage()
+    {
         return view('client/event/promotion');
     }
 
-    public function AboutUsPage() {
+    public function AboutUsPage()
+    {
         return view('client/event/aboutus');
     }
 }

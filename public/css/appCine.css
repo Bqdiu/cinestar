@@ -1543,3 +1543,17 @@ h1 {
     transition: all 0.4s ease-in-out;
     z-index: 1;
 }
+.movies-rp-noti {
+    align-items: center;
+    border: 0.1rem solid rgba(248, 250, 252, 0.5);
+    border-radius: 0.4rem;
+    display: flex;
+    font-size: 14px;
+    gap: 0.6rem;
+    padding: 0.6rem 1rem;
+}
+.movies-rp-noti img {
+    filter: brightness(0) invert(1);
+    flex-shrink: 0;
+    width: 20px;
+}

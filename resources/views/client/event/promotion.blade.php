@@ -1,4 +1,7 @@
 @extends('layout')
+<?php
+$pageTitle = "Chương Trình Khuyến Mãi";
+?>
 <link href="{{asset('/css/promotion.css')}}" rel="stylesheet" />
 @section('main-content')
 <div class="container">
@@ -11,7 +14,7 @@
 <div class="container">
     <div class="promotion-movie-wr">
         <div class="promotion-movie-list pro-row pb-80">
-            <div class="promotion-it col" >
+            <div class="promotion-it col">
                 <div class="promotion-content">
                     <div class="head">
                         <h4 class="sub-tittle" style="font-weight: bold">C’STUDENT -&nbsp; 45K CHO HỌC SINH SINH VIÊN&nbsp;</h4>
@@ -34,19 +37,19 @@
                     </div><a href="/movie" title="ĐẶT VÉ NGAY" class="btn btn--pri">ĐẶT VÉ NGAY</a>
                 </div>
             </div>
-            <div class="promotion-it col" >
+            <div class="promotion-it col">
                 <div class="promotion-image">
                     <img src="https://api-website.cinestar.com.vn/media/.renditions/wysiwyg/CMSPage/Promotions/c_student.png" alt="" />
                 </div>
             </div>
         </div>
         <div class="promotion-movie-list pro-row pb-80">
-            <div class="promotion-it col" >
+            <div class="promotion-it col">
                 <div class="promotion-image">
                     <img src="https://api-website.cinestar.com.vn/media/.renditions/wysiwyg/CMSPage/Promotions/C_TEN.png" alt="" />
                 </div>
             </div>
-            <div class="promotion-it col" >
+            <div class="promotion-it col">
                 <div class="promotion-content">
                     <div class="head">
                         <h4 class="sub-tittle" style="font-weight: bold">C'TEN - HAPPY HOUR - 45K/ 2D MỐC 10H&nbsp;&nbsp;</h4>
@@ -69,7 +72,7 @@
             </div>
         </div>
         <div class="promotion-movie-list pro-row pb-80">
-            <div class="promotion-it col" >
+            <div class="promotion-it col">
                 <div class="promotion-content">
                     <div class="head">
                         <h4 class="sub-tittle">C'MONDAY - HAPPY DAY - ĐỒNG GIÁ 45K/ 2D</h4>
@@ -90,19 +93,19 @@
                     </div><a href="/movie" title="ĐẶT VÉ NGAY" class="btn btn--pri">ĐẶT VÉ NGAY</a>
                 </div>
             </div>
-            <div class="promotion-it col" >
+            <div class="promotion-it col">
                 <div class="promotion-image">
                     <img src="https://api-website.cinestar.com.vn/media/.renditions/wysiwyg/CMSPage/Member/monday_1_.jpg" alt="" />
                 </div>
             </div>
         </div>
         <div class="promotion-movie-list pro-row pb-80">
-            <div class="promotion-it col" >
+            <div class="promotion-it col">
                 <div class="promotion-image">
                     <img src="https://api-website.cinestar.com.vn/media/.renditions/wysiwyg/CMSPage/Promotions/C_MEMBER.png" alt="" />
                 </div>
             </div>
-            <div class="promotion-it col" >
+            <div class="promotion-it col">
                 <div class="promotion-content">
                     <div class="head">
                         <h4 class="sub-tittle" style="font-weight: bold">C'MEMBER - HAPPY MEMBER’S DAY - GIÁ CHỈ 45K/ 2D&nbsp;</h4>
@@ -127,7 +130,7 @@
             </div>
         </div>
         <div class="promotion-movie-list pro-row pb-80">
-            <div class="promotion-it col" >
+            <div class="promotion-it col">
                 <div class="promotion-content">
                     <div class="head">
                         <h4 class="sub-tittle" style="font-weight: bold">C’PURPLE DAY - NHẬN VOUCHER 0 ĐỒNG&nbsp;</h4>
@@ -147,7 +150,7 @@
                     </div><a href="/movie" title="ĐẶT VÉ NGAY" class="btn btn--pri">ĐẶT VÉ NGAY</a>
                 </div>
             </div>
-            <div class="promotion-it col" >
+            <div class="promotion-it col">
                 <div class="promotion-image">
                     <img src="https://api-website.cinestar.com.vn/media/.renditions/wysiwyg/CMSPage/Promotions/C_PURPLE_DAY.png" alt="" />
                 </div>

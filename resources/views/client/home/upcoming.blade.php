@@ -1,8 +1,10 @@
 @extends ('layout')
-
+<?php
+$pageTitle = "Cinestar - PHIM SẮP CHIẾU";
+?>
 @section('main-content')
 <div class="heading">
-  <h1>Phim Sắp Chiêu</h1>
+  <h1>PHIM SẮP CHIẾU</h1>
 </div>
 <div class="container">
   <div class="row">

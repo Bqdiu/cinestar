@@ -65,6 +65,7 @@ $(document).ready(function () {
         $("#" + swiperID).addClass("active");
         var defaultShowDate = $(".swiper-slide-item.active .date").data("date");
         console.log(defaultShowDate);
+
         LoadCinemaList(defaultCityID, defaultShowDate, movieID);
     });
     $(document).on("click", ".city-option-menu", function () {
@@ -105,7 +106,15 @@ $(document).ready(function () {
     }
 
     // Hàm đếm ngược
+    var countdownTimeout; // Biến để lưu trữ ID của hàm đếm ngược
+
+    // Hàm đếm ngược
     function countdown() {
+        // Kiểm tra xem đã có hàm đếm ngược nào đang chạy hay không
+        if (countdownTimeout) {
+            clearTimeout(countdownTimeout); // Nếu có, hủy bỏ hàm đếm ngược đó
+        }
+
         // Cập nhật hiển thị
         updateTimerDisplay();
 
@@ -121,7 +130,7 @@ $(document).ready(function () {
         // Kiểm tra xem có còn thời gian đếm ngược không
         if (minutesRemaining >= 0) {
             // Đặt lại hàm đếm ngược sau 1 giây
-            setTimeout(countdown, 1000);
+            countdownTimeout = setTimeout(countdown, 1000);
         } else {
             // Nếu hết thời gian, thực hiện các hành động sau đó
             console.log("Đếm ngược đã kết thúc!");
@@ -170,7 +179,9 @@ $(document).ready(function () {
                 // Hiển thị tổng giá tiền đã định dạng
                 updateTotalPriceDisplay();
             }
-
+            $(".dt-bill .btn.btn--pri").addClass("opacity-40");
+            $(".dt-bill .btn.btn--pri").addClass("pointer-events-none");
+            $(".dt-bill .btn.btn--pri").removeClass("opcity-100");
             console.log("Đã tăng số lượng vé của loại vé có ID: " + ticketId);
         });
 
@@ -209,7 +220,7 @@ $(document).ready(function () {
             var countContainer = $(this).closest(".count");
             var ticketId = countContainer.data("ticket-id");
             countNumber = countContainer.find(".count-number");
-            currentCount = parseInt(countNumber.text());
+
             price = parseInt(
                 $("#food-box-" + ticketId)
                     .find(".price.sub-title p")
@@ -247,6 +258,10 @@ $(document).ready(function () {
                     "Đã giảm số lượng vé của loại vé có ID: " + ticketId
                 );
             }
+            currentCount = parseInt(countNumber.text());
+            $(".dt-bill .btn.btn--pri").addClass("opacity-40");
+            $(".dt-bill .btn.btn--pri").addClass("pointer-events-none");
+            $(".dt-bill .btn.btn--pri").removeClass("opcity-100");
         });
     });
 
@@ -277,6 +292,8 @@ $(document).ready(function () {
             },
         });
     });
+    var minutesRemaining = 5;
+    var secondsRemaining = 0;
     $(document).ready(function () {
         var selectedSeats = []; // Mảng chứa vị trí của các ghế đã chọn
         var selectedSeats_1 = [];
@@ -287,7 +304,7 @@ $(document).ready(function () {
             // Kiểm tra nếu chưa mua vé
             if (sumCountTicket == 0 && selectedSeats.length === 0) {
                 $(".popup.--w7 .popup-noti-des").text(
-                    "You did not purchase this type of seat!"
+                    "Bạn chưa mua loại ghế này!"
                 );
                 $(".popup.--w7").addClass("open");
                 return; // Dừng sự kiện nếu chưa mua vé
@@ -295,7 +312,7 @@ $(document).ready(function () {
 
             if (sumCountTicket == 0 && selectedSeats.length === 0) {
                 $(".popup.--w7 .popup-noti-des").text(
-                    "You did not purchase this type of seat!"
+                    "Bạn chưa mua loại ghế này!"
                 );
                 $(".popup.--w7").addClass("open");
                 return; // Dừng sự kiện nếu chưa mua vé
@@ -314,10 +331,38 @@ $(document).ready(function () {
                     minutesRemaining = 5; // Đặt lại số phút
                     secondsRemaining = 0;
                     countdown();
+
+                    // const options = {
+                    //     method: "post",
+                    //     url: "/reserve-seat",
+                    //     data: {
+                    //         seatID: seatID,
+                    //     },
+                    // };
+
+                    // let answer = window.confirm(
+                    //     "Reseve Seat: " + seatID + " ?"
+                    // );
+                    // if (answer) {
+                    //     axios(options);
+                    // } else {
+                    //     $(this).removeClass("choosing");
+                    // }
+                    if (
+                        selectedSeats.length + selectedSeats_1.length ==
+                        sumCountTicket +
+                            parseInt($("#food-box-3 .count-number").text())
+                    ) {
+                        $(".dt-bill .btn.btn--pri").removeClass("opacity-40");
+                        $(".dt-bill .btn.btn--pri").removeClass(
+                            "pointer-events-none"
+                        );
+                        $(".dt-bill .btn.btn--pri").addClass("opcity-100");
+                    }
                 } else {
                     // Nếu tổng số ghế đã chọn đã đủ số lượng vé đã mua, hiển thị thông báo
                     $(".popup.--w7 .popup-noti-des").text(
-                        "You have selected the maximum number of seats!"
+                        "Bạn đã mua đủ ghế loại này!"
                     );
                     $(".popup.--w7").addClass("open");
                 }
@@ -328,6 +373,16 @@ $(document).ready(function () {
                 minutesRemaining = 5; // Đặt lại số phút
                 secondsRemaining = 0;
                 countdown();
+
+                if (
+                    selectedSeats.length + selectedSeats_1.length <
+                    sumCountTicket +
+                        parseInt($("#food-box-3 .count-number").text())
+                ) {
+                    $(".dt-bill .btn.btn--pri").addClass("opacity-40");
+                    $(".dt-bill .btn.btn--pri").addClass("pointer-events-none");
+                    $(".dt-bill .btn.btn--pri").removeClass("opcity-100");
+                }
             }
         });
 
@@ -339,7 +394,7 @@ $(document).ready(function () {
             // Kiểm tra nếu chưa mua vé
             if (countNumber == 0 && selectedSeats_1.length === 0) {
                 $(".popup.--w7 .popup-noti-des").text(
-                    "You did not purchase this type of seat!"
+                    "Bạn chưa mua loại ghế này!"
                 );
                 $(".popup.--w7").addClass("open");
                 return; // Dừng sự kiện nếu chưa mua vé
@@ -355,10 +410,37 @@ $(document).ready(function () {
                     selectedSeats_1.push(seatID);
 
                     countdown();
+                    // const options = {
+                    //     method: "post",
+                    //     url: "/reserve-seat",
+                    //     data: {
+                    //         seatID: seatID,
+                    //     },
+                    // };
+
+                    // let answer = window.confirm(
+                    //     "Reseve Seat: " + seatID + " ?"
+                    // );
+                    // if (answer) {
+                    //     axios(options);
+                    // } else {
+                    //     $(this).removeClass("choosing");
+                    // }
+                    if (
+                        selectedSeats.length + selectedSeats_1.length ==
+                        sumCountTicket +
+                            parseInt($("#food-box-3 .count-number").text())
+                    ) {
+                        $(".dt-bill .btn.btn--pri").removeClass("opacity-40");
+                        $(".dt-bill .btn.btn--pri").removeClass(
+                            "pointer-events-none"
+                        );
+                        $(".dt-bill .btn.btn--pri").addClass("opcity-100");
+                    }
                 } else {
                     // Nếu tổng số ghế đã chọn đã đủ số lượng vé đã mua, hiển thị thông báo
                     $(".popup.--w7 .popup-noti-des").text(
-                        "You have selected the maximum number of seats!"
+                        "Bạn đã mua đủ ghế loại này!"
                     );
                     $(".popup.--w7").addClass("open");
                 }
@@ -368,11 +450,35 @@ $(document).ready(function () {
                 selectedSeats_1.splice(seatIndex, 1);
 
                 countdown();
+                if (
+                    selectedSeats.length + selectedSeats_1.length <
+                    sumCountTicket +
+                        parseInt($("#food-box-3 .count-number").text())
+                ) {
+                    $(".dt-bill .btn.btn--pri").addClass("opacity-40");
+                    $(".dt-bill .btn.btn--pri").addClass("pointer-events-none");
+                    $(".dt-bill .btn.btn--pri").removeClass("opcity-100");
+                }
             }
         });
+
         // Sự kiện click vào nút "OK" trong popup
         $(document).on("click", ".popup.--w7 .btn.OK", function () {
             $(".popup.--w7").removeClass("open");
         });
+
+        // Echo.channel("reserve").listen("reserveSeat", (e) => {
+        //     const seatID = e.seatID; // Lấy id của ghế từ sự kiện
+        //     const seatElement = document.querySelector(
+        //         `[data-seat-id="${seatID}"]`
+        //     ); // Tìm phần tử ghế bằng data-seat-id
+
+        //     if (seatElement) {
+        //         seatElement.classList.add("booked");
+        //         console.log(seatID);
+        //     } else {
+        //         console.error("Không tìm thấy phần tử ghế với id:", seatID);
+        //     }
+        // });
     });
 });

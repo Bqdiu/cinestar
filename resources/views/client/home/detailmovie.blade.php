@@ -1,5 +1,7 @@
 @extends('layout')
-
+<?php
+$pageTitle = $PhimItem->Title;
+?>
 @section('main-content')
 <div class="container mt-3" data-movie-id="{{$MovieID}}" id="movie">
     <div class="row">

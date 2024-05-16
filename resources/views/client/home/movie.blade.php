@@ -1,5 +1,7 @@
 @extends ('layout')
-
+<?php
+$pageTitle = "Mua Vé Xem Phim";
+?>
 @section('main-content')
 @foreach($Status as $statusItem)
 

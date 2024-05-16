@@ -8,6 +8,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Management\MovieController;
 use App\Http\Controllers\Management\StatusMovieController;
 use App\Http\Controllers\Management\CinemaController;
+use Illuminate\Http\Request;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +37,9 @@ Route::get('/movie/upcoming', [HomeController::class, 'Upcoming']);
 Route::post('/search', [HomeController::class, 'Search'])->name('search');
 Route::get('/book-tickets/{id}', [HomeController::class, 'BookTickets']);
 Route::get('/booktickets-partial/{idRap}/{idStatus}', [HomeController::class, 'bookTicketsPartial']);
+Route::post('/reserve-seat', function (Request $request) {
+    broadcast(new \App\Events\reserveSeat($request->input('seatID')));
+});
 
 Route::get('/promotion', [HomeController::class, 'PromotionPage'])->name('promotion');
 Route::get('/aboutus', [HomeController::class, 'AboutUsPage'])->name('aboutus');

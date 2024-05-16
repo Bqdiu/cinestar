@@ -1,5 +1,7 @@
 @extends ('layout')
-
+<?php
+$pageTitle = "Đăng Nhập";
+?>
 @section('main-content')
 
 <div class="container mt-5 mb-lg-5" style="height: fit-content" ;>

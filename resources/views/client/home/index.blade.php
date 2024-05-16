@@ -1,5 +1,7 @@
 @extends('layout')
-
+<?php
+$pageTitle = "Cinestar - Hệ thống rạp chiếu phim giá rẻ, hiện đại bậc nhất";
+?>
 @section('main-content')
 <div class="container">
   <div id="carouselBanner" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
