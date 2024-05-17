@@ -41,6 +41,9 @@ Route::post('/reserve-seat', function (Request $request) {
     broadcast(new \App\Events\reserveSeat($request->input('seatID')));
 });
 
+//CheckOut
+Route::get("/checkout", [HomeController::class, "CheckOut"]);
+
 Route::get('/promotion', [HomeController::class, 'PromotionPage'])->name('promotion');
 Route::get('/aboutus', [HomeController::class, 'AboutUsPage'])->name('aboutus');
 
@@ -82,14 +85,11 @@ Route::group(['middleware' => 'admin'], function () {
 
 Route::group(['middleware' => 'manager'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'Index']);
-    
 });
 
 Route::group(['middleware' => 'staff'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'Index']);
-    
 });
 
 Route::get('auth/google', [UserInforController::class, 'redirect'])->name('google-auth');
 Route::get('auth/google/call-back', [UserInforController::class, 'callBackGoogle']);
-

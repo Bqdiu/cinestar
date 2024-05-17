@@ -1,7 +1,9 @@
 * {
     box-sizing: border-box;
 }
-
+ul li {
+    list-style: none;
+}
 body {
     background-color: #0f172a;
     font-family: "Noto Serif", serif;
@@ -1013,7 +1015,9 @@ h1 {
     text-align: center;
     color: white;
 }
-
+p {
+    margin-bottom: 0px;
+}
 @media screen and (min-width: 701px) {
     .seat-screen .txt {
         font-size: 2.4rem;
@@ -1375,6 +1379,9 @@ h1 {
 .opacity-40 {
     opacity: 0.4;
 }
+.opacity-30 {
+    opacity: 0.3;
+}
 .pointer-events-none {
     pointer-events: none;
 }
@@ -1556,4 +1563,555 @@ h1 {
     filter: brightness(0) invert(1);
     flex-shrink: 0;
     width: 20px;
+}
+.no-edit {
+    user-select: none;
+    pointer-events: none;
+}
+.ht {
+    padding: 10rem 0;
+    padding-top: 5rem;
+}
+.checkout-back .ic {
+    display: inline-block;
+    height: 1.6rem;
+    width: 1.6rem;
+}
+
+.checkout-back .ic.ani-s {
+    animation: ani-moveDown 1.2s linear 0.1s infinite;
+    margin-left: -1.6rem;
+}
+
+.checkout-back .ic.ani-f {
+    animation: ani-moveDown 1.2s linear 0.3s infinite;
+}
+
+.checkout-back .txt {
+    transition: all 0.2s;
+}
+
+.checkout-back {
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 2.4rem;
+    opacity: 0;
+    transition: all 0.2;
+}
+
+@media screen and (max-width: 700px) {
+    .checkout-back {
+        display: flex;
+        opacity: 1;
+    }
+}
+
+.checkout-back:hover {
+    color: #f3ea28;
+}
+
+.checkout-back:hover .ic img {
+    filter: brightness(0) saturate(100%) invert(99%) sepia(34%) saturate(6925%)
+        hue-rotate(333deg) brightness(97%) contrast(98%);
+}
+.checkout .heading {
+    text-align: left;
+}
+.checkout .process {
+    display: flex;
+    width: 50%;
+    font-family: "Anton", sans-serif;
+    font-size: 20px;
+    gap: 5.6rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: white;
+    padding-left: 0px;
+}
+h4 {
+    margin-bottom: 0px;
+}
+@media screen and (max-width: 700px) {
+    .checkout .process {
+        font-size: 12px;
+        gap: 3.2rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .checkout .process {
+        gap: 2.4rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .checkout .process {
+        width: 100%;
+    }
+}
+.process .process-item.active {
+    color: #f3ea28;
+}
+
+.process .process-item.active:after {
+    background: #f3ea28;
+}
+.process .process-item .link {
+    display: flex;
+    flex-direction: column;
+}
+
+.process .process-item .link br {
+    display: none;
+}
+
+@media screen and (max-width: 460px) {
+    .process .process-item .link br {
+        display: block;
+    }
+}
+
+.process .process-item:not(:first-child) {
+    position: relative;
+}
+
+.process .process-item:not(:first-child):after {
+    background: #d9d9d9;
+    content: "";
+    height: 0.2rem;
+    left: -0.8rem;
+    position: absolute;
+    top: 50%;
+    transform: translate(-100%, -50%);
+    width: 4rem;
+}
+
+@media screen and (max-width: 700px) {
+    .process .process-item:not(:first-child):after {
+        width: 1.6rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .process .process-item:not(:first-child):after {
+        width: 1.2rem;
+    }
+}
+.form {
+    background: #fff;
+    color: #0f172a;
+    padding: 3.6rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .form {
+        padding: 2.4rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .form {
+        padding: 2rem;
+    }
+}
+
+.form .heading {
+    color: #0f172a;
+    margin-bottom: 1.2rem;
+}
+
+.form .form-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem 0;
+    margin-top: 2.4rem;
+}
+
+@media screen and (max-width: 768px) {
+    .form .form-list {
+        margin-top: 1.2rem;
+    }
+}
+
+.form .form-it input {
+    background-color: #fff;
+    color: #0f172a;
+    font-size: 1.6rem;
+    padding: 1.2rem 3.6rem 0.8rem 1.6rem;
+    transition: all 0.3s;
+}
+
+.form .form-it input[type="date"],
+.form .form-it input[type="file"] {
+    box-sizing: border-box;
+    display: inline-block;
+    height: 3.2rem;
+    opacity: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.form .form-it .input {
+    border: 0.1rem solid #e2e8f0;
+    transition: all 0.3s;
+}
+
+.form .form-it .input:focus,
+.form .form-it .input:hover {
+    border: 0.1rem solid #64748b;
+}
+
+.form .form-it textarea {
+    background-color: #fff;
+    border: 0.1rem solid #e2e8f0;
+    font-family: var(--font-pri);
+    font-size: 1.6rem;
+    font-weight: 400;
+    min-height: 16.7rem;
+    outline: none;
+    padding: 1.4rem 1.6rem;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.form .form-it textarea:focus,
+.form .form-it textarea:hover {
+    border: 0.1rem solid #64748b;
+}
+
+.form .form-label {
+    display: block;
+    margin-bottom: 0.8rem;
+}
+.btn-submit {
+    width: 100%;
+}
+.form .form-list .btn-submit {
+    display: block;
+    width: 100%;
+}
+.checkout-cus-left .form {
+    background-color: transparent;
+}
+.checkout-cus-left .form {
+    padding: 0;
+}
+.checkout-cus-left .form .form-list {
+    margin-top: 0;
+}
+.form-payment .form-list {
+    border-bottom: 0.2rem solid rgba(248, 250, 252, 0.1);
+    padding-bottom: 2.4rem;
+}
+.form .form-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem 0;
+    margin-top: 2.4rem;
+}
+
+@media screen and (max-width: 768px) {
+    .form .form-list {
+        margin-top: 1.2rem;
+    }
+}
+.form .form-list .btn-submit {
+    display: block;
+    width: 100%;
+}
+
+[hidden] {
+    display: none;
+}
+.inner-radio.inner-radio-white .form-label {
+    background: transparent;
+    border: 1px solid #64748b;
+    color: #f8fafc;
+    position: relative;
+}
+
+.inner-radio.inner-radio-white .form-label:after {
+    background-color: #fff;
+    content: "";
+    inset: 0;
+    opacity: 0;
+    position: absolute;
+    transition: all 0.4s ease-in-out;
+    z-index: -1;
+}
+
+.inner-radio.inner-radio-white .form-label:hover:after {
+    opacity: 1;
+}
+
+.inner-radio.inner-radio-white .form-label:hover .text {
+    color: #0f172a;
+}
+.inner-radio-white [type="radio"] + label {
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3 ease;
+}
+.inner-radio-white [type="radio"] + label {
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3 ease;
+}
+@media screen and (max-width: 768px) {
+    .btn-discount .tt,
+    .checkout-payment .inner-radio .form-label .text {
+        font-size: 1.6rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .btn-discount .tt,
+    .checkout-payment .inner-radio .form-label .text {
+        font-size: 1.4rem;
+    }
+}
+.inner-radio .form-label {
+    background: #fff;
+    border: 0.527px solid #f93;
+}
+.form .form-label {
+    display: block;
+    margin-bottom: 0.8rem;
+}
+.btn-discount,
+.inner-radio .form-label {
+    align-items: center;
+    background: #36c;
+    border-radius: 0.4rem;
+    display: flex;
+    gap: 1.6rem;
+    margin-bottom: 0;
+    padding: 1.2rem;
+    position: relative;
+    width: 100%;
+}
+.form-payment .btn-discount {
+    margin-top: 2.4rem;
+}
+.btn-discount {
+    align-items: flex-start;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.btn-discount .img {
+    height: 3rem;
+    width: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+    .btn-discount .img {
+        height: 2.4rem;
+        width: 2.4rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .btn-discount .img {
+        height: 1.6rem;
+        width: 1.6rem;
+    }
+}
+.btn-discount .text,
+.btn-discount img {
+    position: relative;
+    transition: all 0.2s;
+    z-index: 2;
+}
+.btn-discount:after {
+    background: linear-gradient(
+        106deg,
+        rgba(102, 51, 153, 0.9),
+        rgba(51, 102, 204, 0.9) 102.69%
+    );
+    border-radius: 0.4rem;
+    content: "";
+    inset: 0;
+    opacity: 0;
+    position: absolute;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+.btn-discount:hover {
+    box-shadow: 0 0 1.1rem #36c;
+    cursor: pointer;
+}
+
+.btn-discount:hover:after {
+    opacity: 1;
+}
+
+.btn-discount:hover img {
+    transform: scale(1.2) rotate(30deg);
+}
+.form-payment .btn {
+    margin-top: 4rem;
+}
+.form-checkout-cus,
+.form-cus .form-control {
+    border-radius: 0.4rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .form-checkout-cus {
+        padding: 1.2rem;
+    }
+}
+
+.form-checkout-cus .tt {
+    color: #f3ea28;
+}
+
+@media screen and (max-width: 700px) {
+    .form-checkout-cus .tt {
+        font-size: 12px;
+    }
+}
+
+.form-checkout-cus .ct {
+    font-size: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+    .form-checkout-cus .ct {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .form-checkout-cus .ct {
+        font-size: 14px;
+    }
+}
+
+.form-checkout-cus .dt {
+    font-size: 14px;
+}
+
+@media screen and (max-width: 700px) {
+    .form-checkout-cus .dt {
+        font-size: 10px;
+    }
+    .form-checkout-cus .cinestar-br .dt {
+        display: none;
+        font-size: 14px;
+    }
+}
+
+.form-checkout-cus .inner-info:first-child {
+    font-family: "Anton", sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 700px) {
+    .form-checkout-cus .inner-info:first-child {
+        font-size: 16px;
+        letter-spacing: 0.16px;
+    }
+}
+.form-main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    padding-bottom: 1.2rem;
+}
+.form-main .inner-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.4rem;
+    width: 100%;
+}
+.form-checkout-cus .inner-info:first-child {
+    font-family: "Anton", sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.form-checkout-cus .bill-coundown-custom.inner-info-row {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: column;
+}
+.form-checkout-cus .bill-coundown-custom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+.form-checkout-cus .bill-coundown-custom .txt {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 16px;
+}
+.form-checkout-cus .bill-coundown {
+    align-items: center;
+    display: flex;
+    gap: 0.6rem;
+    justify-content: flex-start;
+    padding: 0.2rem 1rem;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+.bill-coundown {
+    background-color: #f3ea28;
+    border: 0.1rem solid rgba(248, 250, 252, 0.5);
+    border-radius: 0.4rem;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+}
+.form-checkout-cus .bill-time {
+    font-size: 16px;
+}
+.bill-time {
+    align-items: center;
+    display: flex;
+    font-family: "Anton", sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.1rem;
+}
+.form-main .inner-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.4rem;
+    width: 100%;
+}
+.form-checkout-cus .tt {
+    color: #f3ea28;
+}
+.form-checkout-cus .ct {
+    font-size: 20px;
+}
+.form-checkout-cus .dt {
+    font-size: 14px;
+}
+.form-footer {
+    border-top: 0.2rem dashed #f8fafc;
+    padding-top: 1.2rem;
+}
+.form-checkout-cus .inner-info:first-child {
+    font-family: "Anton", sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.form-footer .inner-info-row {
+    display: flex;
+    font-family: "Josefin Sans", sans-serif;
+    justify-content: space-between;
+}
+.form-footer .inner-info-row .ct {
+    font-size: 2.6rem;
+    font-weight: 600;
+}
+.form-checkout-cus {
+    background: url(https://bogatyr.club/uploads/posts/2023-03/thumbs/1679586820_bogatyr-club-p-temno-fioletovii-fon-gradient-pinterest-44.jpg);
+    padding: 2.4rem;
+    color: white;
+    background-size: cover;
 }

@@ -208,17 +208,18 @@ $pageTitle = $PhimItem->Title;
             <div class="bill-left">
                 <h4 class="name-combo">{{$PhimItem->Title}}</h4>
                 <ul class="list">
-                    <li class="item cinema-name"><span class="txt">Cinestar Quốc Thanh</span></li>
-                    <li class="item"><span class="txt"></span></li>
+                    <li class="item "><span class="cinema-name txt">Cinestar Quốc Thanh</span></li>
+                    <li class="item cinema-hall-info"></li>
+
                 </ul>
             </div>
             <div class="bill-custom-right">
                 <div class="bill-coundown">
                     <p class="txt">Thời gian giữ vé:</p>
-                    <div class="bill-time"><span class="item" id="timer">05: 00 </span></div>
+                    <div class="bill-time"><span class="item" id="timer">05:00 </span></div>
                 </div>
                 <div class="bill-right">
-                    <div class="price"><span class="txt">Tạm tính </span><span class="num">0 VNĐ</span></div><button class="btn btn--pri  opacity-40 pointer-events-none">Đặt vé</button>
+                    <div class="price"><span class="txt">Tạm tính </span><span class="num">0 VNĐ</span></div><a class="btn btn--pri  opacity-40 pointer-events-none">Đặt vé</a>
                 </div>
             </div>
         </div>

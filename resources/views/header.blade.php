@@ -47,7 +47,7 @@
                         </form>
                         @if(Auth::check())
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" style="background:transparent;border:0px" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="far fa-user-circle"></i>
                                 <span>{{Auth::user()->Name}}</span>
                             </button>

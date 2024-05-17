@@ -116,4 +116,9 @@ class HomeController extends Controller
     {
         return view('client/event/aboutus');
     }
+
+    public function CheckOut()
+    {
+        return view('client/home/checkout');
+    }
 }

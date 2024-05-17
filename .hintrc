@@ -8,7 +8,9 @@
       {
         "ignore": [
           "max-height: fit-content",
-          "height: fit-content"
+          "height: fit-content",
+          "user-select",
+          "width: fit-content"
         ]
       }
     ]
