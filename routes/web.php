@@ -24,13 +24,8 @@ use Illuminate\Http\Request;
 //Client
 //Index
 Route::get('/', [HomeController::class, 'Index']);
-<<<<<<< Updated upstream
-Route::get('/login', [UserInforController::class, 'Login'])->name('login');
-=======
 
-//Loign
-Route::get('/login', [UserInforController::class, 'Login']);
->>>>>>> Stashed changes
+Route::get('/login', [UserInforController::class, 'Login'])->name('login');
 Route::post('/loginSubmit', [UserInforController::class, 'LoginPost']);
 
 //Logout
@@ -108,7 +103,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/userinfor/index', [UserInforController::class, 'UserInforIndex']);
     Route::get('/admin/userinfor/getUserInfor/{UserID}', [UserInforController::class, 'getUserInfor'])->name('getUserInfor');
     Route::post('/admin/userinfor/editUserInfor', [UserInforController::class, 'editUserInfor'])->name('editUserInfor');
-
 });
 
 Route::group(['middleware' => 'manager'], function () {
