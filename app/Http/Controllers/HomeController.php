@@ -107,6 +107,10 @@ class HomeController extends Controller
 
         return view('client/home/bookticketsPartial', ['CountPhim' => $count, 'Title' => $Title, 'idRap' => $idRap, 'idStatus' => $idStatus, 'PhimTheoRap' => $PhimTheoRap]);
     }
+    public function priceOfTicketPartial()
+    {
+        return view('client/home/priceOfTicketPartial');
+    }
     public function PromotionPage()
     {
         return view('client/event/promotion');
@@ -117,8 +121,22 @@ class HomeController extends Controller
         return view('client/event/aboutus');
     }
 
-    public function CheckOut()
+    //Check out and Payment
+
+    public function CheckOut(Request $request)
     {
-        return view('client/home/checkout');
+        if (!$request->query('showTimeID'))
+            return redirect()->route('movie');
+        $Show = Showinfor::find($request->query('showTimeID'));
+
+        return view('client/home/checkout', ["Show" => $Show]);
+    }
+    public function FormCusPartial()
+    {
+        return view('client/home/cart/formCus');
+    }
+    public function FormPaymentPartial()
+    {
+        return view('client/home/cart/formPayment');
     }
 }

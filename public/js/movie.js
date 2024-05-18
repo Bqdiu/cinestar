@@ -5,6 +5,7 @@ $(document).ready(function () {
     var movieID = $("#movie").data("movie-id");
     var dCityID = $(".dropdown-menu .city-option-menu.active").data("city-id");
     var dShowDate = $(".swiper-slide-item.active .date").data("date");
+    var showTimeID = null;
     var showtime = "";
     var roomNumber = "";
     // Output the room number to the console
@@ -13,6 +14,11 @@ $(document).ready(function () {
         totalPrice = 0,
         price,
         popupID;
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
     // document.addEventListener("keydown", function (e) {
     //     if (e.key === "F12") {
     //         e.preventDefault();
@@ -49,10 +55,30 @@ $(document).ready(function () {
     });
     $(".slide-BangGiaVe").click(function () {
         $(".slide-BangGiaVe").addClass("click");
+        LoadPriceOfTicketPartial();
         $(".slide-PhimDangChieu").removeClass("click");
         $(".slide-SuatChieuDacBiet").removeClass("click");
         $(".slide-PhimSapChieu").removeClass("click");
     });
+    //Ticket Price
+    $(document).on("click", ".it.tabBtn", function () {
+        var tabBtnID = $(this).data("tab-id");
+        $(this).addClass("active");
+        $(".it.tabBtn").not(this).removeClass("active");
+
+        $(".tabPanel").removeClass("open");
+        $("#" + tabBtnID).addClass("open");
+    });
+    ///
+    function LoadPriceOfTicketPartial() {
+        $.ajax({
+            url: "/price-of-ticket",
+            type: "GET",
+            success: function (res) {
+                $("#content-Movie-selector").html(res);
+            },
+        });
+    }
     function LoadData(idStatus) {
         $.ajax({
             url: "/booktickets-partial/" + $("#idRap").val() + "/" + idStatus,
@@ -93,13 +119,14 @@ $(document).ready(function () {
         $(".dt-bill .btn.btn--pri").addClass("pointer-events-none");
         $(".dt-bill .btn.btn--pri").removeClass("opcity-100");
         console.log(totalPrice);
+        sumCountTicket = 0;
         updateCinemaInfo("", selectedSeats.concat(selectedSeats_1), "");
     }
     function resetSectionWhenTimerEnded() {
         selectedSeats = [];
         selectedSeats_1 = [];
         stopCountdown();
-
+        sumCountTicket = 0;
         $(".seat-wr.seat-single").removeClass("choosing");
         $(".seat-couple .seat-wr").removeClass("choosing");
         totalPrice = 0;
@@ -360,7 +387,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".item-time", function () {
-        var showTimeID = $(this).data("show-time-item");
+        showTimeID = $(this).data("show-time-item");
         var nameCinema = $(this).data("value-name");
         console.log(showTimeID);
         console.log(nameCinema);
@@ -397,7 +424,7 @@ $(document).ready(function () {
         // Sự kiện click vào ghế
         $(document).on("click", ".seat-wr.seat-single ", function () {
             var seatID = $(this).data("seat-id");
-
+            var cinemaSeatID = $(this).data("cinema-seat-id");
             // Kiểm tra nếu chưa mua vé
             if (sumCountTicket == 0 && selectedSeats.length === 0) {
                 $(".popup.--w7 .popup-noti-des").text(
@@ -406,16 +433,10 @@ $(document).ready(function () {
                 $(".popup.--w7").addClass("open");
                 return; // Dừng sự kiện nếu chưa mua vé
             }
-
-            if (sumCountTicket == 0 && selectedSeats.length === 0) {
-                $(".popup.--w7 .popup-noti-des").text(
-                    "Bạn chưa mua loại ghế này!"
-                );
-                $(".popup.--w7").addClass("open");
-                return; // Dừng sự kiện nếu chưa mua vé
-            }
             // Kiểm tra xem ghế đã được chọn trước đó chưa
-            var seatIndex = selectedSeats.indexOf(seatID);
+            var seatIndex = selectedSeats.findIndex(
+                (seat) => seat.SeatID === cinemaSeatID
+            );
             if (seatIndex === -1) {
                 // Nếu ghế chưa được chọn trước đó và tổng số ghế đã chọn chưa đạt đến số lượng vé đã mua
                 if (
@@ -424,11 +445,11 @@ $(document).ready(function () {
                 ) {
                     // Thêm ghế vào danh sách các ghế đã chọn
                     $(this).addClass("choosing");
-                    selectedSeats.push(seatID);
-                    minutesRemaining = 5; // Đặt lại số phút
-                    secondsRemaining = 0;
-                    countdown();
-
+                    selectedSeats.push({
+                        SeatID: cinemaSeatID,
+                        SeatName: seatID,
+                    });
+                    resetCountdown();
                     // const options = {
                     //     method: "post",
                     //     url: "/reserve-seat",
@@ -445,17 +466,7 @@ $(document).ready(function () {
                     // } else {
                     //     $(this).removeClass("choosing");
                     // }
-                    if (
-                        selectedSeats.length + selectedSeats_1.length ==
-                        sumCountTicket +
-                            parseInt($("#food-box-3 .count-number").text())
-                    ) {
-                        $(".dt-bill .btn.btn--pri").removeClass("opacity-40");
-                        $(".dt-bill .btn.btn--pri").removeClass(
-                            "pointer-events-none"
-                        );
-                        $(".dt-bill .btn.btn--pri").addClass("opcity-100");
-                    }
+                    updateButtonState();
                 } else {
                     // Nếu tổng số ghế đã chọn đã đủ số lượng vé đã mua, hiển thị thông báo
                     $(".popup.--w7 .popup-noti-des").text(
@@ -467,24 +478,14 @@ $(document).ready(function () {
                 // Nếu ghế đã được chọn trước đó, bỏ chọn và loại bỏ khỏi danh sách
                 $(this).removeClass("choosing");
                 selectedSeats.splice(seatIndex, 1);
-                minutesRemaining = 5; // Đặt lại số phút
-                secondsRemaining = 0;
-                countdown();
+                resetCountdown();
 
-                if (
-                    selectedSeats.length + selectedSeats_1.length <
-                    sumCountTicket +
-                        parseInt($("#food-box-3 .count-number").text())
-                ) {
-                    $(".dt-bill .btn.btn--pri").addClass("opacity-40");
-                    $(".dt-bill .btn.btn--pri").addClass("pointer-events-none");
-                    $(".dt-bill .btn.btn--pri").removeClass("opcity-100");
-                }
+                updateButtonState();
             }
             console.log(roomNumber);
             updateCinemaInfo(
                 roomNumber,
-                selectedSeats + selectedSeats_1,
+                selectedSeats.concat(selectedSeats_1),
                 showtime
             );
         });
@@ -512,7 +513,8 @@ $(document).ready(function () {
                     $(this).addClass("choosing");
                     selectedSeats_1.push(seatID);
                     console.log(roomNumber);
-                    countdown();
+                    resetCountdown();
+                    updateButtonState();
                     // const options = {
                     //     method: "post",
                     //     url: "/reserve-seat",
@@ -529,17 +531,6 @@ $(document).ready(function () {
                     // } else {
                     //     $(this).removeClass("choosing");
                     // }
-                    if (
-                        selectedSeats.length + selectedSeats_1.length ==
-                        sumCountTicket +
-                            parseInt($("#food-box-3 .count-number").text())
-                    ) {
-                        $(".dt-bill .btn.btn--pri").removeClass("opacity-40");
-                        $(".dt-bill .btn.btn--pri").removeClass(
-                            "pointer-events-none"
-                        );
-                        $(".dt-bill .btn.btn--pri").addClass("opcity-100");
-                    }
                 } else {
                     // Nếu tổng số ghế đã chọn đã đủ số lượng vé đã mua, hiển thị thông báo
                     $(".popup.--w7 .popup-noti-des").text(
@@ -552,16 +543,8 @@ $(document).ready(function () {
                 $(this).removeClass("choosing");
                 selectedSeats_1.splice(seatIndex, 1);
 
-                countdown();
-                if (
-                    selectedSeats.length + selectedSeats_1.length <
-                    sumCountTicket +
-                        parseInt($("#food-box-3 .count-number").text())
-                ) {
-                    $(".dt-bill .btn.btn--pri").addClass("opacity-40");
-                    $(".dt-bill .btn.btn--pri").addClass("pointer-events-none");
-                    $(".dt-bill .btn.btn--pri").removeClass("opcity-100");
-                }
+                resetCountdown();
+                updateButtonState();
             }
             updateCinemaInfo(
                 roomNumber,
@@ -569,12 +552,29 @@ $(document).ready(function () {
                 showtime
             );
         });
-
+        function resetCountdown() {
+            minutesRemaining = 5; // Đặt lại số phút
+            secondsRemaining = 0;
+            countdown();
+        }
         // Sự kiện click vào nút "OK" trong popup
         $(document).on("click", ".popup.--w7 .btn.OK", function () {
             $(".popup.--w7").removeClass("open");
         });
-
+        function updateButtonState() {
+            if (
+                selectedSeats.length + selectedSeats_1.length ===
+                sumCountTicket + parseInt($("#food-box-3 .count-number").text())
+            ) {
+                $(".dt-bill .btn.btn--pri")
+                    .removeClass("opacity-40 pointer-events-none")
+                    .addClass("opcity-100");
+            } else {
+                $(".dt-bill .btn.btn--pri")
+                    .addClass("opacity-40 pointer-events-none")
+                    .removeClass("opcity-100");
+            }
+        }
         // Echo.channel("reserve").listen("reserveSeat", (e) => {
         //     const seatID = e.seatID; // Lấy id của ghế từ sự kiện
         //     const seatElement = document.querySelector(
@@ -590,21 +590,27 @@ $(document).ready(function () {
         // });
     });
     function updateCinemaInfo(roomNumber, seatList, showTime) {
-        let seatText = Array.isArray(seatList) ? seatList.join(", ") : seatList;
-
-        $(".bill-left .list .item.cinema-hall-info").html(`
-            Phòng chiếu : ${roomNumber} 
-            <span class="dot">|</span> 
-            ${seatText} 
-            <span class="dot">|</span> 
-            ${showTime}
-        `);
-        if (seatList.length == 0) {
+        if (!roomNumber && !showTime) {
             $(".bill-left .list .item.cinema-hall-info").html("");
+            return;
         }
 
-        if (roomNumber == "" && showTime == "") {
+        if (Array.isArray(seatList) && seatList.length > 0) {
+            let seatText = seatList.map((seat) => seat.SeatName).join(", ");
+            $(".bill-left .list .item.cinema-hall-info").html(`
+                Phòng chiếu: ${roomNumber} 
+                <span class="dot">|</span> 
+                Ghế: ${seatText} 
+                <span class="dot">|</span> 
+                Suất chiếu: ${showTime}
+            `);
+        } else {
             $(".bill-left .list .item.cinema-hall-info").html("");
         }
     }
+    //Show Check
+    $(".btn--booking").click(() => {
+        console.log(showTimeID);
+        window.location.href = "/checkout?showTimeID=" + showTimeID;
+    });
 });

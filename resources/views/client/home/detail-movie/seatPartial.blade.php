@@ -207,7 +207,7 @@
                                         @if($sValue->RowPosition == $rpValue->RowPosition)
 
                                         <td class="seat-td">
-                                            <div class="seat-wr seat-single" data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
+                                            <div class="seat-wr seat-single" data-cinema-seat-id="{{$sValue->CinemaSeatID}}" data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
                                         </td>
                                         @endif
                                         @endforeach
@@ -222,7 +222,7 @@
                                         <td class="seat-name-row">{{$rpValue->RowPosition}}</td>
                                         @foreach($Seat as $sKey => $sValue)
                                         @if($sValue->RowPosition == $rpValue->RowPosition && ($sValue->ColumnPosition >=3 && $sValue->ColumnPosition <=14))<td class="seat-td">
-                                            <div class="seat-wr seat-single " data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
+                                            <div class="seat-wr seat-single " data-cinema-seat-id="{{$sValue->CinemaSeatID}}" data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
                                             </td>
                                             @endif
                                             @endforeach
@@ -231,7 +231,7 @@
                                             <td class=""></td>
                                             @foreach($Seat as $sKey => $sValue)
                                             @if($sValue->RowPosition == $rpValue->RowPosition && ($sValue->ColumnPosition >= 1 && $sValue->ColumnPosition <= 2)) <td class="seat-td">
-                                                <div class="seat-wr seat-single " data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
+                                                <div class="seat-wr seat-single " data-cinema-seat-id="{{$sValue->CinemaSeatID}}" data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
                                                 </td>
                                                 @endif
                                                 @endforeach
@@ -243,7 +243,7 @@
                                         <td class="seat-name-row">{{$rpValue->RowPosition}}</td>
                                         @foreach($Seat as $sKey => $sValue)
                                         @if($sValue->RowPosition == $rpValue->RowPosition && ($sValue->ColumnPosition >=9 && $sValue->ColumnPosition <=13)) <td class="seat-td">
-                                            <div class="seat-wr seat-single " data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
+                                            <div class="seat-wr seat-single " data-cinema-seat-id="{{$sValue->CinemaSeatID}}" data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
                                             </td>
                                             @endif
                                             @endforeach
@@ -252,7 +252,7 @@
                                             <td class=""></td>
                                             @foreach($Seat as $sKey => $sValue)
                                             @if($sValue->RowPosition == $rpValue->RowPosition && ($sValue->ColumnPosition >=6 && $sValue->ColumnPosition <=8)) <td class="seat-td">
-                                                <div class="seat-wr seat-single " data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
+                                                <div class="seat-wr seat-single " data-cinema-seat-id="{{$sValue->CinemaSeatID}}" data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
                                                 </td>
                                                 @endif
                                                 @endforeach
@@ -261,7 +261,7 @@
                                                 <td class=""></td>
                                                 @foreach($Seat as $sKey => $sValue)
                                                 @if($sValue->RowPosition == $rpValue->RowPosition && ($sValue->ColumnPosition >=1 && $sValue->ColumnPosition <=5)) <td class="seat-td">
-                                                    <div class="seat-wr seat-single " data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
+                                                    <div class="seat-wr seat-single " data-cinema-seat-id="{{$sValue->CinemaSeatID}}" data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
                                                     </td>
                                                     @endif
                                                     @endforeach
@@ -271,7 +271,7 @@
                                         <td class="seat-name-row">{{$rpValue->RowPosition}}</td>
                                         @foreach($Seat as $sKey => $sValue )
                                         @if($sValue->RowPosition == $rpValue->RowPosition && ($sValue->ColumnPosition >=3 && $sValue->ColumnPosition <=4) ) <td class="seat-td seat-couple">
-                                            <div class="seat-wr " data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat-couple-w.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
+                                            <div class="seat-wr " data-cinema-seat-id="{{$sValue->CinemaSeatID}}" data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat-couple-w.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
                                             </td>
                                             @endif
                                             @endforeach
@@ -285,7 +285,7 @@
                                             <td class=""></td>
                                             @foreach($Seat as $sKey => $sValue )
                                             @if($sValue->RowPosition == $rpValue->RowPosition && ($sValue->ColumnPosition >=1 && $sValue->ColumnPosition <=2) ) <td class="seat-td seat-couple">
-                                                <div class="seat-wr " data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat-couple-w.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
+                                                <div class="seat-wr " data-cinema-seat-id="{{$sValue->CinemaSeatID}}" data-seat-id="{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}"><img src="/img/seat-couple-w.svg" alt=""><span class="seat-name">{{$rpValue->RowPosition . sprintf('%02d', $sValue->ColumnPosition)}}</span></div>
                                                 </td>
                                                 @endif
                                                 @endforeach

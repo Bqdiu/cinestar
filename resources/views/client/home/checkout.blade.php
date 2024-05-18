@@ -1,7 +1,18 @@
 @extends ('layout')
 <?php
 $pageTitle = "Thanh Toán";
+
+$thu = [
+    'Monday' => 'Thứ Hai',
+    'Tuesday' => 'Thứ Ba',
+    'Wednesday' => 'Thứ Tư',
+    'Thursday' => 'Thứ Năm',
+    'Friday' => 'Thứ Sáu',
+    'Saturday' => 'Thứ Bảy',
+    'Sunday' => 'Chủ Nhật',
+];
 ?>
+
 @section('main-content')
 <section class="checkout checkout-customer ht">
     <div class="container">
@@ -14,7 +25,7 @@ $pageTitle = "Thanh Toán";
                     <li class="process-item process-cus active">
                         <p class="link"><span class="num">1 </span><span class="txt">Thông tin khách hàng</span></p>
                     </li>
-                    <li class="process-item process-cus active">
+                    <li class="process-item process-cus">
                         <p class="link"><span class="num">2</span><span class="txt">Thanh toán</span></p>
                     </li>
                     <li class="process-item process-cus">
@@ -24,26 +35,48 @@ $pageTitle = "Thanh Toán";
             </div>
             <div class="checkout-customer-content row">
                 <div class="checkout-cus-left col col-6" data-aos="fade-up">
-                    <div class="form-payment">
-
-                        <form class="form" action="">
+                    <div class="form-cus">
+                        <form class="form">
                             <div class="form-list">
-                                <div class="form-it inner-radio inner-radio-white"><input class="form-control" type="radio" id="payment1" name="input-checkout-payment" hidden=""><label class="form-label" for="payment1"> <span class="img"><img src="/img/img-momo.png" alt=""></span>
-                                        <p class="text mb-0">Thanh toán qua Momo</p>
-                                    </label></div>
-                                <div class="form-it inner-radio inner-radio-white"><input class="form-control" type="radio" id="payment2" name="input-checkout-payment" hidden=""><label class="form-label custom-cursor-on-hover" for="payment2"> <span class="img"><img src="/img/img-card.png" alt=""></span>
-                                        <p class="text">Thanh toán qua Thẻ nội địa</p>
-                                    </label></div>
-                                <div class="form-it inner-radio inner-radio-white"><input class="form-control" type="radio" id="payment3" name="input-checkout-payment" hidden=""><label class="form-label" for="payment3"> <span class="img"><img src="/img/img-card.png" alt=""></span>
-                                        <p class="text">Thanh toán qua thẻ quốc tế</p>
-                                    </label></div>
-                            </div>
+                                <div class="form-it">
+                                    <div class="relative w-full mb-[10px]">
+                                        <div class="form-it">
+                                            <p class="form-label text-white  " style="font-size:14px">Họ và tên <span class="text-error">*</span></p>
+                                            <div class="relative"><input type="text" placeholder="Họ và tên" class="form-control input"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-it">
+                                    <div class="relative w-full mb-[10px]">
+                                        <div class="form-it">
+                                            <p class="form-label text-white  " style="font-size:14px">Số điện thoại <span class="text-error">*</span></p>
+                                            <div class="relative"><input type="text" placeholder="Số điện thoại" class="form-control input"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-it">
+                                    <div class="relative w-full mb-[10px]">
+                                        <div class="form-it">
+                                            <p class="form-label text-white  " style="font-size:14px">Email <span class="text-error">*</span></p>
+                                            <div class="relative"><input type="text" placeholder="Email" class="form-control input"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-check mb-3 mb-md-0">
+                                    <input class="form-check-input" type="checkbox" value="" checked="">
+                                    <label class="form-check-label" for="loginCheck" style="color: white"> Đảm bảo mua vé đúng số tuổi quy định. </label>
+                                    <br>
+                                    <input class="form-check-input" type="checkbox" value="" checked="">
+                                    <label class="form-check-label" for="loginCheck" style="color: white"> Đồng ý với <a class="link" target="_blank" href="#">điều khoản của Cinestar.</a> </label>
+                                </div>
 
-                            <div class="form-it">
-                                <div class="btn btn-submit btn--pri h-[41px]  opacity-30 pointer-events-none">Thanh toán</div>
+                                <div class="form-it">
+                                    <div class="btn btn-submit btn--pri">Tiếp tục</div>
+                                </div>
                             </div>
                         </form>
                     </div>
+
 
                 </div>
                 <div class="checkout-cus-right col col-6" data-aos="fade-up">
@@ -51,7 +84,7 @@ $pageTitle = "Thanh Toán";
                         <div class="form-main">
                             <div class="inner-info">
                                 <div class="inner-info-row bill-coundown-custom">
-                                    <p class="ct" style="font-weight:700">LẬT MẶT 7: MỘT ĐIỀU ƯỚC (K)</p>
+                                    <p class="ct" style="font-weight:700">{{$Show->movie->Title}}</p>
                                     <div class="bill-coundown-custom">
                                         <p class="txt mb-0" style="font-weight:550">Thời gian giữ vé:</p>
                                         <div class="bill-coundown !w-[68px]">
@@ -64,25 +97,27 @@ $pageTitle = "Thanh Toán";
                             </div>
                             <div class="inner-info">
                                 <div class="inner-info-row">
-                                    <p class="tt">Phim dành cho khán giả từ dưới 13 tuổi với điều kiện xem cùng cha, mẹ hoặc người giám hộ.</p>
+                                    <p class="tt">{{$Show->movie->regulation->Content}}</p>
                                 </div>
                             </div>
                             <div class="inner-info">
                                 <div class="inner-info-row cinestar-br">
-                                    <p class="ct">Cinestar Quốc Thanh</p>
-                                    <p class="dt">271 Nguyễn Trãi, Phường Nguyễn Cư Trinh, Quận 1, Thành Phố Hồ Chí Minh</p>
+                                    <p class="ct">{{$Show->cinemaHall->cinema->Name}}</p>
+                                    <p class="dt">{{$Show->cinemaHall->cinema->Address}}</p>
                                 </div>
                             </div>
                             <div class="inner-info">
                                 <div class="inner-info-row time-line">
                                     <p class="tt">Thời gian</p>
-                                    <p class="ct"><span class="time">22:40 </span><span class="date1">Thứ Sáu 17/05/2024</span></p>
+
+                                    <p class="ct"><span class="time">{{ \Carbon\Carbon::parse($Show->StartTime)->format('H:i') }}
+                                        </span><span class="date1">{{ $thu[date('l', strtotime($Show->ShowDate))] }} {{ date('d/m/Y', strtotime($Show->ShowDate)) }}</span></p>
                                 </div>
                             </div>
                             <div class="inner-info">
                                 <div class="inner-info-row room">
                                     <p class="tt">Phòng chiếu</p>
-                                    <p class="ct">04</p>
+                                    <p class="ct">{{substr($Show->cinemaHall->Name,-2)}}</p>
                                 </div>
                                 <div class="inner-info-row num-ticket">
                                     <p class="tt">Số vé</p>

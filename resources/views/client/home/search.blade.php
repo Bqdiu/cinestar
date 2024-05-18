@@ -5,6 +5,7 @@ $pageTitle = "Cinestar - Tìm Kiếm";
 @section('main-content')
 <div class="container" style="margin-top:20px">
   <div class="row">
+    @if($Phim->count()!=0)
     @foreach($Phim as $k=>$item)
     <div class="col-md-3">
       <a style="text-decoration:none" href="/detailmovie/{{$item->MovieID}}">
@@ -37,6 +38,12 @@ $pageTitle = "Cinestar - Tìm Kiếm";
 
     </div>
     @endforeach
+    @else
+    <div class="box"><i class="fas fa-film"></i>
+      <p class="mb-0"> Không tìm thấy phim cần tìm...</p>
+    </div>
+    @endif
+
 
   </div>
 </div>
