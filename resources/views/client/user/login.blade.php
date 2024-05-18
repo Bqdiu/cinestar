@@ -73,7 +73,7 @@ $pageTitle = "Đăng Nhập";
 
                         <div class="col-md-6 d-flex justify-content-center">
                             <!-- Simple link -->
-                            <a href="#!" style="color: #acacac">Forgot password?</a>
+                            <a href="{{route('forgetPassword')}}" style="color: #acacac">Forgot password?</a>
                         </div>
                     </div>
 
@@ -81,10 +81,7 @@ $pageTitle = "Đăng Nhập";
                     <!-- Submit button -->
                     <button type="submit" class="btn btn-block mb-4 w-100" style="background-color:#f3ea28">Sign in</button>
 
-                    <!-- Register buttons -->
-                    <div class="text-center">
-                        <p class="text-white">Not a member? <a href="#!" style="color: #acacac">Register</a></p>
-                    </div>
+                  
                 </form>
                 @if ($errors->any())
                 <div class="alert alert-danger">

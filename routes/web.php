@@ -24,7 +24,7 @@ use Illuminate\Http\Request;
 
 
 Route::get('/', [HomeController::class, 'Index']);
-Route::get('/login', [UserInforController::class, 'Login']);
+Route::get('/login', [UserInforController::class, 'Login'])->name('login');
 Route::post('/loginSubmit', [UserInforController::class, 'LoginPost']);
 Route::get('/logout', [UserInforController::class, 'Logout']);
 Route::get('/register', [UserInforController::class, 'Register']);
@@ -93,6 +93,13 @@ Route::group(['middleware' => 'manager'], function () {
 Route::group(['middleware' => 'staff'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'Index']);
 });
-
+// login/ register google
 Route::get('auth/google', [UserInforController::class, 'redirect'])->name('google-auth');
 Route::get('auth/google/call-back', [UserInforController::class, 'callBackGoogle']);
+
+
+// reset password
+Route::get('/forget-password', [UserInforController::class, 'forgetPassword'])->name('forgetPassword');
+Route::post('/forget-password', [UserInforController::class, 'forgetPassowrdPost'])->name('forgetPassowrdPost');
+Route::get('/reset-password/{token}', [UserInforController::class, 'resetPassword'])->name('resetPassword');
+Route::post('/reset-password', [UserInforController::class, 'resetPasswordPost'])->name('resetPasswordPost');

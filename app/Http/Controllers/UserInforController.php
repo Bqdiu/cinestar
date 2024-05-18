@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 Use App\Models\UserInfor;
 Use App\Models\Role;
+Use App\Models\Password_reset;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Hash;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+use Mail;
 
 class UserInforController extends Controller
 {
@@ -176,5 +180,58 @@ class UserInforController extends Controller
             return redirect()->back()->withErrors('Sửa không thành công: '.$e->getMessage());
         }
     }
+
+    public function forgetPassword()
+    {
+        return view('client.user.forgetPassword');
+    }
+
+    public function forgetPassowrdPost(Request $request)
+    {
+        $request->validate([
+            'email' => "required|email|exists:userinfor",
+        ]);
+        $token = Str::random(64);
+        $email = $request->email;
+        $password_reset = Password_reset::where('email',$email)->first();
+        if($password_reset)
+        {
+            $password_reset->delete();
+        }
+        $password_reset = Password_reset::create([
+            'email' => $email,
+            'token' => $token,
+            'created_at' => Carbon::now()
+        ]);
+        Mail::send("client.emails.forget-password",['token' => $token],function($message) use ($request){
+            $message->to($request->email);
+            $message->subject('Reset Password');
+        });
+        return redirect()->to(route('forgetPassword'))->with('success','Vui lòng kiểm tra email của bạn để reset mật khẩu');
+    }
+
+    public function resetPassword($token)
+    {
+        return view('client.user.new-password',compact('token'));
+    }
+
+   public function resetPasswordPost(Request $request)
+   {
+       $request->validate([
+           'password' => 'required',
+           'password_comfirmation' => 'required|same:password',
+       ]);
+       $password_reset = Password_reset::where('token',$request->token)->first();
+       if(!$password_reset)
+       {
+           return redirect()->to(route('resetPassword'))->with('error','Invalid');
+        }
+        $user = UserInfor::where('Email','=',$password_reset->email)->first();
+        $user->password = bcrypt($request->password);
+        $user->save();
+        $password_reset->delete();
+        return redirect()->to(route('login'))->with('success','Đổi mật khẩu thành công');
+   }
+
 
 }
