@@ -81,6 +81,9 @@ Route::group(['middleware' => 'admin'], function () {
 
     // userinfo
     Route::get('/admin/userinfor/index', [UserInforController::class, 'UserInforIndex']);
+    Route::get('/admin/userinfor/getUserInfor/{UserID}', [UserInforController::class, 'getUserInfor'])->name('getUserInfor');
+    Route::post('/admin/userinfor/editUserInfor', [UserInforController::class, 'editUserInfor'])->name('editUserInfor');
+
 });
 
 Route::group(['middleware' => 'manager'], function () {

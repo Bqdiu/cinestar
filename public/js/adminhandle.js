@@ -197,7 +197,27 @@ $(document).ready(function(){
 
 
 
-    // access premission
+    $('.edit-userinfor-btn').on('click',function(){
+        var UserID = $(this).data('userinfor-id');
+        $('#editUserID').val(UserID);
+        console.log($('#editUserID').val());
+        $.ajax({
+            url: '/admin/userinfor/getUserInfor/' + UserID,
+            type: 'GET',
+            success: function(response){
+                console.log(response);
+                $('#Name').val(response[0].Name);   
+                $('#CCCD').val(response[0].CCCD);   
+                $('#BirthDay').val(response[0].BirthDay);   
+                $('#Email').val(response[0].Email);   
+                $('#Phone').val(response[0].Phone);   
+                $('#edit_role_name').empty();
+                $.each(response[1], function(index, role){
+                    $('#edit_role_name').append('<option value="'+role.role_id+'"' + (response[0].role_id == role.role_id ? 'selected' : '') + '>' + role.role_name + '</option>');
+                });    
+            }
+        });
+    });
     
 
    // hide alert

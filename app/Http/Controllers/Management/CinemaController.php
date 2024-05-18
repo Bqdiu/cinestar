@@ -93,6 +93,16 @@ class CinemaController extends Controller
             'thumbnail.required' => 'Hãy chọn file ảnh',
             'thumbnail.max' => 'File ảnh quá lớn',
         ]);
+
+        $cinemaDeleteThumbnail = Cinema::find($request->CinemaID);
+        if ($cinemaDeleteThumbnail->Thumbnail) {
+            // Xóa file ảnh cũ
+            $oldImagePath = public_path('/imgCinema/' . $cinemaDeleteThumbnail->Thumbnail);
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+        }
+
         $originalFileName = $request->file('thumbnail')->getClientOriginalName();
         $user_id = Auth::id();
         $img = 'image'.$user_id.'-'.time().'-'.$originalFileName;

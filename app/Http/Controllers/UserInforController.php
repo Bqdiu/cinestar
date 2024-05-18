@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 Use App\Models\UserInfor;
+Use App\Models\Role;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Exception;
@@ -130,4 +131,50 @@ class UserInforController extends Controller
             dd('Something went wrong'.$th->getMessage());
         }
     }
+
+    public function getUserInfor($UserID)
+    {
+        $user = UserInfor::select('*')->leftJoin('role','role.role_id','=','userinfor.role_id')
+                                    ->where('userinfor.UserID','=',$UserID)->first();
+        $roles = Role::all();
+        return response()->json([$user,$roles]);
+    }
+    public function editUserInfor(Request $request)
+    {
+        $userId = $request->editUserID;
+        $request->validate([
+            'Name' => 'required',
+            'BirthDay' => 'required|date',
+            'Email' => 'required|email|unique:UserInfor,Phone,' . $userId. ',UserID',// check unique except for current data
+            'Phone' => 'required|unique:UserInfor,Phone,' . $userId . ',UserID|size:10',
+            'CCCD' => 'required|unique:UserInfor,CCCD,' . $userId . ',UserID|size:12', 
+        ], [
+            'Name.required' => "Vui lòng nhập tên",
+            'BirthDay.required' => "Vui lòng nhập ngày sinh",
+            'BirthDay.date' => "Ngày sinh không hợp lệ",
+            'Email.required' => "Vui lòng nhập Email",
+            'Email.email' => "Email không hợp lệ",
+            'Phone.required' => "Vui lòng nhập số điện thoại",
+            'Phone.unique' => "Số điện thoại đã tồn tại",
+            'Phone.size' => "Số điện thoại không hợp lệ",
+            'CCCD.required' => "Vui lòng nhập số CCCD/CMND",
+            'CCCD.unique' => "CCCD/CMND đã tồn tại",
+            'CCCD.size' => "CCCD/CMND không hợp lệ",
+        ]);
+        try{
+            $user = UserInfor::find($userId);
+            $user->Name = $request->Name;
+            $user->Email = $request->Email;
+            $user->BirthDay = $request->BirthDay;
+            $user->Phone = $request->Phone;
+            $user->CCCD = $request->CCCD;
+            $user->role_id = $request->edit_role_id;
+            $user->save();
+            return redirect()->back()->with('mess','Sửa thành công ');
+        }catch(\Illuminate\Database\QueryException $e)
+        {
+            return redirect()->back()->withErrors('Sửa không thành công: '.$e->getMessage());
+        }
+    }
+
 }

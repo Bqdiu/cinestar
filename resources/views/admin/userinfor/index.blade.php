@@ -39,6 +39,7 @@
                         <th scope="col" class="text-center">Role</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody id="data-body">
@@ -57,6 +58,9 @@
                             <td scope="row" class="align-middle">
                                 <a class="col btn btn-danger delete-userinfor-btn" data-bs-toggle="modal" data-bs-target="#deleteUser" data-userinfor-id="{{$row->UserID}}">Delete</a>
                             </td>
+                            <td scope="row" class="align-middle">
+                                <a class="col btn btn-primary reset-password-btn" data-bs-toggle="modal" data-bs-target="#resetPassword" data-userinfor-id="{{$row->UserID}}">Reset </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -67,7 +71,7 @@
     <div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form action="{{route('editUserInfor')}}" method="post" enctype="multipart/form-data">
 
                     <div class="modal-header border-bottom-0">
                         <h5 class="modal-title">Edit User</h5>
@@ -77,16 +81,28 @@
                         @csrf
                         <input type="hidden" id="editUserID" name="editUserID">
                         <div class="mb-3">
-                            <label for="editName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="editName" name="editName" placeholder="Name">
+                            <label for="Name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="Name" name="Name" placeholder="Name">
                         </div>
                         <div class="mb-3">
-                            <label for="editBirthDay" class="form-label">BirthDay</label>
-                            <input type="date" class="form-control" id="editBirthDay" name="editBirthDay">
+                            <label for="BirthDay" class="form-label">BirthDay</label>
+                            <input type="date" class="form-control" id="BirthDay" name="BirthDay">
                         </div>
                         <div class="mb-3">
-                            <label for="movie_status_name" class="form-label">Movie Status</label>
-                            <select class="form-control" name="movie_status_id" id="movie_status_name">
+                            <label for="CCCD" class="form-label">CCCD</label>
+                            <input type="number" class="form-control" id="CCCD" name="CCCD" placeholder="CCCD">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="Email" name="Email" placeholder="Email Address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Phone" class="form-label">Phone</label>
+                            <input type="number" class="form-control" id="Phone" name="Phone" placeholder="Phone number">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_role_name" class="form-label">Role</label>
+                            <select class="form-control" name="edit_role_id" id="edit_role_name">
                             </select>
                         </div>
                     </div>
