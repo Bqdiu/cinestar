@@ -190,9 +190,15 @@ class UserInforController extends Controller
     {
         $request->validate([
             'email' => "required|email|exists:userinfor",
+        ],
+        [
+            'email.required' => 'Vui lòng nhập email',
+            'email.email' => 'Email không hợp lệ',
+            'email.exists' => 'Email không tồn tại',
         ]);
         $token = Str::random(64);
         $email = $request->email;
+        //check exist email in password_reset table
         $password_reset = Password_reset::where('email',$email)->first();
         if($password_reset)
         {
@@ -201,13 +207,13 @@ class UserInforController extends Controller
         $password_reset = Password_reset::create([
             'email' => $email,
             'token' => $token,
-            'created_at' => Carbon::now()
+            'created_at' => Carbon::now()->toDateTimeString(),
         ]);
         Mail::send("client.emails.forget-password",['token' => $token],function($message) use ($request){
             $message->to($request->email);
             $message->subject('Reset Password');
         });
-        return redirect()->to(route('forgetPassword'))->with('success','Vui lòng kiểm tra email của bạn để reset mật khẩu');
+        return redirect()->to(route('forgetPassword'))->with('success','Hãy kiểm tra email');
     }
 
     public function resetPassword($token)
@@ -217,16 +223,17 @@ class UserInforController extends Controller
 
    public function resetPasswordPost(Request $request)
    {
-       $request->validate([
-           'password' => 'required',
-           'password_comfirmation' => 'required|same:password',
-       ]);
-       $password_reset = Password_reset::where('token',$request->token)->first();
-       if(!$password_reset)
-       {
-           return redirect()->to(route('resetPassword'))->with('error','Invalid');
+        $request->validate([
+        'password' => 'required',
+        'password_comfirmation' => 'required|same:password',
+        ]);
+        // check email and token 
+        $password_reset = Password_reset::where('email',$request->email)->where('token',$request->token)->first();    
+        if(!$password_reset)
+        {
+            return redirect()->back()->withErrors('Thông tin không hợp lệ');
         }
-        $user = UserInfor::where('Email','=',$password_reset->email)->first();
+        $user = UserInfor::where('Email','=',$request->email)->first();
         $user->password = bcrypt($request->password);
         $user->save();
         $password_reset->delete();

@@ -18,20 +18,17 @@ $pageTitle = "Reset password";
                 <form action="{{route('resetPasswordPost')}}" method="post" id="resetPasswordPostForm">
                     @csrf
                     <input type="text" name="token" hidden value="{{$token}}">
-                    <legend style="color:#b8b828">Email address</legend>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="email" placeholder="email">
                         <label for="floatingInput">Enter your email</label>
                     </div>
-                    <legend style="color:#b8b828">Enter new password</legend>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control"  name="password" placeholder="password">
                         <label for="floatingInput">Enter new password</label>
                     </div>
-                    <legend style="color:#b8b828">Comfirm password</legend>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="password_comfirmation" placeholder="password comfirm">
-                        <label for="floatingInput">Enter your email</label>
+                        <label for="floatingInput">Comfirm password</label>
                     </div>
                     <!-- Submit button -->
                     <button type="submit" class="btn btn-block mb-4 w-100" style="background-color:#f3ea28">Submit</button>
