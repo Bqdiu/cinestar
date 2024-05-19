@@ -21,35 +21,55 @@ use Illuminate\Http\Request;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
+//Client
+//Index
 Route::get('/', [HomeController::class, 'Index']);
+
 Route::get('/login', [UserInforController::class, 'Login'])->name('login');
 Route::post('/loginSubmit', [UserInforController::class, 'LoginPost']);
+
+//Logout
 Route::get('/logout', [UserInforController::class, 'Logout']);
+
+//Register
 Route::get('/register', [UserInforController::class, 'Register']);
 Route::post('/registerSubmit', [UserInforController::class, 'PostRegister']);
+
+//Detail Movie
 Route::get('/detailmovie/{MovieID}', [HomeController::class, 'DetailMovie'])->name('detailmovie');
 Route::get('/cinemalist-partial/{Cityid}/{date}/{movieID}', [HomeController::class, 'CinemaListPartial']);
-Route::get('/movie', [HomeController::class, 'Movie']);
+
+//Movie
+Route::get('/movie', [HomeController::class, 'Movie'])->name("movie");
 Route::get('/movie/showing', [HomeController::class, 'Showing']);
 Route::get('/movie/upcoming', [HomeController::class, 'Upcoming']);
+
+//Search Movie
 Route::post('/search', [HomeController::class, 'Search'])->name('search');
+
+//Book-Ticket
 Route::get('/book-tickets/{id}', [HomeController::class, 'BookTickets']);
 Route::get('/booktickets-partial/{idRap}/{idStatus}', [HomeController::class, 'bookTicketsPartial']);
+Route::get('/seat-partial/{id}', [HomeController::class, 'seatPartial']);
 Route::post('/reserve-seat', function (Request $request) {
     broadcast(new \App\Events\reserveSeat($request->input('seatID')));
 });
 
 //CheckOut
 Route::get("/checkout", [HomeController::class, "CheckOut"]);
+Route::get("/formCusPartial", [HomeController::class, 'FormCusPartial'])->name("formCus");
+Route::get("/formPaymentPartial", [HomeController::class, 'FormPaymentPartial'])->name("formPayment");
+Route::get("/formDetailShow/{id}", [HomeController::class, 'FormDetailShow'])->name("formDetailShow");
 
+//Another
 Route::get('/promotion', [HomeController::class, 'PromotionPage'])->name('promotion');
 Route::get('/aboutus', [HomeController::class, 'AboutUsPage'])->name('aboutus');
+Route::get("/price-of-ticket", [HomeController::class, "priceOfTicketPartial"]);
 
 
-Route::get('/seat-partial/{id}', [HomeController::class, 'seatPartial']);
 
+
+//Admin
 Route::get('/admin', [AdminController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin', [AdminController::class, 'login']);
 Route::get('/admin/logout', [AdminController::class, 'Logout']);
@@ -83,7 +103,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/userinfor/index', [UserInforController::class, 'UserInforIndex']);
     Route::get('/admin/userinfor/getUserInfor/{UserID}', [UserInforController::class, 'getUserInfor'])->name('getUserInfor');
     Route::post('/admin/userinfor/editUserInfor', [UserInforController::class, 'editUserInfor'])->name('editUserInfor');
-
 });
 
 Route::group(['middleware' => 'manager'], function () {
