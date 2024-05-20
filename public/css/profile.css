@@ -1,0 +1,246 @@
+.prof-wr .side-bar {
+    gap: 0;
+    width: 23%;
+    display: flex;
+    flex-direction: column;
+}
+
+.acc-sbar {
+    background: linear-gradient(106deg, #639, #36c 102.69%);
+    border-radius: .8rem;
+    padding: 1.5rem 1rem;
+}
+
+.acc-sbar-block:not(:last-child) {
+    border-bottom: .1rem solid rgba(248, 250, 252, .2);
+    margin-bottom: .6rem;
+    padding-bottom: 1.6rem;
+}
+
+.acc-sbar .about-user {
+    margin-bottom: 1rem;
+    align-items: center;
+    display: flex;
+    gap: .8rem;
+}
+
+.about-user .ava {
+    flex-shrink: 0;
+    height: 3.2rem;
+    position: relative;
+    width: 3.2rem;
+}
+
+.about-user .ava img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+
+}
+
+.rounded-\[100\%\] {
+    border-radius: 100%;
+}
+
+.about-user .info {
+    width: 100%;
+}
+
+.info .name {
+    color: #f8fafc;
+    font-size: 20px;
+    align-items: center;
+    display: flex;
+    gap: .4rem;
+}
+.swiper {
+    display: block;
+    list-style: none;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.swiper-container {
+    overflow: hidden;
+}
+
+.rows {
+    --col-gap: 2.4rem;
+    --row-gap: 2.4rem;
+    margin: 0 calc(var(--col-gap) / 2* -1);
+}
+
+.swiper-slide {
+    height: auto;
+    overflow: hidden;
+}
+.cols {
+    --col-gap: 2.4rem;
+    --row-gap: 2.4rem;
+    margin-bottom: var(--row-gap);
+    padding: 0 calc(var(--col-gap) / 2);
+    width: 100%;
+}
+.swiper.rows .cols {
+    margin-bottom: 0;
+}
+
+.acc-menu-slider .swiper-slide.active .acc-menu-link {
+    color: #f3ea28;
+    text-decoration: none;
+}
+
+.acc-menu-slider .swiper-slide .acc-menu-link {
+    color: #f8fafc;
+    text-decoration: none;
+}
+.acc-menu-link:before {
+    background-color: #f3ea28;
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: .2rem;
+}
+
+.acc-menu-slider .swiper-slide.active .acc-menu-link img {
+    filter: brightness(0) saturate(100%) invert(81%) sepia(71%) saturate(516%) hue-rotate(1deg) brightness(105%) contrast(91%);
+    transition: none;
+}
+
+.acc-menu-link {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    position: relative;
+}
+.acc-menu-link img {
+    flex-shrink: 0;
+    width: 1.8rem;
+}
+.swiper-wrapper {
+    box-sizing: content-box;
+    display: flex;
+    height: 40%;
+    position: relative;
+    transition-property: transform;
+    transform: translateZ(0);
+    width: 100%;
+    z-index: 1;
+}
+.acc-menu-slider .swiper-wrapper {
+    flex-wrap: wrap;
+}
+
+.act-logout .logout {
+    align-items: center;
+    display: flex;
+    font-size: 1.6rem;
+    font-weight: 400;
+    gap: .8rem;
+    text-decoration: none;
+}
+
+.act-logout .logout .ic{
+    display: inline-block;
+    flex-shrink: 0;
+    height: 2.4rem;
+    width: 2.4rem;
+}
+.ic img{
+    display: block;
+    height: auto;
+    transition: all .2s;
+    width: 100%;
+}
+
+.act-logout .logout .txt {
+    color: #9c9c9c;
+    transition: all .2s;
+}
+
+.act-logout .logout:hover .txt {
+    color: #f3ea28;
+    
+}
+
+.prof-wr .prof-main {
+    flex: 1;
+    overflow: hidden;
+}
+
+.prof-main .sec-heading {
+    margin-top: 2.4rem;
+    margin-bottom: 2.4rem;
+    
+}
+
+.prof-wr .prof-main .sec-heading h2 {
+    color: #f8fafc;
+    font-size: 2.4rem;
+    font-weight: 500;
+    text-align: left;
+    margin: 0;
+}
+
+.acc-prf-block {
+    background-color: #fff;
+    padding: 2rem;
+}
+
+.acc-prf-block-title {
+    color: #000;
+    font-family: "Noto Serif", serif;;
+    font-size: 1.6rem;
+    margin-bottom: 1.6rem;
+    font-weight: 600;
+}
+
+.re-form .f-list {
+    --row-gap: 1rem;
+    --col-gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 calc(var(--col-gap) / 2* -1) calc(var(--row-gap)* -1);
+}
+
+.re-form .re-label {
+    color: #000;
+}
+
+.mb-input {
+    margin-bottom: 12px;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.relative {
+    position: relative;
+}
+
+.re-form .re-input {
+    border: .1rem solid #000;
+}
+
+.re-input {
+    background-color: #fff;
+    border: none;
+    color: #475569;
+    font-size: 1.4rem;
+    outline: none;
+    padding: .6rem;
+    width: 100%;
+}
+
+.text-error {
+    color: #ef4444;
+}

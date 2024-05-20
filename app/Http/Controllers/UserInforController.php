@@ -239,6 +239,10 @@ class UserInforController extends Controller
         $password_reset->delete();
         return redirect()->to(route('login'))->with('success','Đổi mật khẩu thành công');
    }
-
+   
+public function Profile()
+{
+    return view('client/user/profile');
+}
 
 }

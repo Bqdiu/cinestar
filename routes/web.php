@@ -31,6 +31,9 @@ Route::post('/loginSubmit', [UserInforController::class, 'LoginPost']);
 //Logout
 Route::get('/logout', [UserInforController::class, 'Logout']);
 
+//Profile
+Route::get('/profile', [UserInforController::class, 'Profile'])->name('profile');
+
 //Register
 Route::get('/register', [UserInforController::class, 'Register']);
 Route::post('/registerSubmit', [UserInforController::class, 'PostRegister']);
