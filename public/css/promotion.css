@@ -536,3 +536,35 @@ img {
     transition: all .2s;
     width: 100%;
 }
+
+.enter-content .item .bg {
+    border-radius: var(--rs);
+    display: block;
+    height: auto;
+    overflow: hidden;
+    padding-top: 16.6118421053%;
+    position: relative;
+    transition: .5s ease-in-out;
+    width: 100%;
+}
+
+.img-enter-des {
+    height: 100%;
+    left: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: .6s ease-in-out;
+    /* transition: transform 0.6s ease-in-out; */
+    width: 100%;
+}
+
+.enter-content .item .bg:hover .img-enter-des {
+    transform: translate(-50%, -50%) scale(1.1);
+} 
+
+
+.enter-content .item {
+    margin-bottom: 2.4rem;
+}

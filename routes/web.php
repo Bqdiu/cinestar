@@ -67,6 +67,7 @@ Route::get("/formDetailShow/{id}", [HomeController::class, 'FormDetailShow'])->n
 //Another
 Route::get('/promotion', [HomeController::class, 'PromotionPage'])->name('promotion');
 Route::get('/aboutus', [HomeController::class, 'AboutUsPage'])->name('aboutus');
+Route::get('/services', [HomeController::class, 'Services'])->name('services');
 Route::get("/price-of-ticket", [HomeController::class, "priceOfTicketPartial"]);
 
 

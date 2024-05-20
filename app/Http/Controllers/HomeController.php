@@ -121,6 +121,10 @@ class HomeController extends Controller
         return view('client/event/aboutus');
     }
 
+    public function Services()
+    {
+        return view('client/event/services');
+    }
     //Check out and Payment
 
     public function CheckOut(Request $request)
