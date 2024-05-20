@@ -119,6 +119,7 @@ $pageTitle = $PhimItem->Title;
                 <div class="combo-content">
                     <div class="combo-list row">
                         @foreach($TicketPrice as $tpKey=>$tpValue)
+
                         <div class="combo-item col col-md-4">
                             @if($tpValue->TicketID == 2)
                             <div class="popup popup-noti  " id="popup-2">
@@ -145,7 +146,7 @@ $pageTitle = $PhimItem->Title;
                                 </div>
                             </div>
                             @endif
-                            <div class="food-box " id="food-box-{{$tpValue->TicketID}}">
+                            <div class="food-box " id="food-box-{{$tpValue->TicketID}}" data-ticket-id="{{$tpValue->TicketID}}">
                                 <div class="content">
                                     <div class="content-top">
                                         <p class="name sub-title cursor-pointer m-0">{{$tpValue->TicketName}}</p>

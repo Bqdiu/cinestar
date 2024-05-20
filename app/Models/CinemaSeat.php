@@ -11,7 +11,7 @@ class CinemaSeat extends Model
     protected $table = 'cinema_seat';
     protected $primaryKey = 'CinemaSeatID';
     public $timestamps = false;
-    protected $fillable = ['RowPosition', 'ColumnPosition', 'SeatTypeID', 'CinemaHallID', 'IsSelected'];
+    protected $fillable = ['RowPosition', 'ColumnPosition', 'SeatTypeID', 'CinemaHallID'];
     public function typeOfSeat()
     {
         return self::belongsTo(SeatType::class, "SeatTypeID", "SeatTypeID");

@@ -19,6 +19,9 @@ $(document).ready(function () {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
     });
+    let TypeOfTicket = [
+        // Thêm các loại vé khác nếu cần
+    ];
     // document.addEventListener("keydown", function (e) {
     //     if (e.key === "F12") {
     //         e.preventDefault();
@@ -233,6 +236,12 @@ $(document).ready(function () {
         $(".count-plus").click(function () {
             var countContainer = $(this).closest(".count");
             var ticketId = countContainer.data("ticket-id");
+            var foodBoxName = $("#food-box-" + ticketId)
+                .find(".name.sub-title")
+                .text();
+            var ticketIndex = TypeOfTicket.findIndex(
+                (t) => t.TicketTypeID === ticketId
+            );
             countNumber = countContainer.find(".count-number");
             currentCount = parseInt(countNumber.text());
 
@@ -244,17 +253,29 @@ $(document).ready(function () {
                     .replace(/\,/g, "")
             );
 
-            if (currentCount == 0 && ticketId == 2) {
-                // Nếu số lượng hiện tại là 0 và ticketId là 2, mở popup
-                popupID = countContainer.data("popup-id");
+            if (currentCount === 0 && ticketId === 2) {
+                var popupID = countContainer.data("popup-id");
                 $("#" + popupID).addClass("open");
             } else if (ticketId != 3) {
                 // Nếu ticketId không phải là 3, tăng số lượng vé lên 1 và cập nhật tổng giá tiền
+
                 currentCount += 1;
                 countNumber.text(currentCount);
                 sumCountTicket += 1;
                 totalPrice += price;
                 console.log(sumCountTicket);
+
+                if (ticketIndex !== -1) {
+                    // Nếu đã có, cập nhật lại Quantity
+                    TypeOfTicket[ticketIndex].Quantity = currentCount;
+                } else {
+                    // Nếu chưa có, thêm mới vào mảng TypeOfTicket
+                    TypeOfTicket.push({
+                        TicketTypeID: ticketId,
+                        Name: foodBoxName,
+                        Quantity: currentCount,
+                    });
+                }
                 // Hiển thị tổng giá tiền đã định dạng
                 updateTotalPriceDisplay();
                 updateTicketCounts();
@@ -263,6 +284,18 @@ $(document).ready(function () {
                 currentCount += 1;
                 countNumber.text(currentCount);
                 totalPrice += price;
+
+                if (ticketIndex !== -1) {
+                    // Nếu đã có, cập nhật lại Quantity
+                    TypeOfTicket[ticketIndex].Quantity = currentCount;
+                } else {
+                    // Nếu chưa có, thêm mới vào mảng TypeOfTicket
+                    TypeOfTicket.push({
+                        TicketTypeID: ticketId,
+                        Name: foodBoxName,
+                        Quantity: currentCount,
+                    });
+                }
                 // Hiển thị tổng giá tiền đã định dạng
                 updateTotalPriceDisplay();
                 updateTicketCounts();
@@ -270,7 +303,7 @@ $(document).ready(function () {
             $(".dt-bill .btn.btn--pri").addClass("opacity-40");
             $(".dt-bill .btn.btn--pri").addClass("pointer-events-none");
             $(".dt-bill .btn.btn--pri").removeClass("opcity-100");
-
+            console.log(TypeOfTicket);
             console.log("Đã tăng số lượng vé của loại vé có ID: " + ticketId);
         });
 
@@ -278,24 +311,39 @@ $(document).ready(function () {
         $("#popup-2 .btn.ok").click(function () {
             currentCount += 1;
             countNumber.text(currentCount);
-
+            var ticketIndex = TypeOfTicket.findIndex(
+                (t) => t.TicketTypeID === 2
+            );
+            if (ticketIndex !== -1) {
+                // Nếu đã có, cập nhật lại Quantity
+                TypeOfTicket[ticketIndex].Quantity = currentCount;
+            } else {
+                // Nếu chưa có, thêm mới vào mảng TypeOfTicket
+                TypeOfTicket.push({
+                    TicketTypeID: 2,
+                    Name: "HSSV-Người cao tuổi",
+                    Quantity: currentCount,
+                });
+            }
             // Đóng popup
-            $("#" + popupID).removeClass("open");
+            $("#popup-2").removeClass("open");
 
             // Cập nhật tổng số vé và tổng giá tiền
             sumCountTicket += 1;
             totalPrice += price;
+
             console.log(totalPrice);
             console.log(price);
             console.log(sumCountTicket);
             // Hiển thị tổng giá tiền đã định dạng
             updateTotalPriceDisplay();
             updateTicketCounts();
+            console.log(TypeOfTicket);
         });
 
         // Bắt sự kiện khi nhấn nút "close" trong popup
         $("#popup-2 .btn.close").click(function () {
-            $("#" + popupID).removeClass("open");
+            $("#popup-2").removeClass("open");
         });
 
         // Hàm cập nhật tổng giá tiền và hiển thị giá tiền đã định dạng
@@ -310,7 +358,9 @@ $(document).ready(function () {
             var countContainer = $(this).closest(".count");
             var ticketId = countContainer.data("ticket-id");
             countNumber = countContainer.find(".count-number");
-
+            var ticketIndex = TypeOfTicket.findIndex(
+                (t) => t.TicketTypeID === ticketId
+            );
             price = parseInt(
                 $("#food-box-" + ticketId)
                     .find(".price.sub-title p")
@@ -323,6 +373,14 @@ $(document).ready(function () {
             // Giảm số lượng vé đi 1 nếu số lượng hiện tại lớn hơn 0
             if (currentCount > 0 && ticketId != 3) {
                 currentCount -= 1;
+
+                if (ticketIndex !== -1) {
+                    // Nếu đã có, cập nhật lại Quantity
+                    TypeOfTicket[ticketIndex].Quantity = currentCount;
+                    if (currentCount === 0) {
+                        TypeOfTicket.splice(ticketIndex, 1);
+                    }
+                }
                 countNumber.text(currentCount);
                 sumCountTicket -= 1;
                 // Cập nhật tổng giá tiền
@@ -338,14 +396,24 @@ $(document).ready(function () {
             }
             if (currentCount > 0 && ticketId == 3) {
                 currentCount -= 1;
+                if (ticketIndex !== -1) {
+                    // Nếu đã có, cập nhật lại Quantity
+                    TypeOfTicket[ticketIndex].Quantity = currentCount;
+                    if (currentCount === 0) {
+                        TypeOfTicket.splice(ticketIndex, 1);
+                    }
+                }
                 countNumber.text(currentCount);
                 // Cập nhật tổng giá tiền
                 totalPrice -= price;
                 $(".seat-couple .seat-wr").removeClass("choosing");
+                $(".seat-wr.seat-single").removeClass("choosing");
+
                 // Hiển thị tổng giá tiền đã định dạng
                 updateTotalPriceDisplay();
                 updateTicketCounts();
                 console.log(currentCount);
+                console.log(TypeOfTicket);
                 console.log(
                     "Đã giảm số lượng vé của loại vé có ID: " + ticketId
                 );
@@ -491,6 +559,7 @@ $(document).ready(function () {
         });
 
         $(document).on("click", ".seat-couple .seat-wr", function () {
+            var cinemaSeatID = $(this).data("cinema-seat-id");
             var seatID = $(this).data("seat-id");
             // Kiểm tra giá trị của food-box-3 .count-number
             var countNumber = parseInt($("#food-box-3 .count-number").text());
@@ -505,13 +574,18 @@ $(document).ready(function () {
             }
 
             // Kiểm tra xem ghế đã được chọn trước đó chưa
-            var seatIndex = selectedSeats_1.indexOf(seatID);
+            var seatIndex = selectedSeats_1.findIndex(
+                (seat) => seat.SeatID === cinemaSeatID
+            );
             if (seatIndex === -1) {
                 // Nếu ghế chưa được chọn trước đó và tổng số ghế đã chọn chưa đạt đến số lượng vé đã mua
                 if (selectedSeats_1.length < countNumber) {
                     // Thêm ghế vào danh sách các ghế đã chọn
                     $(this).addClass("choosing");
-                    selectedSeats_1.push(seatID);
+                    selectedSeats_1.push({
+                        SeatID: cinemaSeatID,
+                        SeatName: seatID,
+                    });
                     console.log(roomNumber);
                     resetCountdown();
                     updateButtonState();
@@ -611,6 +685,134 @@ $(document).ready(function () {
     //Show Check
     $(".btn--booking").click(() => {
         console.log(showTimeID);
-        window.location.href = "/checkout?showTimeID=" + showTimeID;
+        console.log(JSON.stringify(selectedSeats.concat(selectedSeats_1)));
+        console.log($("#userID").val());
+        console.log(totalPrice);
+        console.log(countdownTimeout);
+        console.log(showTimeID);
+        let formData = new FormData();
+
+        formData.append(
+            "Seats",
+            JSON.stringify(selectedSeats.concat(selectedSeats_1))
+        ); // Convert array to JSON string
+        formData.append("UserID", $("#userID").val());
+        formData.append("ShowID", showTimeID);
+        formData.append("TotalPrice", totalPrice);
+        formData.append("RemainingTime", countdownTimeout);
+        formData.append("TypeTicketQuantity", JSON.stringify(TypeOfTicket));
+        // Include CSRF token for security
+        $.ajax({
+            url: "/booking",
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: formData,
+            processData: false, // Prevent jQuery from automatically transforming the data into a query string
+            contentType: false,
+            success: function (res) {
+                window.location.href = res.redirectUrl;
+            },
+            error: function (xhr, status, error) {
+                // Handle error
+                console.error("An error occurred:", error);
+                console.error("Status:", status);
+                console.error("Response:", xhr.responseText);
+            },
+        });
+    });
+    $(document).ready(function () {
+        $("#FullName, #Email, #PhoneNumber").on("input", function () {
+            var id = $(this).attr("id");
+            var value = $(this).val().trim();
+            var errorId = "#error" + id.charAt(0).toUpperCase() + id.slice(1);
+
+            $(errorId).text(""); // Clear previous error message
+
+            switch (id) {
+                case "FullName":
+                    if (value === "") {
+                        $(errorId).text("Vui lòng điền họ tên");
+                    }
+                    break;
+                case "Email":
+                    if (value === "") {
+                        $(errorId).text("Vui lòng điền Email");
+                    } else if (!validateEmail(value)) {
+                        $(errorId).text("Email không hợp lệ!");
+                    }
+                    break;
+                case "PhoneNumber":
+                    if (value === "") {
+                        $(errorId).text("Vui lòng nhập số điện thoại");
+                    } else if (!validatePhoneNumber(value)) {
+                        $(errorId).text("Số điện thoại không hợp lệ!");
+                    }
+                    break;
+            }
+        });
+        $("#UpdateInfor").submit(function (e) {
+            e.preventDefault();
+            var fullName = $("#FullName").val().trim();
+            var email = $("#Email").val().trim();
+            var phoneNumber = $("#PhoneNumber").val().trim();
+            var hasError = false;
+            if (fullName === "") {
+                $("#errorFullName").text("Vui lòng điền họ tên");
+                hasError = true;
+            }
+
+            if (email === "") {
+                $("#errorEmail").text("Vui lòng điền Email");
+                hasError = true;
+            } else if (!validateEmail(email)) {
+                $("#errorEmail").text("Email không hợp lệ!");
+                hasError = true;
+            }
+
+            if (phoneNumber === "") {
+                $("#errorPhoneNumber").text("Vui lòng nhập số điện thoại");
+                hasError = true;
+            }
+
+            // Validate phone number format (optional)
+            else if (!validatePhoneNumber(phoneNumber)) {
+                $("#errorPhoneNumber").text("Số điện thoại không hợp lệ!");
+                hasError = true;
+            }
+            if (hasError) {
+                return false;
+            }
+            var formData = new FormData(this);
+            $.ajax({
+                url: "/updateInforBooking",
+                type: "POST",
+                data: formData,
+                processData: false, // Prevent jQuery from automatically transforming the data into a query string
+                contentType: false,
+                success: function (res) {
+                    $(".checkout-cus-left").html(res.view);
+                    $(".process-item:eq(1)").addClass("active");
+                },
+                error: function (xhr, status, error) {
+                    //         Handle error response here
+                    console.error("An error occurred:", error);
+                    console.error("Status:", status);
+                    console.error("Response:", xhr.responseText);
+                    alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+                },
+            });
+        });
+        function validateEmail(email) {
+            var re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+
+        // Function to validate phone number format (simple)
+        function validatePhoneNumber(phoneNumber) {
+            var re = /^\d{10,11}$/;
+            return re.test(phoneNumber);
+        }
     });
 });

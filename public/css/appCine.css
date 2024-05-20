@@ -1669,14 +1669,17 @@ h4 {
     color: #f3ea28;
 }
 
-.process .process-item.active:after {
+.process .process-item.active:not(:first-child)::after {
     background: #f3ea28;
 }
 .process .process-item .link {
     display: flex;
     flex-direction: column;
 }
-
+.inner-radio-white [type="radio"]:checked + label {
+    background-color: #fff;
+    color: #0f172a;
+}
 .process .process-item .link br {
     display: none;
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UserInforController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Management\MovieController;
@@ -57,11 +58,14 @@ Route::get('/seat-partial/{id}', [HomeController::class, 'seatPartial']);
 Route::post('/reserve-seat', function (Request $request) {
     broadcast(new \App\Events\reserveSeat($request->input('seatID')));
 });
+Route::post('/updateInforBooking', [BookingController::class, 'UpdateInformationOfBooking']);
 
 //CheckOut
-Route::get("/checkout", [HomeController::class, "CheckOut"]);
+Route::post('/booking', [BookingController::class, "Booking"])->name('booking');
+Route::get("/checkout", [HomeController::class, "CheckOut"])->name('checkout');
+
 Route::get("/formCusPartial", [HomeController::class, 'FormCusPartial'])->name("formCus");
-Route::get("/formPaymentPartial", [HomeController::class, 'FormPaymentPartial'])->name("formPayment");
+Route::get("/formPaymentPartial", [HomeController::class, 'FormPaymentPartial'])->name("formPaymentPartial");
 Route::get("/formDetailShow/{id}", [HomeController::class, 'FormDetailShow'])->name("formDetailShow");
 
 //Another

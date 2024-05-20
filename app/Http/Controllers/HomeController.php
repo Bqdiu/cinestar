@@ -12,6 +12,9 @@ use App\Models\CinemaSeat;
 use App\Models\Showinfor;
 use App\Models\City;
 use App\Models\TicketPrice;
+use App\Models\Booking;
+use App\Models\SeatType;
+use App\Models\ShowSeat;
 
 class HomeController extends Controller
 {
@@ -129,11 +132,32 @@ class HomeController extends Controller
 
     public function CheckOut(Request $request)
     {
-        if (!$request->query('showTimeID'))
-            return redirect()->route('movie');
-        $Show = Showinfor::find($request->query('showTimeID'));
+        if (!$request->BookingID) {
+            return redirect()->back();
+        }
+        $booking = Booking::find($request->BookingID);
+        $remainingTime = $request->RemainingTime;
+        $TypeTicketList = $request->TypeTicketList;
 
-        return view('client/home/checkout', ["Show" => $Show]);
+
+        $Ticket = ShowSeat::where('BookingID', $booking->BookingID)->get();
+        $TicketType = [];
+        foreach ($Ticket as $v) {
+            $seatTypeID = $v->cinema_seat->SeatTypeID;
+
+            if (!isset($TicketType[$booking->BookingID])) {
+                $TicketType[$booking->BookingID] = [];
+            }
+
+            if (!isset($TicketType[$booking->BookingID][$seatTypeID])) {
+                $seatType = SeatType::find($seatTypeID);
+                if ($seatType) {
+                    $TicketType[$booking->BookingID][$seatTypeID] = $seatType;
+                }
+            }
+        }
+
+        return view('client/home/checkout', ["Booking" => $booking, "RemainingTime" => $remainingTime, 'TypeTicketList' => $TypeTicketList, "TicketType" => $TicketType, "Ticket" => $Ticket]);
     }
     public function FormCusPartial()
     {
