@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-Use App\Models\UserInfor;
-Use App\Models\Role;
-Use App\Models\Password_reset;
+use App\Models\UserInfor;
+use App\Models\Role;
+use App\Models\Password_reset;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Exception;
@@ -12,47 +13,50 @@ use Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class UserInforController extends Controller
 {
-    public function Register(){
+    public function Register()
+    {
         return view('client/user/register');
     }
 
     public function PostRegister(Request $request)
     {
-        $request->validate([
-           'Name' => 'required',
-           'BirthDay' => 'required',
-           'Username' => 'required|unique:Userinfor',
-           'Password' => 'required',
-           'rp_password' => 'required|same:Password',
-           'Email' => 'required|unique:Userinfor',
-           'Phone' => 'required|unique:Userinfor|size:10',
-           'CCCD' => 'required|unique:Userinfor|size:12',
+        $request->validate(
+            [
+                'Name' => 'required',
+                'BirthDay' => 'required',
+                'Username' => 'required|unique:Userinfor',
+                'Password' => 'required',
+                'rp_password' => 'required|same:Password',
+                'Email' => 'required|unique:Userinfor',
+                'Phone' => 'required|unique:Userinfor|size:10',
+                'CCCD' => 'required|unique:Userinfor|size:12',
 
-        ],[
-            'Name.required' => "Vui lòng nhập tên",
-            'BirthDay.required' => "Vui lòng ngày sinh",
-            'BirthDay.required' => "Vui lòng ngày sinh",
-            'Phone.required' => "Vui lòng nhập số điện thoại",
-            'Phone.unique' => "Số điện thoại đã tồn tại",
-            'Phone.size' => "Số điện thoại không hợp lệ",
-            'Username.required' => "Vui lòng nhập tên đăng nhập",
-            'Username.unique' => "Tên đăng nhập đã tồn tại",
-            'Password.required' => "Vui lòng nhập mật khẩu",
-            'CCCD.required' => "Vui lòng nhập số CCCD/CMND",
-            'CCCD.unique' => "CCCD/CMND đã tồn tại",
-            'CCCD.size' => "CCCD/CMND không hợp lệ",
-            'Email.required' => "Vui lòng nhập Email",
-            'Email.unique' => "Email đã tồn tại",
-            'rp_password.required' => "Vui lòng nhập mật khẩu xác thực",
-            'rp_password.same' => "Mật khẩu không trùng khớp",
-            
-        ]
+            ],
+            [
+                'Name.required' => "Vui lòng nhập tên",
+                'BirthDay.required' => "Vui lòng ngày sinh",
+                'BirthDay.required' => "Vui lòng ngày sinh",
+                'Phone.required' => "Vui lòng nhập số điện thoại",
+                'Phone.unique' => "Số điện thoại đã tồn tại",
+                'Phone.size' => "Số điện thoại không hợp lệ",
+                'Username.required' => "Vui lòng nhập tên đăng nhập",
+                'Username.unique' => "Tên đăng nhập đã tồn tại",
+                'Password.required' => "Vui lòng nhập mật khẩu",
+                'CCCD.required' => "Vui lòng nhập số CCCD/CMND",
+                'CCCD.unique' => "CCCD/CMND đã tồn tại",
+                'CCCD.size' => "CCCD/CMND không hợp lệ",
+                'Email.required' => "Vui lòng nhập Email",
+                'Email.unique' => "Email đã tồn tại",
+                'rp_password.required' => "Vui lòng nhập mật khẩu xác thực",
+                'rp_password.same' => "Mật khẩu không trùng khớp",
+
+            ]
         );
-       
+
         try {
             $user = new UserInfor();
             $user->Name = $request->input('Name');
@@ -69,18 +73,22 @@ class UserInforController extends Controller
         }
         dd($request->all());
     }
-    public function Login(){
+    public function Login()
+    {
         return view('client/user/login');
     }
 
     public function LoginPost(Request $request)
     {
-        $request->validate([
-            'username' => 'required',
-            'password' => 'required',
-        ],[
-            'username.required' => 'Vui lòng nhập tên đăng nhập',
-            'password.required' => 'Vui lòng nhập mật khẩu',]
+        $request->validate(
+            [
+                'username' => 'required',
+                'password' => 'required',
+            ],
+            [
+                'username.required' => 'Vui lòng nhập tên đăng nhập',
+                'password.required' => 'Vui lòng nhập mật khẩu',
+            ]
         );
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
@@ -91,17 +99,18 @@ class UserInforController extends Controller
             return redirect()->back()->withErrors(['username' => 'Tên đăng nhập hoặc mật khẩu không chính xác']);
         }
     }
-    
-    public function Logout(Request $request){
+
+    public function Logout(Request $request)
+    {
         Auth::logout();
         return redirect('/');
     }
 
     public function UserInforIndex()
     {
-        $users = UserInfor::select('*')->leftJoin('role','userinfor.role_id','=','role.role_id')->get();
+        $users = UserInfor::select('*')->leftJoin('role', 'userinfor.role_id', '=', 'role.role_id')->get();
         // dd($users);
-        return view('admin.userinfor.index',compact('users'));        
+        return view('admin.userinfor.index', compact('users'));
     }
 
     public function redirect()
@@ -111,12 +120,11 @@ class UserInforController extends Controller
 
     public function callBackGoogle()
     {
-        try{
+        try {
             $google_user = Socialite::driver('google')->user();
             $user = UserInfor::where('google_id', $google_user->getId())->first();
             // dd($google_user);
-            if(!$user)
-            {
+            if (!$user) {
                 $new_user = UserInfor::create([
                     'Name' => $google_user->getName(),
                     'Email' => $google_user->getEmail(),
@@ -124,24 +132,21 @@ class UserInforController extends Controller
                 ]);
                 Auth::login($new_user);
                 return redirect()->intended('/');
-            }
-            else
-            {
+            } else {
                 Auth::login($user);
                 return redirect()->intended('/');
             }
-        }catch(\Throwable $th)
-        {
-            dd('Something went wrong'.$th->getMessage());
+        } catch (\Throwable $th) {
+            dd('Something went wrong' . $th->getMessage());
         }
     }
 
     public function getUserInfor($UserID)
     {
-        $user = UserInfor::select('*')->leftJoin('role','role.role_id','=','userinfor.role_id')
-                                    ->where('userinfor.UserID','=',$UserID)->first();
+        $user = UserInfor::select('*')->leftJoin('role', 'role.role_id', '=', 'userinfor.role_id')
+            ->where('userinfor.UserID', '=', $UserID)->first();
         $roles = Role::all();
-        return response()->json([$user,$roles]);
+        return response()->json([$user, $roles]);
     }
     public function editUserInfor(Request $request)
     {
@@ -149,9 +154,9 @@ class UserInforController extends Controller
         $request->validate([
             'Name' => 'required',
             'BirthDay' => 'required|date',
-            'Email' => 'required|email|unique:UserInfor,Phone,' . $userId. ',UserID',// check unique except for current data
+            'Email' => 'required|email|unique:UserInfor,Phone,' . $userId . ',UserID', // check unique except for current data
             'Phone' => 'required|unique:UserInfor,Phone,' . $userId . ',UserID|size:10',
-            'CCCD' => 'required|unique:UserInfor,CCCD,' . $userId . ',UserID|size:12', 
+            'CCCD' => 'required|unique:UserInfor,CCCD,' . $userId . ',UserID|size:12',
         ], [
             'Name.required' => "Vui lòng nhập tên",
             'BirthDay.required' => "Vui lòng nhập ngày sinh",
@@ -165,7 +170,7 @@ class UserInforController extends Controller
             'CCCD.unique' => "CCCD/CMND đã tồn tại",
             'CCCD.size' => "CCCD/CMND không hợp lệ",
         ]);
-        try{
+        try {
             $user = UserInfor::find($userId);
             $user->Name = $request->Name;
             $user->Email = $request->Email;
@@ -174,10 +179,9 @@ class UserInforController extends Controller
             $user->CCCD = $request->CCCD;
             $user->role_id = $request->edit_role_id;
             $user->save();
-            return redirect()->back()->with('mess','Sửa thành công ');
-        }catch(\Illuminate\Database\QueryException $e)
-        {
-            return redirect()->back()->withErrors('Sửa không thành công: '.$e->getMessage());
+            return redirect()->back()->with('mess', 'Sửa thành công ');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors('Sửa không thành công: ' . $e->getMessage());
         }
     }
 
@@ -198,10 +202,18 @@ class UserInforController extends Controller
         ]);
         $token = Str::random(64);
         $email = $request->email;
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+        $password_reset = Password_reset::where('email', $email)->first();
+        if ($password_reset) {
+=======
+>>>>>>> Stashed changes
         //check exist email in password_reset table
         $password_reset = Password_reset::where('email',$email)->first();
         if($password_reset)
         {
+>>>>>>> 3b12bba2d15085ba3709776bd0897f9f5ab1dcea
             $password_reset->delete();
         }
         $password_reset = Password_reset::create([
@@ -209,18 +221,44 @@ class UserInforController extends Controller
             'token' => $token,
             'created_at' => Carbon::now()->toDateTimeString(),
         ]);
-        Mail::send("client.emails.forget-password",['token' => $token],function($message) use ($request){
+        Mail::send("client.emails.forget-password", ['token' => $token], function ($message) use ($request) {
             $message->to($request->email);
             $message->subject('Reset Password');
         });
+<<<<<<< Updated upstream
         return redirect()->to(route('forgetPassword'))->with('success','Hãy kiểm tra email');
+=======
+<<<<<<< HEAD
+        return redirect()->to(route('forgetPassword'))->with('success', 'Vui lòng kiểm tra email của bạn để reset mật khẩu');
+=======
+        return redirect()->to(route('forgetPassword'))->with('success','Hãy kiểm tra email');
+>>>>>>> 3b12bba2d15085ba3709776bd0897f9f5ab1dcea
+>>>>>>> Stashed changes
     }
 
     public function resetPassword($token)
     {
-        return view('client.user.new-password',compact('token'));
+        return view('client.user.new-password', compact('token'));
     }
 
+<<<<<<< HEAD
+    public function resetPasswordPost(Request $request)
+    {
+        $request->validate([
+            'password' => 'required',
+            'password_comfirmation' => 'required|same:password',
+        ]);
+        $password_reset = Password_reset::where('token', $request->token)->first();
+        if (!$password_reset) {
+            return redirect()->to(route('resetPassword'))->with('error', 'Invalid');
+        }
+        $user = UserInfor::where('Email', '=', $password_reset->email)->first();
+        $user->password = bcrypt($request->password);
+        $user->save();
+        $password_reset->delete();
+        return redirect()->to(route('login'))->with('success', 'Đổi mật khẩu thành công');
+    }
+=======
    public function resetPasswordPost(Request $request)
    {
         $request->validate([
@@ -243,6 +281,10 @@ class UserInforController extends Controller
 public function Profile()
 {
     return view('client/user/profile');
+<<<<<<< Updated upstream
+=======
+>>>>>>> 3b12bba2d15085ba3709776bd0897f9f5ab1dcea
+>>>>>>> Stashed changes
 }
 
 }

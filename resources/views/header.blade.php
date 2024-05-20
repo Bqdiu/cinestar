@@ -15,7 +15,16 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link href="{{asset('/css/appCine.css')}}" rel="stylesheet" />
+<<<<<<< Updated upstream
     <link rel="shortcut icon" href="{{asset('/img/favicon.ico')}}">
+=======
+<<<<<<< HEAD
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+=======
+    <link rel="shortcut icon" href="{{asset('/img/favicon.ico')}}">
+>>>>>>> 3b12bba2d15085ba3709776bd0897f9f5ab1dcea
+>>>>>>> Stashed changes
     <title><?php echo $pageTitle; ?></title>
 </head>
 
@@ -46,10 +55,12 @@
                             <button class="btn btn-search-submit" type="submit"><i class="fas fa-search"></i></button>
                         </form>
                         @if(Auth::check())
+                        <input id="userID" type="hidden" value="{{Auth::user()->UserID}}" />
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" style="background:transparent;border:0px" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="far fa-user-circle"></i>
                                 <span>{{Auth::user()->Name}}</span>
+
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="/profile">Profile</a></li>
@@ -57,6 +68,7 @@
                             </ul>
                         </div>
                         @else
+                        <input id="userID" type="hidden" value="43" />
                         <p style="color:white;margin:auto"><i class="far fa-user-circle"></i> <a class="link-text" style="text-decoration:none;" href="/login">Đăng Nhập</a> / <a class="link-text" style="text-decoration:none;" href="/register">Đăng ký</a></p>
                         @endif
                         <div class="language">
