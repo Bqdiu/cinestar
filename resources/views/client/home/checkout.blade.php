@@ -29,6 +29,10 @@ $thu = [
                     <li class="process-item process-cus active">
                         <p class="link"><span class="num">2</span><span class="txt">Thanh toán</span></p>
                     </li>
+                    @else
+                    <li class="process-item process-">
+                        <p class="link"><span class="num">2</span><span class="txt">Thanh toán</span></p>
+                    </li>
                     @endif
                     <li class="process-item process-cus">
                         <p class="link"><span class="num">3</span><span class="txt">Thông tin vé phim </span></p>

@@ -190,30 +190,21 @@ class UserInforController extends Controller
         return view('client.user.forgetPassword');
     }
 
+
     public function forgetPassowrdPost(Request $request)
     {
         $request->validate([
             'email' => "required|email|exists:userinfor",
-        ],
-        [
+        ], [
             'email.required' => 'Vui lòng nhập email',
             'email.email' => 'Email không hợp lệ',
             'email.exists' => 'Email không tồn tại',
         ]);
         $token = Str::random(64);
         $email = $request->email;
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
+        //check exist email in password_reset table
         $password_reset = Password_reset::where('email', $email)->first();
         if ($password_reset) {
-=======
->>>>>>> Stashed changes
-        //check exist email in password_reset table
-        $password_reset = Password_reset::where('email',$email)->first();
-        if($password_reset)
-        {
->>>>>>> 3b12bba2d15085ba3709776bd0897f9f5ab1dcea
             $password_reset->delete();
         }
         $password_reset = Password_reset::create([
@@ -225,15 +216,7 @@ class UserInforController extends Controller
             $message->to($request->email);
             $message->subject('Reset Password');
         });
-<<<<<<< Updated upstream
-        return redirect()->to(route('forgetPassword'))->with('success','Hãy kiểm tra email');
-=======
-<<<<<<< HEAD
-        return redirect()->to(route('forgetPassword'))->with('success', 'Vui lòng kiểm tra email của bạn để reset mật khẩu');
-=======
-        return redirect()->to(route('forgetPassword'))->with('success','Hãy kiểm tra email');
->>>>>>> 3b12bba2d15085ba3709776bd0897f9f5ab1dcea
->>>>>>> Stashed changes
+        return redirect()->to(route('forgetPassword'))->with('success', 'Hãy kiểm tra email');
     }
 
     public function resetPassword($token)
@@ -241,50 +224,26 @@ class UserInforController extends Controller
         return view('client.user.new-password', compact('token'));
     }
 
-<<<<<<< HEAD
     public function resetPasswordPost(Request $request)
     {
         $request->validate([
             'password' => 'required',
             'password_comfirmation' => 'required|same:password',
         ]);
-        $password_reset = Password_reset::where('token', $request->token)->first();
+        // check email and token 
+        $password_reset = Password_reset::where('email', $request->email)->where('token', $request->token)->first();
         if (!$password_reset) {
-            return redirect()->to(route('resetPassword'))->with('error', 'Invalid');
+            return redirect()->back()->withErrors('Thông tin không hợp lệ');
         }
-        $user = UserInfor::where('Email', '=', $password_reset->email)->first();
+        $user = UserInfor::where('Email', '=', $request->email)->first();
         $user->password = bcrypt($request->password);
         $user->save();
         $password_reset->delete();
         return redirect()->to(route('login'))->with('success', 'Đổi mật khẩu thành công');
     }
-=======
-   public function resetPasswordPost(Request $request)
-   {
-        $request->validate([
-        'password' => 'required',
-        'password_comfirmation' => 'required|same:password',
-        ]);
-        // check email and token 
-        $password_reset = Password_reset::where('email',$request->email)->where('token',$request->token)->first();    
-        if(!$password_reset)
-        {
-            return redirect()->back()->withErrors('Thông tin không hợp lệ');
-        }
-        $user = UserInfor::where('Email','=',$request->email)->first();
-        $user->password = bcrypt($request->password);
-        $user->save();
-        $password_reset->delete();
-        return redirect()->to(route('login'))->with('success','Đổi mật khẩu thành công');
-   }
-   
-public function Profile()
-{
-    return view('client/user/profile');
-<<<<<<< Updated upstream
-=======
->>>>>>> 3b12bba2d15085ba3709776bd0897f9f5ab1dcea
->>>>>>> Stashed changes
-}
 
+    public function Profile()
+    {
+        return view('client/user/profile');
+    }
 }

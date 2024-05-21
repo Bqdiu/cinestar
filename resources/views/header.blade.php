@@ -15,16 +15,15 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link href="{{asset('/css/appCine.css')}}" rel="stylesheet" />
-<<<<<<< Updated upstream
+
     <link rel="shortcut icon" href="{{asset('/img/favicon.ico')}}">
-=======
-<<<<<<< HEAD
+
+
     <link rel="shortcut icon" href="/img/favicon.ico">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-=======
-    <link rel="shortcut icon" href="{{asset('/img/favicon.ico')}}">
->>>>>>> 3b12bba2d15085ba3709776bd0897f9f5ab1dcea
->>>>>>> Stashed changes
+
+
+
     <title><?php echo $pageTitle; ?></title>
 </head>
 
