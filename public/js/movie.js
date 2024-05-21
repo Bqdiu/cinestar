@@ -723,36 +723,41 @@ $(document).ready(function () {
         });
     });
     $(document).ready(function () {
-        $("#FullName, #Email, #PhoneNumber").on("input", function () {
-            var id = $(this).attr("id");
-            var value = $(this).val().trim();
-            var errorId = "#error" + id.charAt(0).toUpperCase() + id.slice(1);
+        $(".checkout-cus-left").on(
+            "input",
+            "#FullName, #Email, #PhoneNumber",
+            function () {
+                var id = $(this).attr("id");
+                var value = $(this).val().trim();
+                var errorId =
+                    "#error" + id.charAt(0).toUpperCase() + id.slice(1);
 
-            $(errorId).text(""); // Clear previous error message
+                $(errorId).text(""); // Clear previous error message
 
-            switch (id) {
-                case "FullName":
-                    if (value === "") {
-                        $(errorId).text("Vui lòng điền họ tên");
-                    }
-                    break;
-                case "Email":
-                    if (value === "") {
-                        $(errorId).text("Vui lòng điền Email");
-                    } else if (!validateEmail(value)) {
-                        $(errorId).text("Email không hợp lệ!");
-                    }
-                    break;
-                case "PhoneNumber":
-                    if (value === "") {
-                        $(errorId).text("Vui lòng nhập số điện thoại");
-                    } else if (!validatePhoneNumber(value)) {
-                        $(errorId).text("Số điện thoại không hợp lệ!");
-                    }
-                    break;
+                switch (id) {
+                    case "FullName":
+                        if (value === "") {
+                            $(errorId).text("Vui lòng điền họ tên");
+                        }
+                        break;
+                    case "Email":
+                        if (value === "") {
+                            $(errorId).text("Vui lòng điền Email");
+                        } else if (!validateEmail(value)) {
+                            $(errorId).text("Email không hợp lệ!");
+                        }
+                        break;
+                    case "PhoneNumber":
+                        if (value === "") {
+                            $(errorId).text("Vui lòng nhập số điện thoại");
+                        } else if (!validatePhoneNumber(value)) {
+                            $(errorId).text("Số điện thoại không hợp lệ!");
+                        }
+                        break;
+                }
             }
-        });
-        $("#UpdateInfor").submit(function (e) {
+        );
+        $(".checkout-cus-left").on("submit", "#UpdateInfor", function (e) {
             e.preventDefault();
             var fullName = $("#FullName").val().trim();
             var email = $("#Email").val().trim();
@@ -815,4 +820,69 @@ $(document).ready(function () {
             return re.test(phoneNumber);
         }
     });
+    $(document).on(
+        "change",
+        'input[name="input-checkout-payment"]',
+        function () {
+            // Kiểm tra nếu có bất kỳ radio nào được chọn
+            var anyChecked =
+                $('input[name="input-checkout-payment"]:checked').length > 0;
+
+            // Nếu có radio nào được chọn, hiển thị nút "Thanh toán"
+            if (anyChecked) {
+                $(".btn-submit")
+                    .removeClass("opacity-30 pointer-events-none")
+                    .addClass("opacity-100");
+            } else {
+                // Ngược lại, ẩn nút "Thanh toán"
+                $(".btn-submit")
+                    .addClass("opacity-30 pointer-events-none")
+                    .removeClass("opacity-100");
+            }
+        }
+    );
+    $(document).ready(function () {
+        $(".checkout-cus-left").on("submit", "#FormPayment", function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            formData.append("TotalPrice", $("#TotalPrice").val());
+            $.ajax({
+                url: "/payment",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    window.location.href = res.payUrl;
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX Error: ", error);
+                    alert("An error occurred while processing the payment.");
+                },
+            });
+        });
+    });
+    function LoadCusLeft() {
+        var bookingId = $("#BookingID").val();
+        if ($("#userID").val() == 43)
+            $.ajax({
+                url: "/formCusPartial",
+                type: "GET",
+                data: { BookingID: bookingId },
+                success: function (res) {
+                    $(".checkout-cus-left").html(res.view);
+                },
+            });
+        else {
+            $.ajax({
+                url: "/formPaymentPartial",
+                type: "GET",
+                success: function (res) {
+                    $(".checkout-cus-left").html(res.view);
+                    $(".process-item:eq(1)").addClass("active");
+                },
+            });
+        }
+    }
+    LoadCusLeft();
 });

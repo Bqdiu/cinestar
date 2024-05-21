@@ -14,6 +14,7 @@ $thu = [
 ?>
 
 @section('main-content')
+<input id="BookingID" value="{{$Booking->BookingID}}" type="hidden">
 <section class="checkout checkout-customer ht">
     <div class="container">
         <div class="checkout-customer-wr">
@@ -25,15 +26,12 @@ $thu = [
                     <li class="process-item process-cus active">
                         <p class="link"><span class="num">1 </span><span class="txt">Thông tin khách hàng</span></p>
                     </li>
-                    @if(Auth::user()->UserID != 43)
-                    <li class="process-item process-cus active">
-                        <p class="link"><span class="num">2</span><span class="txt">Thanh toán</span></p>
-                    </li>
-                    @else
+
+
                     <li class="process-item process-">
                         <p class="link"><span class="num">2</span><span class="txt">Thanh toán</span></p>
                     </li>
-                    @endif
+
                     <li class="process-item process-cus">
                         <p class="link"><span class="num">3</span><span class="txt">Thông tin vé phim </span></p>
                     </li>
@@ -41,83 +39,7 @@ $thu = [
             </div>
             <div class="checkout-customer-content row">
                 <div class="checkout-cus-left col col-6" data-aos="fade-up">
-                    @if(Auth::user()->UserID == 43)
-                    <div class="form-cus">
 
-                        <form class="form" id="UpdateInfor" action="/updateInforBooking" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <input name="BookingID" value="{{$Booking->BookingID}}" type="hidden">
-                            <div class="form-list">
-                                <div class="form-it">
-                                    <div class="relative w-full mb-[10px]">
-                                        <div class="form-it">
-                                            <p class="form-label text-white  " style="font-size:14px">Họ và tên <span class="text-error">*</span></p>
-                                            <div class="relative"><input type="text" id="FullName" name="FullName" placeholder="Họ và tên" class="form-control input"></div>
-                                        </div>
-
-                                        <span class="text-danger mt-1" id="errorFullName"></span>
-
-                                    </div>
-                                </div>
-                                <div class="form-it">
-                                    <div class="relative w-full mb-[10px]">
-                                        <div class="form-it">
-                                            <p class="form-label text-white  " style="font-size:14px">Số điện thoại <span class="text-error">*</span></p>
-                                            <div class="relative"><input type="tel" id="PhoneNumber" name="PhoneNumber" placeholder="Số điện thoại" class="form-control input"></div>
-                                        </div>
-
-                                        <span class="text-danger mt-1" id="errorPhoneNumber"></span>
-
-                                    </div>
-                                </div>
-                                <div class="form-it">
-                                    <div class="relative w-full mb-[10px]">
-                                        <div class="form-it">
-                                            <p class="form-label text-white  " style="font-size:14px">Email <span class="text-error">*</span></p>
-                                            <div class="relative"><input type="email" id="Email" name="Email" placeholder="Email" class="form-control input"></div>
-                                        </div>
-
-                                        <span class="text-danger mt-1" id="errorEmail"></span>
-
-                                    </div>
-                                </div>
-                                <div class="form-check mb-3 mb-md-0">
-                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                    <label class="form-check-label" for="loginCheck" style="color: white"> Đảm bảo mua vé đúng số tuổi quy định. </label>
-                                    <br>
-                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                    <label class="form-check-label" for="loginCheck" style="color: white"> Đồng ý với <a class="link" target="_blank" href="#">điều khoản của Cinestar.</a> </label>
-                                </div>
-
-                                <div class="form-it">
-                                    <button class="btn btn-submit btn--pri" type="submit">Tiếp tục</button>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                    @else
-                    <div class="form-payment">
-
-                        <form class="form" action="">
-                            <div class="form-list">
-                                <div class="form-it inner-radio inner-radio-white"><input class="form-control" type="radio" id="payment1" name="input-checkout-payment" hidden=""><label class="form-label" for="payment1"> <span class="img"><img src="/img/img-momo.png" alt=""></span>
-                                        <p class="text mb-0">Thanh toán qua Momo</p>
-                                    </label></div>
-                                <div class="form-it inner-radio inner-radio-white"><input class="form-control" type="radio" id="payment2" name="input-checkout-payment" hidden=""><label class="form-label custom-cursor-on-hover" for="payment2"> <span class="img"><img src="/img/img-card.png" alt=""></span>
-                                        <p class="text">Thanh toán qua Thẻ nội địa</p>
-                                    </label></div>
-                                <div class="form-it inner-radio inner-radio-white"><input class="form-control" type="radio" id="payment3" name="input-checkout-payment" hidden=""><label class="form-label" for="payment3"> <span class="img"><img src="/img/img-card.png" alt=""></span>
-                                        <p class="text">Thanh toán qua thẻ quốc tế</p>
-                                    </label></div>
-                            </div>
-
-                            <div class="form-it">
-                                <div class="btn btn-submit btn--pri h-[41px]  opacity-30 pointer-events-none">Thanh toán</div>
-                            </div>
-                        </form>
-                    </div>
-                    @endif
 
                 </div>
                 <div class="checkout-cus-right col col-6" data-aos="fade-up">
@@ -210,6 +132,7 @@ $thu = [
                                 <div class="inner-info-row total">
                                     <p class="tt">Số tiền cần thanh toán</p>
                                     <p class="ct">{{ number_format($Booking->TotalPrice, 0, ',', ',') }}VNĐ</p>
+                                    <input id="TotalPrice" type="hidden" value="{{$Booking->TotalPrice}}">
                                 </div>
                             </div>
                         </div>

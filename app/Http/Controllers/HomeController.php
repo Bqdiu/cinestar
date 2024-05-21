@@ -15,6 +15,7 @@ use App\Models\TicketPrice;
 use App\Models\Booking;
 use App\Models\SeatType;
 use App\Models\ShowSeat;
+use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
@@ -159,12 +160,16 @@ class HomeController extends Controller
 
         return view('client/home/checkout', ["Booking" => $booking, "RemainingTime" => $remainingTime, 'TypeTicketList' => $TypeTicketList, "TicketType" => $TicketType, "Ticket" => $Ticket]);
     }
-    public function FormCusPartial()
+    public function FormCusPartial(Request $request)
     {
-        return view('client/home/cart/formCus');
+        $bookingId = $request->query('BookingID');
+        $booking = Booking::find($bookingId);
+        $view = View::make('client/home/cart/formCus', ["Booking" => $booking])->render();
+        return response()->json(['view' => $view]);
     }
     public function FormPaymentPartial()
     {
-        return view('client/home/cart/formPayment');
+        $view = View::make('client/home/cart/formPayment')->render();
+        return response()->json(['view' => $view]);
     }
 }

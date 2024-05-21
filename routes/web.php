@@ -63,7 +63,7 @@ Route::post('/updateInforBooking', [BookingController::class, 'UpdateInformation
 //CheckOut
 Route::post('/booking', [BookingController::class, "Booking"])->name('booking');
 Route::get("/checkout", [HomeController::class, "CheckOut"])->name('checkout');
-
+Route::post("/payment", [BookingController::class, "Payment"])->name("Payment");
 Route::get("/formCusPartial", [HomeController::class, 'FormCusPartial'])->name("formCus");
 Route::get("/formPaymentPartial", [HomeController::class, 'FormPaymentPartial'])->name("formPaymentPartial");
 Route::get("/formDetailShow/{id}", [HomeController::class, 'FormDetailShow'])->name("formDetailShow");
