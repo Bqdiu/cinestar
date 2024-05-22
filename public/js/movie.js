@@ -683,45 +683,67 @@ $(document).ready(function () {
         }
     }
     //Show Check
-    $(".btn--booking").click(() => {
-        console.log(showTimeID);
-        console.log(JSON.stringify(selectedSeats.concat(selectedSeats_1)));
-        console.log($("#userID").val());
-        console.log(totalPrice);
-        console.log(countdownTimeout);
-        console.log(showTimeID);
-        let formData = new FormData();
+    $(document).ready(function () {
+        $(".btn--booking").click(() => {
+            console.log(showTimeID);
+            console.log(JSON.stringify(selectedSeats.concat(selectedSeats_1)));
+            console.log($("#userID").val());
+            console.log(totalPrice);
+            console.log(countdownTimeout);
+            console.log(showTimeID);
+            if (
+                !showTimeID ||
+                !selectedSeats ||
+                !selectedSeats_1 ||
+                !$("#userID").val() ||
+                !totalPrice ||
+                !countdownTimeout ||
+                !TypeOfTicket
+            ) {
+                console.error("One or more required variables are undefined");
+                return;
+            }
+            let formData = new FormData();
 
-        formData.append(
-            "Seats",
-            JSON.stringify(selectedSeats.concat(selectedSeats_1))
-        ); // Convert array to JSON string
-        formData.append("UserID", $("#userID").val());
-        formData.append("ShowID", showTimeID);
-        formData.append("TotalPrice", totalPrice);
-        formData.append("RemainingTime", countdownTimeout);
-        formData.append("TypeTicketQuantity", JSON.stringify(TypeOfTicket));
-        // Include CSRF token for security
-        $.ajax({
-            url: "/booking",
-            type: "POST",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            data: formData,
-            processData: false, // Prevent jQuery from automatically transforming the data into a query string
-            contentType: false,
-            success: function (res) {
-                window.location.href = res.redirectUrl;
-            },
-            error: function (xhr, status, error) {
-                // Handle error
-                console.error("An error occurred:", error);
-                console.error("Status:", status);
-                console.error("Response:", xhr.responseText);
-            },
+            formData.append(
+                "Seats",
+                JSON.stringify(selectedSeats.concat(selectedSeats_1))
+            ); // Convert array to JSON string
+            formData.append("UserID", $("#userID").val());
+            formData.append("ShowID", showTimeID);
+            formData.append("TotalPrice", totalPrice);
+            formData.append("RemainingTime", countdownTimeout);
+            formData.append("TypeTicketQuantity", JSON.stringify(TypeOfTicket));
+            localStorage.setItem(
+                "TypeTicketList",
+                JSON.stringify(TypeOfTicket)
+            );
+            // Include CSRF token for security
+            $.ajax({
+                url: "/booking",
+                type: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                data: formData,
+                processData: false, // Prevent jQuery from automatically transforming the data into a query string
+                contentType: false,
+                success: function (res) {
+                    // console.log(res.redirectUrl);
+                    window.location.href = res.redirectUrl;
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error("An error occurred:", error);
+                    console.error("Status:", status);
+                    console.error("Response:", xhr.responseText);
+                },
+            });
         });
     });
+
     $(document).ready(function () {
         $(".checkout-cus-left").on(
             "input",
@@ -844,8 +866,17 @@ $(document).ready(function () {
     $(document).ready(function () {
         $(".checkout-cus-left").on("submit", "#FormPayment", function (e) {
             e.preventDefault();
+
             var formData = new FormData(this);
+            var TypeTicketList = JSON.parse(
+                localStorage.getItem("TypeTicketList")
+            );
             formData.append("TotalPrice", $("#TotalPrice").val());
+            formData.append("TypeTicketList", JSON.stringify(TypeTicketList));
+            console.log(TypeTicketList);
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ", " + pair[1]);
+            }
             $.ajax({
                 url: "/payment",
                 type: "POST",

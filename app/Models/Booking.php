@@ -11,7 +11,7 @@ class Booking extends Model
     protected $table = 'booking';
     protected $primaryKey = 'BookingID';
     public $timestamps = false;
-    protected $fillable = ['NumberOfSeats', 'Timestamp', 'Status', 'UserID', 'ShowID', 'FullName', 'PhoneNumber', 'Email', 'TotalPrice', 'createdAt', 'updatedAt'];
+    protected $fillable = ['NumberOfSeats', 'Status', 'UserID', 'ShowID', 'FullName', 'PhoneNumber', 'Email', 'TotalPrice', 'createdAt', 'updatedAt', 'PaymentID'];
 
     public function userinfor()
     {

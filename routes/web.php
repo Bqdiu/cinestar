@@ -67,6 +67,7 @@ Route::post("/payment", [BookingController::class, "Payment"])->name("Payment");
 Route::get("/formCusPartial", [HomeController::class, 'FormCusPartial'])->name("formCus");
 Route::get("/formPaymentPartial", [HomeController::class, 'FormPaymentPartial'])->name("formPaymentPartial");
 Route::get("/formDetailShow/{id}", [HomeController::class, 'FormDetailShow'])->name("formDetailShow");
+Route::get("/thank", [HomeController::class, "FormThank"])->name("formThank");
 
 //Another
 Route::get('/promotion', [HomeController::class, 'PromotionPage'])->name('promotion');

@@ -26,11 +26,12 @@ class BookingController extends Controller
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderInfo = "Thanh toán qua MoMo";
         $amount = $request->TotalPrice;
-        $orderId = time() . "";
-        $redirectUrl = "http://cinestar.test/checkout";
-        $ipnUrl = "http://cinestar.test/checkout";
 
-        $extraData = "";
+        $orderId = time() . "";
+        $redirectUrl = "http://cinestar.test/thank?PaymentID=1";
+        $ipnUrl = "http://cinestar.test/thank?PaymentID=1";
+
+        $extraData =  "";
 
 
         $requestId = time() . "";
@@ -51,11 +52,13 @@ class BookingController extends Controller
             'lang' => 'vi',
             'extraData' => $extraData,
             'requestType' => $requestType,
-            'signature' => $signature
+            'signature' => $signature,
+
         );
         $result = $this->execPostRequest($endpoint, json_encode($data));
-        $jsonResult = json_decode($result, true);  // decode json
+        $jsonResult = json_decode($result, true);  // decode json   
 
+        // return $jsonResult;
         //Just a example, please check more in there
         return response()->json(["payUrl" => $jsonResult['payUrl']]);
         // header('Location: ' . $jsonResult['payUrl']);
@@ -104,7 +107,8 @@ class BookingController extends Controller
                     'Email' => "",
                     'TotalPrice' => $request->TotalPrice,
                     'createdAt' => now(),
-                    'updatedAt' => now()
+                    'updatedAt' => now(),
+                    'PaymentID' => null
                 ]);
             } catch (QueryException $e) {
                 $errorCode = $e->errorInfo[1];
@@ -126,7 +130,8 @@ class BookingController extends Controller
                         'Email' => $User->Email,
                         'TotalPrice' => $request->TotalPrice,
                         'createdAt' => now(),
-                        'updatedAt' => now()
+                        'updatedAt' => now(),
+                        'PaymentID' => null
 
                     ]
 

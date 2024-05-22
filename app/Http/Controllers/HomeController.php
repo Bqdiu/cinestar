@@ -133,15 +133,24 @@ class HomeController extends Controller
 
     public function CheckOut(Request $request)
     {
-        if (!$request->BookingID) {
-            return redirect()->back();
+
+        if (!isset($request->BookingID)) {
+            return redirect()->route('movie');
         }
+        if (session("BookingID", null) == null) {
+            session(["BookingID" => $request->BookingID]);
+        }
+        if (session("BookingID") != null) {
+            session(["BookingID" => $request->BookingID]);
+        }
+
+
         $booking = Booking::find($request->BookingID);
         $remainingTime = $request->RemainingTime;
         $TypeTicketList = $request->TypeTicketList;
+        Session()->put('TypeTicketList', $TypeTicketList);
 
-
-        $Ticket = ShowSeat::where('BookingID', $booking->BookingID)->get();
+        $Ticket = ShowSeat::where('BookingID', '=', $booking->BookingID)->get();
         $TicketType = [];
         foreach ($Ticket as $v) {
             $seatTypeID = $v->cinema_seat->SeatTypeID;
@@ -171,5 +180,41 @@ class HomeController extends Controller
     {
         $view = View::make('client/home/cart/formPayment')->render();
         return response()->json(['view' => $view]);
+    }
+    public function FormThank(Request $request)
+    {
+
+        $bookingID = intval(session('BookingID'));
+
+
+
+        $booking = Booking::find($bookingID);
+
+        if ($booking->Status == "Chưa thanh toán") {
+            if ($request->message == "Successful.") {
+                $booking->Status = "Đã Thanh Toán";
+                $booking->PaymentID = $request->PaymentID;
+                $booking->save();
+            }
+        }
+        $TypeTicketList = session()->get('TypeTicketList');
+
+        $Ticket = ShowSeat::where('BookingID', '=', $booking->BookingID)->get();
+        $TicketType = [];
+        foreach ($Ticket as $v) {
+            $seatTypeID = $v->cinema_seat->SeatTypeID;
+
+            if (!isset($TicketType[$booking->BookingID])) {
+                $TicketType[$booking->BookingID] = [];
+            }
+
+            if (!isset($TicketType[$booking->BookingID][$seatTypeID])) {
+                $seatType = SeatType::find($seatTypeID);
+                if ($seatType) {
+                    $TicketType[$booking->BookingID][$seatTypeID] = $seatType;
+                }
+            }
+        }
+        return view('client/home/cart/formThank', ["Booking" => $booking, 'TypeTicketList' => $TypeTicketList, "TicketType" => $TicketType, "Ticket" => $Ticket]);
     }
 }
