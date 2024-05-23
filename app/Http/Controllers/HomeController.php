@@ -13,6 +13,7 @@ use App\Models\Showinfor;
 use App\Models\City;
 use App\Models\TicketPrice;
 use App\Models\Booking;
+use App\Models\Momo;
 use App\Models\SeatType;
 use App\Models\ShowSeat;
 use Illuminate\Support\Facades\View;
@@ -194,6 +195,22 @@ class HomeController extends Controller
             if ($request->message == "Successful.") {
                 $booking->Status = "Đã Thanh Toán";
                 $booking->PaymentID = $request->PaymentID;
+                Momo::create([
+                    'partnerCode' => $request->partnerCode,
+                    'orderId' => $request->orderId,
+                    'requestId' => $request->requestId,
+                    'orderInfo' => $request->orderInfo,
+                    'orderType' => $request->orderType,
+                    'transId' => $request->transId,
+                    'resultCode' => $request->resultCode,
+                    'message' => $request->message,
+                    'payType' => $request->payType,
+                    'responseTime' => $request->responseTime,
+                    'extraData' => $request->extraData,
+                    'signature' => $request->signature,
+                    'paymentOption' => $request->paymentOption,
+                    'BookingID' => $booking->BookingID
+                ]);
                 $booking->save();
             }
         }

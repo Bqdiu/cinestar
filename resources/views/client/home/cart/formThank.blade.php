@@ -35,8 +35,8 @@ $thu = [
                 </ul>
             </div>
             <div class="checkout-customer-content row">
-                <div class="checkout-cus-left col col-6" data-aos="fade-up">
-
+                <div class="checkout-cus-left-1 col col-6" data-aos="fade-up">
+                    <h1 style="text-align:center;color:yellow">Thanh Toán Thành Công</h1>
 
                 </div>
                 <div class="checkout-cus-right col col-6" data-aos="fade-up">
@@ -45,14 +45,6 @@ $thu = [
                             <div class="inner-info">
                                 <div class="inner-info-row bill-coundown-custom">
                                     <p class="ct" style="font-weight:700">{{$Booking->showinfor->movie->Title}}</p>
-                                    <div class="bill-coundown-custom">
-                                        <p class="txt mb-0" style="font-weight:550">Thời gian giữ vé:</p>
-                                        <div class="bill-coundown !w-[68px]">
-                                            <div class="bill-time">
-                                                <p id="timerCheckout" style="font-weight:600">05:00</p>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="inner-info">
@@ -127,7 +119,7 @@ $thu = [
                         <div class="form-footer">
                             <div class="inner-info">
                                 <div class="inner-info-row total">
-                                    <p class="tt">Số tiền cần thanh toán</p>
+                                    <p class="tt">Tổng Tiền</p>
                                     <p class="ct">{{ number_format($Booking->TotalPrice, 0, ',', ',') }}VNĐ</p>
                                     <input id="TotalPrice" type="hidden" value="{{$Booking->TotalPrice}}">
                                 </div>
