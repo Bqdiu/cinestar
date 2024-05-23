@@ -895,7 +895,11 @@ $(document).ready(function () {
     });
     function LoadCusLeft() {
         var bookingId = $("#BookingID").val();
-        if ($("#userID").val() == 43)
+        if (
+            $("#userID").val() == 43 &&
+            $("#FullName").val() == "" &&
+            $("#PhoneNumber").val()=="" && $("#Email").val()=="")
+        )
             $.ajax({
                 url: "/formCusPartial",
                 type: "GET",

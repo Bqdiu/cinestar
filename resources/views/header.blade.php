@@ -55,6 +55,7 @@
                         </form>
                         @if(Auth::check())
                         <input id="userID" type="hidden" value="{{Auth::user()->UserID}}" />
+
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" style="background:transparent;border:0px" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="far fa-user-circle"></i>

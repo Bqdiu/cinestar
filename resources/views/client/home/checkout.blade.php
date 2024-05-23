@@ -15,6 +15,9 @@ $thu = [
 
 @section('main-content')
 <input id="BookingID" value="{{$Booking->BookingID}}" type="hidden">
+<input id="FullName" value="{{$Booking->FullName}}" type="hidden">
+<input id="PhoneNumber" value="{{$Booking->PhoneNumber}}" type="hidden">
+<input id="Email" value="{{$Booking->Email}}" type="hidden">
 <section class="checkout checkout-customer ht">
     <div class="container">
         <div class="checkout-customer-wr">

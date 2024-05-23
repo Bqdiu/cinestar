@@ -29,12 +29,15 @@ class UserInfor extends Authenticatable
         'google_id',
         'Phone'
     ];
-    
+
     protected $hidden = [
         'Password',
         'remember_token',
     ];
-
+    public function role()
+    {
+        return self::belongsTo(Role::class, "role_id", "role_id");
+    }
     public function getAuthPassword()
     {
         return $this->Password;
