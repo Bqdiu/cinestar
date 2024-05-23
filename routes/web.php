@@ -112,6 +112,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/userinfor/index', [UserInforController::class, 'UserInforIndex']);
     Route::get('/admin/userinfor/getUserInfor/{UserID}', [UserInforController::class, 'getUserInfor'])->name('getUserInfor');
     Route::post('/admin/userinfor/editUserInfor', [UserInforController::class, 'editUserInfor'])->name('editUserInfor');
+    Route::post('/admin/userinfor/delete-user', [USerInforController::class, 'deleteUser'])->name('deleteUser');
+
 });
 
 Route::group(['middleware' => 'manager'], function () {

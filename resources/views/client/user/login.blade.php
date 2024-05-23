@@ -32,14 +32,6 @@ $pageTitle = "Đăng Nhập";
                         <button type="button" class="btn btn-link btn-floating mx-1">
                             <i class="fab fa-facebook-f" style="color: #f3ea28;"></i>
                         </button>
-
-                        <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-twitter" style="color: #f3ea28;"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-github" style="color: #f3ea28;"></i>
-                        </button>
                     </div>
 
                     <p class="text-center" style="color: white">or:</p>

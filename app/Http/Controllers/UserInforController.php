@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserInfor;
+use App\Models\Booking;
 use App\Models\Role;
 use App\Models\Password_reset;
 use Illuminate\Support\Facades\Validator;
@@ -148,6 +149,29 @@ class UserInforController extends Controller
         $roles = Role::all();
         return response()->json([$user, $roles]);
     }
+    public function deleteUser(Request $request)
+    {
+        try{
+            $user_booking = Booking::where('UserID','=',$request->deleteUserID)->first();
+            if($user_booking)
+                 return redirect()->back()->with('error','Tài khoản có đơn không thể xóa'); 
+            $user_admin = UserInfor::where('UserID','=',$request->deleteUserID)->where('role_id','=',1)->first();
+            if($user_admin)
+                 return redirect()->back()->with('error','Không thể xóa admin'); 
+            dd($user_booking);
+            $user = UserInfor::find($request->deleteUserID);
+            if(!$user)
+                return redirect()->back()->with('error','Không tìm thấy tài khoản muốn xóa'); 
+            $user->delete();
+            return redirect()->back()->with('mess','Xóa thành công');    
+        }catch(\Exception $e)
+        {
+            $mess = "Xóa không thành công ".$e->getMessage();
+            return redirect()->back()->withErrors($mess);
+        }
+    }
+
+
     public function editUserInfor(Request $request)
     {
         $userId = $request->editUserID;
@@ -223,7 +247,7 @@ class UserInforController extends Controller
     {
         return view('client.user.new-password', compact('token'));
     }
-
+    
     public function resetPasswordPost(Request $request)
     {
         $request->validate([
@@ -246,4 +270,5 @@ class UserInforController extends Controller
     {
         return view('client/user/profile');
     }
+
 }

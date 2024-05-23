@@ -19,6 +19,12 @@
                         </ul>
                     </div>
                 @endif
+               @if(session('error'))
+                    <div class="alert alert-danger alert_hide">
+                        {{session('error')}}
+                    </div>
+                    
+                @endif
             </div>
         </div>
         <div class="row">
@@ -115,5 +121,27 @@
         </div>
     </div>
 
+    {{-- Delete modal --}}
+    <div class="modal fade" id="deleteUser" tabindex="-1" aria-labelledby="deleteUserLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form action="{{route('deleteUser')}}" method="post">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title">Xóa tài khoản</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="deleteUserID" name="deleteUserID">
+                        <p>Bạn có chắc chắn muốn xóa tài khoản này không?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-danger">Xóa</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 @endsection

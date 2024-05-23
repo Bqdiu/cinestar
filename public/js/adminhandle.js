@@ -218,7 +218,11 @@ $(document).ready(function(){
             }
         });
     });
-    
+    $(document).on('click', '.delete-userinfor-btn', function () {
+        var user_id = $(this).data('userinfor-id');
+        console.log(user_id);
+        $('#deleteUserID').val(user_id);
+    }); 
 
    // hide alert
     setTimeout(function() 
