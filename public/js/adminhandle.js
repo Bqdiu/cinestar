@@ -223,7 +223,19 @@ $(document).ready(function(){
         console.log(user_id);
         $('#deleteUserID').val(user_id);
     }); 
-
+    $('.btn-add-user').on('click', function () {
+        $.ajax({
+            url: '/admin/userinfor/getDataOption',
+            type: 'GET',
+            success: function(response){
+                console.log(response);
+                $('#add_role_name').empty();
+                $.each(response, function (index, role) {
+                    $('#add_role_name').append('<option value="' + role.role_id + '"' + '>' + role.role_name + '</option>');
+                });    
+            }
+        })
+    });
    // hide alert
     setTimeout(function() 
     {

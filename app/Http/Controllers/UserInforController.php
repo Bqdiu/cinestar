@@ -149,6 +149,13 @@ class UserInforController extends Controller
         $roles = Role::all();
         return response()->json([$user, $roles]);
     }
+
+    public function getDataOption()
+    {
+        $roles = Role::all();
+        return response()->json($roles);
+    }
+
     public function deleteUser(Request $request)
     {
         try{
@@ -206,6 +213,45 @@ class UserInforController extends Controller
             return redirect()->back()->with('mess', 'Sửa thành công ');
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->withErrors('Sửa không thành công: ' . $e->getMessage());
+        }
+    }
+
+    public function addUser(Request $request)
+    {
+        $request->validate([
+            'addName' => 'required',
+            'addBirthDay' => 'required|date',
+            'addEmail' => 'required|email|unique:UserInfor,Email', // check unique except for current data
+            'addPhone' => 'required|unique:UserInfor,Phone|size:10',
+            'addCCCD' => 'required|unique:UserInfor,CCCD|size:12',
+        ], [
+            'addName.required' => "Vui lòng nhập tên",
+            'addBirthDay.required' => "Vui lòng nhập ngày sinh",
+            'addBirthDay.date' => "Ngày sinh không hợp lệ",
+            'addEmail.required' => "Vui lòng nhập Email",
+            'addEmail.email' => "Email không hợp lệ",
+            'addEmail.unique' => "Email đã tồn tại",
+            'addPhone.required' => "Vui lòng nhập số điện thoại",
+            'addPhone.unique' => "Số điện thoại đã tồn tại",
+            'addPhone.size' => "Số điện thoại không hợp lệ",
+            'addCCCD.required' => "Vui lòng nhập số CCCD/CMND",
+            'addCCCD.unique' => "CCCD/CMND đã tồn tại",
+            'addCCCD.size' => "CCCD/CMND không hợp lệ",
+        ]);
+        try {
+            $user = UserInfor::create();
+            $user->Name = $request->addName;
+            $user->Email = $request->addEmail;
+            $user->BirthDay = $request->addBirthDay;
+            $user->Phone = $request->addPhone;
+            $user->CCCD = $request->addCCCD;
+            $user->role_id = $request->add_role_id;
+            $user->Username = $request->addUsername;
+            $user->Password =  bcrypt($request->input('addPassword'));
+            $user->save();
+            return redirect()->back()->with('mess', 'Tạo tài khoản thành công');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors('Thêm không thành công: ' . $e->getMessage());
         }
     }
 

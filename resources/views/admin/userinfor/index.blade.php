@@ -29,7 +29,7 @@
         </div>
         <div class="row">
             <div class="col-12 p-0 m-0">
-                <a href="#" class="btn btn-success mt-2 mb-2 btn-add-cinema" data-bs-toggle="modal" data-bs-target="#addCinema">Thêm mới</a>
+                <a href="#" class="btn btn-success mt-2 mb-2 btn-add-user" data-bs-toggle="modal" data-bs-target="#addUser">Thêm mới</a>
             </div>
         </div>
         <div class="row">
@@ -51,6 +51,7 @@
                 <tbody id="data-body">
                     @foreach($users as $row)
                         <tr>
+                            @if($row->UserID != 43)
                             <th scope="row" class="text-center align-middle">{{$row->UserID}}</th>
                             <td scope="row" class="text-center align-middle">{{$row->Name}}</td>
                             <td scope="row" class="text-center align-middle">{{$row->BirthDay}}</td>
@@ -58,16 +59,18 @@
                             <td scope="row" class="text-center align-middle">{{$row->Email}}</td>
                             <td scope="row" class="text-center align-middle">{{$row->Phone}}</td>
                             <td scope="row" class="text-center align-middle">{{$row->role_name}}</td>
-                            <td scope="row" class="align-middle">
-                                <a class="col btn btn-secondary edit-userinfor-btn" data-bs-toggle="modal" data-bs-target="#editUser" data-userinfor-id="{{$row->UserID}} ">Edit</a>
-                            </td>
-                            <td scope="row" class="align-middle">
-                                <a class="col btn btn-danger delete-userinfor-btn" data-bs-toggle="modal" data-bs-target="#deleteUser" data-userinfor-id="{{$row->UserID}}">Delete</a>
-                            </td>
-                            <td scope="row" class="align-middle">
-                                <a class="col btn btn-primary reset-password-btn" data-bs-toggle="modal" data-bs-target="#resetPassword" data-userinfor-id="{{$row->UserID}}">Reset </a>
-                            </td>
+                                <td scope="row" class="align-middle">
+                                    <a class="col btn btn-secondary edit-userinfor-btn" data-bs-toggle="modal" data-bs-target="#editUser" data-userinfor-id="{{$row->UserID}} ">Edit</a>
+                                </td>
+                                <td scope="row" class="align-middle">
+                                    <a class="col btn btn-danger delete-userinfor-btn" data-bs-toggle="modal" data-bs-target="#deleteUser" data-userinfor-id="{{$row->UserID}}">Delete</a>
+                                </td>
+                                <td scope="row" class="align-middle">
+                                    <a class="col btn btn-primary reset-password-btn" data-bs-toggle="modal" data-bs-target="#resetPassword" data-userinfor-id="{{$row->UserID}}">Reset </a>
+                                </td>
+                            @endif
                         </tr>
+
                     @endforeach
                 </tbody>
             </table>
@@ -96,7 +99,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="CCCD" class="form-label">CCCD</label>
-                            <input type="number" class="form-control" id="CCCD" name="CCCD" placeholder="CCCD">
+                            <input type="text" class="form-control" id="CCCD" name="CCCD" placeholder="CCCD">
                         </div>
                         <div class="mb-3">
                             <label for="Email" class="form-label">Email</label>
@@ -104,7 +107,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="Phone" class="form-label">Phone</label>
-                            <input type="number" class="form-control" id="Phone" name="Phone" placeholder="Phone number">
+                            <input type="text" class="form-control" id="Phone" name="Phone" placeholder="Phone number">
                         </div>
                         <div class="mb-3">
                             <label for="edit_role_name" class="form-label">Role</label>
@@ -143,5 +146,59 @@
             </div>
         </div>
     </div>
+    {{-- Add modal --}}
+    <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form action="{{route('addUser')}}" method="post" enctype="multipart/form-data">
 
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title">Create User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <input type="hidden" id="addUserID" name="addUserID">
+                        <div class="mb-3">
+                            <label for="addName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="addName" name="addName" placeholder="Name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="addUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="addUsername" name="addUsername" placeholder="Username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="addPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="addPassword" name="addPassword" placeholder="Password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="addBirthDay" class="form-label">BirthDay</label>
+                            <input type="date" class="form-control" id="addBirthDay" name="addBirthDay">
+                        </div>
+                        <div class="mb-3">
+                            <label for="addCCCD" class="form-label">CCCD</label>
+                            <input type="text" class="form-control" id="addCCCD" name="addCCCD" placeholder="CCCD">
+                        </div>
+                        <div class="mb-3">
+                            <label for="addEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="addEmail" name="addEmail" placeholder="Email Address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="addPhone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="addPhone" name="addPhone" placeholder="Phone number">
+                        </div>
+                        <div class="mb-3">
+                            <label for="add_role_name" class="form-label">Role</label>
+                            <select class="form-control" name="add_role_id" id="add_role_name">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+                        <input type="submit" class="btn btn-primary" value="Submit"></input>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection

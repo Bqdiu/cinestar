@@ -113,6 +113,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/userinfor/getUserInfor/{UserID}', [UserInforController::class, 'getUserInfor'])->name('getUserInfor');
     Route::post('/admin/userinfor/editUserInfor', [UserInforController::class, 'editUserInfor'])->name('editUserInfor');
     Route::post('/admin/userinfor/delete-user', [USerInforController::class, 'deleteUser'])->name('deleteUser');
+    Route::get('/admin/userinfor/getDataOption', [UserInforController::class, 'getDataOption']);
+    Route::post('/admin/userinfor/add-user', [UserInforController::class, 'addUser'])->name('addUser');
+    
 
 });
 
