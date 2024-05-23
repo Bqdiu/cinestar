@@ -164,7 +164,7 @@ class UserInforController extends Controller
                  return redirect()->back()->with('error','Tài khoản có đơn không thể xóa'); 
             $user_admin = UserInfor::where('UserID','=',$request->deleteUserID)->where('role_id','=',1)->first();
             if($user_admin)
-                 return redirect()->back()->with('error','Không thể xóa admin'); 
+                 return redirect()->back()->with('error','Không thể xóa tài khoản admin'); 
             dd($user_booking);
             $user = UserInfor::find($request->deleteUserID);
             if(!$user)
@@ -252,6 +252,18 @@ class UserInforController extends Controller
             return redirect()->back()->with('mess', 'Tạo tài khoản thành công');
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->withErrors('Thêm không thành công: ' . $e->getMessage());
+        }
+    }
+
+    public function resetPasswordAdmin(Request $request)
+    {
+        try {
+            $user = UserInfor::find($request->resetUserID);
+            $user->Password = bcrypt($request->input('resetPassword'));;
+            $user->save();
+            return redirect()->back()->with('mess', 'Sửa thành công ');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors('Sửa không thành công: ' . $e->getMessage());
         }
     }
 

@@ -66,7 +66,7 @@
                                     <a class="col btn btn-danger delete-userinfor-btn" data-bs-toggle="modal" data-bs-target="#deleteUser" data-userinfor-id="{{$row->UserID}}">Delete</a>
                                 </td>
                                 <td scope="row" class="align-middle">
-                                    <a class="col btn btn-primary reset-password-btn" data-bs-toggle="modal" data-bs-target="#resetPassword" data-userinfor-id="{{$row->UserID}}">Reset </a>
+                                    <a class="col btn btn-primary reset-password-btn" data-bs-toggle="modal" data-bs-target="#resetPassword" data-userinfor-id="{{$row->UserID}}">Reset Password</a>
                                 </td>
                             @endif
                         </tr>
@@ -191,6 +191,31 @@
                             <label for="add_role_name" class="form-label">Role</label>
                             <select class="form-control" name="add_role_id" id="add_role_name">
                             </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+                        <input type="submit" class="btn btn-primary" value="Submit"></input>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- Reset password modal --}}
+    <div class="modal fade" id="resetPassword" tabindex="-1" aria-labelledby="resetPasswordLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form action="{{route('resetPasswordAdmin')}}" method="post" enctype="multipart/form-data">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title">Reset password</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <input type="hidden" id="resetUserID" name="resetUserID">
+                        <div class="mb-3">
+                            <label for="resetPassword" class="form-label">New password</label>
+                            <input type="password" class="form-control" id="resetPassword" name="resetPassword" placeholder="Enter new password">
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">

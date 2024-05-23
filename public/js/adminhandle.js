@@ -236,6 +236,11 @@ $(document).ready(function(){
             }
         })
     });
+
+    $('.reset-password-btn').on('click',function(){
+        $('#resetUserID').val($(this).data('userinfor-id'));
+        console.log($('#resetUserID').val());
+    });
    // hide alert
     setTimeout(function() 
     {
