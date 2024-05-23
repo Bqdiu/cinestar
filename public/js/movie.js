@@ -897,8 +897,9 @@ $(document).ready(function () {
         var bookingId = $("#BookingID").val();
         if (
             $("#userID").val() == 43 &&
-            $("#FullName").val() == "" &&
-            $("#PhoneNumber").val()=="" && $("#Email").val()=="")
+            $("#FullNameBooking").val().trim().length == 0 &&
+            $("#PhoneNumberBooking").val().trim().length == 0 &&
+            $("#EmailBooking").val().trim().length == 0
         )
             $.ajax({
                 url: "/formCusPartial",

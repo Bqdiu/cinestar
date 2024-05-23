@@ -36,7 +36,10 @@ $thu = [
             </div>
             <div class="checkout-customer-content row">
                 <div class="checkout-cus-left-1 col col-6" data-aos="fade-up">
-                    <h1 style="text-align:center;color:yellow">Thanh Toán Thành Công</h1>
+                    <h1 style="text-align:center;color:yellow;font-weight:600">Thanh Toán Thành Công</h1>
+                    <p class="mt-3" style="text-align:center">
+                        {{QrCode::size(250)->generate($Booking->BookingID)}}
+                    </p>
 
                 </div>
                 <div class="checkout-cus-right col col-6" data-aos="fade-up">
