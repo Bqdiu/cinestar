@@ -10,7 +10,7 @@ use App\Http\Controllers\Management\MovieController;
 use App\Http\Controllers\Management\StatusMovieController;
 use App\Http\Controllers\Management\CinemaController;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\QRCodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +68,7 @@ Route::get("/formCusPartial", [HomeController::class, 'FormCusPartial'])->name("
 Route::get("/formPaymentPartial", [HomeController::class, 'FormPaymentPartial'])->name("formPaymentPartial");
 Route::get("/formDetailShow/{id}", [HomeController::class, 'FormDetailShow'])->name("formDetailShow");
 Route::get("/thank", [HomeController::class, "FormThank"])->name("formThank");
+Route::get('booking-movie-detail', [HomeController::class, "BookingMovieDetail"]);
 
 //Another
 Route::get('/promotion', [HomeController::class, 'PromotionPage'])->name('promotion');
@@ -116,8 +117,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/userinfor/getDataOption', [UserInforController::class, 'getDataOption']);
     Route::post('/admin/userinfor/add-user', [UserInforController::class, 'addUser'])->name('addUser');
     Route::post('/admin/userinfor/reset-password-user', [UserInforController::class, 'resetPasswordAdmin'])->name('resetPasswordAdmin');
-    
-
 });
 
 Route::group(['middleware' => 'manager'], function () {

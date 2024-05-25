@@ -232,6 +232,11 @@ class HomeController extends Controller
                 }
             }
         }
-        return view('client/home/cart/formThank', ["Booking" => $booking, 'TypeTicketList' => $TypeTicketList, "TicketType" => $TicketType, "Ticket" => $Ticket]);
+        return view('client/home/cart/formThank', ["Booking" => $booking, "Message" => $request->message, 'TypeTicketList' => $TypeTicketList, "TicketType" => $TicketType, "Ticket" => $Ticket]);
+    }
+    public function BookingMovieDetail(Request $request)
+    {
+        $Ticket = ShowSeat::where('BookingID', '=', $request->BookingID)->get();
+        return view('client/home/cart/bookingMovieDetail', ["Ticket" => $Ticket]);
     }
 }

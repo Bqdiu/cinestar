@@ -12,11 +12,12 @@ $thu = [
 ];
 ?>
 @section('main-content')
+@if($Message == "Successful.")
 <section class="checkout checkout-customer ht">
     <div class="container">
         <div class="checkout-customer-wr">
-            <div class="mb-[12px] cursor-pointer block text-white"> <i class="fas fa-chevron-left fa-xs"></i> Quay lại</div>
-            <div class="checkout-back"> <span class="ic ani-f"><img src="/assets/images/ic-back.svg" alt=""></span><span class="ic ani-s"><img src="/assets/images/ic-back.svg" alt=""></span><span class="txt">Quay lại</span></div>
+            <div class="mb-[12px] cursor-pointer block text-white"> <i class="fas fa-chevron-left fa-xs"></i> Quay lại Trang Chủ</div>
+
             <div class="checkout-customer-heading sec-heading" data-aos="fade-up">
                 <h2 class="heading !text-center min-[700px]:!text-left"></h2>
                 <ul class="process">
@@ -38,9 +39,10 @@ $thu = [
                 <div class="checkout-cus-left-1 col col-6" data-aos="fade-up">
                     <h1 style="text-align:center;color:yellow;font-weight:600">Thanh Toán Thành Công</h1>
                     <p class="mt-3" style="text-align:center">
-                        {{QrCode::size(250)->generate($Booking->BookingID)}}
+                        <?php $qrcode_url = url('booking-movie-detail?BookingID=' . $Booking->BookingID)  ?>
+                        {{QrCode::size(250)->generate($qrcode_url)}}
                     </p>
-
+                    <p class="mt-5" style="text-align:center;color:yellow;font-weight:600">Cảm ơn quý khách đã ủng hộ CINESTAR. Quý khách vui lòng lưu lại mã QR để lấy vé.</p>
                 </div>
                 <div class="checkout-cus-right col col-6" data-aos="fade-up">
                     <div class="form-checkout-cus">
@@ -134,4 +136,13 @@ $thu = [
         </div>
     </div>
 </section>
+@else
+<div class="checkout-success-wr">
+    <h2 class="heading" style="font-weight:800">Giao dịch thất bại</h2>
+    <div class="text-white" style="display:flex;margin:auto;flex-direction:column;justify-content:center;align-items:center">
+        <p class="">Giao dịch không thành công, vui lòng kiểm tra lại thông tin thanh toán của bạn</p>
+        <p class="">Xin chân thành cảm ơn!</p>
+    </div>
+</div>
+@endif
 @endsection
