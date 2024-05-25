@@ -191,4 +191,10 @@ class BookingController extends Controller
                 return $this->MomoPayment($request);
         }
     }
+    public function UpdateSeat(Request $request)
+    {
+        $Seat = ShowSeat::where('ShowID', '=', $request->ShowID)->get();
+
+        return response()->json(["Seat" => $Seat]);
+    }
 }

@@ -453,7 +453,33 @@ $(document).ready(function () {
             }
         }
     });
+    function LoadUpdateSeat(ShowID) {
+        $.ajax({
+            url: "/update-seat",
+            type: "GET",
+            data: { ShowID: ShowID },
 
+            success: function (res) {
+                console.log(res);
+                updateSeatsUI(res.Seat);
+            },
+            error: function (err) {
+                console.error("Error fetching seat information:", err);
+            },
+        });
+    }
+
+    function updateSeatsUI(seats) {
+        seats.forEach((seat) => {
+            let seatElement = $(`[data-cinema-seat-id="${seat.CinemaSeatID}"]`);
+
+            console.log(`data-cinema-seat-id="${seat.CinemaSeatID}"`);
+            if (seat.Status === "Ghế đã được đặt") {
+                seatElement.addClass("booked");
+                seatElement.off("click"); // Loại bỏ sự kiện click để ngăn người dùng nhấp lại
+            }
+        });
+    }
     $(document).on("click", ".item-time", function () {
         showTimeID = $(this).data("show-time-item");
         var nameCinema = $(this).data("value-name");
@@ -463,7 +489,7 @@ $(document).ready(function () {
         $(".item-time").not(this).removeClass("active");
         $(".cinema-name.txt").text(nameCinema);
         showtime = $(this).text();
-
+        LoadUpdateSeat(showTimeID);
         console.log(showtime);
         $.ajax({
             url: "/seat-partial/" + showTimeID,
@@ -473,6 +499,7 @@ $(document).ready(function () {
                 $(".sec-seat").addClass("d-block");
                 $(".sec-seat").html(res);
                 $(".dt-bill").addClass("d-block");
+
                 roomNumber = $(".seat-wr .seat-heading.sec-heading .heading")
                     .text()
                     .slice(-2);
@@ -893,6 +920,7 @@ $(document).ready(function () {
             });
         });
     });
+
     function LoadCusLeft() {
         var bookingId = $("#BookingID").val();
         if (
