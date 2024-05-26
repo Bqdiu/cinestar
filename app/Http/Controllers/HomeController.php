@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\reserveSeat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\StatusMovie;
@@ -16,6 +17,7 @@ use App\Models\Booking;
 use App\Models\Momo;
 use App\Models\SeatType;
 use App\Models\ShowSeat;
+use App\Models\VNPay;
 use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
@@ -188,12 +190,13 @@ class HomeController extends Controller
         $bookingID = intval(session('BookingID'));
 
 
-
+        $Message = "";
         $booking = Booking::find($bookingID);
 
         if ($booking->Status == "Chưa thanh toán") {
             if ($request->message == "Successful.") {
                 $booking->Status = "Đã Thanh Toán";
+                $Message = $request->message;
                 $booking->PaymentID = $request->PaymentID;
                 Momo::create([
                     'partnerCode' => $request->partnerCode,
@@ -211,7 +214,40 @@ class HomeController extends Controller
                     'paymentOption' => $request->paymentOption,
                     'BookingID' => $booking->BookingID
                 ]);
+                $ShowSeat = ShowSeat::where('ShowID', '=', $booking->ShowID)->get();
+                foreach ($ShowSeat as $s) {
+                    $s->Status = "Ghế đã được đặt";
+                    $s->save();
+                }
+
                 $booking->save();
+                broadcast(new reserveSeat($ShowSeat))->toOthers();
+            } else if ($request->vnp_ResponseCode == "00") {
+                $booking->Status = "Đã Thanh Toán";
+                $Message = $request->vnp_ResponseCode;
+                $booking->PaymentID = $request->PaymentID;
+                VNPay::create([
+                    'vnp_BankCode' => $request->vnp_BankCode,
+                    'vnp_BankTranNo' => $request->vnp_BankTranNo,
+                    'vnp_CardType' => $request->vnp_CardType,
+                    'vnp_OrderInfo' => $request->vnp_OrderInfo,
+                    'vnp_PayDate' => $request->vnp_PayDate,
+                    'vnp_ResponseCode' => $request->vnp_ResponseCode,
+                    'vnp_TmnCode' => $request->vnp_TmnCode,
+                    'vnp_TransactionNo' => $request->vnp_TransactionNo,
+                    'vnp_TransactionStatus' => $request->vnp_TransactionStatus,
+                    'vnp_TxnRef	' => $request->vnp_TxnRef,
+                    'vnp_SecureHash' => $request->vnp_SecureHash,
+                    'BookingID' => $booking->BookingID
+                ]);
+                $ShowSeat = ShowSeat::where('ShowID', '=', $booking->ShowID)->get();
+                foreach ($ShowSeat as $s) {
+                    $s->Status = "Ghế đã được đặt";
+                    $s->save();
+                }
+
+                $booking->save();
+                reserveSeat::dispatch($ShowSeat);
             }
         }
         $TypeTicketList = session()->get('TypeTicketList');
@@ -232,7 +268,7 @@ class HomeController extends Controller
                 }
             }
         }
-        return view('client/home/cart/formThank', ["Booking" => $booking, "Message" => $request->message, 'TypeTicketList' => $TypeTicketList, "TicketType" => $TicketType, "Ticket" => $Ticket]);
+        return view('client/home/cart/formThank', ["Booking" => $booking, "Message" => $Message, 'TypeTicketList' => $TypeTicketList, "TicketType" => $TicketType, "Ticket" => $Ticket]);
     }
     public function BookingMovieDetail(Request $request)
     {

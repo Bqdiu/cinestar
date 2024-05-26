@@ -678,20 +678,8 @@ $(document).ready(function () {
                     .removeClass("opcity-100");
             }
         }
-        // Echo.channel("reserve").listen("reserveSeat", (e) => {
-        //     const seatID = e.seatID; // Lấy id của ghế từ sự kiện
-        //     const seatElement = document.querySelector(
-        //         `[data-seat-id="${seatID}"]`
-        //     ); // Tìm phần tử ghế bằng data-seat-id
-
-        //     if (seatElement) {
-        //         seatElement.classList.add("booked");
-        //         console.log(seatID);
-        //     } else {
-        //         console.error("Không tìm thấy phần tử ghế với id:", seatID);
-        //     }
-        // });
     });
+
     function updateCinemaInfo(roomNumber, seatList, showTime) {
         if (!roomNumber && !showTime) {
             $(".bill-left .list .item.cinema-hall-info").html("");
@@ -897,12 +885,8 @@ $(document).ready(function () {
             e.preventDefault();
 
             var formData = new FormData(this);
-            var TypeTicketList = JSON.parse(
-                localStorage.getItem("TypeTicketList")
-            );
             formData.append("TotalPrice", $("#TotalPrice").val());
-            formData.append("TypeTicketList", JSON.stringify(TypeTicketList));
-            console.log(TypeTicketList);
+
             for (var pair of formData.entries()) {
                 console.log(pair[0] + ", " + pair[1]);
             }
@@ -913,6 +897,7 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 success: function (res) {
+                    console.log(res.payUrl);
                     window.location.href = res.payUrl;
                 },
                 error: function (xhr, status, error) {
@@ -952,3 +937,109 @@ $(document).ready(function () {
     }
     LoadCusLeft();
 });
+Echo.channel("reserve").listen("reserveSeat", (e) => {
+    console.log("Event received:", e);
+    const seats = e.ShowSeat;
+    console.log(seats);
+    seats.forEach((seat) => {
+        const seatID = seat.CinemaSeatID;
+        let seatElement = $(`[data-cinema-seat-id="${seatID}"]`);
+        if (seatElement.length > 0) {
+            if (seat.Status === "Ghế đã được đặt") {
+                seatElement.addClass("booked");
+                seatElement.off("click"); // Remove click event to prevent further clicks
+            } else {
+                console.error("Phần tử ghế không tồn tại với id:", seatID);
+            }
+        } else {
+            console.error("Không tìm thấy phần tử ghế với id:", seatID);
+        }
+    });
+});
+// Function to simulate receiving the event
+// Function to simulate receiving the event
+// Define the event handler function
+function handleReserveSeatEvent(e) {
+    // Log to check if the event is being received
+    console.log("Event received:", e);
+
+    // Extract the array of seats from the event object
+    const seats = e.ShowSeat;
+
+    // Log the received seats for debugging purposes
+    console.log("Seats array:", seats);
+
+    // Iterate over each seat in the array
+    seats.forEach((seat) => {
+        // Extract the CinemaSeatID from the current seat object
+        const seatID = seat.CinemaSeatID;
+
+        // Select the seat element in the DOM using the CinemaSeatID
+        let seatElement = $(`[data-cinema-seat-id="${seatID}"]`);
+
+        // Check if the seat element exists
+        if (seatElement.length > 0) {
+            // Check if the seat status is "Ghế đã được đặt"
+            if (seat.Status === "Ghế đã được đặt") {
+                // Add the "booked" class to the seat element
+                seatElement.addClass("booked");
+
+                // Remove the click event to prevent further clicks
+                seatElement.off("click");
+            } else {
+                // Log an error if the seat status is not "Ghế đã được đặt"
+                console.error(
+                    `Unexpected status for seat with id: ${seatID} - Status: ${seat.Status}`
+                );
+            }
+        } else {
+            // Log an error if the seat element is not found
+            console.error(`Không tìm thấy phần tử ghế với id: ${seatID}`);
+        }
+    });
+}
+
+// // Attach the event handler to the Echo listener
+// // Echo.channel("Reserve").listen(`.reserveSeat`, handleReserveSeatEvent);
+// import { LaraSocket } from "@larasocket/larasocket-js";
+
+// const larasocket = new LaraSocket({
+//     appId: process.env.MIX_LARASOCKET_APP_ID,
+//     key: process.env.MIX_LARASOCKET_APP_KEY,
+//     host: process.env.MIX_LARASOCKET_HOST,
+//     port: process.env.MIX_LARASOCKET_PORT,
+//     scheme: process.env.MIX_LARASOCKET_SCHEME,
+// });
+
+// // Connect to the LaraSocket server
+// larasocket.connect();
+
+// // Define the event handler function
+// function handleReserveSeatEvent(data) {
+//     console.log("Event received:", data);
+
+//     const seats = data.ShowSeat;
+//     console.log("Seats array:", seats);
+
+//     seats.forEach((seat) => {
+//         const seatID = seat.CinemaSeatID;
+//         let seatElement = document.querySelector(
+//             `[data-cinema-seat-id="${seatID}"]`
+//         );
+
+//         if (seatElement) {
+//             if (seat.Status === "Ghế đã được đặt") {
+//                 seatElement.classList.add("booked");
+//             } else {
+//                 console.error(
+//                     `Unexpected status for seat with id: ${seatID} - Status: ${seat.Status}`
+//                 );
+//             }
+//         } else {
+//             console.error(`Không tìm thấy phần tử ghế với id: ${seatID}`);
+//         }
+//     });
+// }
+
+// // Listen to the channel and event
+// larasocket.channel("reserve").listen("reserveSeat", handleReserveSeatEvent);

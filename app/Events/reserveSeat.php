@@ -17,11 +17,11 @@ class reserveSeat implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $seatID;
-    public function __construct($seatID)
+    public $ShowSeat;
+    public function __construct($ShowSeat)
     {
         //
-        $this->seatID = $seatID;
+        $this->ShowSeat = $ShowSeat;
     }
 
     /**
@@ -32,7 +32,28 @@ class reserveSeat implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('reserve'),
+            new Channel('Reserve'),
+        ];
+    }
+    /**
+     * Broadcast event name.
+     *
+     * @return string
+     */
+    public function broadcastAs()
+    {
+        return 'reserveSeat';
+    }
+
+    /**
+     * Broadcast event data.
+     *
+     * @return array
+     */
+    public function broadcastWith()
+    {
+        return [
+            'ShowSeat' => $this->ShowSeat,
         ];
     }
 }

@@ -12,7 +12,7 @@ $thu = [
 ];
 ?>
 @section('main-content')
-@if($Message == "Successful.")
+@if($Message == "Successful." || $Message = "00")
 <section class="checkout checkout-customer ht">
     <div class="container">
         <div class="checkout-customer-wr">
