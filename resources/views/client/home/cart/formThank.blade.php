@@ -16,7 +16,7 @@ $thu = [
 <section class="checkout checkout-customer ht">
     <div class="container">
         <div class="checkout-customer-wr">
-            <div class="mb-[12px] cursor-pointer block text-white"> <i class="fas fa-chevron-left fa-xs"></i> Quay lại Trang Chủ</div>
+            <div class="thank mb-[12px] cursor-pointer block text-white btn-back"> <i class="fas fa-chevron-left fa-xs"></i> Quay lại Trang Chủ</div>
 
             <div class="checkout-customer-heading sec-heading" data-aos="fade-up">
                 <h2 class="heading !text-center min-[700px]:!text-left"></h2>

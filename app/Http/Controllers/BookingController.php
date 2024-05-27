@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\DeleteBooking;
 use App\Models\Booking;
 use App\Models\ShowSeat;
 use App\Models\UserInfor;
+use Carbon\Carbon;
 use COM;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -161,14 +163,21 @@ class BookingController extends Controller
     {
 
         $User = UserInfor::find($request->UserID);
+        $booking = null;
         if (!$User) {
             // Handle the case where the user is not found
             return redirect()->back()->withErrors(['User not found']);
         }
         $Seats = json_decode($request->Seats, true);
+        foreach ($Seats as $s) {
+            $seatItem = ShowSeat::where('CinemaSeatID', '=', $s['SeatID'])->where('ShowID', '=', $request->ShowID)->first();
+            if (isset($seatItem))
+                return response()->json(['error' => 'Ghế này đã được đặt!.']);
+        }
         $TypeTicketQuantity = json_decode($request->TypeTicketQuantity);
         if ($User->UserID == 43) {
             try {
+
                 $booking = Booking::create([
                     'NumberOfSeats' => count($Seats),
                     'Status' => 'Chưa thanh toán',
@@ -230,9 +239,9 @@ class BookingController extends Controller
             );
         }
 
-
+        DeleteBooking::dispatch($booking)->delay(Carbon::now()->addMinute(2));
         return response()->json([
-            'redirectUrl' => route('checkout', ['BookingID' => $booking->BookingID, 'RemainingTime' => $request->RemainingTime, 'TypeTicketList' => $TypeTicketQuantity])
+            'redirectUrl' => route('checkout', ['BookingID' => $booking->BookingID, 'TypeTicketList' => $TypeTicketQuantity])
         ]);
     }
     public function UpdateInformationOfBooking(Request $request)

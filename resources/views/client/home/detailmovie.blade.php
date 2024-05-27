@@ -215,10 +215,7 @@ $pageTitle = $PhimItem->Title;
                 </ul>
             </div>
             <div class="bill-custom-right">
-                <div class="bill-coundown">
-                    <p class="txt">Thời gian giữ vé:</p>
-                    <div class="bill-time"><span class="item" id="timer">05:00 </span></div>
-                </div>
+
                 <div class="bill-right">
                     <div class="price"><span class="txt">Tạm tính </span><span class="num">0 VNĐ</span></div><button class="btn btn--pri btn--booking  opacity-40 pointer-events-none">Đặt vé</button>
                 </div>

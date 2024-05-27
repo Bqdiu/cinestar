@@ -21,7 +21,7 @@ $thu = [
 <section class="checkout checkout-customer ht">
     <div class="container">
         <div class="checkout-customer-wr">
-            <div class="mb-[12px] cursor-pointer block text-white"> <i class="fas fa-chevron-left fa-xs"></i> Quay lại</div>
+            <div class="checkout mb-[12px] cursor-pointer block text-white btn-back"> <i class="fas fa-chevron-left fa-xs"></i> Quay lại</div>
             <div class="checkout-back"> <span class="ic ani-f"><img src="/assets/images/ic-back.svg" alt=""></span><span class="ic ani-s"><img src="/assets/images/ic-back.svg" alt=""></span><span class="txt">Quay lại</span></div>
             <div class="checkout-customer-heading sec-heading" data-aos="fade-up">
                 <h2 class="heading !text-center min-[700px]:!text-left"></h2>
@@ -52,10 +52,10 @@ $thu = [
                                 <div class="inner-info-row bill-coundown-custom">
                                     <p class="ct" style="font-weight:700">{{$Booking->showinfor->movie->Title}}</p>
                                     <div class="bill-coundown-custom">
-                                        <p class="txt mb-0" style="font-weight:550">Thời gian giữ vé:</p>
+                                        <p class="txt">Thời gian giữ vé:</p>
                                         <div class="bill-coundown !w-[68px]">
                                             <div class="bill-time">
-                                                <p id="timerCheckout" style="font-weight:600">05:00</p>
+                                                <p id="timerCheckout" style="font-weight:750"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -155,7 +155,7 @@ $thu = [
                         <p class="popup-noti-title mb-0">LƯU Ý !</p>
                         <p class="popup-noti-des text-white m-0"></p>
                         <div class="popup-noti-ctr">
-                            <div class="btn btn-xemthem custom-cursor-on-hover OK"><span class="txt">OK</span></div>
+                            <div class="checkout btn btn-xemthem custom-cursor-on-hover OK"><span class="txt">OK</span></div>
                         </div>
                     </div>
                 </div>

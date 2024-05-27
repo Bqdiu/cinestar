@@ -108,16 +108,15 @@ $(document).ready(function () {
     function resetSection() {
         selectedSeats = [];
         selectedSeats_1 = [];
-        stopCountdown();
-        $(".ticket-cointainer").removeClass("d-block");
+
+        // $(".ticket-cointainer").removeClass("d-block");
         $(".seat-wr.seat-single").removeClass("choosing");
         $(".seat-couple .seat-wr").removeClass("choosing");
-        $(".dt-bill").removeClass("d-block");
-        $(".sec-seat").removeClass("d-block");
+        // $(".dt-bill").removeClass("d-block");
+        // $(".sec-seat").removeClass("d-block");
         totalPrice = 0;
-        countNumber = $(".count-number").text("0");
+        // countNumber = $(".count-number").text("0");
         $(".bill-right .price .num").text("0 VNĐ");
-        $("#timer").text("05:00");
         $(".dt-bill .btn.btn--pri").addClass("opacity-40");
         $(".dt-bill .btn.btn--pri").addClass("pointer-events-none");
         $(".dt-bill .btn.btn--pri").removeClass("opcity-100");
@@ -187,7 +186,7 @@ $(document).ready(function () {
         var formattedSeconds = String(secondsRemaining).padStart(2, "0");
 
         // Hiển thị thời gian còn lại
-        $(".bill-coundown .bill-time #timer").text(
+        $(".bill-coundown .bill-time #timerCheckout").text(
             formattedMinutes + ":" + formattedSeconds
         );
     }
@@ -222,7 +221,7 @@ $(document).ready(function () {
             $(".popup.--w7 .popup-noti-des").text("Đã hết thời gian giữ vé!");
             $(".popup.--w7").addClass("open");
 
-            resetSectionWhenTimerEnded();
+            // resetSectionWhenTimerEnded();
             // Nếu hết thời gian, thực hiện các hành động sau đó
             console.log("Đếm ngược đã kết thúc!");
             return;
@@ -368,8 +367,7 @@ $(document).ready(function () {
                     .replace(" VNĐ", "")
                     .replace(/\,/g, "")
             );
-            selectedSeats = [];
-            selectedSeats_1 = [];
+
             // Giảm số lượng vé đi 1 nếu số lượng hiện tại lớn hơn 0
             if (currentCount > 0 && ticketId != 3) {
                 currentCount -= 1;
@@ -386,7 +384,7 @@ $(document).ready(function () {
                 // Cập nhật tổng giá tiền
                 totalPrice -= price;
                 $(".seat-wr.seat-single").removeClass("choosing");
-
+                resetSection();
                 // Hiển thị tổng giá tiền đã định dạng
                 updateTotalPriceDisplay();
                 updateTicketCounts();
@@ -408,7 +406,7 @@ $(document).ready(function () {
                 totalPrice -= price;
                 $(".seat-couple .seat-wr").removeClass("choosing");
                 $(".seat-wr.seat-single").removeClass("choosing");
-
+                resetSection();
                 // Hiển thị tổng giá tiền đã định dạng
                 updateTotalPriceDisplay();
                 updateTicketCounts();
@@ -484,7 +482,6 @@ $(document).ready(function () {
             data: { ShowID: ShowID },
 
             success: function (res) {
-                console.log(res);
                 updateSeatsUI(res.Seat);
             },
             error: function (err) {
@@ -496,7 +493,7 @@ $(document).ready(function () {
         seats.forEach((seat) => {
             let seatElement = $(`[data-cinema-seat-id="${seat.CinemaSeatID}"]`);
 
-            console.log(seatElement);
+            // console.log(seatElement);
             if (seat.Status === "Ghế đã được đặt") {
                 seatElement.addClass("booked");
                 seatElement.off("click"); // Loại bỏ sự kiện click để ngăn người dùng nhấp lại
@@ -701,6 +698,8 @@ $(document).ready(function () {
     }
     //Show Check
     $(document).ready(function () {
+        // Initialize endTime from localStorage or set it to 2 minutes from now
+
         $(".btn--booking").click(() => {
             console.log(showTimeID);
             console.log(JSON.stringify(selectedSeats.concat(selectedSeats_1)));
@@ -721,7 +720,10 @@ $(document).ready(function () {
                 return;
             }
             let formData = new FormData();
+            endTime = new Date().getTime() + 2 * 60 * 1000;
 
+            // Lưu endTime vào localStorage để duy trì qua các lần tải lại trang
+            localStorage.setItem("endTime", endTime);
             formData.append(
                 "Seats",
                 JSON.stringify(selectedSeats.concat(selectedSeats_1))
@@ -729,7 +731,6 @@ $(document).ready(function () {
             formData.append("UserID", $("#userID").val());
             formData.append("ShowID", showTimeID);
             formData.append("TotalPrice", totalPrice);
-            formData.append("RemainingTime", countdownTimeout);
             formData.append("TypeTicketQuantity", JSON.stringify(TypeOfTicket));
             localStorage.setItem(
                 "TypeTicketList",
@@ -749,13 +750,23 @@ $(document).ready(function () {
                 contentType: false,
                 success: function (res) {
                     // console.log(res.redirectUrl);
-                    window.location.href = res.redirectUrl;
+                    if (res.redirectUrl) window.location.href = res.redirectUrl;
+                    else if (res.error) {
+                        $(".popup.--w7 .popup-noti-des").text(
+                            "Ghế này đã có người đặt!"
+                        );
+                        $(".popup.--w7").addClass("open");
+                    }
                 },
                 error: function (xhr, status, error) {
                     // Handle error
-                    console.error("An error occurred:", error);
-                    console.error("Status:", status);
-                    console.error("Response:", xhr.responseText);
+                    // console.error("An error occurred:", error);
+                    // console.error("Status:", status);
+                    // console.error("Response:", xhr.responseText);
+                    // $(".popup.--w7 .popup-noti-des").text(
+                    //     "Ghế này đã có người đặt!"
+                    // );
+                    // $(".popup.--w7").addClass("open");
                 },
             });
         });
@@ -887,9 +898,9 @@ $(document).ready(function () {
             var formData = new FormData(this);
             formData.append("TotalPrice", $("#TotalPrice").val());
 
-            for (var pair of formData.entries()) {
-                console.log(pair[0] + ", " + pair[1]);
-            }
+            // for (var pair of formData.entries()) {
+            //     console.log(pair[0] + ", " + pair[1]);
+            // }
             $.ajax({
                 url: "/payment",
                 type: "POST",
@@ -937,32 +948,9 @@ $(document).ready(function () {
     }
     LoadCusLeft();
 });
-Echo.channel("reserve").listen("reserveSeat", (e) => {
-    console.log("Event received:", e);
-    const seats = e.ShowSeat;
-    console.log(seats);
-    seats.forEach((seat) => {
-        const seatID = seat.CinemaSeatID;
-        let seatElement = $(`[data-cinema-seat-id="${seatID}"]`);
-        if (seatElement.length > 0) {
-            if (seat.Status === "Ghế đã được đặt") {
-                seatElement.addClass("booked");
-                seatElement.off("click"); // Remove click event to prevent further clicks
-            } else {
-                console.error("Phần tử ghế không tồn tại với id:", seatID);
-            }
-        } else {
-            console.error("Không tìm thấy phần tử ghế với id:", seatID);
-        }
-    });
-});
-// Function to simulate receiving the event
-// Function to simulate receiving the event
-// Define the event handler function
 function handleReserveSeatEvent(e) {
     // Log to check if the event is being received
     console.log("Event received:", e);
-
     // Extract the array of seats from the event object
     const seats = e.ShowSeat;
 
@@ -976,7 +964,7 @@ function handleReserveSeatEvent(e) {
 
         // Select the seat element in the DOM using the CinemaSeatID
         let seatElement = $(`[data-cinema-seat-id="${seatID}"]`);
-
+        console.log(seatElement);
         // Check if the seat element exists
         if (seatElement.length > 0) {
             // Check if the seat status is "Ghế đã được đặt"
@@ -999,47 +987,108 @@ function handleReserveSeatEvent(e) {
     });
 }
 
-// // Attach the event handler to the Echo listener
-// // Echo.channel("Reserve").listen(`.reserveSeat`, handleReserveSeatEvent);
-// import { LaraSocket } from "@larasocket/larasocket-js";
+// Attach the event handler to the Echo listener
+Echo.channel("Reserve").listen(`.reserveSeat`, handleReserveSeatEvent);
+$(document).on("click", ".popup.--w7 .checkout.btn.OK", function () {
+    $(".popup.--w7").removeClass("open");
+    history.back();
+});
 
-// const larasocket = new LaraSocket({
-//     appId: process.env.MIX_LARASOCKET_APP_ID,
-//     key: process.env.MIX_LARASOCKET_APP_KEY,
-//     host: process.env.MIX_LARASOCKET_HOST,
-//     port: process.env.MIX_LARASOCKET_PORT,
-//     scheme: process.env.MIX_LARASOCKET_SCHEME,
-// });
+let endTime = localStorage.getItem("endTime");
 
-// // Connect to the LaraSocket server
-// larasocket.connect();
+// Bắt đầu countdown nếu có endTime
+if (endTime) {
+    startCountdown(endTime);
+}
 
-// // Define the event handler function
-// function handleReserveSeatEvent(data) {
-//     console.log("Event received:", data);
+function startCountdown(endTime) {
+    // Bắt đầu cập nhật countdown mỗi giây
+    const interval = setInterval(updateCountdown, 1000);
 
-//     const seats = data.ShowSeat;
-//     console.log("Seats array:", seats);
+    // Cập nhật ngay lần đầu tiên
+    updateCountdown();
 
-//     seats.forEach((seat) => {
-//         const seatID = seat.CinemaSeatID;
-//         let seatElement = document.querySelector(
-//             `[data-cinema-seat-id="${seatID}"]`
-//         );
+    function updateCountdown() {
+        // Lấy thời gian hiện tại
+        const now = new Date().getTime();
 
-//         if (seatElement) {
-//             if (seat.Status === "Ghế đã được đặt") {
-//                 seatElement.classList.add("booked");
-//             } else {
-//                 console.error(
-//                     `Unexpected status for seat with id: ${seatID} - Status: ${seat.Status}`
-//                 );
-//             }
-//         } else {
-//             console.error(`Không tìm thấy phần tử ghế với id: ${seatID}`);
-//         }
-//     });
-// }
+        // Tính khoảng cách giữa thời gian kết thúc và thời gian hiện tại
+        const distance = endTime - now;
 
-// // Listen to the channel and event
-// larasocket.channel("reserve").listen("reserveSeat", handleReserveSeatEvent);
+        // Tính toán thời gian còn lại bằng phút và giây
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Hiển thị kết quả trong phần tử HTML
+        updateTimerDisplay(minutes, seconds);
+
+        // Nếu countdown kết thúc, dừng countdown và hiển thị thông báo
+        if (distance <= 0) {
+            clearInterval(interval);
+            $(".popup.--w7 .popup-noti-des").text("Đã hết thời gian giữ vé!");
+            $(".popup.--w7").addClass("open");
+
+            // Xóa thời gian kết thúc từ localStorage
+            localStorage.removeItem("endTime");
+        }
+    }
+
+    function updateTimerDisplay(minutes, seconds) {
+        // Định dạng thời gian còn lại
+        const formattedMinutes = String(minutes).padStart(2, "0");
+        const formattedSeconds = String(seconds).padStart(2, "0");
+
+        // Hiển thị thời gian còn lại
+        $(".bill-coundown .bill-time #timerCheckout").text(
+            `${formattedMinutes}:${formattedSeconds}`
+        );
+    }
+}
+
+$(document).on("click", ".checkout.btn-back", function () {
+    if (interval) {
+        clearInterval(interval);
+    }
+    history.back();
+});
+$(document).on("click", ".thank.btn-back", function () {
+    window.location.href = "/";
+});
+
+$(document).ready(function () {
+    function LoadProfilePartial() {
+        $(".prof-main .heading").text("THÔNG TIN KHÁCH HÀNG");
+        $.ajax({
+            url: "/profile-partial",
+            type: "POST",
+            success: function (res) {
+                $(".acc-prf").html(res.view);
+            },
+        });
+    }
+    LoadProfilePartial();
+    $(document).on("click", ".acc-menu-link", function () {
+        const wrapperID = $(this).data("swiper-wrapper");
+        $(".swiper-slide").removeClass("active");
+        $("#" + wrapperID).addClass("active");
+        if (wrapperID == "swiper-slide-1") {
+            $(".prof-main .heading").text("THÔNG TIN KHÁCH HÀNG");
+            $.ajax({
+                url: "/profile-partial",
+                type: "POST",
+                success: function (res) {
+                    $(".acc-prf").html(res.view);
+                },
+            });
+        } else {
+            $(".prof-main .heading").text("LỊCH SỬ MUA HÀNG");
+            $.ajax({
+                url: "/history-partial",
+                type: "POST",
+                success: function (res) {
+                    $(".acc-prf").html(res.view);
+                },
+            });
+        }
+    });
+});

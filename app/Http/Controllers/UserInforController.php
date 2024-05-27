@@ -15,6 +15,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\View;
 
 class UserInforController extends Controller
 {
@@ -158,22 +159,21 @@ class UserInforController extends Controller
 
     public function deleteUser(Request $request)
     {
-        try{
-            $user_booking = Booking::where('UserID','=',$request->deleteUserID)->first();
-            if($user_booking)
-                 return redirect()->back()->with('error','Tài khoản có đơn không thể xóa'); 
-            $user_admin = UserInfor::where('UserID','=',$request->deleteUserID)->where('role_id','=',1)->first();
-            if($user_admin)
-                 return redirect()->back()->with('error','Không thể xóa tài khoản admin'); 
+        try {
+            $user_booking = Booking::where('UserID', '=', $request->deleteUserID)->first();
+            if ($user_booking)
+                return redirect()->back()->with('error', 'Tài khoản có đơn không thể xóa');
+            $user_admin = UserInfor::where('UserID', '=', $request->deleteUserID)->where('role_id', '=', 1)->first();
+            if ($user_admin)
+                return redirect()->back()->with('error', 'Không thể xóa tài khoản admin');
             dd($user_booking);
             $user = UserInfor::find($request->deleteUserID);
-            if(!$user)
-                return redirect()->back()->with('error','Không tìm thấy tài khoản muốn xóa'); 
+            if (!$user)
+                return redirect()->back()->with('error', 'Không tìm thấy tài khoản muốn xóa');
             $user->delete();
-            return redirect()->back()->with('mess','Xóa thành công');    
-        }catch(\Exception $e)
-        {
-            $mess = "Xóa không thành công ".$e->getMessage();
+            return redirect()->back()->with('mess', 'Xóa thành công');
+        } catch (\Exception $e) {
+            $mess = "Xóa không thành công " . $e->getMessage();
             return redirect()->back()->withErrors($mess);
         }
     }
@@ -305,7 +305,7 @@ class UserInforController extends Controller
     {
         return view('client.user.new-password', compact('token'));
     }
-    
+
     public function resetPasswordPost(Request $request)
     {
         $request->validate([
@@ -328,5 +328,14 @@ class UserInforController extends Controller
     {
         return view('client/user/profile');
     }
-
+    public function ProfilePartial()
+    {
+        $view = View::make('client/user/ProfilePartial/profile-partial')->render();
+        return response()->json(["view" => $view]);
+    }
+    public function HistoryPartial()
+    {
+        $view = View::make('client/user/ProfilePartial/history-partial')->render();
+        return response()->json(["view" => $view]);
+    }
 }

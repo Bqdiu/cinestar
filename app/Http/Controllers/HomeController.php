@@ -214,7 +214,7 @@ class HomeController extends Controller
                     'paymentOption' => $request->paymentOption,
                     'BookingID' => $booking->BookingID
                 ]);
-                $ShowSeat = ShowSeat::where('ShowID', '=', $booking->ShowID)->get();
+                $ShowSeat = ShowSeat::where('BookingID', '=', $booking->BookingID)->get();
                 foreach ($ShowSeat as $s) {
                     $s->Status = "Ghế đã được đặt";
                     $s->save();
@@ -240,14 +240,14 @@ class HomeController extends Controller
                     'vnp_SecureHash' => $request->vnp_SecureHash,
                     'BookingID' => $booking->BookingID
                 ]);
-                $ShowSeat = ShowSeat::where('ShowID', '=', $booking->ShowID)->get();
+                $ShowSeat = ShowSeat::where('BookingID', '=', $booking->BookingID)->get();
                 foreach ($ShowSeat as $s) {
                     $s->Status = "Ghế đã được đặt";
                     $s->save();
                 }
 
                 $booking->save();
-                reserveSeat::dispatch($ShowSeat);
+                broadcast(new reserveSeat($ShowSeat))->toOthers();
             }
         }
         $TypeTicketList = session()->get('TypeTicketList');
