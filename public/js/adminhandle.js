@@ -195,8 +195,37 @@ $(document).ready(function(){
         });
     });
 
-
-
+    $('#searchCinema').on('input', function () {
+        var searchText = $(this).val().trim();
+        $.ajax({
+            url: '/admin/cinema/searchCinema/' + searchText,
+            type: 'GET',
+            success: function (data) {
+                $('#data-body').empty();
+                $.each(data, function (index, cinema) {
+                    var row =
+                        '<tr>' +
+                        '<th scope="row" class="text-center align-middle">' + cinema.CinemaID + '</th>' +
+                        '<td scope="row" class="text-center align-middle">' + cinema.Name + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' +
+                            '<img src="/imgCinema/' + cinema.Thumbnail + '" width="150" height="150">' +
+                        '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + cinema.Address + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + cinema.TotalCinemaHalls + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + cinema.CityName + '</td>' +
+                        '<td scope="row" class="align-middle">' +
+                        '<a class="col btn btn-secondary edit-cinema-btn" data-bs-toggle="modal" data-bs-target="#editCinema" data-cinema-id="' + cinema.CinemaID + '">Edit</a>' +
+                        '</td>' +
+                        '<td scope="row" class="align-middle">' +
+                        '<a class="col btn btn-danger delete-cinema-btn" data-bs-toggle="modal" data-bs-target="#deleteCinema" data-cinema-id="' + cinema.CinemaID + '">Delete</a>' +
+                        '</td>' +
+                        '</tr>';
+                    $('#data-body').append(row);
+                });
+            }
+        });
+    });
+    // Userinfor
     $('.edit-userinfor-btn').on('click',function(){
         var UserID = $(this).data('userinfor-id');
         $('#editUserID').val(UserID);

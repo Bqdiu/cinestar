@@ -27,6 +27,9 @@
             </div>
         </div>
         <div class="row">
+            <input id="searchCinema" class="form-control mr-sm-2" type="search" placeholder="Search" name="searchCinema">
+        </div>
+        <div class="row">
             <table class="table">
                 <thead>
                     <tr>

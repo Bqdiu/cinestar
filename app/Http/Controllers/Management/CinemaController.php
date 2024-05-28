@@ -121,4 +121,15 @@ class CinemaController extends Controller
             return redirect()->back()->withErrors('Sửa không thành công: '.$e->getMessage());
         }
     }
+
+    public function searchCinema($searchText)
+    {
+        $cinema = Cinema::where('CinemaID', 'like', '%' . $searchText . '%')->orWhere('Name', 'like', '%' . $searchText . '%')->orWhere('Address', 'like', '%' . $searchText . '%')->leftJoin('city','cinema.CityID','=','city.CityID')->get();
+        if ($cinema->isEmpty())
+        {
+            $cinemas = Cinema::select('*')->leftJoin('city','cinema.CityID','=','city.CityID')->get();
+            return response()->json($cinema);
+        }
+        return response()->json($cinema);
+    }
 }

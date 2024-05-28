@@ -110,6 +110,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/cinema/delete-cinema', [CinemaController::class, 'deleteCinema'])->name('deleteCinema');
     Route::get('/admin/cinema/getCinema/{CinemaID}', [CinemaController::class, 'getCinema'])->name('getCinema');
     Route::post('/admin/cinema/editCinema', [CinemaController::class, 'editCinema'])->name('editCinema');
+    Route::get('/admin/cinema/searchCinema/{searchText}', [CinemaController::class, 'searchCinema'])->name('searchCinema');
 
     // userinfo
     Route::get('/admin/userinfor/index', [UserInforController::class, 'UserInforIndex']);
