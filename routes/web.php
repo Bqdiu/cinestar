@@ -36,6 +36,8 @@ Route::get('/logout', [UserInforController::class, 'Logout']);
 Route::get('/profile', [UserInforController::class, 'Profile'])->name('profile');
 Route::post('/profile-partial', [UserInforController::class, 'ProfilePartial'])->name('profile-partial');
 Route::post('/history-partial', [UserInforController::class, 'HistoryPartial'])->name('history-partial');
+Route::post('/update-infor', [UserInforController::class, 'UpdateInformation'])->name('updateInfor');
+Route::post('/change-pass', [UserInforController::class, 'ChangePassword']);
 //Register
 Route::get('/register', [UserInforController::class, 'Register']);
 Route::post('/registerSubmit', [UserInforController::class, 'PostRegister']);

@@ -10,12 +10,13 @@ use App\Models\Password_reset;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Exception;
-use Hash;
+
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Hash;
 
 class UserInforController extends Controller
 {
@@ -337,5 +338,36 @@ class UserInforController extends Controller
     {
         $view = View::make('client/user/ProfilePartial/history-partial')->render();
         return response()->json(["view" => $view]);
+    }
+    public function UpdateInformation(Request $request)
+    {
+        if (Auth::check()) {
+            $user = UserInfor::where("UserID", '=', Auth::user()->UserID)->first();
+
+            $user->Name = $request->FullName;
+            $user->Birthday = $request->BirthDay;
+            $user->Phone = $request->PhoneNumber;
+            $user->Email = $request->Email;
+            $user->save();
+            return response()->json(["Successful" => "CẬP NHẬT THÀNH CÔNG"]);
+        }
+        return response()->json(["Error" => "CẬP NHẬT THẤT BẠI"]);
+    }
+    public function ChangePassword(Request $request)
+    {
+        if (Auth::check()) {
+            $user = UserInfor::where("UserID", '=', Auth::user()->UserID)->first();
+            if (!Hash::check($request->OldPassword, $user->Password)) {
+                return response()->json(["Error" => "Mật khẩu cũ không đúng"]);
+            }
+            if ($request->RetypePassword != $request->NewPassword) {
+                return response()->json(["Error" => "Mật khẩu mới không trùng khớp"]);
+            } else {
+                $user->Password =   bcrypt($request->NewPassword);
+                $user->save();
+                return response()->json(["Successful" => "CẬP NHẬT THÀNH CÔNG"]);
+            }
+        }
+        return response()->json(["Error" => "CẬP NHẬT THẤT BẠI"]);
     }
 }

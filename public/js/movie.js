@@ -1091,4 +1091,186 @@ $(document).ready(function () {
             });
         }
     });
+    $(document).on("click", ".popup.--w7 .profile.btn.OK", function () {
+        $(".popup.--w7").removeClass("open");
+    });
+    $(".acc-prf").on("input", "#FullName, #Email, #PhoneNumber", function () {
+        var id = $(this).attr("id");
+        var value = $(this).val().trim();
+        var errorId = "#error" + id.charAt(0).toUpperCase() + id.slice(1);
+
+        $(errorId).text(""); // Clear previous error message
+
+        switch (id) {
+            case "FullName":
+                if (value === "") {
+                    $(errorId).text("Vui lòng điền họ tên");
+                }
+                break;
+            case "Email":
+                if (value === "") {
+                    $(errorId).text("Vui lòng điền Email");
+                } else if (!validateEmail(value)) {
+                    $(errorId).text("Email không hợp lệ!");
+                }
+                break;
+            case "PhoneNumber":
+                if (value === "") {
+                    $(errorId).text("Vui lòng nhập số điện thoại");
+                } else if (!validatePhoneNumber(value)) {
+                    $(errorId).text("Số điện thoại không hợp lệ!");
+                }
+                break;
+        }
+    });
+    $(".acc-prf").on(
+        "input",
+        "#OldPassword, #NewPassword, #RetypePassword",
+        function () {
+            var id = $(this).attr("id");
+            var value = $(this).val().trim();
+            var errorId = "#error" + id.charAt(0).toUpperCase() + id.slice(1);
+
+            $(errorId).text(""); // Clear previous error message
+
+            switch (id) {
+                case "OldPassword":
+                    if (value === "") {
+                        $(errorId).text("Vui lòng nhập thông tin");
+                    }
+                    break;
+                case "NewPassword":
+                    if (value === "") {
+                        $(errorId).text("Vui lòng nhập thông tin");
+                    }
+                    break;
+                case "RetypePassword":
+                    if (value === "") {
+                        $(errorId).text("Vui lòng nhập thông tin");
+                    }
+                    break;
+            }
+        }
+    );
+    $(document).on("submit", "#changePassword", function (e) {
+        e.preventDefault();
+        var oldPassword = $("#OldPassword").val().trim();
+        var newPassword = $("#NewPassword").val().trim();
+        var retypePassword = $("#RetypePassword").val().trim();
+        var hasError = false;
+        if (!oldPassword) {
+            hasError = true;
+            $("#errorOldPassword").text("Vui lòng nhập thông tin");
+        } else if (!newPassword) {
+            hasError = true;
+            $("#errorNewPassword").text("Vui lòng nhập thông tin");
+        } else if (!retypePassword) {
+            hasError = true;
+            $("#errorRetypePassword").text("Vui lòng nhập thông tin");
+        } else if (newPassword !== retypePassword) {
+            hasError = true;
+            $("#errorRetypePassword").text(
+                "Mật khẩu mới và xác nhận mật khẩu không trùng khớp"
+            );
+        }
+
+        if (hasError) {
+            return false;
+        }
+        var formData = new FormData(this);
+        $.ajax({
+            url: "/change-pass",
+            type: "POST",
+            data: formData,
+            processData: false, // Prevent jQuery from automatically transforming the data into a query string
+            contentType: false,
+            success: function (res) {
+                console.log(res);
+                if (res.Successful) {
+                    $(".popup.--w7 .popup-noti-des").text(res.Successful);
+                    $(".popup.--w7").addClass("open");
+                } else {
+                    $(".popup.--w7 .popup-noti-des").text(res.Error);
+                    $(".popup.--w7").addClass("open");
+                }
+            },
+            error: function (xhr, status, error) {
+                //         Handle error response here
+                console.error("An error occurred:", error);
+                console.error("Status:", status);
+                console.error("Response:", xhr.responseText);
+                alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+            },
+        });
+    });
+    $(document).on("submit", "#formUpdateInfo", function (e) {
+        e.preventDefault();
+        var fullName = $("#FullName").val().trim();
+        var email = $("#Email").val().trim();
+        var phoneNumber = $("#PhoneNumber").val().trim();
+        var hasError = false;
+        if (fullName === "") {
+            $("#errorFullName").text("Vui lòng điền họ tên");
+            hasError = true;
+        }
+
+        if (email === "") {
+            $("#errorEmail").text("Vui lòng điền Email");
+            hasError = true;
+        } else if (!validateEmail(email)) {
+            $("#errorEmail").text("Email không hợp lệ!");
+            hasError = true;
+        }
+
+        if (phoneNumber === "") {
+            $("#errorPhoneNumber").text("Vui lòng nhập số điện thoại");
+            hasError = true;
+        }
+
+        // Validate phone number format (optional)
+        else if (!validatePhoneNumber(phoneNumber)) {
+            $("#errorPhoneNumber").text("Số điện thoại không hợp lệ!");
+            hasError = true;
+        }
+
+        if (hasError) {
+            return false;
+        }
+        var formData = new FormData(this);
+        $.ajax({
+            url: "/update-infor",
+            type: "POST",
+            data: formData,
+            processData: false, // Prevent jQuery from automatically transforming the data into a query string
+            contentType: false,
+            success: function (res) {
+                console.log(res);
+                if (res.Successful) {
+                    $(".popup.--w7 .popup-noti-des").text(res.Successful);
+                    $(".popup.--w7").addClass("open");
+                } else {
+                    $(".popup.--w7 .popup-noti-des").text(res.Error);
+                    $(".popup.--w7").addClass("open");
+                }
+            },
+            error: function (xhr, status, error) {
+                //         Handle error response here
+                console.error("An error occurred:", error);
+                console.error("Status:", status);
+                console.error("Response:", xhr.responseText);
+                alert("Đã xảy ra lỗi, vui lòng thử lại sau.");
+            },
+        });
+    });
+
+    function validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+
+    // Function to validate phone number format (simple)
+    function validatePhoneNumber(phoneNumber) {
+        var re = /^\d{10,11}$/;
+        return re.test(phoneNumber);
+    }
 });
