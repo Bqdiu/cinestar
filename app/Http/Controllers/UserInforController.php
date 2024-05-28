@@ -349,7 +349,7 @@ class UserInforController extends Controller
             $user->Phone = $request->PhoneNumber;
             $user->Email = $request->Email;
             $user->save();
-            return response()->json(["Successful" => "CẬP NHẬT THÀNH CÔNG"]);
+            return response()->json(["Successful" => "CẬP NHẬT THÀNH CÔNG", "FullName" => $user->Name]);
         }
         return response()->json(["Error" => "CẬP NHẬT THẤT BẠI"]);
     }

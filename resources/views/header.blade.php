@@ -50,7 +50,7 @@
 
                         <form action="{{route('search')}}" style="display:flex" method="post">
                             @csrf
-                            <input type="text" name="key" placeholder="Tìm phim,rạp,..." class="input-search" value="{{$key ?? ''}}">
+                            <input type="text" name="key" placeholder="Tìm phim,..." class="input-search" value="{{$key ?? ''}}">
                             <button class="btn btn-search-submit" type="submit"><i class="fas fa-search"></i></button>
                         </form>
                         @if(Auth::check())
@@ -58,13 +58,13 @@
 
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" style="background:transparent;border:0px" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="far fa-user-circle"></i>
+                                <i style="font-size:18px" class="far fa-user-circle"></i>
                                 <span>{{Auth::user()->Name}}</span>
 
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                <li><a class="dropdown-item" href="/profile"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
+                                <li><a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                             </ul>
                         </div>
                         @else

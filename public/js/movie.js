@@ -1248,6 +1248,7 @@ $(document).ready(function () {
                 if (res.Successful) {
                     $(".popup.--w7 .popup-noti-des").text(res.Successful);
                     $(".popup.--w7").addClass("open");
+                    $(".about-user .info .name").text(res.FullName);
                 } else {
                     $(".popup.--w7 .popup-noti-des").text(res.Error);
                     $(".popup.--w7").addClass("open");
