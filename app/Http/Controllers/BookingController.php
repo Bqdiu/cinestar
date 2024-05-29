@@ -194,9 +194,9 @@ class BookingController extends Controller
             } catch (QueryException $e) {
                 $errorCode = $e->errorInfo[1];
                 if ($errorCode == 1062)
-                    return redirect()->back()->withErrors(['error' => "Ghế đã được đặt trong suất chiếu này"]);
+                    return response()->json(['error' => "Ghế đã được đặt trong suất chiếu này"]);
                 else
-                    return redirect()->back()->withErrors(['error' => 'Lỗi khi đặt ghế']);
+                    return response()->json(['error' => 'Lỗi khi đặt ghế']);
             }
         } else {
             try {
@@ -220,9 +220,9 @@ class BookingController extends Controller
             } catch (QueryException $e) {
                 $errorCode = $e->errorInfo[1];
                 if ($errorCode == 1062)
-                    return redirect()->back()->withErrors(['error' => "Ghế đã được đặt trong suất chiếu này"]);
+                    return response()->json(['error' => "Ghế đã được đặt trong suất chiếu này"]);
                 else
-                    return redirect()->back()->withErrors(['error' => 'Lỗi khi đặt ghế']);
+                    return response()->json(['error' => 'Lỗi khi đặt ghế']);
             }
         }
 
