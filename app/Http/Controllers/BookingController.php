@@ -166,7 +166,7 @@ class BookingController extends Controller
         $booking = null;
         if (!$User) {
             // Handle the case where the user is not found
-            return redirect()->back()->withErrors(['User not found']);
+            return response()->json(['User not found']);
         }
         $Seats = json_decode($request->Seats, true);
         foreach ($Seats as $s) {

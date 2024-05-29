@@ -148,7 +148,7 @@ class HomeController extends Controller
         }
 
 
-        $booking = Booking::find($request->BookingID);
+        $booking = Booking::where('BookingID', '=', $request->BookingID)->first();
         $remainingTime = $request->RemainingTime;
         $TypeTicketList = $request->TypeTicketList;
         Session()->put('TypeTicketList', $TypeTicketList);
