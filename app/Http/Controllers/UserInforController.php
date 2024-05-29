@@ -167,7 +167,6 @@ class UserInforController extends Controller
             $user_admin = UserInfor::where('UserID', '=', $request->deleteUserID)->where('role_id', '=', 1)->first();
             if ($user_admin)
                 return redirect()->back()->with('error', 'Không thể xóa tài khoản admin');
-            dd($user_booking);
             $user = UserInfor::find($request->deleteUserID);
             if (!$user)
                 return redirect()->back()->with('error', 'Không tìm thấy tài khoản muốn xóa');

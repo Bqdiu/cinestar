@@ -9,6 +9,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Management\MovieController;
 use App\Http\Controllers\Management\StatusMovieController;
 use App\Http\Controllers\Management\CinemaController;
+use App\Http\Controllers\Management\TicketPriceController;
+use App\Http\Controllers\Management\ShowInforController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\QRCodeController;
 
@@ -122,10 +124,27 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/userinfor/getDataOption', [UserInforController::class, 'getDataOption']);
     Route::post('/admin/userinfor/add-user', [UserInforController::class, 'addUser'])->name('addUser');
     Route::post('/admin/userinfor/reset-password-user', [UserInforController::class, 'resetPasswordAdmin'])->name('resetPasswordAdmin');
+
+    // ticket price
+    Route::get('/admin/ticketprice/index', [TicketPriceController::class, 'TicketPriceIndex']);
+    
+    // showinfor
+    Route::get('/admin/showinfor/index', [ShowInforController::class, 'ShowInforIndex']);
+
+
 });
 
 Route::group(['middleware' => 'manager'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'Index']);
+       // movie
+    Route::get('/admin/movie/index', [Moviecontroller::class, 'MovieIndex']);
+    Route::get('/admin/movie/getMovie/{MovieID}', [Moviecontroller::class, 'getMovie'])->name('getMovie');
+    Route::post('/admin/movie/editMovie', [Moviecontroller::class, 'editMovie'])->name('editMovie');
+    Route::post('/admin/movie/delete-movie', [MovieController::class, 'deleteMovie'])->name('deleteMovie');
+    Route::get('/admin/movie/searchMovie/{term}', [MovieController::class, 'searchMovie'])->name('searchMovie');
+    Route::post('/admin/movie/add-movie', [MovieController::class, 'addMovie'])->name('addMovie');
+    Route::get('/admin/movie/getDataOption', [Moviecontroller::class, 'getDataOption']);
+
 });
 
 Route::group(['middleware' => 'staff'], function () {
