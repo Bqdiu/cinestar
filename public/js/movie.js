@@ -1091,6 +1091,7 @@ $(document).ready(function () {
             });
         }
     });
+
     $(document).on("click", ".popup.--w7 .profile.btn.OK", function () {
         $(".popup.--w7").removeClass("open");
     });
