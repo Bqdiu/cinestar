@@ -17,6 +17,7 @@ use App\Models\Booking;
 use App\Models\Momo;
 use App\Models\SeatType;
 use App\Models\ShowSeat;
+use App\Models\TypeTicketBookingList;
 use App\Models\VNPay;
 use Illuminate\Support\Facades\View;
 
@@ -150,8 +151,7 @@ class HomeController extends Controller
 
         $booking = Booking::where('BookingID', '=', $request->BookingID)->first();
         $remainingTime = $request->RemainingTime;
-        $TypeTicketList = $request->TypeTicketList;
-        Session()->put('TypeTicketList', $TypeTicketList);
+        $TypeTicketList = TypeTicketBookingList::where('BookingID', '=', $request->BookingID)->get();
 
         $Ticket = ShowSeat::where('BookingID', '=', $booking->BookingID)->get();
         $TicketType = [];
@@ -250,7 +250,7 @@ class HomeController extends Controller
                 broadcast(new reserveSeat($ShowSeat))->toOthers();
             }
         }
-        $TypeTicketList = session()->get('TypeTicketList');
+        $TypeTicketList = TypeTicketBookingList::where('BookingID', '=', $booking->BookingID)->get();;
 
         $Ticket = ShowSeat::where('BookingID', '=', $booking->BookingID)->get();
         $TicketType = [];
@@ -272,7 +272,26 @@ class HomeController extends Controller
     }
     public function BookingMovieDetail(Request $request)
     {
+        $booking = Booking::where('BookingID', '=', $request->BookingID)->first();
         $Ticket = ShowSeat::where('BookingID', '=', $request->BookingID)->get();
-        return view('client/home/cart/bookingMovieDetail', ["Ticket" => $Ticket]);
+        $TypeTicketList = TypeTicketBookingList::where('BookingID', '=', $booking->BookingID)->get();
+
+        $Ticket = ShowSeat::where('BookingID', '=', $request->BookingID)->get();
+        $TicketType = [];
+        foreach ($Ticket as $v) {
+            $seatTypeID = $v->cinema_seat->SeatTypeID;
+
+            if (!isset($TicketType[$request->BookingID])) {
+                $TicketType[$request->BookingID] = [];
+            }
+
+            if (!isset($TicketType[$request->BookingID][$seatTypeID])) {
+                $seatType = SeatType::find($seatTypeID);
+                if ($seatType) {
+                    $TicketType[$request->BookingID][$seatTypeID] = $seatType;
+                }
+            }
+        }
+        return view('client/home/cart/bookingMovieDetail', ["Booking" => $booking, 'TypeTicketList' => $TypeTicketList, "TicketType" => $TicketType, "Ticket" => $Ticket]);
     }
 }

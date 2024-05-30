@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\ShowSeat;
+use App\Models\TypeTicketBookingList;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -32,6 +33,10 @@ class DeleteBooking implements ShouldQueue
             $ShowSeat = ShowSeat::where('BookingID', '=', $this->booking->BookingID)->get();
             foreach ($ShowSeat as $s) {
                 $s->delete();
+            }
+            $TypeTicket = TypeTicketBookingList::where('BookingID', '=', $this->booking->BookingID)->get();
+            foreach ($TypeTicket as $t) {
+                $t->delete();
             }
             $this->booking->delete();
         }

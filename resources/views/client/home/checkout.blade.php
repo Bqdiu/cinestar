@@ -90,14 +90,14 @@ $thu = [
 
                                 <div class="inner-info-row num-ticket">
                                     <p class="tt">Số vé</p>
-                                    <p class="ct">{{$ticket['Quantity']}}</p>
+                                    <p class="ct">{{$ticket->Quantity}}</p>
                                 </div>
                                 <div class="inner-info-row type-ticket">
                                     <p class="tt">Loại vé</p>
-                                    @if($ticket['TicketTypeID'] == 2)
-                                    <p class="ct">{{$ticket['Name'] }}</p>
+                                    @if($ticket->TicketID == 2)
+                                    <p class="ct">{{$ticket->ticket_price->TicketName }}</p>
                                     @else
-                                    <p class="ct">{{ ucwords(mb_strtolower($ticket['Name'])) }}</p>
+                                    <p class="ct">{{ ucwords(mb_strtolower($ticket->ticket_price->TicketName )) }}</p>
                                     @endif
                                 </div>
 

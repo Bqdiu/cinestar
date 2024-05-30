@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jobs\DeleteBooking;
 use App\Models\Booking;
 use App\Models\ShowSeat;
+use App\Models\TypeTicketBookingList;
 use App\Models\UserInfor;
 use Carbon\Carbon;
 use COM;
@@ -174,7 +175,7 @@ class BookingController extends Controller
             if (isset($seatItem))
                 return response()->json(['error' => 'Ghế này đã được đặt!.']);
         }
-        $TypeTicketQuantity = json_decode($request->TypeTicketQuantity);
+
         if ($User->UserID == 43) {
             try {
 
@@ -225,7 +226,24 @@ class BookingController extends Controller
                     return response()->json(['error' => 'Lỗi khi đặt ghế']);
             }
         }
-
+        try {
+            $TypeTicketQuantity = json_decode($request->TypeTicketQuantity, true);
+            foreach ($TypeTicketQuantity as $t) {
+                TypeTicketBookingList::create(
+                    [
+                        'TicketID' => $t['TicketTypeID'],
+                        'Quantity' => $t['Quantity'],
+                        'BookingID' => $booking->BookingID
+                    ]
+                );
+            }
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1062)
+                return response()->json(['error' => "Ghế đã được đặt trong suất chiếu này"]);
+            else
+                return response()->json(['error' => 'Lỗi khi đặt ghế']);
+        }
 
         foreach ($Seats as  $v) {
             ShowSeat::create(
@@ -241,7 +259,7 @@ class BookingController extends Controller
 
         DeleteBooking::dispatch($booking)->delay(Carbon::now()->addMinute(2));
         return response()->json([
-            'redirectUrl' => route('checkout', ['BookingID' => $booking->BookingID, 'TypeTicketList' => $TypeTicketQuantity])
+            'redirectUrl' => route('checkout', ['BookingID' => $booking->BookingID])
         ]);
     }
     public function UpdateInformationOfBooking(Request $request)

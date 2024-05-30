@@ -732,6 +732,7 @@ $(document).ready(function () {
             formData.append("ShowID", showTimeID);
             formData.append("TotalPrice", totalPrice);
             formData.append("TypeTicketQuantity", JSON.stringify(TypeOfTicket));
+            console.log(JSON.stringify(TypeOfTicket));
             localStorage.setItem(
                 "TypeTicketList",
                 JSON.stringify(TypeOfTicket)
@@ -760,9 +761,9 @@ $(document).ready(function () {
                 },
                 error: function (xhr, status, error) {
                     // Handle error
-                    // console.error("An error occurred:", error);
-                    // console.error("Status:", status);
-                    // console.error("Response:", xhr.responseText);
+                    console.error("An error occurred:", error);
+                    console.error("Status:", status);
+                    console.error("Response:", xhr.responseText);
                     // $(".popup.--w7 .popup-noti-des").text(
                     //     "Ghế này đã có người đặt!"
                     // );

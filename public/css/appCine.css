@@ -2203,3 +2203,14 @@ h4 {
 .tab-image .image img {
     width: 100%;
 }
+.ct.responsive {
+    font-weight: 545;
+    position: relative;
+    left: -55px;
+    bottom: -3px;
+}
+@media (max-width: 768px) {
+    .ct.responsive {
+        left: 10px; /* Adjust for mobile screens */
+    }
+}

@@ -31,10 +31,10 @@
     <header class="m-0 p-0 container-fluid header-cinestar --second">
         <div class="container">
             <div class="row" style="height: 80px;border-bottom:1px solid grey">
-                <div class="col-md-2" style="display:flex;align-items:center">
+                <div class="col-md-2 col-6" style="display:flex;align-items:center">
                     <a href="/"> <img src="/img/header-logo.png" style="width: 130px; height:46px" alt=""></a>
                 </div>
-                <div class="col-md-4" style="display: flex; align-items:center;gap:1px;justify-content:center">
+                <div class="col-md-4 col-6" style="display: flex; align-items:center;gap:1px;justify-content:center">
 
                     <a href="/movie" class="btn btn--pri">
                         <div class="d-flex w-100">
@@ -44,7 +44,7 @@
 
                     </a>
                 </div>
-                <div class="col-md-6" style="display: grid; align-items:center">
+                <div class="col-md-6 col-12" style="display: grid; align-items:center">
 
                     <div class="container d-flex" style="align-items: center;justify-content:space-around">
 
