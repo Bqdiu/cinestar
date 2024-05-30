@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cinema;
 use App\Models\City;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+
 class CinemaController extends Controller
 {
     public function CinemaIndex()
     {
-        $cinemas = Cinema::select('*')->leftJoin('city','cinema.CityID','=','city.CityID')->get();
-        return view('admin.cinema.index',compact('cinemas'));        
+        $cinemas = Cinema::select('*')->leftJoin('city', 'cinema.CityID', '=', 'city.CityID')->get();
+        return view('admin.cinema.index', compact('cinemas'));
     }
 
     public function getDataOption()
@@ -28,7 +29,7 @@ class CinemaController extends Controller
             'add_address' => 'required',
             'add_toltalcinemahalls' => 'required',
             'add_thumbnail' => 'mimes:jpeg,jpg,png|required|max:10000',
-        ],[
+        ], [
             'add_name.required' => 'Chưa nhập tên rạp',
             'add_address.required' => 'Chưa nhập địa chỉ',
             'add_toltalcinemahalls.required' => 'Chưa nhập đạo diễn phim',
@@ -38,9 +39,9 @@ class CinemaController extends Controller
         ]);
         $originalFileName = $request->file('add_thumbnail')->getClientOriginalName();
         $user_id = Auth::id();
-        $img = 'image'.$user_id.'-'.time().'-'.$originalFileName;
-        $request->file('add_thumbnail')->move(public_path('/imgCinema'),$img);
-        try{
+        $img = 'image' . $user_id . '-' . time() . '-' . $originalFileName;
+        $request->file('add_thumbnail')->move(public_path('/imgCinema'), $img);
+        try {
             $cinema = new Cinema();
             $cinema->CinemaID = $request->addCinemaID;
             $cinema->Name = $request->add_name;
@@ -49,32 +50,29 @@ class CinemaController extends Controller
             $cinema->TotalCinemaHalls = $request->add_toltalcinemahalls;
             $cinema->CityID = $request->add_city_id;
             $cinema->save();
-            return redirect()->back()->with('mess','Thêm thành công');
-
-        }catch(\Illuminate\Database\QueryException $e)
-        {
-            return redirect()->back()->withErrors('Thêm không thành công: '.$e->getMessage());
+            return redirect()->back()->with('mess', 'Thêm thành công');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors('Thêm không thành công: ' . $e->getMessage());
         }
     }
     public function deleteCinema(Request $request)
     {
-        try{
+        try {
             $cinema = Cinema::find($request->deleteCinemaID);
-            if(!$cinema)
+            if (!$cinema)
                 return redirect()->back()->withErorrs('Không tìm thấy rạp muốn xóa');
             $cinema->delete();
-            return redirect()->back()->with('mess','Xóa thành công');    
-        }catch(\Exception $e)
-        {
-            $mess = "Xóa không thành công ".$e->getMessage();
+            return redirect()->back()->with('mess', 'Xóa thành công');
+        } catch (\Exception $e) {
+            $mess = "Xóa không thành công " . $e->getMessage();
             return redirect()->back()->withErrors($mess);
         }
     }
 
     public function getCinema($CinemaID)
     {
-        $cinemas = Cinema::select('*')->leftJoin('city','city.CityID','=','cinema.CityID')
-                                    ->where('cinema.CinemaID','=',$CinemaID)->first();
+        $cinemas = Cinema::select('*')->leftJoin('city', 'city.CityID', '=', 'cinema.CityID')
+            ->where('cinema.CinemaID', '=', $CinemaID)->first();
         $citys = City::all();
         return response()->json([$cinemas, $citys]);
     }
@@ -85,7 +83,7 @@ class CinemaController extends Controller
             'address' => 'required',
             'toltalcinemahalls' => 'required',
             'thumbnail' => 'mimes:jpeg,jpg,png|required|max:10000',
-        ],[
+        ], [
             'CinemaName.required' => 'Chưa nhập tên rạp',
             'address.required' => 'Chưa nhập địa chỉ',
             'toltalcinemahalls.required' => 'Chưa nhập đạo diễn phim',
@@ -105,9 +103,9 @@ class CinemaController extends Controller
 
         $originalFileName = $request->file('thumbnail')->getClientOriginalName();
         $user_id = Auth::id();
-        $img = 'image'.$user_id.'-'.time().'-'.$originalFileName;
-        $request->file('thumbnail')->move(public_path('/imgCinema'),$img);
-        try{
+        $img = 'image' . $user_id . '-' . time() . '-' . $originalFileName;
+        $request->file('thumbnail')->move(public_path('/imgCinema'), $img);
+        try {
             $cinema = Cinema::find($request->CinemaID);
             $cinema->Name = $request->CinemaName;
             $cinema->Thumbnail = $img;
@@ -115,19 +113,17 @@ class CinemaController extends Controller
             $cinema->TotalCinemaHalls = $request->toltalcinemahalls;
             $cinema->CityID = $request->city_id;
             $cinema->save();
-            return redirect()->back()->with('mess','Sửa thành công ');
-        }catch(\Illuminate\Database\QueryException $e)
-        {
-            return redirect()->back()->withErrors('Sửa không thành công: '.$e->getMessage());
+            return redirect()->back()->with('mess', 'Sửa thành công ');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->withErrors('Sửa không thành công: ' . $e->getMessage());
         }
     }
 
     public function searchCinema($searchText)
     {
-        $cinema = Cinema::where('CinemaID', 'like', '%' . $searchText . '%')->orWhere('Name', 'like', '%' . $searchText . '%')->orWhere('Address', 'like', '%' . $searchText . '%')->leftJoin('city','cinema.CityID','=','city.CityID')->get();
-        if ($cinema->isEmpty())
-        {
-            $cinemas = Cinema::select('*')->leftJoin('city','cinema.CityID','=','city.CityID')->get();
+        $cinema = Cinema::where('CinemaID', 'like', '%' . $searchText . '%')->orWhere('Name', 'like', '%' . $searchText . '%')->orWhere('Address', 'like', '%' . $searchText . '%')->leftJoin('city', 'cinema.CityID', '=', 'city.CityID')->get();
+        if ($cinema->isEmpty()) {
+            $cinemas = Cinema::select('*')->leftJoin('city', 'cinema.CityID', '=', 'city.CityID')->get();
             return response()->json($cinema);
         }
         return response()->json($cinema);
