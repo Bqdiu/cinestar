@@ -27,6 +27,7 @@
             <a href="/admin/cinema/index" ><h5>Cinema</h5></a>
             <a href="/admin/movie/index" ><h5>Movie</h5></a>
             <a href="/admin/moviestatus/index" ><h5>Movie status</h5></a>
+            <a href="/admin/booking/index" ><h5>Booking</h5></a>
         @elseif(Auth::user()->role_id === 2)
             <a href="/admin/dashboard" ><h5>Dashboard</h5></a>
             <a href="/admin/showinfor/index" ><h5>Show</h5></a>

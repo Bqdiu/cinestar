@@ -32,7 +32,8 @@ body {
   margin: 0;
   padding: 0;
   width: 200px;
-  background-image: linear-gradient(to right top, #919191, #3a3a3a, #777878, #547575, #7e9b9b, #b5e3e3);  position: fixed;
+  background-image: linear-gradient(to left bottom, #051937, #00384f, #055659, #5b6c64, #212713);
+  position: fixed;
   height: 100%;
   overflow: auto;
 }
@@ -51,8 +52,8 @@ body {
 }
 
 .sidebar a:hover:not(.active) {
-  background-image: linear-gradient(to right bottom, #000000, #932043);
-  color: white;
+    background-image: linear-gradient(to right bottom, #494e55, #f1cfcf);
+    color: white;
 }
 
 div.content {
