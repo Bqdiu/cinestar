@@ -27,11 +27,7 @@
                 @endif
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 p-0 m-0">
-                <a href="#" class="btn btn-success mt-2 mb-2 btn-add-user" data-bs-toggle="modal" data-bs-target="#addUser">Thêm mới</a>
-            </div>
-        </div>
+      
         <div class="row">
             <table class="table">
                 <thead>
@@ -40,7 +36,6 @@
                         <th scope="col" class="text-center align-center">Ticket Name</th>
                         <th scope="col" class="text-center align-center">Ticket Price</th>
                         <th scope="col" class="text-center align-center">Seat Type</th>
-                        <th></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -51,12 +46,9 @@
                             <td scope="row" class="text-center align-middle">{{$row->TicketName}}</td>
                             <td scope="row" class="text-center align-middle">{{$row->TicketPrice}}</td>
                             <td scope="row" class="text-center align-middle">{{$row->SeatTypeName}}</td>
-                                <td scope="row" class="align-middle">
-                                    <a class="col btn btn-secondary edit-ticketprice-btn" data-bs-toggle="modal" data-bs-target="#editUser" data-ticketprice-id="{{$row->UserID}} ">Edit</a>
-                                </td>
-                                <td scope="row" class="align-middle">
-                                    <a class="col btn btn-danger delete-ticketprice-btn" data-bs-toggle="modal" data-bs-target="#deleteUser" data-ticketprice-id="{{$row->UserID}}">Delete</a>
-                                </td>
+                            <td scope="row" class="align-middle">
+                                <a class="col btn btn-secondary edit-ticketprice-btn" data-bs-toggle="modal" data-bs-target="#editUser" data-ticketprice-id="{{$row->UserID}} ">Edit</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

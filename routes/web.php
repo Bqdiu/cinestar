@@ -130,6 +130,13 @@ Route::group(['middleware' => 'admin'], function () {
     
     // showinfor
     Route::get('/admin/showinfor/index', [ShowInforController::class, 'ShowInforIndex']);
+    Route::get('/admin/showinfor/searchShow/{searchText}', [ShowInforController::class, 'searchShow'])->name('searchShow');
+    Route::get('/admin/showinfor/getShowInfor/{ShowID}', [ShowInforController::class, 'getShowInfor'])->name('getShowInfor');
+    Route::get('/admin/showinfor/getCinemaHallByCinema/{CinemaID}', [ShowInforController::class, 'getCinemaHallByCinema'])->name('getCinemaHallByCinema');
+    Route::post('/admin/showinfor/editShow', [ShowInforController::class, 'editShow'])->name('editShow');
+    Route::get('/admin/showinfor/getDataOption', [ShowInforController::class, 'getDataOption']);
+    Route::post('/admin/showinfor/addShow', [ShowInforController::class, 'addShow'])->name('addShow');
+    Route::post('/admin/showinfor/delete-show', [ShowInforController::class, 'deleteShow'])->name('deleteShow');
 
 
 });

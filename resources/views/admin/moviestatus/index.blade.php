@@ -21,7 +21,7 @@
                 @endif
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="padding-bottom: 20px">
             <input id="searchMovieStatus" class="form-control mr-sm-2" type="search" placeholder="Search" name="searchMovieStatus">
         </div>
         <div class="row">

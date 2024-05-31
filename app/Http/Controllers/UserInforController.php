@@ -196,7 +196,8 @@ class UserInforController extends Controller
             'Email.email' => "Email không hợp lệ",
             'Phone.required' => "Vui lòng nhập số điện thoại",
             'Phone.unique' => "Số điện thoại đã tồn tại",
-            'Phone.size' => "Số điện thoại không hợp lệ",
+            'Pho
+            ne.size' => "Số điện thoại không hợp lệ",
             'CCCD.required' => "Vui lòng nhập số CCCD/CMND",
             'CCCD.unique' => "CCCD/CMND đã tồn tại",
             'CCCD.size' => "CCCD/CMND không hợp lệ",

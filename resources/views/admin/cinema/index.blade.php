@@ -26,7 +26,7 @@
                 <a href="#" class="btn btn-success mt-2 mb-2 btn-add-cinema" data-bs-toggle="modal" data-bs-target="#addCinema">Thêm mới</a>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="padding-bottom: 20px">
             <input id="searchCinema" class="form-control mr-sm-2" type="search" placeholder="Search" name="searchCinema">
         </div>
         <div class="row">

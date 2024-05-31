@@ -45,6 +45,7 @@ $(document).ready(function(){
    // Movie function
    $(document).on('click','.edit-movie-btn', function(){
         var MovieID = $(this).data('movie-id');
+        console.log(MovieID);
         $('#editMovieID').val(MovieID);
         $.ajax({
             url: '/admin/movie/getMovie/' + MovieID,
@@ -111,13 +112,13 @@ $(document).ready(function(){
                         '<td scope="row" class="text-left align-middle">'+movie.ReleaseDate+'</td>'+
                         '<td scope="row" class="text-left align-middle">'+movie.Country+'</td>'+
                         '<td scope="row" class="text-left align-middle">'+movie.Genre+'</td>'+
-                        '<td scope="row" class="text-left align-middle">'+movie.trailer_url+'</td>'+
+                        '<td scope="row" class="text-left align-middle"  style="overflow: hidden;text-overflow: ellipsis;">'+movie.trailer_url+'</td>'+
                         '<td scope="row" class="text-left align-middle">'+movie.Director+'</td>'+
                         '<td scope="row" class="text-left align-middle">'+movie.Actor+'</td>'+
-                        '<td scope="row">'+
+                        '<td scope="row" class="text-center align-middle">'+
                             '<a class="col btn btn-secondary edit-movie-btn" data-bs-toggle="modal" data-bs-target="#editMovie" data-movie-id="'+movie.MovieID+'">Edit</a>'+
                         '</td>'+
-                        '<td scope="row">'+
+                        '<td scope="row" class="text-center align-middle">'+
                             '<a class="col btn btn-danger delete-movie-btn" data-bs-toggle="modal" data-bs-target="#deleteMovie" data-movie-id="'+movie.MovieID+'">Delete</a>'+
                         '</td>'+
                     '</tr>';
@@ -173,8 +174,7 @@ $(document).ready(function(){
         $('#deleteCinemaID').val(cinema_id);    
 
    }); 
-
-   $('.edit-cinema-btn').on('click',function(){
+    $(document).on('click', '.edit-cinema-btn', function () {
         var CinemaID = $(this).data('cinema-id');
         $('#CinemaID').val(CinemaID);
         console.log(CinemaID);
@@ -201,6 +201,7 @@ $(document).ready(function(){
             url: '/admin/cinema/searchCinema/' + searchText,
             type: 'GET',
             success: function (data) {
+                console.log(data);
                 $('#data-body').empty();
                 $.each(data, function (index, cinema) {
                     var row =
@@ -270,6 +271,131 @@ $(document).ready(function(){
         $('#resetUserID').val($(this).data('userinfor-id'));
         console.log($('#resetUserID').val());
     });
+
+    //showinfor
+    $('#searchShow').on('input',function(){
+        var searchText = $(this).val().trim();
+        $.ajax({
+            url: '/admin/showinfor/searchShow/' + searchText,
+            type: 'GET',
+            success: function(data){
+                $('#data-body').empty();
+                $.each(data, function (index, showinfor) {
+                    var row =
+                        '<tr>' +
+                        '<th scope="row" class="text-center align-middle">' + showinfor.ShowID + '</th>' +
+                        '<td scope="row" class="text-center align-middle">' + showinfor.ShowDate + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + showinfor.StartTime + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + showinfor.EndTime + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + showinfor.hall_name + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + showinfor.Title + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + showinfor.CinemaName + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' +
+                        '<a class="col btn btn-secondary edit-showinfor-btn" data-bs-toggle="modal" data-bs-target="#editShow" data-showinfor-id="' + showinfor.ShowID + '">Edit</a>' +
+                        '</td>' +
+                        '<td scope="row" class="text-center align-middle">' +
+                        '<a class="col btn btn-danger delete-showinfor-btn" data-bs-toggle="modal" data-bs-target="#deleteShow" data-showinfor-id="' + showinfor.ShowID + '">Delete</a>' +
+                        '</td>' +
+                        '</tr>';
+                    $('#data-body').append(row);
+                });
+            }
+        });
+    });
+    $(document).on('click', '.edit-showinfor-btn', function () {
+        var ShowID = $(this).data('showinfor-id');
+        $('#editShowInforID').val(ShowID);
+        console.log($('#editShowInforID').val());
+
+        $.ajax({
+            url: '/admin/showinfor/getShowInfor/' + ShowID,
+            type: 'GET',
+            success: function(response){
+                // console.log(response);
+                $('#editShowDate').val(response[0].ShowDate);
+                $('#editStartTime').val(response[0].StartTime);
+                $('#editEndTime').val(response[0].EndTime);
+                var $edit_cinema_name = $('#edit_cinema_name').empty();
+                var $edit_cinemahall_name = $('#edit_cinemahall_name').empty();
+                var $edit_movie_name = $('#edit_movie_name').empty();
+                $edit_cinemahall_name.append(`<option value="${response[0].CinemaHallID}" selected>${response[0].hall_name}</option>`);
+
+                if (response[1]) {
+                    $.each(response[1], function (index, movie) {
+                        $edit_movie_name.append(`<option value="${movie.MovieID}" ${response[0].MovieID == movie.MovieID ? 'selected' : ''}>${movie.Title}</option>`);
+                    });
+                }
+
+                if (response[2]) {
+                    $.each(response[2], function (index, cinema) {
+                        $edit_cinema_name.append(`<option value="${cinema.CinemaID}" ${response[0].CinemaID == cinema.CinemaID ? 'selected' : ''}>${cinema.Name}</option>`);
+                    });
+                }    
+            }
+        });
+
+    });
+
+    $(document).on('change', '#edit_cinema_name', function () {
+        var cinema_id = $(this).val();
+        $.ajax({
+            url: `/admin/showinfor/getCinemaHallByCinema/${cinema_id}`,
+            type: 'GET',
+            success: function (response) {
+                console.log(response);
+                var $edit_cinemahall_name = $('#edit_cinemahall_name').empty();
+                $.each(response, function (index, hall) {
+                    $edit_cinemahall_name.append(`<option value="${hall.CinemaHallID}">${hall.Name}</option>`);
+                });
+            }
+        });
+    });
+    
+    $(document).on('click', '.btn-add-showinfor', function(){
+        $.ajax({
+            url: '/admin/showinfor/getDataOption',
+            type: 'GET',
+            success: function(response){
+                if(response[0])
+                {
+                    var $add_cinema_name = $('#add_cinema_name').empty();
+                    $add_cinema_name.append(`<option value="">Chọn rạp phim</option>`);
+                    $.each(response[0], function(index, cinema){
+                        $add_cinema_name.append(`<option value="${cinema.CinemaID}">${cinema.Name}</option>`);
+                    });
+                }
+                if(response[1])
+                {
+                    var $add_movie_name = $('#add_movie_name').empty();
+                    $.each(response[1], function(index, movie){
+                        $add_movie_name.append(`<option value="${movie.MovieID}">${movie.Title}</option>`); 
+                    });
+                }
+            }
+        });
+    });
+
+    $(document).on('change','#add_cinema_name', function(){
+        var cinema_id = $(this).val();
+        $.ajax({
+            url: `/admin/showinfor/getCinemaHallByCinema/${cinema_id}`,
+            type: 'GET',
+            success: function (response) {
+                console.log(response);
+                var $add_cinemahall_name = $('#add_cinemahall_name').empty();
+                $.each(response, function (index, hall) {
+                    $add_cinemahall_name.append(`<option value="${hall.CinemaHallID}">${hall.Name}</option>`);
+                });
+            }
+        });
+    });
+
+    $(document).on('click','.delete-showinfor-btn',function(){
+        var ShowID = $(this).data('showinfor-id');
+        $('#deleteShowID').val(ShowID);
+        console.log($('#deleteShowID').val());
+    });
+
    // hide alert
     setTimeout(function() 
     {

@@ -121,9 +121,13 @@ class CinemaController extends Controller
 
     public function searchCinema($searchText)
     {
-        $cinema = Cinema::where('CinemaID', 'like', '%' . $searchText . '%')->orWhere('Name', 'like', '%' . $searchText . '%')->orWhere('Address', 'like', '%' . $searchText . '%')->leftJoin('city', 'cinema.CityID', '=', 'city.CityID')->get();
+        $cinema = Cinema::where('CinemaID','like','%'.$searchText .'%')
+            ->join('city', 'cinema.CityID', '=', 'city.CityID')
+            ->orWhere('Name','like','%'.$searchText.'%')
+            ->orWhere('Address','like', '%' . $searchText . '%')
+            ->get();
         if ($cinema->isEmpty()) {
-            $cinemas = Cinema::select('*')->leftJoin('city', 'cinema.CityID', '=', 'city.CityID')->get();
+            $cinema = Cinema::select('*')->join('city', 'cinema.CityID', '=', 'city.CityID')->get();
             return response()->json($cinema);
         }
         return response()->json($cinema);

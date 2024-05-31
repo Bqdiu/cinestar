@@ -25,7 +25,7 @@
                 <a href="#" class="btn btn-success mt-2 mb-2 btn-add-movie" data-bs-toggle="modal" data-bs-target="#addMovie">Thêm mới</a>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="padding-bottom: 20px">
             <input id="searchMovie" class="form-control mr-sm-2" type="search" placeholder="Search" name="searchMovie">
         </div>
         <div class="row">
@@ -33,19 +33,19 @@
                 <thead>
                     <tr>
                         <th scope="col" class="text-center align-middle">ID</th>
-                        <th scope="col" class="text-center">Title</th>
-                        <th scope="col" class="text-center">Thumbnail</th>
-                        <th scope="col" class="text-center">Description</th>
-                        <th scope="col" class="text-center">Duration</th>
-                        <th scope="col" class="text-center">Language</th>
-                        <th scope="col" class="text-center">ReleaseDate</th>
-                        <th scope="col" class="text-center">Country</th>
-                        <th scope="col" class="text-center">Genre</th>
-                        <th scope="col" class="text-center">Trailer</th>
-                        <th scope="col" class="text-center">Director</th>
-                        <th scope="col" class="text-center">Actor</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
+                        <th scope="col" class="text-center align-middle">Title</th>
+                        <th scope="col" class="text-center align-middle">Thumbnail</th>
+                        <th scope="col" class="text-center align-middle">Description</th>
+                        <th scope="col" class="text-center align-middle">Duration</th>
+                        <th scope="col" class="text-center align-middle">Language</th>
+                        <th scope="col" class="text-center align-middle">ReleaseDate</th>
+                        <th scope="col" class="text-center align-middle">Country</th>
+                        <th scope="col" class="text-center align-middle">Genre</th>
+                        <th scope="col" class="text-center align-middle">Trailer</th>
+                        <th scope="col" class="text-center align-middle">Director</th>
+                        <th scope="col" class="text-center align-middle">Actor</th>
+                        <th scope="col" class="text-center align-middle"></th>
+                        <th scope="col" class="text-center align-middle"></th>
                     </tr>
                 </thead>
                 <tbody id="data-body">
@@ -65,10 +65,10 @@
                         <td scope="row" class="text-center align-middle">{{$row->trailer_url}}</td>
                         <td scope="row" class="text-center align-middle">{{$row->Director}}</td>
                         <td scope="row" class="text-center align-middle">{{$row->Actor}}</td>
-                        <td scope="row">
+                        <td scope="row" class="text-center align-middle">
                             <a class="col btn btn-secondary edit-movie-btn" data-bs-toggle="modal" data-bs-target="#editMovie" data-movie-id="{{$row->MovieID}} ">Edit</a>
                         </td>
-                        <td scope="row">
+                        <td scope="row" class="text-center align-middle">
                             <a class="col btn btn-danger delete-movie-btn" data-bs-toggle="modal" data-bs-target="#deleteMovie" data-movie-id="{{$row->MovieID}}">Delete</a>
                         </td>
                     </tr>

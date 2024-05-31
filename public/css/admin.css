@@ -73,25 +73,32 @@ div.content {
   }
 }
 
-.table {
+table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+  table-layout: fixed;
+  /* border-collapse: collapse; */
 }
 
 .table th,
 .table td {
   padding: 8px;
-  /* text-align: left; */
   border-bottom: 1px solid #ddd;
 }
-
+.text-center.align-middle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+}
 .table th {
   background-color: #f2f2f2;
 }
 
 .table tbody tr:hover {
   background-color: #f5f5f5;
+}
+
+tr th:first-child {
+  width: 6%;
 }
 
 a {
