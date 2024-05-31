@@ -396,6 +396,22 @@ $(document).ready(function(){
         console.log($('#deleteShowID').val());
     });
 
+    // ticket price
+    $(document).on('click','.edit-ticketprice-btn', function(){
+        var id = $(this).data('ticketprice-id');
+        $('#editTicketPriceID').val(id);
+        $.ajax({
+            url: '/admin/ticketprice/getTicketPrice/' + id,
+            type: 'GET',
+            success: function(response){
+                $('#editTicketPriceName').text('Loại vé: ' + response.TicketName);
+                $('#TicketPrice').val(response.TicketPrice);
+
+            }
+        });
+    });
+    
+
    // hide alert
     setTimeout(function() 
     {

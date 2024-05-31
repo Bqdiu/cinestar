@@ -127,6 +127,8 @@ Route::group(['middleware' => 'admin'], function () {
 
     // ticket price
     Route::get('/admin/ticketprice/index', [TicketPriceController::class, 'TicketPriceIndex']);
+    Route::get('/admin/ticketprice/getTicketPrice/{TicketPriceID}', [TicketPriceController::class, 'getTicketPrice'])->name('getTicketPrice');
+    Route::post('/admin/ticketprice/editTicketPrice', [TicketPriceController::class, 'editTicketPrice'])->name('editTicketPrice');
     
     // showinfor
     Route::get('/admin/showinfor/index', [ShowInforController::class, 'ShowInforIndex']);
