@@ -20,19 +20,19 @@
             <img src="{{ asset('/img/header-logo.png') }}" alt="logo"  class="logo">
         </a>  
         @if(Auth::user()->role_id === 1)
-            <a href="/admin/dashboard" >Dashboard</a>
-            <a href="/admin/userinfor/index" >Account</a>
-            <a href="/admin/ticketprice/index" >Ticket price</a>
-            <a href="/admin/showinfor/index" >Show infor</a>
-            <a href="/admin/cinema/index" >Cinema</a>
-            <a href="/admin/movie/index" >Movie</a>
-            <a href="/admin/moviestatus/index" >Movie status</a>
+            <a href="/admin/dashboard" ><h5>Dashboard</h5></a>
+            <a href="/admin/userinfor/index" ><h5>Account</h5></a>
+            <a href="/admin/ticketprice/index" ><h5>Ticket price</h5></a>
+            <a href="/admin/showinfor/index" ><h5>Show infor</h5></a>
+            <a href="/admin/cinema/index" ><h5>Cinema</h5></a>
+            <a href="/admin/movie/index" ><h5>Movie</h5></a>
+            <a href="/admin/moviestatus/index" ><h5>Movie status</h5></a>
         @elseif(Auth::user()->role_id === 2)
-            <a href="/admin/dashboard" >Dashboard</a>
-            <a href="/admin/movie/index" >Movie</a>
-            <a href="/admin/userinfor/index" >Ticket price</a>
+            <a href="/admin/dashboard" ><h5>Dashboard</h5></a>
+            <a href="/admin/showinfor/index" ><h5>Show</h5></a>
+            <a href="/admin/ticketprice/index" ><h5>Ticket price</h5></a>
         @else
-            <a href="/admin/dashboard" >Dashboard</a>
+            <a href="/admin/dashboard" ><h5>Dashboard</h5></a>
         @endif
         
     </div>
@@ -41,7 +41,7 @@
         <div class="row">
           <div class="col-md-12 d-flex">
               <div class="dropdown ms-auto dropdown_btn">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn dropdown-toggle btn-profile" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="far fa-user-circle"></i>
                       <span>{{Auth::user()->Name}}</span>
                   </button>

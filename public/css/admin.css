@@ -23,21 +23,26 @@ body {
     
 }
 
+.btn-profile{
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
 .sidebar {
   margin: 0;
   padding: 0;
   width: 200px;
-  background-image: linear-gradient(to right, #00b4db, #0083b0);
-  position: fixed;
+  background-image: linear-gradient(to right top, #919191, #3a3a3a, #777878, #547575, #7e9b9b, #b5e3e3);  position: fixed;
   height: 100%;
   overflow: auto;
 }
 
 .sidebar a {
   display: block;
-  color: black;
+  color: white;
   padding: 16px;
   text-decoration: none;
+  font-weight: bold;
 }
  
 .sidebar a.active {
@@ -46,7 +51,7 @@ body {
 }
 
 .sidebar a:hover:not(.active) {
-  background-color: #cfb8b8;
+  background-image: linear-gradient(to right bottom, #000000, #932043);
   color: white;
 }
 
