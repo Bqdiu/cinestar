@@ -296,4 +296,9 @@ class BookingController extends Controller
 
         return response()->json(["Seat" => $Seat]);
     }
+    public function BookingIndex()
+    {
+        $bookings = Booking::select('*')->paginate(8);
+        return view('admin.booking.index',compact('bookings'));
+    }
 }

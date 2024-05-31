@@ -26,7 +26,7 @@ use App\Http\Controllers\QRCodeController;
 */
 //Client
 //Index
-Route::get('/', [HomeController::class, 'Index'])->name('index');
+Route::get('/', [HomeController::class, 'Index']);
 
 Route::get('/login', [UserInforController::class, 'Login'])->name('login');
 Route::post('/loginSubmit', [UserInforController::class, 'LoginPost']);
@@ -38,7 +38,6 @@ Route::get('/logout', [UserInforController::class, 'Logout']);
 Route::get('/profile', [UserInforController::class, 'Profile'])->name('profile');
 Route::post('/profile-partial', [UserInforController::class, 'ProfilePartial'])->name('profile-partial');
 Route::post('/history-partial', [UserInforController::class, 'HistoryPartial'])->name('history-partial');
-Route::get('/booking-detail-partial', [UserInforController::class, 'BookingDetailPartial'])->name('booking-detail-partial');
 Route::post('/update-infor', [UserInforController::class, 'UpdateInformation'])->name('updateInfor');
 Route::post('/change-pass', [UserInforController::class, 'ChangePassword']);
 //Register
@@ -128,10 +127,9 @@ Route::group(['middleware' => 'admin'], function () {
 
     // ticket price
     Route::get('/admin/ticketprice/index', [TicketPriceController::class, 'TicketPriceIndex']);
-
     Route::get('/admin/ticketprice/getTicketPrice/{TicketPriceID}', [TicketPriceController::class, 'getTicketPrice'])->name('getTicketPrice');
     Route::post('/admin/ticketprice/editTicketPrice', [TicketPriceController::class, 'editTicketPrice'])->name('editTicketPrice');
-
+    
     // showinfor
     Route::get('/admin/showinfor/index', [ShowInforController::class, 'ShowInforIndex']);
     Route::get('/admin/showinfor/searchShow/{searchText}', [ShowInforController::class, 'searchShow'])->name('searchShow');
@@ -141,11 +139,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/showinfor/getDataOption', [ShowInforController::class, 'getDataOption']);
     Route::post('/admin/showinfor/addShow', [ShowInforController::class, 'addShow'])->name('addShow');
     Route::post('/admin/showinfor/delete-show', [ShowInforController::class, 'deleteShow'])->name('deleteShow');
+
+    // booking
+    Route::get('/admin/booking/index', [BookingController::class, 'BookingIndex']);
 });
 
 Route::group(['middleware' => 'manager'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'Index']);
-    // movie
     // movie
     Route::get('/admin/movie/index', [Moviecontroller::class, 'MovieIndex']);
     Route::get('/admin/movie/getMovie/{MovieID}', [Moviecontroller::class, 'getMovie'])->name('getMovie');
@@ -158,7 +158,7 @@ Route::group(['middleware' => 'manager'], function () {
     Route::get('/admin/ticketprice/index', [TicketPriceController::class, 'TicketPriceIndex']);
     Route::get('/admin/ticketprice/getTicketPrice/{TicketPriceID}', [TicketPriceController::class, 'getTicketPrice'])->name('getTicketPrice');
     Route::post('/admin/ticketprice/editTicketPrice', [TicketPriceController::class, 'editTicketPrice'])->name('editTicketPrice');
-
+    
     // showinfor
     Route::get('/admin/showinfor/index', [ShowInforController::class, 'ShowInforIndex']);
     Route::get('/admin/showinfor/searchShow/{searchText}', [ShowInforController::class, 'searchShow'])->name('searchShow');
@@ -168,6 +168,7 @@ Route::group(['middleware' => 'manager'], function () {
     Route::get('/admin/showinfor/getDataOption', [ShowInforController::class, 'getDataOption']);
     Route::post('/admin/showinfor/addShow', [ShowInforController::class, 'addShow'])->name('addShow');
     Route::post('/admin/showinfor/delete-show', [ShowInforController::class, 'deleteShow'])->name('deleteShow');
+
 });
 
 Route::group(['middleware' => 'staff'], function () {
