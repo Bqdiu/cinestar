@@ -11,7 +11,7 @@ $thu = [
 <div class="history mb-[12px] cursor-pointer block text-white btn-back"> <i class="fas fa-chevron-left fa-xs"></i> Trở về</div>
 <div class="mt-5">
     <div class="row d-flex m-auto">
-        @foreach($Ticket as $t)
+
         <div class="col-md-12 col-12">
             <div class="form-checkout-cus">
                 <div class="form-main">
@@ -20,12 +20,12 @@ $thu = [
                             <div class="row mb-2">
                                 <div class="col-md-4 col-5 "> <img src="/img/header-logo.png" style="width: 130px; height:46px" alt=""></div>
                                 <div class="col-md-8 col-7 d-flex align-items-center mt-2">
-                                    <span class="ct responsive">{{ str_replace('Cinestar', '', $t->show_infor->cinemaHall->cinema->Name) }}</span>
+                                    <span class="ct responsive">{{ str_replace('Cinestar', '', $Booking->showinfor->cinemaHall->cinema->Name) }}</span>
                                 </div>
 
                             </div>
 
-                            <p class="dt">{{$t->show_infor->cinemaHall->cinema->Address}}</p>
+                            <p class="dt">{{$Booking->showinfor->cinemaHall->cinema->Address}}</p>
                         </div>
                     </div>
                     <div class="inner-info">
@@ -106,7 +106,7 @@ $thu = [
                                 @endforeach
                             </div>
                             <div class="col-md-8 col-12">
-                                <?php $qrcode_url = url('booking-movie-detail?BookingID=' . $t->BookingID)  ?>
+                                <?php $qrcode_url = url('booking-movie-detail?BookingID=' . $Booking->BookingID)  ?>
                                 {{QrCode::size(160)->generate($qrcode_url)}}
                             </div>
                         </div>
@@ -125,6 +125,6 @@ $thu = [
                 </div>
             </div>
         </div>
-        @endforeach
+
     </div>
 </div>

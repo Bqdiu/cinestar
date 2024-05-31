@@ -280,7 +280,6 @@ class HomeController extends Controller
     public function BookingMovieDetail(Request $request)
     {
         $booking = Booking::where('BookingID', '=', $request->BookingID)->first();
-        $Ticket = ShowSeat::where('BookingID', '=', $request->BookingID)->get();
         $TypeTicketList = TypeTicketBookingList::where('BookingID', '=', $booking->BookingID)->get();
 
         $Ticket = ShowSeat::where('BookingID', '=', $request->BookingID)->get();
