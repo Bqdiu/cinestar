@@ -24,7 +24,7 @@
                 <form action="/booking-detail-partial" id="FormRedirectoDetail" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="BookingID" value="{{$b->BookingID}}">
                     <button style="background:none;border:0px" type="submit">
-                        <i class="far fa-eye" style="padding-top:5px;color:yellow"></i>
+                        <i class="far fa-eye" style="padding-top:5px;color:green"></i>
                     </button>
                 </form>
 
