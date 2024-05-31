@@ -10,6 +10,8 @@
     <script src="https://kit.fontawesome.com/a597e9f72c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('/summernote/summernote-bs4.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/admin.css') }}">
+    <link rel="shortcut icon" href="{{asset('/img/favicon.ico')}}">
+
 </head>
 
 <body>

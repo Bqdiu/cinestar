@@ -75,6 +75,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $movie->links('pagination::bootstrap-4') }}
         </div>
     </div>
 

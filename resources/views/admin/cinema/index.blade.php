@@ -64,6 +64,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $cinemas->links('pagination::bootstrap-4') }}
         </div>
     </div>
 

@@ -12,7 +12,7 @@ class CinemaController extends Controller
 {
     public function CinemaIndex()
     {
-        $cinemas = Cinema::select('*')->leftJoin('city', 'cinema.CityID', '=', 'city.CityID')->get();
+        $cinemas = Cinema::select('*')->leftJoin('city', 'cinema.CityID', '=', 'city.CityID')->paginate(3);
         return view('admin.cinema.index', compact('cinemas'));
     }
 

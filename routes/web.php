@@ -145,7 +145,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 Route::group(['middleware' => 'manager'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'Index']);
-       // movie
+    // movie
     Route::get('/admin/movie/index', [Moviecontroller::class, 'MovieIndex']);
     Route::get('/admin/movie/getMovie/{MovieID}', [Moviecontroller::class, 'getMovie'])->name('getMovie');
     Route::post('/admin/movie/editMovie', [Moviecontroller::class, 'editMovie'])->name('editMovie');
@@ -153,6 +153,20 @@ Route::group(['middleware' => 'manager'], function () {
     Route::get('/admin/movie/searchMovie/{term}', [MovieController::class, 'searchMovie'])->name('searchMovie');
     Route::post('/admin/movie/add-movie', [MovieController::class, 'addMovie'])->name('addMovie');
     Route::get('/admin/movie/getDataOption', [Moviecontroller::class, 'getDataOption']);
+    // ticket price
+    Route::get('/admin/ticketprice/index', [TicketPriceController::class, 'TicketPriceIndex']);
+    Route::get('/admin/ticketprice/getTicketPrice/{TicketPriceID}', [TicketPriceController::class, 'getTicketPrice'])->name('getTicketPrice');
+    Route::post('/admin/ticketprice/editTicketPrice', [TicketPriceController::class, 'editTicketPrice'])->name('editTicketPrice');
+    
+    // showinfor
+    Route::get('/admin/showinfor/index', [ShowInforController::class, 'ShowInforIndex']);
+    Route::get('/admin/showinfor/searchShow/{searchText}', [ShowInforController::class, 'searchShow'])->name('searchShow');
+    Route::get('/admin/showinfor/getShowInfor/{ShowID}', [ShowInforController::class, 'getShowInfor'])->name('getShowInfor');
+    Route::get('/admin/showinfor/getCinemaHallByCinema/{CinemaID}', [ShowInforController::class, 'getCinemaHallByCinema'])->name('getCinemaHallByCinema');
+    Route::post('/admin/showinfor/editShow', [ShowInforController::class, 'editShow'])->name('editShow');
+    Route::get('/admin/showinfor/getDataOption', [ShowInforController::class, 'getDataOption']);
+    Route::post('/admin/showinfor/addShow', [ShowInforController::class, 'addShow'])->name('addShow');
+    Route::post('/admin/showinfor/delete-show', [ShowInforController::class, 'deleteShow'])->name('deleteShow');
 
 });
 

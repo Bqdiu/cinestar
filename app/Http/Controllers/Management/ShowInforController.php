@@ -14,7 +14,7 @@ class ShowInforController extends Controller
 {
     public function ShowInforIndex()
     {
-        $show_infor = Showinfor::select('*')->get();
+        $show_infor = Showinfor::select('*')->paginate(8);
         return view('admin.showinfor.index',compact('show_infor'));
     }
 

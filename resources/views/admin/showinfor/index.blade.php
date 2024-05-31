@@ -70,6 +70,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $show_infor->links('pagination::bootstrap-4') }}
         </div>
     </div>
 
