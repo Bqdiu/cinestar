@@ -1,6 +1,66 @@
 let newTitle = "";
 let newURL = "";
+var roomNumber = "";
+function LoadCinemaList(cityID, date, movieID) {
+    $.ajax({
+        url: "/cinemalist-partial/" + cityID + "/" + date + "/" + movieID,
+        type: "GET",
+        success: function (res) {
+            $(".shtime-ft").html(res);
+        },
+    });
+}
+function LoadUpdateSeat(ShowID) {
+    $.ajax({
+        url: "/seat-partial/" + ShowID,
+        type: "GET",
+        success: function (res) {
+            $(".ticket-cointainer").addClass("d-block");
+            $(".sec-seat").addClass("d-block");
+            $(".sec-seat").html(res);
+            $(".dt-bill").addClass("d-block");
+
+            roomNumber = $(".seat-wr .seat-heading.sec-heading .heading")
+                .text()
+                .slice(-2);
+            $("html, body").animate(
+                {
+                    scrollTop:
+                        $(".ticket-cointainer").first().offset().top - 100,
+                },
+                300
+            );
+            updateSeats(ShowID);
+        },
+    });
+}
+function updateSeats(ShowID) {
+    $.ajax({
+        url: "/update-seat",
+        type: "GET",
+        data: { ShowID: ShowID },
+
+        success: function (res) {
+            updateSeatsUI(res.Seat);
+        },
+        error: function (err) {
+            console.error("Error fetching seat information:", err);
+        },
+    });
+}
+function updateSeatsUI(seats) {
+    seats.forEach((seat) => {
+        let seatElement = $(`[data-cinema-seat-id="${seat.CinemaSeatID}"]`);
+
+        // console.log(seatElement);
+        if (seat.Status === "Ghế đã được đặt") {
+            seatElement.addClass("booked");
+            seatElement.off("click"); // Loại bỏ sự kiện click để ngăn người dùng nhấp lại
+        }
+    });
+}
 $(document).ready(function () {
+    const urlParams = new URLSearchParams(window.location.search);
     var selectedSeats = []; // Mảng chứa vị trí của các ghế đã chọn
     var selectedSeats_1 = [];
     var sumCountTicket = 0;
@@ -8,8 +68,10 @@ $(document).ready(function () {
     var dCityID = $(".dropdown-menu .city-option-menu.active").data("city-id");
     var dShowDate = $(".swiper-slide-item.active .date").data("date");
     var showTimeID = null;
+    if (urlParams.get("ShowID")) showTimeID = urlParams.get("ShowID");
+
     var showtime = "";
-    var roomNumber = "";
+
     // Output the room number to the console
     var currentCount,
         countNumber,
@@ -93,15 +155,7 @@ $(document).ready(function () {
             },
         });
     }
-    function LoadCinemaList(cityID, date, movieID) {
-        $.ajax({
-            url: "/cinemalist-partial/" + cityID + "/" + date + "/" + movieID,
-            type: "GET",
-            success: function (res) {
-                $(".shtime-ft").html(res);
-            },
-        });
-    }
+
     $(document).on("click", ".movie-collapse", function () {
         var movieShowID = $(this).data("movie-show");
         $("#" + movieShowID).toggleClass("active");
@@ -118,6 +172,25 @@ $(document).ready(function () {
         // $(".sec-seat").removeClass("d-block");
         totalPrice = 0;
         // countNumber = $(".count-number").text("0");
+        $(".bill-right .price .num").text("0 VNĐ");
+        $(".dt-bill .btn.btn--pri").addClass("opacity-40");
+        $(".dt-bill .btn.btn--pri").addClass("pointer-events-none");
+        $(".dt-bill .btn.btn--pri").removeClass("opcity-100");
+        console.log(totalPrice);
+        sumCountTicket = 0;
+        updateCinemaInfo("", selectedSeats.concat(selectedSeats_1), "");
+    }
+    function resetSection1() {
+        selectedSeats = [];
+        selectedSeats_1 = [];
+
+        $(".ticket-cointainer").removeClass("d-block");
+        $(".seat-wr.seat-single").removeClass("choosing");
+        $(".seat-couple .seat-wr").removeClass("choosing");
+        $(".dt-bill").removeClass("d-block");
+        $(".sec-seat").removeClass("d-block");
+        totalPrice = 0;
+        countNumber = $(".count-number").text("0");
         $(".bill-right .price .num").text("0 VNĐ");
         $(".dt-bill .btn.btn--pri").addClass("opacity-40");
         $(".dt-bill .btn.btn--pri").addClass("pointer-events-none");
@@ -164,7 +237,7 @@ $(document).ready(function () {
         $(".city-option-menu").not(this).removeClass("active");
         $(".an-select-selection-item").empty();
         $(".an-select-selection-item").html(cityName);
-
+        resetSection1();
         LoadCinemaList(cityID, defaultShowDate, movieID);
     });
     $(document).on("click", ".cinestar-heading", function () {
@@ -453,57 +526,10 @@ $(document).ready(function () {
             }
         }
     });
-    function LoadUpdateSeat(ShowID) {
-        $.ajax({
-            url: "/seat-partial/" + ShowID,
-            type: "GET",
-            success: function (res) {
-                $(".ticket-cointainer").addClass("d-block");
-                $(".sec-seat").addClass("d-block");
-                $(".sec-seat").html(res);
-                $(".dt-bill").addClass("d-block");
 
-                roomNumber = $(".seat-wr .seat-heading.sec-heading .heading")
-                    .text()
-                    .slice(-2);
-                $("html, body").animate(
-                    {
-                        scrollTop:
-                            $(".ticket-cointainer").first().offset().top - 100,
-                    },
-                    300
-                );
-                updateSeats(ShowID);
-            },
-        });
-    }
-    function updateSeats(ShowID) {
-        $.ajax({
-            url: "/update-seat",
-            type: "GET",
-            data: { ShowID: ShowID },
-
-            success: function (res) {
-                updateSeatsUI(res.Seat);
-            },
-            error: function (err) {
-                console.error("Error fetching seat information:", err);
-            },
-        });
-    }
-    function updateSeatsUI(seats) {
-        seats.forEach((seat) => {
-            let seatElement = $(`[data-cinema-seat-id="${seat.CinemaSeatID}"]`);
-
-            // console.log(seatElement);
-            if (seat.Status === "Ghế đã được đặt") {
-                seatElement.addClass("booked");
-                seatElement.off("click"); // Loại bỏ sự kiện click để ngăn người dùng nhấp lại
-            }
-        });
-    }
     $(document).on("click", ".item-time", function () {
         showTimeID = $(this).data("show-time-item");
+
         var nameCinema = $(this).data("value-name");
         console.log(showTimeID);
         console.log(nameCinema);
@@ -1417,5 +1443,73 @@ $(document).ready(function () {
     function validatePhoneNumber(phoneNumber) {
         var re = /^\d{10,11}$/;
         return re.test(phoneNumber);
+    }
+});
+
+$(document).ready(function () {
+    var path = window.location.pathname;
+
+    // Tách phần cuối cùng của đoạn path
+    var parts = path.split("/");
+    var movieID = parts[parts.length - 1];
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let cityID = urlParams.get("CityID");
+    let showID = urlParams.get("ShowID");
+    let showDate = urlParams.get("ShowDate");
+
+    if (cityID && showID && showDate) {
+        $(".swiper-slide-item").removeClass("active");
+        $(".swiper-slide-item .date").each(function () {
+            if ($(this).data("date") === showDate) {
+                $(this).parent().addClass("active");
+            }
+        });
+
+        $(".city-option-menu").removeClass("active");
+        $(".city-option-menu[data-city-id='" + cityID + "']").addClass(
+            "active"
+        );
+
+        var cityName = $(
+            ".city-option-menu[data-city-id='" + cityID + "']"
+        ).data("city-name");
+        $(".an-select-selection-item").empty();
+        $(".an-select-selection-item").html(cityName);
+
+        LoadCinemaList(cityID, showDate, movieID, showID, function () {
+            console.log("Partial loaded successfully");
+
+            // Kiểm tra và cập nhật item-time
+            LoadUpdateSeat(showID);
+        });
+    }
+    // Hàm load partial
+    function LoadCinemaList(cityID, showDate, movieID, showID, callback) {
+        // Thực hiện load partial ở đây
+        $.ajax({
+            url:
+                "/cinemalist-partial/" +
+                cityID +
+                "/" +
+                showDate +
+                "/" +
+                movieID,
+            type: "GET",
+            success: function (res) {
+                $(".shtime-ft").html(res);
+                $(".item-time").removeClass("active");
+                $(".item-time").each(function () {
+                    if ($(this).data("show-time-item") === parseInt(showID)) {
+                        $(this).addClass("active");
+                        var nameCinema = $(this).data("value-name");
+                        $(".cinema-name.txt").text(nameCinema);
+                    }
+                });
+            },
+        });
+        if (typeof callback === "function") {
+            callback();
+        }
     }
 });

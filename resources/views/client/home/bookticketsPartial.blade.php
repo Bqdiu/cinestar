@@ -39,12 +39,12 @@
               <p class="text-white d-grid align-items-center"><i class="fas fa-angle-up icon"></i></p>
             </div>
             <div class="content-movieShow mt-2">
-              <p class="text-white">STANDARD</p>
+              <p class="text-white mb-2">STANDARD</p>
               <div class="row">
 
                 @foreach(\App\Models\Showinfor::getStartTimeOFShow($idRap,$valueShow->ShowDate,$v->MovieID) as $keyTime=>$valueTime)
 
-                <a href="" class="col-md-3 movie-show-item"><span>{{ \Carbon\Carbon::createFromFormat('H:i:s', $valueTime->StartTime)->format('H:i') }}</span></a>
+                <a href="/detailmovie/{{$v->MovieID}}?ShowID={{$valueTime->ShowID}}&CityID={{$valueTime->cinemahall->cinema->CityID}}&ShowDate={{$valueTime->ShowDate}}" class="col-md-3 movie-show-item"><span>{{ \Carbon\Carbon::createFromFormat('H:i:s', $valueTime->StartTime)->format('H:i') }}</span></a>
 
                 @endforeach
 

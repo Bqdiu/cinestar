@@ -11,17 +11,18 @@ $thu = [
 ]; ?>
 
 @section('main-content')
-<div class="thank mb-[12px] cursor-pointer block text-white btn-back"> <i class="fas fa-chevron-left fa-xs"></i> Quay lại Trang Chủ</div>
 <div class="container mt-5">
+    <div class="thank mb-[12px] mb-5 cursor-pointer block text-white btn-back"> <i class="fas fa-chevron-left fa-xs"></i> Quay lại Trang Chủ</div>
+
     <div class="row d-flex m-auto">
         <div class="col-md-12 col-12">
             <div class="form-checkout-cus">
                 <div class="form-main">
                     <div class="inner-info">
                         <div class="inner-info-row cinestar-br">
-                            <div class="row mb-2">
-                                <div class="col-md-4 col-5 "> <img src="/img/header-logo.png" style="width: 130px; height:46px" alt=""></div>
-                                <div class="col-md-8 col-7 d-flex align-items-center mt-2">
+                            <div class="d-flex" style="flex-direction:row">
+                                <div class=" "> <img src="/img/header-logo.png" style="width: 130px; height:46px" alt=""></div>
+                                <div class="ms-1 mb-3 d-flex align-items-center mt-2">
                                     <span class="ct responsive">{{ str_replace('Cinestar', '', $Booking->showinfor->cinemaHall->cinema->Name) }}</span>
                                 </div>
 
