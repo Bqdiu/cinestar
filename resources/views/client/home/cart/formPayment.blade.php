@@ -15,7 +15,7 @@
         </div>
 
         <div class="form-it">
-            <button type="submit" class="btn btn-submit btn--pri h-[41px]  opacity-30 pointer-events-none" name="payUrl">Thanh toán</button>
+            <button type="submit" class="payment-method btn btn-submit btn--pri h-[41px]  opacity-30 pointer-events-none" name="payUrl">Thanh toán</button>
         </div>
     </form>
 </div>

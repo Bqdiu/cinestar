@@ -21,4 +21,8 @@ class Booking extends Model
     {
         return self::belongsTo(Showinfor::class, "ShowID", "ShowID");
     }
+    public function payment_method()
+    {
+        return self::belongsTo(PaymentMethod::class, "PaymentID", "PaymentID");
+    }
 }

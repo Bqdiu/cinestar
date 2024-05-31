@@ -1,5 +1,4 @@
-@extends('layout')
-<?php $pageTitle = "Thông tin vé phim";
+<?php
 $thu = [
     'Monday' => 'Thứ Hai',
     'Tuesday' => 'Thứ Ba',
@@ -9,10 +8,8 @@ $thu = [
     'Saturday' => 'Thứ Bảy',
     'Sunday' => 'Chủ Nhật',
 ]; ?>
-
-@section('main-content')
-<div class="thank mb-[12px] cursor-pointer block text-white btn-back"> <i class="fas fa-chevron-left fa-xs"></i> Quay lại Trang Chủ</div>
-<div class="container mt-5">
+<div class="history mb-[12px] cursor-pointer block text-white btn-back"> <i class="fas fa-chevron-left fa-xs"></i> Trở về</div>
+<div class="mt-5">
     <div class="row d-flex m-auto">
         @foreach($Ticket as $t)
         <div class="col-md-12 col-12">
@@ -131,4 +128,3 @@ $thu = [
         @endforeach
     </div>
 </div>
-@endsection

@@ -7,6 +7,10 @@ use App\Models\UserInfor;
 use App\Models\Booking;
 use App\Models\Role;
 use App\Models\Password_reset;
+use App\Models\Showinfor;
+use App\Models\ShowSeat;
+use App\Models\TypeTicketBookingList;
+use App\Models\SeatType;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Exception;
@@ -336,8 +340,41 @@ class UserInforController extends Controller
     }
     public function HistoryPartial()
     {
-        $view = View::make('client/user/ProfilePartial/history-partial')->render();
-        return response()->json(["view" => $view]);
+        if (Auth::check()) {
+            $Show = Booking::where("UserID", '=', Auth::user()->UserID)->get();
+            $view = View::make('client/user/ProfilePartial/history-partial', ["Booking" => $Show])->render();
+            return response()->json(["view" => $view]);
+        }
+        return redirect()->route('index');
+    }
+    public function BookingDetailPartial(Request $request)
+    {
+        if (Auth::check()) {
+            $booking = Booking::where('BookingID', '=', $request->BookingID)->first();
+            $Ticket = ShowSeat::where('BookingID', '=', $request->BookingID)->get();
+            $TypeTicketList = TypeTicketBookingList::where('BookingID', '=', $booking->BookingID)->get();
+
+            $Ticket = ShowSeat::where('BookingID', '=', $request->BookingID)->get();
+            $TicketType = [];
+            foreach ($Ticket as $v) {
+                $seatTypeID = $v->cinema_seat->SeatTypeID;
+
+                if (!isset($TicketType[$request->BookingID])) {
+                    $TicketType[$request->BookingID] = [];
+                }
+
+                if (!isset($TicketType[$request->BookingID][$seatTypeID])) {
+                    $seatType = SeatType::find($seatTypeID);
+                    if ($seatType) {
+                        $TicketType[$request->BookingID][$seatTypeID] = $seatType;
+                    }
+                }
+            }
+            $view = View::make('client/user/ProfilePartial/booking-detail-partial', ["Booking" => $booking, 'TypeTicketList' => $TypeTicketList, "TicketType" => $TicketType, "Ticket" => $Ticket])->render();
+            return response()->json(["view" => $view]);
+        }
+
+        return redirect()->route('index');
     }
     public function UpdateInformation(Request $request)
     {

@@ -1,3 +1,5 @@
+let newTitle = "";
+let newURL = "";
 $(document).ready(function () {
     var selectedSeats = []; // Mảng chứa vị trí của các ghế đã chọn
     var selectedSeats_1 = [];
@@ -910,6 +912,7 @@ $(document).ready(function () {
                 processData: false,
                 success: function (res) {
                     console.log(res.payUrl);
+
                     window.location.href = res.payUrl;
                 },
                 error: function (xhr, status, error) {
@@ -1045,7 +1048,11 @@ function startCountdown(endTime) {
         );
     }
 }
-
+$(document).on("click", ".payment-method.btn-submit", function () {
+    if (interval) {
+        clearInterval(interval);
+    }
+});
 $(document).on("click", ".checkout.btn-back", function () {
     if (interval) {
         clearInterval(interval);
@@ -1055,8 +1062,38 @@ $(document).on("click", ".checkout.btn-back", function () {
 $(document).on("click", ".thank.btn-back", function () {
     window.location.href = "/";
 });
+$(document).on("click", ".history.btn-back", function () {
+    history.back();
+});
 
 $(document).ready(function () {
+    let bID = null;
+    $(document).on("submit", "#FormRedirectoDetail", function (e) {
+        e.preventDefault();
+
+        let formData = new FormData(this);
+        let newTitle = "THÔNG TIN VÉ PHIM";
+        let newURL = "?view=detail";
+
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ": " + pair[1]);
+            bID = pair[1];
+        }
+
+        $.ajax({
+            url: "/booking-detail-partial?BookingID=" + bID,
+            type: "GET",
+            success: function (res) {
+                $(".prof-main .heading").text("THÔNG TIN VÉ PHIM");
+                $(".acc-prf").html(res.view);
+                window.history.pushState({ view: "detail" }, newTitle, newURL);
+                localStorage.setItem("bID", bID);
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX error: ", status, error);
+            },
+        });
+    });
     function LoadProfilePartial() {
         $(".prof-main .heading").text("THÔNG TIN KHÁCH HÀNG");
         $.ajax({
@@ -1068,11 +1105,126 @@ $(document).ready(function () {
         });
     }
     LoadProfilePartial();
+
     $(document).on("click", ".acc-menu-link", function () {
         const wrapperID = $(this).data("swiper-wrapper");
         $(".swiper-slide").removeClass("active");
         $("#" + wrapperID).addClass("active");
+
         if (wrapperID == "swiper-slide-1") {
+            $(".prof-main .heading").text("THÔNG TIN KHÁCH HÀNG");
+            newTitle = "THÔNG TIN KHÁCH HÀNG";
+            newURL = "?view=profile";
+            $.ajax({
+                url: "/profile-partial",
+                type: "POST",
+                success: function (res) {
+                    $(".acc-prf").html(res.view);
+                    window.history.pushState(
+                        { view: "profile" },
+                        newTitle,
+                        newURL
+                    );
+                },
+            });
+        } else {
+            $(".prof-main .heading").text("LỊCH SỬ MUA HÀNG");
+            newTitle = "LỊCH SỬ MUA HÀNG";
+            newURL = "?view=history";
+            $.ajax({
+                url: "/history-partial",
+                type: "POST",
+                success: function (res) {
+                    $(".acc-prf").html(res.view);
+                    window.history.pushState(
+                        { view: "history" },
+                        newTitle,
+                        newURL
+                    );
+                },
+            });
+        }
+    });
+    window.addEventListener("popstate", function (event) {
+        if (event.state && event.state.view) {
+            if (event.state.view === "profile") {
+                $(".prof-main .heading").text("THÔNG TIN KHÁCH HÀNG");
+                $.ajax({
+                    url: "/profile-partial",
+                    type: "POST",
+                    success: function (res) {
+                        $(".acc-prf").html(res.view);
+                    },
+                });
+            } else if (event.state.view === "history") {
+                $(".prof-main .heading").text("LỊCH SỬ MUA HÀNG");
+                $.ajax({
+                    url: "/history-partial",
+                    type: "POST",
+                    success: function (res) {
+                        $(".acc-prf").html(res.view);
+                    },
+                });
+            } else if (event.state.view === "detail") {
+                $(".prof-main .heading").text("THÔNG TIN VÉ PHIM");
+                $.ajax({
+                    url:
+                        "/booking-detail-partial?BookingID=" +
+                        localStorage.getItem("bID"),
+                    type: "GET",
+                    success: function (res) {
+                        $(".acc-prf").html(res.view);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX error: ", status, error);
+                    },
+                });
+            }
+        }
+    });
+    $(document).ready(function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const view = urlParams.get("view");
+        if (view === "profile") {
+            $(".prof-main .heading").text("THÔNG TIN KHÁCH HÀNG");
+            $("#swiper-slide-1").addClass("active");
+            $("#swiper-slide-2").removeClass("active");
+            $.ajax({
+                url: "/profile-partial",
+                type: "POST",
+                success: function (res) {
+                    $(".acc-prf").html(res.view);
+                },
+            });
+        } else if (view === "history") {
+            $(".prof-main .heading").text("LỊCH SỬ MUA HÀNG");
+            $("#swiper-slide-2").addClass("active");
+            $("#swiper-slide-1").removeClass("active");
+            $.ajax({
+                url: "/history-partial",
+                type: "POST",
+                success: function (res) {
+                    $(".acc-prf").html(res.view);
+                },
+            });
+        } else if (view === "detail") {
+            $(".prof-main .heading").text("THÔNG TIN VÉ PHIM");
+            $("#swiper-slide-2").addClass("active");
+            $("#swiper-slide-1").removeClass("active");
+            $.ajax({
+                url:
+                    "/booking-detail-partial?BookingID=" +
+                    localStorage.getItem("bID"),
+                type: "GET",
+                success: function (res) {
+                    $(".acc-prf").html(res.view);
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX error: ", status, error);
+                },
+            });
+        } else {
+            // Load partial view mặc định (profile)
             $(".prof-main .heading").text("THÔNG TIN KHÁCH HÀNG");
             $.ajax({
                 url: "/profile-partial",
@@ -1081,18 +1233,8 @@ $(document).ready(function () {
                     $(".acc-prf").html(res.view);
                 },
             });
-        } else {
-            $(".prof-main .heading").text("LỊCH SỬ MUA HÀNG");
-            $.ajax({
-                url: "/history-partial",
-                type: "POST",
-                success: function (res) {
-                    $(".acc-prf").html(res.view);
-                },
-            });
         }
     });
-
     $(document).on("click", ".popup.--w7 .profile.btn.OK", function () {
         $(".popup.--w7").removeClass("open");
     });

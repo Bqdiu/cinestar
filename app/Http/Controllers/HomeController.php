@@ -190,13 +190,17 @@ class HomeController extends Controller
         $bookingID = intval(session('BookingID'));
 
 
-        $Message = "";
+        $Message = null;
         $booking = Booking::find($bookingID);
-
+        if (!$booking) {
+            return redirect()->route('index');
+        }
         if ($booking->Status == "Chưa thanh toán") {
+
             if ($request->message == "Successful.") {
                 $booking->Status = "Đã Thanh Toán";
                 $Message = $request->message;
+
                 $booking->PaymentID = $request->PaymentID;
                 Momo::create([
                     'partnerCode' => $request->partnerCode,
@@ -248,6 +252,8 @@ class HomeController extends Controller
 
                 $booking->save();
                 broadcast(new reserveSeat($ShowSeat))->toOthers();
+            } else {
+                $Message = "Error";
             }
         }
         $TypeTicketList = TypeTicketBookingList::where('BookingID', '=', $booking->BookingID)->get();;
@@ -268,6 +274,7 @@ class HomeController extends Controller
                 }
             }
         }
+
         return view('client/home/cart/formThank', ["Booking" => $booking, "Message" => $Message, 'TypeTicketList' => $TypeTicketList, "TicketType" => $TicketType, "Ticket" => $Ticket]);
     }
     public function BookingMovieDetail(Request $request)

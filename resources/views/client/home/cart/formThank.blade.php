@@ -12,7 +12,9 @@ $thu = [
 ];
 ?>
 @section('main-content')
-@if($Message == "Successful." || $Message = "00")
+
+@if($Message != "Error" )
+
 <section class="checkout checkout-customer ht">
     <div class="container">
         <div class="checkout-customer-wr">
@@ -76,19 +78,18 @@ $thu = [
                                     <p class="tt">Phòng chiếu</p>
                                     <p class="ct">{{substr($Booking->showinfor->cinemaHall->Name,-2)}}</p>
                                 </div>
-
                                 @foreach($TypeTicketList as $ticket)
 
                                 <div class="inner-info-row num-ticket">
                                     <p class="tt">Số vé</p>
-                                    <p class="ct">{{$ticket['Quantity']}}</p>
+                                    <p class="ct">{{$ticket->Quantity}}</p>
                                 </div>
                                 <div class="inner-info-row type-ticket">
                                     <p class="tt">Loại vé</p>
-                                    @if($ticket['TicketTypeID'] == 2)
-                                    <p class="ct">{{$ticket['Name'] }}</p>
+                                    @if($ticket->TicketID == 2)
+                                    <p class="ct">{{$ticket->ticket_price->TicketName }}</p>
                                     @else
-                                    <p class="ct">{{ ucwords(mb_strtolower($ticket['Name'])) }}</p>
+                                    <p class="ct">{{ ucwords(mb_strtolower($ticket->ticket_price->TicketName )) }}</p>
                                     @endif
                                 </div>
 
@@ -144,5 +145,6 @@ $thu = [
         <p class="">Xin chân thành cảm ơn!</p>
     </div>
 </div>
+
 @endif
 @endsection
