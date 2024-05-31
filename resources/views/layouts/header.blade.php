@@ -32,8 +32,12 @@
             <a href="/admin/dashboard" ><h5>Dashboard</h5></a>
             <a href="/admin/showinfor/index" ><h5>Show</h5></a>
             <a href="/admin/ticketprice/index" ><h5>Ticket price</h5></a>
+            <a href="/admin/booking/index" ><h5>Booking</h5></a>
+
         @else
             <a href="/admin/dashboard" ><h5>Dashboard</h5></a>
+            <a href="/admin/booking/index" ><h5>Booking</h5></a>
+
         @endif
         
     </div>

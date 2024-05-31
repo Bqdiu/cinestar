@@ -169,10 +169,14 @@ Route::group(['middleware' => 'manager'], function () {
     Route::get('/admin/showinfor/getDataOption', [ShowInforController::class, 'getDataOption']);
     Route::post('/admin/showinfor/addShow', [ShowInforController::class, 'addShow'])->name('addShow');
     Route::post('/admin/showinfor/delete-show', [ShowInforController::class, 'deleteShow'])->name('deleteShow');
+    // booking
+    Route::get('/admin/booking/index', [BookingController::class, 'BookingIndex']);
 });
 
 Route::group(['middleware' => 'staff'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'Index']);
+    // booking
+    Route::get('/admin/booking/index', [BookingController::class, 'BookingIndex']);
 });
 // login/ register google
 Route::get('auth/google', [UserInforController::class, 'redirect'])->name('google-auth');
