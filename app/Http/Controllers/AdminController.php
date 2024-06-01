@@ -28,11 +28,7 @@ class AdminController extends Controller
             ]);
     }
 
-    public function Index()
-    {
-        return view('admin.dashboard');
-    }
-
+   
     public function Logout()
     {
         Auth::Logout();

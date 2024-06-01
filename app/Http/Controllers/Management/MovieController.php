@@ -46,6 +46,12 @@ class MovieController extends Controller
             'thumbnail.required' => 'Hãy chọn file ảnh',
             'thumbnail.max' => 'File ảnh quá lớn',
         ]);
+        $MovieDeleteThumbnail = Movie::find($request->editMovieID);
+        $oldImagePath = public_path('/imgMovie/' . $MovieDeleteThumbnail->Thumbnail);
+        if (file_exists($oldImagePath))
+            unlink($oldImagePath);
+
+
         $originalFileName = $request->file('thumbnail')->getClientOriginalName();
         $user_id = Auth::id();
         $img = 'image' . $user_id . '-' . time() . '-' . $originalFileName;
@@ -78,6 +84,10 @@ class MovieController extends Controller
             $movie = Movie::find($request->deleteMovieID);
             if (!$movie)
                 return redirect()->back()->withErorrs('Không tìm thấy phim muốn xóa');
+            $oldImagePath = public_path('/imgMovie/' . $movie->Thumbnail);
+            if (file_exists($oldImagePath))
+                unlink($oldImagePath);
+
             $movie->delete();
             return redirect()->back()->with('mess', 'Xóa thành công');
         } catch (\Exception $e) {

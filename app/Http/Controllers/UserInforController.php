@@ -148,6 +148,33 @@ class UserInforController extends Controller
         }
     }
 
+    public function redirectFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function callBackFacebook()
+    {
+        try {
+            $facebook_user = Socialite::driver('facebook')->user();
+            $user = UserInfor::where('facebook_id', $facebook_user->getId())->first();
+            if (!$user) {
+                $new_user = UserInfor::create([
+                    'Name' => $facebook_user->getName(),
+                    'Email' => $facebook_user->getEmail(),
+                    'facebook_id' => $facebook_user->getId()
+                ]);
+                Auth::login($new_user);
+                return redirect()->intended('/');
+            } else {
+                Auth::login($user);
+                return redirect()->intended('/');
+            }
+        } catch (\Throwable $th) {
+            dd('Something went wrong' . $th->getMessage());
+        }
+    }
+
     public function getUserInfor($UserID)
     {
         $user = UserInfor::select('*')->leftJoin('role', 'role.role_id', '=', 'userinfor.role_id')
@@ -407,4 +434,6 @@ class UserInforController extends Controller
         }
         return response()->json(["Error" => "CẬP NHẬT THẤT BẠI"]);
     }
+
+    
 }

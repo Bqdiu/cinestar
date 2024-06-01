@@ -3,26 +3,27 @@
     <div class="container-fluid mt-3 border-top">
         <div class="row">
             <div class="col-12">
-                    <h3 class="text-center">Movie</h3>
-                    @if(session('mess'))
-                        <div class="alert alert-success alert_hide">
-                            {{session('mess')}}
-                        </div>
-                    @endif
-                    @if ($errors->any())
-                        <div class="alert alert-danger alert_hide">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                </div>
+                <h3 class="text-center">Movie</h3>
+                @if (session('mess'))
+                    <div class="alert alert-success alert_hide">
+                        {{ session('mess') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger alert_hide">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
         </div>
         <div class="row">
             <div class="col-12 p-0 m-0">
-                <a href="#" class="btn btn-success mt-2 mb-2 btn-add-movie" data-bs-toggle="modal" data-bs-target="#addMovie">Thêm mới</a>
+                <a href="#" class="btn btn-success mt-2 mb-2 btn-add-movie" data-bs-toggle="modal"
+                    data-bs-target="#addMovie">Thêm mới</a>
             </div>
         </div>
         <div class="row" style="padding-bottom: 20px">
@@ -49,29 +50,31 @@
                     </tr>
                 </thead>
                 <tbody id="data-body">
-                    @foreach($movie as $row)
-                    <tr>
-                        <th scope="row" class="text-center align-middle">{{$row->MovieID}}</th>
-                        <td scope="row" class="text-center align-middle">{{$row->Title}}</td>
-                        <td scope="row" class="text-center align-middle">
-                            <img src="{{ asset('/imgMovie/' . $row->Thumbnail) }}" width="50" height="50">
-                        </td>
-                        <td scope="row" class="text-center align-middle">{{$row->Description}}</td>
-                        <td scope="row" class="text-center align-middle">{{$row->Duration}}</td>
-                        <td scope="row" class="text-center align-middle">{{$row->Language}}</td>
-                        <td scope="row" class="text-center align-middle">{{$row->ReleaseDate}}</td>
-                        <td scope="row" class="text-center align-middle">{{$row->Country}}</td>
-                        <td scope="row" class="text-center align-middle">{{$row->Genre}}</td>
-                        <td scope="row" class="text-center align-middle">{{$row->trailer_url}}</td>
-                        <td scope="row" class="text-center align-middle">{{$row->Director}}</td>
-                        <td scope="row" class="text-center align-middle">{{$row->Actor}}</td>
-                        <td scope="row" class="text-center align-middle">
-                            <a class="col btn btn-secondary edit-movie-btn" data-bs-toggle="modal" data-bs-target="#editMovie" data-movie-id="{{$row->MovieID}} ">Edit</a>
-                        </td>
-                        <td scope="row" class="text-center align-middle">
-                            <a class="col btn btn-danger delete-movie-btn" data-bs-toggle="modal" data-bs-target="#deleteMovie" data-movie-id="{{$row->MovieID}}">Delete</a>
-                        </td>
-                    </tr>
+                    @foreach ($movie as $row)
+                        <tr>
+                            <th scope="row" class="text-center align-middle">{{ $row->MovieID }}</th>
+                            <td scope="row" class="text-center align-middle">{{ $row->Title }}</td>
+                            <td scope="row" class="text-center align-middle">
+                                <img src="{{ asset('/imgMovie/' . $row->Thumbnail) }}" width="50" height="50">
+                            </td>
+                            <td scope="row" class="text-center align-middle">{{ $row->Description }}</td>
+                            <td scope="row" class="text-center align-middle">{{ $row->Duration }}</td>
+                            <td scope="row" class="text-center align-middle">{{ $row->Language }}</td>
+                            <td scope="row" class="text-center align-middle">{{ $row->ReleaseDate }}</td>
+                            <td scope="row" class="text-center align-middle">{{ $row->Country }}</td>
+                            <td scope="row" class="text-center align-middle">{{ $row->Genre }}</td>
+                            <td scope="row" class="text-center align-middle">{{ $row->trailer_url }}</td>
+                            <td scope="row" class="text-center align-middle">{{ $row->Director }}</td>
+                            <td scope="row" class="text-center align-middle">{{ $row->Actor }}</td>
+                            <td scope="row" class="text-center align-middle">
+                                <a class="col btn btn-secondary edit-movie-btn" data-bs-toggle="modal"
+                                    data-bs-target="#editMovie" data-movie-id="{{ $row->MovieID }} ">Edit</a>
+                            </td>
+                            <td scope="row" class="text-center align-middle">
+                                <a class="col btn btn-danger delete-movie-btn" data-bs-toggle="modal"
+                                    data-bs-target="#deleteMovie" data-movie-id="{{ $row->MovieID }}">Delete</a>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -83,8 +86,8 @@
     <div class="modal fade" id="editMovie" tabindex="-1" aria-labelledby="editMovieLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form action="{{route('editMovie')}}" method="post" enctype="multipart/form-data">
-    
+                <form action="{{ route('editMovie') }}" method="post" enctype="multipart/form-data">
+
                     <div class="modal-header border-bottom-0">
                         <h5 class="modal-title">Edit movie</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -94,13 +97,15 @@
                         <input type="hidden" id="editMovieID" name="editMovieID">
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                            <input type="text" class="form-control" id="title" name="title"
+                                placeholder="Title">
                             <div class="text-danger" id="error_title"></div>
                         </div>
                         <div class="mb-3">
                             <label for="thumbnail" class="form-label">Thumbnail</label>
                             <img id="loadThumbnail" width="80" height="80">
-                            <input type="file" class="form-control" id="thumbnail" name="thumbnail" placeholder="Thumbnail">
+                            <input type="file" class="form-control" id="thumbnail" name="thumbnail"
+                                placeholder="Thumbnail">
                         </div>
                         <div class="mb-3">
                             <label for="descripton" class="form-label">Description</label>
@@ -108,38 +113,45 @@
                         </div>
                         <div class="mb-3">
                             <label for="duration" class="form-label">Duration</label>
-                            <input type="number" class="form-control" id="duration" name="duration" placeholder="Thời lượng">
+                            <input type="number" class="form-control" id="duration" name="duration"
+                                placeholder="Thời lượng">
                         </div>
                         <div class="mb-3">
                             <label for="language" class="form-label">Language</label>
-                            <input type="text" class="form-control" id="language" name="language" placeholder="Language">
+                            <input type="text" class="form-control" id="language" name="language"
+                                placeholder="Language">
                         </div>
                         <div class="mb-3">
                             <label for="release_date" class="form-label">Release Date</label>
-                            <input type="date" class="form-control" id="release_date" name="release_date" placeholder="Release Date">
+                            <input type="date" class="form-control" id="release_date" name="release_date"
+                                placeholder="Release Date">
                         </div>
                         <div class="mb-3">
                             <label for="country" class="form-label">Country</label>
-                            <input type="text" class="form-control" id="country" name="country" placeholder="Country">
+                            <input type="text" class="form-control" id="country" name="country"
+                                placeholder="Country">
                         </div>
                         <div class="mb-3">
                             <label for="genre" class="form-label">Genre</label>
-                            <input type="text" class="form-control" id="genre" name="genre" placeholder="Thể loại">
+                            <input type="text" class="form-control" id="genre" name="genre"
+                                placeholder="Thể loại">
                         </div>
                         <div class="mb-3">
                             <label for="trailer_url" class="form-label">Trailer URL</label>
-                            <input type="url" class="form-control" id="trailer_url" name="trailer_url" placeholder="trailer_url">
+                            <input type="url" class="form-control" id="trailer_url" name="trailer_url"
+                                placeholder="trailer_url">
                         </div>
                         <div class="mb-3">
                             <label for="director" class="form-label">Director</label>
-                            <input type="text" class="form-control" id="director" name="director" placeholder="Director">
+                            <input type="text" class="form-control" id="director" name="director"
+                                placeholder="Director">
                         </div>
                         <label for="actor" class="form-label">Actor</label>
-                            <textarea class="form-control" id="actor" name="actor" rows="3" placeholder="Actor"></textarea>
+                        <textarea class="form-control" id="actor" name="actor" rows="3" placeholder="Actor"></textarea>
                         <div class="mb-3">
                             <label for="regulation_name" class="form-label">Regulation</label>
                             <select class="form-control" name="regulation_id" id="regulation_name">
-                                
+
                             </select>
                         </div>
                         <div class="mb-3">
@@ -161,7 +173,7 @@
     <div class="modal fade" id="deleteMovie" tabindex="-1" aria-labelledby="deleteMovieLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form action="{{route('deleteMovie')}}" method="post">
+                <form action="{{ route('deleteMovie') }}" method="post">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title">Xóa phim</h5>
@@ -183,8 +195,8 @@
     <div class="modal fade" id="addMovie" tabindex="-1" aria-labelledby="addMovieLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form action="{{route('addMovie')}}" method="post" enctype="multipart/form-data">
-    
+                <form action="{{ route('addMovie') }}" method="post" enctype="multipart/form-data">
+
                     <div class="modal-header border-bottom-0">
                         <h5 class="modal-title">Add movie</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -194,12 +206,14 @@
                         <input type="hidden" id="addMovieID" name="addMovieID">
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="add_title" name="add_title" placeholder="Title">
+                            <input type="text" class="form-control" id="add_title" name="add_title"
+                                placeholder="Title">
                             <div class="text-danger" id="error_title"></div>
                         </div>
                         <div class="mb-3">
                             <label for="thumbnail" class="form-label">Thumbnail</label>
-                            <input type="file" class="form-control" id="add_thumbnail" name="add_thumbnail" placeholder="Thumbnail">
+                            <input type="file" class="form-control" id="add_thumbnail" name="add_thumbnail"
+                                placeholder="Thumbnail">
                         </div>
                         <div class="mb-3">
                             <label for="descripton" class="form-label">Description</label>
@@ -207,34 +221,41 @@
                         </div>
                         <div class="mb-3">
                             <label for="duration" class="form-label">Duration</label>
-                            <input type="number" class="form-control" id="add_duration" name="add_duration" placeholder="Thời lượng">
+                            <input type="number" class="form-control" id="add_duration" name="add_duration"
+                                placeholder="Thời lượng">
                         </div>
                         <div class="mb-3">
                             <label for="language" class="form-label">Language</label>
-                            <input type="text" class="form-control" id="add_language" name="add_language" placeholder="Language">
+                            <input type="text" class="form-control" id="add_language" name="add_language"
+                                placeholder="Language">
                         </div>
                         <div class="mb-3">
                             <label for="release_date" class="form-label">Release Date</label>
-                            <input type="date" class="form-control" id="add_release_date" name="add_release_date" placeholder="Release Date">
+                            <input type="date" class="form-control" id="add_release_date" name="add_release_date"
+                                placeholder="Release Date">
                         </div>
                         <div class="mb-3">
                             <label for="country" class="form-label">Country</label>
-                            <input type="text" class="form-control" id="add_country" name="add_country" placeholder="Country">
+                            <input type="text" class="form-control" id="add_country" name="add_country"
+                                placeholder="Country">
                         </div>
                         <div class="mb-3">
                             <label for="genre" class="form-label">Genre</label>
-                            <input type="text" class="form-control" id="add_genre" name="add_genre" placeholder="Thể loại">
+                            <input type="text" class="form-control" id="add_genre" name="add_genre"
+                                placeholder="Thể loại">
                         </div>
                         <div class="mb-3">
                             <label for="trailer_url" class="form-label">Trailer URL</label>
-                            <input type="url" class="form-control" id="add_trailer_url" name="add_trailer_url" placeholder="trailer_url">
+                            <input type="url" class="form-control" id="add_trailer_url" name="add_trailer_url"
+                                placeholder="trailer_url">
                         </div>
                         <div class="mb-3">
                             <label for="director" class="form-label">Director</label>
-                            <input type="text" class="form-control" id="add_director" name="add_director" placeholder="Director">
+                            <input type="text" class="form-control" id="add_director" name="add_director"
+                                placeholder="Director">
                         </div>
                         <label for="actor" class="form-label">Actor</label>
-                            <textarea class="form-control" id="add_actor" name="add_actor" rows="3" placeholder="Actor"></textarea>
+                        <textarea class="form-control" id="add_actor" name="add_actor" rows="3" placeholder="Actor"></textarea>
                         <div class="mb-3">
                             <label for="add_regulation_name" class="form-label">Regulation</label>
                             <select class="form-control" name="add_regulation_id" id="add_regulation_name">

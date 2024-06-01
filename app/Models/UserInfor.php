@@ -27,6 +27,7 @@ class UserInfor extends Authenticatable
         'Email',
         'role_id',
         'google_id',
+        'facebook_id',
         'Phone'
     ];
 

@@ -30,7 +30,7 @@ $pageTitle = "Đăng Nhập";
                             <a href="{{route('google-auth')}}"><i class="fab fa-google" style="color: #f3ea28;"></i></a>
                         </button>
                         <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-facebook-f" style="color: #f3ea28;"></i>
+                            <a href="{{route('facebook-auth')}}"><i class="fab fa-facebook-f" style="color: #f3ea28;"></i></a>
                         </button>
                     </div>
 

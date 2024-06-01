@@ -11,6 +11,7 @@ use App\Http\Controllers\Management\StatusMovieController;
 use App\Http\Controllers\Management\CinemaController;
 use App\Http\Controllers\Management\TicketPriceController;
 use App\Http\Controllers\Management\ShowInforController;
+use App\Http\Controllers\Management\DashBoardController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\QRCodeController;
 
@@ -91,7 +92,10 @@ Route::get('/admin', [AdminController::class, 'showLoginForm'])->name('admin.log
 Route::post('/admin', [AdminController::class, 'login']);
 Route::get('/admin/logout', [AdminController::class, 'Logout']);
 Route::group(['middleware' => 'admin'], function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'Index']);
+    //dashboard
+    Route::get('/admin/dashboard', [DashBoardController::class, 'Index']);
+    Route::get('/admin/filter-by-date/{start}/{end}', [DashBoardController::class, 'FilterByDate'])->name('FilterByDate');
+
     // movie status
     Route::get('/admin/moviestatus/index', [StatusMovieController::class, 'StatusMovieIndex']);
     Route::post('/admin/moviestatus/delete-movie-status', [StatusMovieController::class, 'deleteMovieStatus'])->name('deleteMovieStatus');
@@ -146,7 +150,7 @@ Route::group(['middleware' => 'admin'], function () {
 });
 
 Route::group(['middleware' => 'manager'], function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'Index']);
+    Route::get('/admin/dashboard', [DashBoardController::class, 'Index']);
     // movie
     Route::get('/admin/movie/index', [Moviecontroller::class, 'MovieIndex']);
     Route::get('/admin/movie/getMovie/{MovieID}', [Moviecontroller::class, 'getMovie'])->name('getMovie');
@@ -174,7 +178,7 @@ Route::group(['middleware' => 'manager'], function () {
 });
 
 Route::group(['middleware' => 'staff'], function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'Index']);
+    Route::get('/admin/dashboard', [DashBoardController::class, 'Index']);
     // booking
     Route::get('/admin/booking/index', [BookingController::class, 'BookingIndex']);
 });
@@ -182,6 +186,9 @@ Route::group(['middleware' => 'staff'], function () {
 Route::get('auth/google', [UserInforController::class, 'redirect'])->name('google-auth');
 Route::get('auth/google/call-back', [UserInforController::class, 'callBackGoogle']);
 
+// login/ register facebook
+Route::get('auth/facebook', [UserInforController::class, 'redirectFacebook'])->name('facebook-auth');
+Route::get('auth/facebook/call-back', [UserInforController::class, 'callBackFacebook']);
 
 // reset password
 Route::get('/forget-password', [UserInforController::class, 'forgetPassword'])->name('forgetPassword');

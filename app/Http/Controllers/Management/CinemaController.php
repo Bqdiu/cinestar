@@ -61,6 +61,10 @@ class CinemaController extends Controller
             $cinema = Cinema::find($request->deleteCinemaID);
             if (!$cinema)
                 return redirect()->back()->withErorrs('Không tìm thấy rạp muốn xóa');
+            //delete old image
+            $oldImagePath = public_path('/imgCinema/' . $cinema->Thumbnail);
+            if (file_exists($oldImagePath))
+                unlink($oldImagePath);
             $cinema->delete();
             return redirect()->back()->with('mess', 'Xóa thành công');
         } catch (\Exception $e) {
@@ -93,13 +97,9 @@ class CinemaController extends Controller
         ]);
 
         $cinemaDeleteThumbnail = Cinema::find($request->CinemaID);
-        if ($cinemaDeleteThumbnail->Thumbnail) {
-            // Xóa file ảnh cũ
-            $oldImagePath = public_path('/imgCinema/' . $cinemaDeleteThumbnail->Thumbnail);
-            if (file_exists($oldImagePath)) {
-                unlink($oldImagePath);
-            }
-        }
+        $oldImagePath = public_path('/imgCinema/' . $cinemaDeleteThumbnail->Thumbnail);
+        if (file_exists($oldImagePath))
+            unlink($oldImagePath);
 
         $originalFileName = $request->file('thumbnail')->getClientOriginalName();
         $user_id = Auth::id();
