@@ -1,12 +1,25 @@
 @extends('layouts.admin')
 @section('main-content')
     <div class="row">
-            <h3 class="text-center">Thống kê doanh thu</h3>
+            <h3 class="text-center">THỐNG KÊ DOANH THU PHIM</h3>
             <form autocomplete="off" style="padding: 10px">
                 @csrf
                  <div class="row">
-                    <p class="col-6">Từ ngày: <input type="date" id="start_time" name="start_time" class="form-control"></p>
-                    <p class="col-6">Đến ngày: <input type="date" id="end_time" name="end_time" class="form-control"></p>
+                     <div class="col-4">
+                             <label for="movie_status_name" class="form-label">Phim:</label>
+                             <select class="form-control" name="movie_id" id="movie_name">
+ 
+                             </select>
+                     </div>
+                    {{-- Chọn năm --}}
+                    <div class="col-4">
+                        <label for="year" class="form-label">Năm:</label>
+                        <select class="form-control" name="year" id="year">
+                            @for ($i = 2021; $i <= 2025; $i++)
+                                <option value="{{$i}}">{{$i}}</option>
+                            @endfor
+                        </select>
+                    </div>
                 </div>
                 <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm text" value="Filter">
                 

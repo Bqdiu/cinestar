@@ -95,7 +95,8 @@ Route::get('/admin/logout', [AdminController::class, 'Logout']);
 Route::group(['middleware' => 'admin'], function () {
     //dashboard
     Route::get('/admin/dashboard', [DashBoardController::class, 'Index']);
-    Route::get('/admin/filter-by-date/{start}/{end}', [DashBoardController::class, 'FilterByDate'])->name('FilterByDate');
+    Route::get('/admin/dashboard/getDataOption', [DashBoardController::class, 'getDataOption']);
+    Route::get('/admin/dashboard/filter-by-date/{start}/{end}/{movie_id}', [DashBoardController::class, 'FilterByDate'])->name('FilterByDate');
 
     // movie status
     Route::get('/admin/moviestatus/index', [StatusMovieController::class, 'StatusMovieIndex']);

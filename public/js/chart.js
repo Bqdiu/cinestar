@@ -1,40 +1,79 @@
 
-$(document).on('click','#btn-dashboard-filter',function(){
-    var start_time = $('#start_time').val();
-    var end_time = $('#end_time').val();
+// $(document).on('click','#btn-dashboard-filter',function(){
+//     var start_time = $('#start_time').val();
+//     var end_time = $('#end_time').val();
+//     if(start_time == '' || end_time == ''){
+//         alert('Hãy chọn thời gian cần xem doanh thu');
+//         return;
+//     }
+//     var movie_id = $('#movie_name').val();
+
+//     $.ajax({
+//         url: '/admin/dashboard/filter-by-date/' + start_time + '/' + end_time + '/' + movie_id,
+//         type: 'GET',
+//         success: function(response){
+//             if(response != null && response != '')
+//                 console.log(response);
+//             // else
+//             //     alert('Phim không có doanh thu trong khoảng thời gian này');
+//         }
+//     });
+// });
+
+$(document).ready(function(){
+   
     $.ajax({
-        url: '/admin/filter-by-date/' + start_time + '/' + end_time,
+        url: '/admin/dashboard/getDataOption',
         type: 'GET',
         success: function(response){
-            console.log(response);
+            $.each(response, function(index, value){
+                $('#movie_name').append('<option value="'+value.MovieID+'">'+value.Title+'</option>');
+            });
         }
     });
 });
 
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['1', '2', '3', '4', '5', '6'],
-        datasets: [{
-            label: 'Test data',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
+$(document).on('click', '#btn-dashboard-filter', function () {
+    var start_time = $('#start_time').val();
+    var end_time = $('#end_time').val();
+    if (start_time == '' || end_time == '') {
+        alert('Hãy chọn thời gian cần xem doanh thu');
+        return;
     }
+    var movie_id = $('#movie_name').val();
+    $.ajax({
+        url: '/admin/dashboard/filter-by-date/' + start_time + '/' + end_time + '/' + movie_id,
+        type: 'GET',
+        success: function (response) {
+            if (response != null && response != '') {
+                const months = response.map(item => 'Tháng ' + item.month);
+                const totals = response.map(item => item.total);
+
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: months,
+                        datasets: [{
+                            label: 'Doanh thu tháng',
+                            data: totals,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            } else {
+                alert('Phim không có doanh thu trong khoảng thời gian này');
+            }
+        }
+    });
 });
+

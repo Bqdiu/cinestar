@@ -34,6 +34,7 @@
                         <th scope="col" class="text-center align-middle">Phone number</th>
                         <th scope="col" class="text-center align-middle">Email</th>
                         <th scope="col" class="text-center align-middle">Toltal price</th>
+                        <th scope="col" class="text-center align-middle">Date</th>
                         <th scope="col" class="text-center align-middle">Payment method</th>
                     </tr>
                 </thead>
@@ -48,6 +49,7 @@
                             <td scope="row" class="text-center align-middle">{{$row->PhoneNumber}}</td>
                             <td scope="row" class="text-center align-middle">{{$row->Email}}</td>
                             <td scope="row" class="text-center align-middle">{{$row->TotalPrice}}</td>
+                            <td scope="row" class="text-center align-middle">{{$row->createdAt}}</td>
                             <td scope="row" class="text-center align-middle">{{(optional($row->payment_method)->PaymentName)}}</td>
 
                         </tr>

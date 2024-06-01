@@ -42,7 +42,7 @@ $chunks = $Phim->filter(function ($phim) use ($statusItem) {
 <div class="container">
   <div id="carousel{{$statusItem->IDStatus}}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
 
-    <div class="carousel-inner" style="height:630px">
+    <div class="carousel-inner" style="height:655px">
 
       @foreach($chunks as $chunk)
       <div class="carousel-item {{$loop->first? 'active':''}}">
