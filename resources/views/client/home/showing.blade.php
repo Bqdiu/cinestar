@@ -40,5 +40,9 @@ $pageTitle = "Cinestar - PHIM ĐANG CHIẾU";
     @endforeach
 
   </div>
+  <div class="showing-panigation">
+    {{$Phim->links()}}
+
+  </div>
 </div>
 @endsection

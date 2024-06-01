@@ -39,7 +39,8 @@ Route::get('/logout', [UserInforController::class, 'Logout']);
 Route::get('/profile', [UserInforController::class, 'Profile'])->name('profile');
 Route::post('/profile-partial', [UserInforController::class, 'ProfilePartial'])->name('profile-partial');
 Route::get('/booking-detail-partial', [UserInforController::class, 'BookingDetailPartial'])->name('booking-detail-partial');
-Route::post('/history-partial', [UserInforController::class, 'HistoryPartial'])->name('history-partial');
+Route::get('/history-partial', [UserInforController::class, 'HistoryPartial'])->name('history-partial');
+Route::get('/profile?view=history', [UserInforController::class, 'HistoryPartial'])->name('history-partial');
 Route::post('/update-infor', [UserInforController::class, 'UpdateInformation'])->name('updateInfor');
 Route::post('/change-pass', [UserInforController::class, 'ChangePassword']);
 //Register

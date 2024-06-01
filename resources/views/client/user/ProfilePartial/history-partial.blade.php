@@ -33,7 +33,13 @@
         @endforeach
 
     </tbody>
+
 </table>
+<div class="history-panigation">
+    {{$Booking->links()}}
+</div>
+
+
 @else
 <div class="container">
     <h5 class="text-white d-flex justify-content-center align-items-center mt-5">Không có dữ liệu!</h5>

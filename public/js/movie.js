@@ -171,7 +171,7 @@ $(document).ready(function () {
         // $(".dt-bill").removeClass("d-block");
         // $(".sec-seat").removeClass("d-block");
         totalPrice = 0;
-        // countNumber = $(".count-number").text("0");
+        countNumber = $(".count-number").text("0");
         $(".bill-right .price .num").text("0 VNĐ");
         $(".dt-bill .btn.btn--pri").addClass("opacity-40");
         $(".dt-bill .btn.btn--pri").addClass("pointer-events-none");
@@ -252,59 +252,59 @@ $(document).ready(function () {
     //     console.log(cinestarBodyItemID);
     //     $("#" + cinestarItemID).toggleClass("active");
     // });
-    var secondsRemaining = 60 * 5; // 60 giây = 1 phút
+    // var secondsRemaining = 60 * 5; // 60 giây = 1 phút
 
-    // Hàm để cập nhật hiển thị
-    function updateTimerDisplay() {
-        // Hiển thị thời gian còn lại
-        var formattedMinutes = String(minutesRemaining).padStart(2, "0");
-        var formattedSeconds = String(secondsRemaining).padStart(2, "0");
+    // // Hàm để cập nhật hiển thị
+    // function updateTimerDisplay() {
+    //     // Hiển thị thời gian còn lại
+    //     var formattedMinutes = String(minutesRemaining).padStart(2, "0");
+    //     var formattedSeconds = String(secondsRemaining).padStart(2, "0");
 
-        // Hiển thị thời gian còn lại
-        $(".bill-coundown .bill-time #timerCheckout").text(
-            formattedMinutes + ":" + formattedSeconds
-        );
-    }
+    //     // Hiển thị thời gian còn lại
+    //     $(".bill-coundown .bill-time #timerCheckout").text(
+    //         formattedMinutes + ":" + formattedSeconds
+    //     );
+    // }
 
-    // Hàm đếm ngược
-    var countdownTimeout = null; // Biến để lưu trữ ID của hàm đếm ngược
+    // // Hàm đếm ngược
+    // var countdownTimeout = null; // Biến để lưu trữ ID của hàm đếm ngược
 
-    // Hàm đếm ngược
-    function countdown() {
-        // Kiểm tra xem đã có hàm đếm ngược nào đang chạy hay không
-        if (countdownTimeout) {
-            clearTimeout(countdownTimeout); // Nếu có, hủy bỏ hàm đếm ngược đó
-        }
+    // // Hàm đếm ngược
+    // function countdown() {
+    //     // Kiểm tra xem đã có hàm đếm ngược nào đang chạy hay không
+    //     if (countdownTimeout) {
+    //         clearTimeout(countdownTimeout); // Nếu có, hủy bỏ hàm đếm ngược đó
+    //     }
 
-        // Cập nhật hiển thị
-        updateTimerDisplay();
+    //     // Cập nhật hiển thị
+    //     updateTimerDisplay();
 
-        // Giảm số giây còn lại đi 1
-        if (secondsRemaining === 0) {
-            // Nếu số giây bằng 0, giảm số phút và đặt lại số giây
-            minutesRemaining--;
-            secondsRemaining = 59;
-        } else {
-            secondsRemaining--;
-        }
+    //     // Giảm số giây còn lại đi 1
+    //     if (secondsRemaining === 0) {
+    //         // Nếu số giây bằng 0, giảm số phút và đặt lại số giây
+    //         minutesRemaining--;
+    //         secondsRemaining = 59;
+    //     } else {
+    //         secondsRemaining--;
+    //     }
 
-        // Kiểm tra xem có còn thời gian đếm ngược không
-        if (minutesRemaining >= 0) {
-            // Đặt lại hàm đếm ngược sau 1 giây
-            countdownTimeout = setTimeout(countdown, 1000);
-        } else {
-            $(".popup.--w7 .popup-noti-des").text("Đã hết thời gian giữ vé!");
-            $(".popup.--w7").addClass("open");
+    //     // Kiểm tra xem có còn thời gian đếm ngược không
+    //     if (minutesRemaining >= 0) {
+    //         // Đặt lại hàm đếm ngược sau 1 giây
+    //         countdownTimeout = setTimeout(countdown, 1000);
+    //     } else {
+    //         $(".popup.--w7 .popup-noti-des").text("Đã hết thời gian giữ vé!");
+    //         $(".popup.--w7").addClass("open");
 
-            // resetSectionWhenTimerEnded();
-            // Nếu hết thời gian, thực hiện các hành động sau đó
-            console.log("Đếm ngược đã kết thúc!");
-            return;
-        }
-    }
-    function stopCountdown() {
-        clearTimeout(countdownTimeout); // Stop the countdown
-    }
+    //         // resetSectionWhenTimerEnded();
+    //         // Nếu hết thời gian, thực hiện các hành động sau đó
+    //         console.log("Đếm ngược đã kết thúc!");
+    //         return;
+    //     }
+    // }
+    // function stopCountdown() {
+    //     clearTimeout(countdownTimeout); // Stop the countdown
+    // }
     $(document).ready(function () {
         // Bắt sự kiện khi nhấn nút "plus"
         $(".count-plus").click(function () {
@@ -571,7 +571,7 @@ $(document).ready(function () {
                         SeatID: cinemaSeatID,
                         SeatName: seatID,
                     });
-                    resetCountdown();
+                    // resetCountdown();
                     // const options = {
                     //     method: "post",
                     //     url: "/reserve-seat",
@@ -600,7 +600,7 @@ $(document).ready(function () {
                 // Nếu ghế đã được chọn trước đó, bỏ chọn và loại bỏ khỏi danh sách
                 $(this).removeClass("choosing");
                 selectedSeats.splice(seatIndex, 1);
-                resetCountdown();
+                // resetCountdown();
 
                 updateButtonState();
             }
@@ -641,7 +641,7 @@ $(document).ready(function () {
                         SeatName: seatID,
                     });
                     console.log(roomNumber);
-                    resetCountdown();
+                    // resetCountdown();
                     updateButtonState();
                     // const options = {
                     //     method: "post",
@@ -671,7 +671,7 @@ $(document).ready(function () {
                 $(this).removeClass("choosing");
                 selectedSeats_1.splice(seatIndex, 1);
 
-                resetCountdown();
+                // resetCountdown();
                 updateButtonState();
             }
             updateCinemaInfo(
@@ -680,11 +680,11 @@ $(document).ready(function () {
                 showtime
             );
         });
-        function resetCountdown() {
-            minutesRemaining = 5; // Đặt lại số phút
-            secondsRemaining = 0;
-            countdown();
-        }
+        // function resetCountdown() {
+        //     minutesRemaining = 5; // Đặt lại số phút
+        //     secondsRemaining = 0;
+        //     countdown();
+        // }
         // Sự kiện click vào nút "OK" trong popup
         $(document).on("click", ".popup.--w7 .btn.OK", function () {
             $(".popup.--w7").removeClass("open");
@@ -733,7 +733,7 @@ $(document).ready(function () {
             console.log(JSON.stringify(selectedSeats.concat(selectedSeats_1)));
             console.log($("#userID").val());
             console.log(totalPrice);
-            console.log(countdownTimeout);
+            // console.log(countdownTimeout);
             console.log(showTimeID);
             if (
                 !showTimeID ||
@@ -741,7 +741,6 @@ $(document).ready(function () {
                 !selectedSeats_1 ||
                 !$("#userID").val() ||
                 !totalPrice ||
-                !countdownTimeout ||
                 !TypeOfTicket
             ) {
                 console.error("One or more required variables are undefined");
@@ -1025,7 +1024,7 @@ $(document).on("click", ".popup.--w7 .checkout.btn.OK", function () {
 });
 
 let endTime = localStorage.getItem("endTime");
-
+let timeoutId;
 // Bắt đầu countdown nếu có endTime
 if (endTime) {
     startCountdown(endTime);
@@ -1034,7 +1033,7 @@ if (endTime) {
 function startCountdown(endTime) {
     // Bắt đầu cập nhật countdown mỗi giây
     const interval = setInterval(updateCountdown, 1000);
-
+    timeoutId = setTimeout(updateCountdown, 1000);
     // Cập nhật ngay lần đầu tiên
     updateCountdown();
 
@@ -1060,6 +1059,8 @@ function startCountdown(endTime) {
 
             // Xóa thời gian kết thúc từ localStorage
             localStorage.removeItem("endTime");
+        } else {
+            timeoutId = setTimeout(updateCountdown, 1000);
         }
     }
 
@@ -1075,25 +1076,37 @@ function startCountdown(endTime) {
     }
 }
 $(document).on("click", ".payment-method.btn-submit", function () {
-    if (interval) {
-        clearInterval(interval);
-    }
+    clearTimeout(timeoutId);
+    localStorage.removeItem("endTime");
 });
 $(document).on("click", ".checkout.btn-back", function () {
-    if (interval) {
-        clearInterval(interval);
-    }
+    clearTimeout(timeoutId);
+    localStorage.removeItem("endTime");
     history.back();
 });
 $(document).on("click", ".thank.btn-back", function () {
     window.location.href = "/";
 });
-$(document).on("click", ".history.btn-back", function () {
-    history.back();
+$(document).ready(function (res) {
+    $(document).on("click", ".showing-panigation a.page-link", function () {
+        console.log("Showing Event");
+        console.log($(this).attr("href"));
+        window.location.href = $(this).attr("href");
+    });
 });
-
+$(document).ready(function (res) {
+    $(document).on("click", ".upcoming-panigation a.page-link", function () {
+        console.log("Upcoming Event");
+        console.log($(this).attr("href"));
+        window.location.href = $(this).attr("href");
+    });
+});
 $(document).ready(function () {
     let bID = null;
+    $(document).on("click", ".history.btn-back", function () {
+        history.back();
+    });
+
     $(document).on("submit", "#FormRedirectoDetail", function (e) {
         e.preventDefault();
 
@@ -1130,7 +1143,7 @@ $(document).ready(function () {
             },
         });
     }
-    LoadProfilePartial();
+    // LoadProfilePartial();
 
     $(document).on("click", ".acc-menu-link", function () {
         const wrapperID = $(this).data("swiper-wrapper");
@@ -1156,10 +1169,10 @@ $(document).ready(function () {
         } else {
             $(".prof-main .heading").text("LỊCH SỬ MUA HÀNG");
             newTitle = "LỊCH SỬ MUA HÀNG";
-            newURL = "?view=history";
+            newURL = "?view=history&page=1";
             $.ajax({
                 url: "/history-partial",
-                type: "POST",
+                type: "GET",
                 success: function (res) {
                     $(".acc-prf").html(res.view);
                     window.history.pushState(
@@ -1170,6 +1183,96 @@ $(document).ready(function () {
                 },
             });
         }
+    });
+    $(document).on(
+        "click",
+        ".history-panigation .pagination .page-item .page-link",
+        function (e) {
+            e.preventDefault();
+            var url = $(this).attr("href");
+            loadHistoryPage(url);
+        }
+    );
+    function updateHistoryState(view, newTitle, newURL) {
+        window.history.pushState({ view: view }, newTitle, newURL);
+    }
+    function loadHistoryPage(url) {
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function (res) {
+                $(".acc-prf").html(res.view);
+                var urlParams = new URLSearchParams(url.split("?")[1]);
+                var newURL = "?view=history&page=" + urlParams.get("page");
+                updateHistoryState("history", "LỊCH SỬ MUA HÀNG", newURL);
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX error: ", status, error);
+            },
+        });
+    }
+    function loadProfilePartial() {
+        $(".prof-main .heading").text("THÔNG TIN KHÁCH HÀNG");
+        $.ajax({
+            url: "/profile-partial",
+            type: "POST",
+            success: function (res) {
+                $(".acc-prf").html(res.view);
+                updateHistoryState(
+                    "profile",
+                    "THÔNG TIN KHÁCH HÀNG",
+                    "?view=profile"
+                );
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX error: ", status, error);
+            },
+        });
+    }
+
+    function loadHistoryPartial() {
+        $(".prof-main .heading").text("LỊCH SỬ MUA HÀNG");
+        $.ajax({
+            url: "/history-partial",
+            type: "GET",
+            success: function (res) {
+                $(".acc-prf").html(res.view);
+                updateHistoryState(
+                    "history",
+                    "LỊCH SỬ MUA HÀNG",
+                    "?view=history"
+                );
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX error: ", status, error);
+            },
+        });
+    }
+
+    function loadBookingDetail(bookingId) {
+        $(".prof-main .heading").text("THÔNG TIN VÉ PHIM");
+        $.ajax({
+            url: "/booking-detail-partial?BookingID=" + bookingId,
+            type: "GET",
+            success: function (res) {
+                $(".acc-prf").html(res.view);
+                updateHistoryState(
+                    "detail",
+                    "THÔNG TIN VÉ PHIM",
+                    "?view=detail"
+                );
+                localStorage.setItem("bID", bookingId);
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX error: ", status, error);
+            },
+        });
+    }
+    $(document).on("click", ".pagination a", function (e) {
+        e.preventDefault();
+        var url = $(this).attr("href");
+
+        loadHistoryPage(url);
     });
     window.addEventListener("popstate", function (event) {
         if (event.state && event.state.view) {
@@ -1184,13 +1287,11 @@ $(document).ready(function () {
                 });
             } else if (event.state.view === "history") {
                 $(".prof-main .heading").text("LỊCH SỬ MUA HÀNG");
-                $.ajax({
-                    url: "/history-partial",
-                    type: "POST",
-                    success: function (res) {
-                        $(".acc-prf").html(res.view);
-                    },
-                });
+
+                var urlParams = new URLSearchParams(window.location.search);
+                var page = urlParams.get("page");
+                var newUrl = "/history-partial?page=" + page;
+                loadHistoryPage(newUrl);
             } else if (event.state.view === "detail") {
                 $(".prof-main .heading").text("THÔNG TIN VÉ PHIM");
                 $.ajax({
@@ -1226,13 +1327,10 @@ $(document).ready(function () {
             $(".prof-main .heading").text("LỊCH SỬ MUA HÀNG");
             $("#swiper-slide-2").addClass("active");
             $("#swiper-slide-1").removeClass("active");
-            $.ajax({
-                url: "/history-partial",
-                type: "POST",
-                success: function (res) {
-                    $(".acc-prf").html(res.view);
-                },
-            });
+
+            var currentPage = urlParams.get("page") || 1;
+            var url = "/history-partial?page=" + currentPage;
+            loadHistoryPage(url);
         } else if (view === "detail") {
             $(".prof-main .heading").text("THÔNG TIN VÉ PHIM");
             $("#swiper-slide-2").addClass("active");
@@ -1324,6 +1422,9 @@ $(document).ready(function () {
     );
     $(document).on("submit", "#changePassword", function (e) {
         e.preventDefault();
+        $("#errorOldPassword").text("");
+        $("#errorNewPassword").text("");
+        $("#errorRetypePassword").text("");
         var oldPassword = $("#OldPassword").val().trim();
         var newPassword = $("#NewPassword").val().trim();
         var retypePassword = $("#RetypePassword").val().trim();
@@ -1331,10 +1432,12 @@ $(document).ready(function () {
         if (!oldPassword) {
             hasError = true;
             $("#errorOldPassword").text("Vui lòng nhập thông tin");
-        } else if (!newPassword) {
+        }
+        if (!newPassword) {
             hasError = true;
             $("#errorNewPassword").text("Vui lòng nhập thông tin");
-        } else if (!retypePassword) {
+        }
+        if (!retypePassword) {
             hasError = true;
             $("#errorRetypePassword").text("Vui lòng nhập thông tin");
         } else if (newPassword !== retypePassword) {
@@ -1441,7 +1544,7 @@ $(document).ready(function () {
 
     // Function to validate phone number format (simple)
     function validatePhoneNumber(phoneNumber) {
-        var re = /^\d{10,11}$/;
+        var re = /^\d{10}$/;
         return re.test(phoneNumber);
     }
 });

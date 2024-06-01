@@ -368,8 +368,8 @@ class UserInforController extends Controller
     public function HistoryPartial()
     {
         if (Auth::check()) {
-            $Show = Booking::where("UserID", '=', Auth::user()->UserID)->get();
-            $view = View::make('client/user/ProfilePartial/history-partial', ["Booking" => $Show])->render();
+            $Show = Booking::where("UserID", '=', Auth::user()->UserID)->paginate(7);
+            $view = View::make('client/user/ProfilePartial/history-partial', ["Booking" => $Show])->with('i', (request()->input('page', 1) - 1) * 7)->render();
             return response()->json(["view" => $view]);
         }
         return redirect()->route('index');

@@ -21,6 +21,7 @@ use App\Models\TypeTicketBookingList;
 use App\Models\VNPay;
 use Illuminate\Support\Facades\View;
 
+
 class HomeController extends Controller
 {
 
@@ -41,13 +42,13 @@ class HomeController extends Controller
     }
     public function Showing()
     {
-        $Phim = Movie::getAllMovieWithAgeRegulation()->where("IDStatus", 1);
-        return view('client/home/showing', compact('Phim'));
+        $Phim = Movie::where('IDStatus', '=', 1)->paginate(8);
+        return view('client/home/showing', compact('Phim'))->with('i', (request()->input('page', 1) - 1) * 8);
     }
     public function Upcoming()
     {
-        $Phim = Movie::getAllMovieWithAgeRegulation()->where("IDStatus", 2);
-        return view('client/home/upcoming', compact('Phim'));
+        $Phim = Movie::where('IDStatus', '=', 2)->paginate(8);
+        return view('client/home/upcoming', compact('Phim'))->with('i', (request()->input('page', 1) - 1) * 8);;
     }
 
     //Detail Movie

@@ -2209,8 +2209,23 @@ h4 {
     /* left: -55px; */
     bottom: -8px;
 }
-@media (max-width: 768px) {
-    .ct.responsive {
-        left: 10px; /* Adjust for mobile screens */
-    }
+nav {
+    display: flex;
+    justify-content: center;
+}
+.page-item.active .page-link {
+    background-color: yellow;
+    border-color: yellow;
+    color: black;
+}
+
+.page-link {
+    color: yellow;
+    background-color: transparent;
+}
+.page-item.disabled .page-link {
+    color: white;
+    pointer-events: none;
+    background-color: transparent;
+    border-color: #dee2e6;
 }

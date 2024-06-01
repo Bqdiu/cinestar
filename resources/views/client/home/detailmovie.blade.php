@@ -202,6 +202,7 @@ $pageTitle = $PhimItem->Title;
             <div class="popup-close popupClose"><i class="fas fa-times icon"></i></div>
         </div>
     </div>
+
 </div>
 <div class="dt-bill bill-fixed bill-custom sticky">
     <div class="container">
