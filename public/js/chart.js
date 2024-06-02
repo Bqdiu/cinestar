@@ -42,10 +42,10 @@ $(document).on('click', '#btn-dashboard-filter', function () {
                 const totals = response.map(item => item.total);
                 var ctx = document.getElementById('MovieRevenueChart').getContext('2d');
                 // destroy the old chart
-                if (window.myChart instanceof Chart) {
-                    window.myChart.destroy();
+                if (window.myChart1 instanceof Chart) {
+                    window.myChart1.destroy();
                 }
-                myChart = new Chart(ctx, {
+                window.myChart1 = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: months,
@@ -77,30 +77,22 @@ $(document).ready(function(){
         url: '/admin/dashboard/filter-by-custumer',
         type: 'GET',
         success: function(response){
-            // public function FilterByCustomer()
-            // {
-            //     $customers = Booking:: selectRaw('UserID, SUM(TotalPrice) as total')
-            //         -> where('Status', '=', 'Đã Thanh Toán')
-            //         -> groupBy('UserID')
-            //         -> get();
-            //     return response() -> json($customers);
-
-            // }
             console.log(response);
             if (response != null && response != '') {
                 const customers = response.map(item => item.Name);
                 const totals = response.map(item => item.total);
                 var ctx = document.getElementById('UserExpenseChart').getContext('2d');
                 // destroy the old chart
-                if (window.myChart instanceof Chart) {
-                    window.myChart.destroy();
+                if (window.myChart2 instanceof Chart) {
+                    console.log("A chart exists and will be destroyed.");
+                    window.myChart2.destroy();
                 }
-                myChart = new Chart(ctx, {
+                window.myChart2 = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: customers,
                         datasets: [{
-                            label: 'Doanh thu của khách hàng',
+                            label: 'Chi tiêu của khách hàng',
                             data: totals,
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
