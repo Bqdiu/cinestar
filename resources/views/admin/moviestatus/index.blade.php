@@ -40,7 +40,7 @@
                             <td scope="row" class="text-center align-middle">{{$row->StatusName}}</td>
                             <td scope="row" class="align-middle">
                                 <a class="col btn btn-secondary edit-status-btn" data-bs-toggle="modal" data-bs-target="#editStatusMovie" data-status-id="{{$row->IDStatus}} ">Edit</a>
-                                <a class="col btn btn-danger delete-status-btn" data-bs-toggle="modal" data-bs-target="#deleteStatusMovie" data-status-id="{{$row->IDStatus}}">Delete</a>
+                                {{-- <a class="col btn btn-danger delete-status-btn" data-bs-toggle="modal" data-bs-target="#deleteStatusMovie" data-status-id="{{$row->IDStatus}}">Delete</a> --}}
                             </td>
                         </tr>
                     @endforeach

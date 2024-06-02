@@ -96,7 +96,9 @@ Route::group(['middleware' => 'admin'], function () {
     //dashboard
     Route::get('/admin/dashboard', [DashBoardController::class, 'Index']);
     Route::get('/admin/dashboard/getDataOption', [DashBoardController::class, 'getDataOption']);
-    Route::get('/admin/dashboard/filter-by-date/{start}/{end}/{movie_id}', [DashBoardController::class, 'FilterByDate'])->name('FilterByDate');
+    Route::get('/admin/dashboard/getYearExists', [DashBoardController::class, 'getYearExists']);
+    Route::get('/admin/dashboard/filter-by-year-movie/{year}/{movie_id}', [DashBoardController::class, 'FilterByYearAndMovie'])->name('FilterByYearAndMovie');
+    Route::get('/admin/dashboard/filter-by-custumer', [DashBoardController::class, 'FilterByCustomer'])->name('FilterByCustomer');
 
     // movie status
     Route::get('/admin/moviestatus/index', [StatusMovieController::class, 'StatusMovieIndex']);

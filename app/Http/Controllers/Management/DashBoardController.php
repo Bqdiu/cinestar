@@ -19,24 +19,20 @@ class DashBoardController extends Controller
 {
     public function Index()
     {
-        return view('admin.dashboard');
+        $year = Booking::selectRaw('YEAR(createdAt) as year')
+            ->orderBy('year', 'asc')
+            ->first();
+        $year1 = Booking::selectRaw('YEAR(createdAt) as year')
+            ->orderBy('year', 'desc')
+            ->first();
+        return view('admin.dashboard', ['year_old' => $year, 'year_new' => $year1]);
     }
-
-    // public function FilterByDate($start, $end, $movie_id)
-    // {
-    //     $bookings = Booking::selectRaw('MONTH(createdAt) as month, SUM(TotalPrice) as total')
-    //         ->join('showinfor', 'booking.ShowID', '=', 'showinfor.ShowID')
-    //         ->join('movie', 'movie.MovieID', '=', 'showinfor.MovieID')
-    //         ->where('movie.MovieID', '=', $movie_id)
-    //         ->where('Status', '=', 'Đã Thanh Toán')
-    //         ->whereBetween('createdAt', [$start, $end])
-    //         ->groupBy('month')
-    //         ->get();
-
-    //     return response()->json($bookings);
-    // }
-
-    public function FilterByDate($year, $movie_id)
+    public function getDataOption()
+    {
+        $movies = Movie::all();
+        return response()->json($movies);
+    }
+    public function FilterByYearAndMovie($year, $movie_id)
     {
         $bookings = Booking::selectRaw('MONTH(createdAt) as month, SUM(TotalPrice) as total')
             ->join('showinfor', 'booking.ShowID', '=', 'showinfor.ShowID')
@@ -49,10 +45,16 @@ class DashBoardController extends Controller
 
         return response()->json($bookings);
     }
-    public function getDataOption()
+
+    public function FilterByCustomer()
     {
-        $movies = Movie::all();
-        return response()->json($movies);
+        $customers = Booking::selectRaw('booking.UserID,Name, SUM(TotalPrice) as total')
+            ->join('userinfor','userinfor.UserID','=', 'booking.UserID')
+            ->where('Status', '=', 'Đã Thanh Toán')
+            ->groupBy('booking.UserID')
+            ->get();
+        return response()->json($customers);
+
     }
 
 }
