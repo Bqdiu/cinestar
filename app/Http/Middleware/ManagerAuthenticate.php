@@ -15,7 +15,7 @@ class ManagerAuthenticate
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && (Auth::user()->isManager() || Auth::user()->isAdmin()) ) {
+        if (Auth::check() && (Auth::user()->role_id == 2 || Auth::user()->role_id == 1) ) {
             return $next($request);
         }
         return redirect('/admin')->withInput($request->only('username'))

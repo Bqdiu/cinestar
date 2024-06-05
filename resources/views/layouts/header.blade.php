@@ -19,18 +19,18 @@
         <a href="#">
             <img src="{{ asset('/img/header-logo.png') }}" alt="logo"  class="logo">
         </a>  
-        @if(Auth::user()->role_id === 1)
+        @if(Auth::user()->role_id == 1)
             <a href="/admin/dashboard" ><h5>Dashboard</h5></a>
             <a href="/admin/userinfor/index" ><h5>Account</h5></a>
             <a href="/admin/ticketprice/index" ><h5>Ticket price</h5></a>
-            <a href="/admin/showinfor/index" ><h5>Show infor</h5></a>
+            <a href="/admin/showinfor/index" ><h5>Show info</h5></a>
             <a href="/admin/cinema/index" ><h5>Cinema</h5></a>
             <a href="/admin/movie/index" ><h5>Movie</h5></a>
             <a href="/admin/moviestatus/index" ><h5>Movie status</h5></a>
             <a href="/admin/booking/index" ><h5>Booking</h5></a>
-        @elseif(Auth::user()->role_id === 2)
+        @elseif(Auth::user()->role_id == 2)
             <a href="/admin/dashboard" ><h5>Dashboard</h5></a>
-            <a href="/admin/showinfor/index" ><h5>Show</h5></a>
+            <a href="/admin/showinfor/index" ><h5>Show info</h5></a>
             <a href="/admin/ticketprice/index" ><h5>Ticket price</h5></a>
             <a href="/admin/booking/index" ><h5>Booking</h5></a>
 

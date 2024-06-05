@@ -46,15 +46,25 @@ class DashBoardController extends Controller
         return response()->json($bookings);
     }
 
+    // public function FilterByCustomer()
+    // {
+    //     $customers = Booking::selectRaw('booking.UserID,Name, SUM(TotalPrice) as total')
+    //         ->join('userinfor','userinfor.UserID','=', 'booking.UserID')
+    //         ->where('Status', '=', 'Đã Thanh Toán')
+    //         ->groupBy('booking.UserID')
+    //         ->get();
+    //     return response()->json($customers);
+
+    // }
+
     public function FilterByCustomer()
     {
-        $customers = Booking::selectRaw('booking.UserID,Name, SUM(TotalPrice) as total')
-            ->join('userinfor','userinfor.UserID','=', 'booking.UserID')
+        $customers = Booking::selectRaw('booking.UserID, userinfor.Name, SUM(TotalPrice) as total')
+            ->join('userinfor', 'userinfor.UserID', '=', 'booking.UserID')
             ->where('Status', '=', 'Đã Thanh Toán')
-            ->groupBy('booking.UserID')
+            ->groupBy('booking.UserID', 'userinfor.Name')
             ->get();
         return response()->json($customers);
-
     }
 
 }

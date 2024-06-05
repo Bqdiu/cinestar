@@ -154,7 +154,12 @@ Route::group(['middleware' => 'admin'], function () {
 });
 
 Route::group(['middleware' => 'manager'], function () {
+    //dashboard
     Route::get('/admin/dashboard', [DashBoardController::class, 'Index']);
+    Route::get('/admin/dashboard/getDataOption', [DashBoardController::class, 'getDataOption']);
+    Route::get('/admin/dashboard/getYearExists', [DashBoardController::class, 'getYearExists']);
+    Route::get('/admin/dashboard/filter-by-year-movie/{year}/{movie_id}', [DashBoardController::class, 'FilterByYearAndMovie'])->name('FilterByYearAndMovie');
+    Route::get('/admin/dashboard/filter-by-custumer', [DashBoardController::class, 'FilterByCustomer'])->name('FilterByCustomer');
     // movie
     Route::get('/admin/movie/index', [Moviecontroller::class, 'MovieIndex']);
     Route::get('/admin/movie/getMovie/{MovieID}', [Moviecontroller::class, 'getMovie'])->name('getMovie');
@@ -177,12 +182,18 @@ Route::group(['middleware' => 'manager'], function () {
     Route::get('/admin/showinfor/getDataOption', [ShowInforController::class, 'getDataOption']);
     Route::post('/admin/showinfor/addShow', [ShowInforController::class, 'addShow'])->name('addShow');
     Route::post('/admin/showinfor/delete-show', [ShowInforController::class, 'deleteShow'])->name('deleteShow');
+
     // booking
     Route::get('/admin/booking/index', [BookingController::class, 'BookingIndex']);
 });
 
 Route::group(['middleware' => 'staff'], function () {
+    //dashboard
     Route::get('/admin/dashboard', [DashBoardController::class, 'Index']);
+    Route::get('/admin/dashboard/getDataOption', [DashBoardController::class, 'getDataOption']);
+    Route::get('/admin/dashboard/getYearExists', [DashBoardController::class, 'getYearExists']);
+    Route::get('/admin/dashboard/filter-by-year-movie/{year}/{movie_id}', [DashBoardController::class, 'FilterByYearAndMovie'])->name('FilterByYearAndMovie');
+    Route::get('/admin/dashboard/filter-by-custumer', [DashBoardController::class, 'FilterByCustomer'])->name('FilterByCustomer');
     // booking
     Route::get('/admin/booking/index', [BookingController::class, 'BookingIndex']);
 });

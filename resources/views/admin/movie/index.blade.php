@@ -34,9 +34,8 @@
                 <thead>
                     <tr>
                         <th scope="col" class="text-center align-middle">ID</th>
-                        <th scope="col" class="text-center align-middle">Title</th>
+                        <th scope="col" class="text-center align-middle" colspan="2">Title</th>
                         <th scope="col" class="text-center align-middle">Thumbnail</th>
-                        <th scope="col" class="text-center align-middle">Description</th>
                         <th scope="col" class="text-center align-middle">Duration</th>
                         <th scope="col" class="text-center align-middle">Language</th>
                         <th scope="col" class="text-center align-middle">ReleaseDate</th>
@@ -44,7 +43,6 @@
                         <th scope="col" class="text-center align-middle">Genre</th>
                         <th scope="col" class="text-center align-middle">Trailer</th>
                         <th scope="col" class="text-center align-middle">Director</th>
-                        <th scope="col" class="text-center align-middle">Actor</th>
                         <th scope="col" class="text-center align-middle"></th>
                         <th scope="col" class="text-center align-middle"></th>
                     </tr>
@@ -53,11 +51,10 @@
                     @foreach ($movie as $row)
                         <tr>
                             <th scope="row" class="text-center align-middle">{{ $row->MovieID }}</th>
-                            <td scope="row" class="text-center align-middle">{{ $row->Title }}</td>
+                            <td scope="row" class="text-center align-middle" colspan="2">{{ $row->Title }}</td>
                             <td scope="row" class="text-center align-middle">
-                                <img src="{{ asset('/imgMovie/' . $row->Thumbnail) }}" width="50" height="50">
+                                <img src="{{ asset('/imgMovie/' . $row->Thumbnail) }}" width="100" height="100">
                             </td>
-                            <td scope="row" class="text-center align-middle">{{ $row->Description }}</td>
                             <td scope="row" class="text-center align-middle">{{ $row->Duration }}</td>
                             <td scope="row" class="text-center align-middle">{{ $row->Language }}</td>
                             <td scope="row" class="text-center align-middle">{{ $row->ReleaseDate }}</td>
@@ -65,7 +62,6 @@
                             <td scope="row" class="text-center align-middle">{{ $row->Genre }}</td>
                             <td scope="row" class="text-center align-middle">{{ $row->trailer_url }}</td>
                             <td scope="row" class="text-center align-middle">{{ $row->Director }}</td>
-                            <td scope="row" class="text-center align-middle">{{ $row->Actor }}</td>
                             <td scope="row" class="text-center align-middle">
                                 <a class="col btn btn-secondary edit-movie-btn" data-bs-toggle="modal"
                                     data-bs-target="#editMovie" data-movie-id="{{ $row->MovieID }} ">Edit</a>
@@ -78,7 +74,9 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $movie->links('pagination::bootstrap-4') }}
+           <div id="paniga_movie">
+                {{ $movie->links('pagination::bootstrap-4') }}
+            </div>
         </div>
     </div>
 

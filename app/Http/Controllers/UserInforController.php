@@ -35,12 +35,12 @@ class UserInforController extends Controller
             [
                 'Name' => 'required',
                 'BirthDay' => 'required',
-                'Username' => 'required|unique:Userinfor',
+                'Username' => 'required|unique:userinfor',
                 'Password' => 'required',
                 'rp_password' => 'required|same:Password',
-                'Email' => 'required|unique:Userinfor',
-                'Phone' => 'required|unique:Userinfor|size:10',
-                'CCCD' => 'required|unique:Userinfor|size:12',
+                'Email' => 'required|unique:userinfor',
+                'Phone' => 'required|unique:userinfor|size:10',
+                'CCCD' => 'required|unique:userinfor|size:12',
 
             ],
             [
@@ -216,9 +216,9 @@ class UserInforController extends Controller
         $request->validate([
             'Name' => 'required',
             'BirthDay' => 'required|date',
-            'Email' => 'required|email|unique:UserInfor,Phone,' . $userId . ',UserID', // check unique except for current data
-            'Phone' => 'required|unique:UserInfor,Phone,' . $userId . ',UserID|size:10',
-            'CCCD' => 'required|unique:UserInfor,CCCD,' . $userId . ',UserID|size:12',
+            'Email' => 'required|email|unique:userinfor,Phone,' . $userId . ',UserID', // check unique except for current data
+            'Phone' => 'required|unique:userinfor,Phone,' . $userId . ',UserID|size:10',
+            'CCCD' => 'required|unique:userinfor,CCCD,' . $userId . ',UserID|size:12',
         ], [
             'Name.required' => "Vui lòng nhập tên",
             'BirthDay.required' => "Vui lòng nhập ngày sinh",
@@ -253,9 +253,9 @@ class UserInforController extends Controller
         $request->validate([
             'addName' => 'required',
             'addBirthDay' => 'required|date',
-            'addEmail' => 'required|email|unique:UserInfor,Email', // check unique except for current data
-            'addPhone' => 'required|unique:UserInfor,Phone|size:10',
-            'addCCCD' => 'required|unique:UserInfor,CCCD|size:12',
+            'addEmail' => 'required|email|unique:userinfor,Email', // check unique except for current data
+            'addPhone' => 'required|unique:userinfor,Phone|size:10',
+            'addCCCD' => 'required|unique:userinfor,CCCD|size:12',
         ], [
             'addName.required' => "Vui lòng nhập tên",
             'addBirthDay.required' => "Vui lòng nhập ngày sinh",

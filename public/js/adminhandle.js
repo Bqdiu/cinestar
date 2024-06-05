@@ -33,7 +33,6 @@ $(document).ready(function(){
                     '<td scope="row" class="text-center align-middle">' + movie_status.StatusName + '</td>' +
                     '<td scope="row" class="align-middle">' +
                         '<a class="col btn btn-secondary edit-status-btn" data-bs-toggle="modal" data-bs-target="#editStatusMovie" data-status-id="' + movie_status.IDStatus + '">Edit</a>' +
-                        '<a class="col btn btn-danger delete-status-btn" data-bs-toggle="modal" data-bs-target="#deleteStatusMovie" data-status-id="' + movie_status.IDStatus + '">Delete</a>' +
                     '</td>' +
                 '</tr>';
                 $('#data-body').append(row);
@@ -93,28 +92,37 @@ $(document).ready(function(){
 
    $('#searchMovie').on('input',function(){
         var term = $(this).val().trim();
+        if(term == ''){
+            $('#paniga_movie').removeClass('d-none');
+            $('#paniga_movie').addClass('d-block');
+        }
+        else
+        {
+            $('#paniga_movie').addClass('d-none');
+            $('#paniga_movie').removeClass('d-block');
+
+        }
         $.ajax({
             url: '/admin/movie/searchMovie/' + term,
             type: 'GET',
             success: function(data) {
                 $('#data-body').empty();
+                console.log(data);
                 $.each(data, function (index, movie) {
                     var row = 
                     '<tr>' +
-                        '<th scope="row" class="text-left align-middle">'+movie.MovieID+'</th>' +
-                        '<td scope="row" class="text-left align-middle">'+movie.Title+'</td>' +
-                        '<td scope="row" class="text-left align-middle">' +
-                            '<img src="/imgMovie/'+movie.Thumbnail+'" width="50" height="50">'+
+                        '<th scope="row" class="text-center align-middle">'+movie.MovieID+'</th>' +
+                        '<td scope="row" class="text-center align-middle" colspan="2">'+movie.Title+'</td>' +
+                        '<td scope="row" class="text-center align-middle">' +
+                            '<img src="/imgMovie/'+movie.Thumbnail+'" width="100" height="100">'+
                         '</td>'+
-                        '<td scope="row" class="text-left align-middle">'+movie.Description+'</td>'+
-                        '<td scope="row" class="text-left align-middle">'+movie.Duration+'</td>'+
-                        '<td scope="row" class="text-left align-middle">'+movie.Language+'</td>'+
-                        '<td scope="row" class="text-left align-middle">'+movie.ReleaseDate+'</td>'+
-                        '<td scope="row" class="text-left align-middle">'+movie.Country+'</td>'+
-                        '<td scope="row" class="text-left align-middle">'+movie.Genre+'</td>'+
-                        '<td scope="row" class="text-left align-middle"  style="overflow: hidden;text-overflow: ellipsis;">'+movie.trailer_url+'</td>'+
-                        '<td scope="row" class="text-left align-middle">'+movie.Director+'</td>'+
-                        '<td scope="row" class="text-left align-middle">'+movie.Actor+'</td>'+
+                        '<td scope="row" class="text-center align-middle">'+movie.Duration+'</td>'+
+                        '<td scope="row" class="text-center align-middle">'+movie.Language+'</td>'+
+                        '<td scope="row" class="text-center align-middle">'+movie.ReleaseDate+'</td>'+
+                        '<td scope="row" class="text-center align-middle">'+movie.Country+'</td>'+
+                        '<td scope="row" class="text-center align-middle">'+movie.Genre+'</td>'+
+                        '<td scope="row" class="text-center align-middle"  style="overflow: hidden;text-overflow: ellipsis;">'+movie.trailer_url+'</td>'+
+                        '<td scope="row" class="text-center align-middle">'+movie.Director+'</td>'+
                         '<td scope="row" class="text-center align-middle">'+
                             '<a class="col btn btn-secondary edit-movie-btn" data-bs-toggle="modal" data-bs-target="#editMovie" data-movie-id="'+movie.MovieID+'">Edit</a>'+
                         '</td>'+

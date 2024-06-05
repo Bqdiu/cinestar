@@ -25,9 +25,6 @@ $pageTitle = "Đăng Ký";
                             <a href="{{route('google-auth')}}"><i class="fab fa-google" style="color: #f3ea28;"></i></a>
                         </button>
                         
-                        <button type="button" class="btn btn-link btn-floating mx-1">
-                            <i class="fab fa-facebook-f" style="color: #f3ea28;"></i>
-                        </button>
                     </div>
                     <p class="text-center text-white">or:</p>
                     <!-- Name input -->
