@@ -978,46 +978,36 @@ $(document).ready(function () {
     LoadCusLeft();
 });
 function handleReserveSeatEvent(e) {
-    // Log to check if the event is being received
     console.log("Event received:", e);
-    // Extract the array of seats from the event object
+
     const seats = e.ShowSeat;
 
-    // Log the received seats for debugging purposes
     console.log("Seats array:", seats);
 
-    // Iterate over each seat in the array
     seats.forEach((seat) => {
-        // Extract the CinemaSeatID from the current seat object
         const seatID = seat.CinemaSeatID;
 
-        // Select the seat element in the DOM using the CinemaSeatID
         let seatElement = $(`[data-cinema-seat-id="${seatID}"]`);
         console.log(seatElement);
-        // Check if the seat element exists
+
         if (seatElement.length > 0) {
-            // Check if the seat status is "Ghế đã được đặt"
             if (seat.Status === "Ghế đã được đặt") {
-                // Add the "booked" class to the seat element
                 seatElement.addClass("booked");
 
-                // Remove the click event to prevent further clicks
                 seatElement.off("click");
             } else {
-                // Log an error if the seat status is not "Ghế đã được đặt"
                 console.error(
                     `Unexpected status for seat with id: ${seatID} - Status: ${seat.Status}`
                 );
             }
         } else {
-            // Log an error if the seat element is not found
             console.error(`Không tìm thấy phần tử ghế với id: ${seatID}`);
         }
     });
 }
-
 // Attach the event handler to the Echo listener
 Echo.channel("Reserve").listen(`.reserveSeat`, handleReserveSeatEvent);
+
 $(document).on("click", ".popup.--w7 .checkout.btn.OK", function () {
     $(".popup.--w7").removeClass("open");
     history.back();

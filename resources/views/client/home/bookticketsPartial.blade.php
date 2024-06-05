@@ -8,7 +8,7 @@
     @foreach($PhimTheoRap as $k=>$v)
     <div class="col-md-6">
       <div class="row mb-3">
-        <div class="col-md-6"><a href="/detailmovie/{{$v->MovieID}}"><img style="width:100%;" src="/imgMovie/{{$v->Thumbnail}}" alt=""></a></div>
+        <div class="col-md-6"><a class="thumbnail-movie" href="/detailmovie/{{$v->MovieID}}?CityID={{$v->CityID}}"><img style="width:100%;" src="/imgMovie/{{$v->Thumbnail}}" alt=""></a></div>
         <div class="col-md-6">
           <p class="text-white" style="font-weight:1000;margin-bottom:20px">{{$v->Title}} ({{$v->AgeRegulationName}})</p>
           <div style="font-size:14px;">
@@ -78,3 +78,16 @@
 
 
 @endif
+
+<script>
+  $(document).ready(function() {
+    $('.thumbnail-movie').each(function() {
+      // Tìm href của phần tử .movie-show-item đầu tiên trong phần tử cha
+      const firstHref = $(this).closest('.col-md-6').next().find('.movie-show-item').first().attr('href');
+      if (firstHref) {
+        // Gán href mới cho .thumbnail-movie
+        $(this).attr('href', firstHref);
+      }
+    });
+  });
+</script>

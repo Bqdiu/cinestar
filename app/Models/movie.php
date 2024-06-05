@@ -36,7 +36,7 @@ class Movie extends Model
             ->join('showinfor', 'movie.MovieID', '=', 'showinfor.MovieID')
             ->join('cinema_hall', 'showinfor.CinemaHallID', '=', 'cinema_hall.CinemaHallID')
             ->join('cinema', 'cinema_hall.CinemaID', '=', 'cinema.CinemaID')
-            ->select('movie.*', 'age_regulation.*')->distinct()
+            ->select('movie.*', 'age_regulation.*', 'cinema.CityID')->distinct()
             ->where('cinema.CinemaID', $idCinema)
             ->where('movie.IDStatus', $idStatus)
             ->get();

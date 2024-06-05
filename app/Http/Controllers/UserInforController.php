@@ -368,7 +368,7 @@ class UserInforController extends Controller
     public function HistoryPartial()
     {
         if (Auth::check()) {
-            $Show = Booking::where("UserID", '=', Auth::user()->UserID)->paginate(7);
+            $Show = Booking::where("UserID", '=', Auth::user()->UserID)->orderBy("createdAt", "desc")->paginate(7);
             $view = View::make('client/user/ProfilePartial/history-partial', ["Booking" => $Show])->with('i', (request()->input('page', 1) - 1) * 7)->render();
             return response()->json(["view" => $view]);
         }
@@ -405,15 +405,20 @@ class UserInforController extends Controller
     }
     public function UpdateInformation(Request $request)
     {
+
         if (Auth::check()) {
             $user = UserInfor::where("UserID", '=', Auth::user()->UserID)->first();
-
-            $user->Name = $request->FullName;
-            $user->Birthday = $request->BirthDay;
-            $user->Phone = $request->PhoneNumber;
-            $user->Email = $request->Email;
-            $user->save();
-            return response()->json(["Successful" => "CẬP NHẬT THÀNH CÔNG", "FullName" => $user->Name]);
+            $flag = UserInfor::where('Email', '=', $request->Email)->get();
+            if (count($flag) > 0 && $user->Email != $request->Email) {
+                return response()->json(["Error" => "EMAIL ĐÃ TỒN TẠI. VUI LÒNG THỬ LẠI BẰNG EMAIL KHÁC."]);
+            } else {
+                $user->Name = $request->FullName;
+                $user->Birthday = $request->BirthDay;
+                $user->Phone = $request->PhoneNumber;
+                $user->Email = $request->Email;
+                $user->save();
+                return response()->json(["Successful" => "CẬP NHẬT THÀNH CÔNG", "FullName" => $user->Name]);
+            }
         }
         return response()->json(["Error" => "CẬP NHẬT THẤT BẠI"]);
     }
@@ -434,6 +439,4 @@ class UserInforController extends Controller
         }
         return response()->json(["Error" => "CẬP NHẬT THẤT BẠI"]);
     }
-
-    
 }
