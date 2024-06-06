@@ -304,13 +304,20 @@ class BookingController extends Controller
 
     public function searchBooking($term)
     {
-        $bookings = Booking::where('BookingID', 'like', '%' . $term . '%')
+        $bookings = Booking::where('BookingID', '=',$term)
+            ->join('showinfor', 'booking.ShowID', '=', 'showinfor.ShowID')
+            ->join('movie', 'movie.MovieID', '=', 'showinfor.MovieID')
+            ->join('payment_method', 'booking.PaymentID', '=', 'payment_method.PaymentID')
             ->orWhere('FullName', 'like', '%' . $term . '%')
             ->orWhere('PhoneNumber', 'like', '%' . $term . '%')
             ->orWhere('Email', 'like', '%' . $term . '%')
             ->get();
         if ($bookings->isEmpty()) {
-            $bookings = Booking::all();
+            $bookings = Booking::select('*')
+                    ->join('showinfor', 'booking.ShowID', '=', 'showinfor.ShowID')
+                    ->join('movie', 'movie.MovieID', '=', 'showinfor.MovieID')
+                    ->join('payment_method', 'booking.PaymentID', '=', 'payment_method.PaymentID')
+                    ->get();
             return response()->json($bookings);
         }
         return response()->json($bookings);

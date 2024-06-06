@@ -433,12 +433,13 @@ $(document).ready(function(){
                         '<th scope="row" class="text-center align-middle">' + booking.BookingID + '</th>' +
                         '<td scope="row" class="text-center align-middle">' + booking.NumberOfSeats + '</td>' +
                         '<td scope="row" class="text-center align-middle">' + booking.Status + '</td>' +
-                        '<td scope="row" class="text-center align-middle">' + optional(optional(booking.showinfor).movie).Title + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + booking.FullName + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + booking.Title + '</td>' +
                         '<td scope="row" class="text-center align-middle">' + booking.PhoneNumber + '</td>' +
                         '<td scope="row" class="text-center align-middle">' + booking.Email + '</td>' +
                         '<td scope="row" class="text-center align-middle">' + booking.TotalPrice + '</td>' +
                         '<td scope="row" class="text-center align-middle">' + booking.createdAt + '</td>' +
-                        '<td scope="row" class="text-center align-middle">' + optional(booking.payment_method).PaymentName + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + (booking.PaymentName || 'Không có thông tin') + '</td>'+
                         '</tr>';
                     $('#data-body').append(row);
                 });
