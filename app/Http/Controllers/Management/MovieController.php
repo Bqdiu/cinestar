@@ -13,7 +13,7 @@ class MovieController extends Controller
 {
     public function MovieIndex()
     {
-        $movie = Movie::paginate(2);
+        $movie = Movie::paginate(5);
         return view('admin.movie.index', compact('movie'));
     }
 
@@ -35,7 +35,7 @@ class MovieController extends Controller
             'duration' => 'required',
             'director' => 'required',
             'actor' => 'required',
-            'thumbnail' => 'mimes:jpeg,jpg,png|required|max:10000',
+            'thumbnail' => 'required|mimes:jpeg,jpg,png|max:10240',
         ], [
             'title.required' => 'Hãy nhập tên phim',
             'descripton.required' => 'Hãy nhập mô tả phim',

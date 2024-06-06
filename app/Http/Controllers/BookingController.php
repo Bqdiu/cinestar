@@ -301,4 +301,18 @@ class BookingController extends Controller
         $bookings = Booking::select('*')->paginate(8);
         return view('admin.booking.index',compact('bookings'));
     }
+
+    public function searchBooking($term)
+    {
+        $bookings = Booking::where('BookingID', 'like', '%' . $term . '%')
+            ->orWhere('FullName', 'like', '%' . $term . '%')
+            ->orWhere('PhoneNumber', 'like', '%' . $term . '%')
+            ->orWhere('Email', 'like', '%' . $term . '%')
+            ->get();
+        if ($bookings->isEmpty()) {
+            $bookings = Booking::all();
+            return response()->json($bookings);
+        }
+        return response()->json($bookings);
+    }
 }

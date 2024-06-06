@@ -418,8 +418,33 @@ $(document).ready(function(){
             }
         });
     });
-    
-
+    // booking 
+    $('#searchBooking').on('input', function () {
+        var searchText = $(this).val().trim();
+        $.ajax({
+            url: '/admin/booking/searchBooking/' + searchText,
+            type: 'GET',
+            success: function (data) {
+                console.log(data);
+                $('#data-body').empty();
+                $.each(data, function (index, booking) {
+                    var row =
+                        '<tr>' +
+                        '<th scope="row" class="text-center align-middle">' + booking.BookingID + '</th>' +
+                        '<td scope="row" class="text-center align-middle">' + booking.NumberOfSeats + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + booking.Status + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + optional(optional(booking.showinfor).movie).Title + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + booking.PhoneNumber + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + booking.Email + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + booking.TotalPrice + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + booking.createdAt + '</td>' +
+                        '<td scope="row" class="text-center align-middle">' + optional(booking.payment_method).PaymentName + '</td>' +
+                        '</tr>';
+                    $('#data-body').append(row);
+                });
+            }
+        });
+    });
    // hide alert
     setTimeout(function() 
     {

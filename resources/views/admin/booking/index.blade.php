@@ -21,7 +21,9 @@
                 @endif
             </div>
         </div>
-       
+        <div class="row" style="padding-bottom: 20px">
+            <input id="searchBooking" class="form-control mr-sm-2" type="search" placeholder="Search" name="searchBooking">
+        </div>
         <div class="row">
             <table class="table">
                 <thead>

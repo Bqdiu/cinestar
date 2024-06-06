@@ -101,9 +101,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="thumbnail" class="form-label">Thumbnail</label>
-                            <img id="loadThumbnail" width="80" height="80">
-                            <input type="file" class="form-control" id="thumbnail" name="thumbnail"
-                                placeholder="Thumbnail">
+                            <img id="loadThumbnail" width="100" height="100">
+                            <input type="file" class="form-control" id="thumbnail" name="thumbnail">
                         </div>
                         <div class="mb-3">
                             <label for="descripton" class="form-label">Description</label>

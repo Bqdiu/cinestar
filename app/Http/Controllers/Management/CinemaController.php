@@ -33,9 +33,9 @@ class CinemaController extends Controller
             'add_name.required' => 'Chưa nhập tên rạp',
             'add_address.required' => 'Chưa nhập địa chỉ',
             'add_toltalcinemahalls.required' => 'Chưa nhập đạo diễn phim',
+            'add_thumbnail.max' => 'File ảnh quá lớn',
             'add_thumbnail.mimes' => 'Hãy chọn file ảnh đúng định dạng jpeg,jpg,png',
             'add_thumbnail.required' => 'Hãy chọn file ảnh',
-            'add_thumbnail.max' => 'File ảnh quá lớn',
         ]);
         $originalFileName = $request->file('add_thumbnail')->getClientOriginalName();
         $user_id = Auth::id();

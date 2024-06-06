@@ -151,6 +151,8 @@ Route::group(['middleware' => 'admin'], function () {
 
     // booking
     Route::get('/admin/booking/index', [BookingController::class, 'BookingIndex']);
+    Route::get('/admin/booking/searchBooking/{searchText}', [BookingController::class, 'searchBooking'])->name('searchBooking');
+    
 });
 
 Route::group(['middleware' => 'manager'], function () {
@@ -185,6 +187,7 @@ Route::group(['middleware' => 'manager'], function () {
 
     // booking
     Route::get('/admin/booking/index', [BookingController::class, 'BookingIndex']);
+    Route::get('/admin/booking/searchBooking/{searchText}', [BookingController::class, 'searchBooking'])->name('searchBooking');
 });
 
 Route::group(['middleware' => 'staff'], function () {
@@ -196,6 +199,7 @@ Route::group(['middleware' => 'staff'], function () {
     Route::get('/admin/dashboard/filter-by-custumer', [DashBoardController::class, 'FilterByCustomer'])->name('FilterByCustomer');
     // booking
     Route::get('/admin/booking/index', [BookingController::class, 'BookingIndex']);
+    Route::get('/admin/booking/searchBooking/{searchText}', [BookingController::class, 'searchBooking'])->name('searchBooking');
 });
 // login/ register google
 Route::get('auth/google', [UserInforController::class, 'redirect'])->name('google-auth');
