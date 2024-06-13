@@ -9,9 +9,8 @@
 
 ## Thông tin dự án
 
-- Đề tài: Website bán điện thoại Light Studio
+- Đề tài: Website đặt vé xem phim Cinestar
 - Học phần: Mã nguồn mở - 12DHTH03 - 010100292003
-- Giảng viên: Phan Thị Ngọc Mai
 
 ## Công nghệ sử dụng
 
