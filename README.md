@@ -20,15 +20,13 @@
 4. Các thành phần khác:
     - Bootstrap 5.3 (Compiled)
     - jQuery 3.2.7 (CDN) (Google APIs)
-    - Select2 4.1.0 RC.0 (Compiled)
-    - Summernote 0.8.20 (Compiled)
     - FontAwesome V6 (CDN)
+    - Google Service
+    - Momo payment
+    - VNPAY payment
 5. Composer dependencies:
-    - barryvdh/laravel-dompdf v2.1 (PDF printing library)
-    - diglactic/laravel-breadcrumbs v9.0 (Blade View breadcrumbs rendering)
-    - nguyenary/vietnam-address-api v1.1 (Vietnam Address API, Data Source: https://danhmuchanhchinh.gso.gov.vn/)
-    - phpmailer/phpmailer v6.9 (Mailer library)
     - srmklive/paypal v3.0 (PayPal payment implementation library)
+    - larasocket (v1.0)
     - và một số default laravel composer dependencies khác...
 ## Thông tin thành viên
 
